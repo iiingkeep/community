@@ -1,0 +1,31 @@
+.CommunityWrite {
+ 
+}
+
+.TitleBox {
+  width:800px;
+  margin: 100px auto 0px;
+  text-align: start;
+  font-size: 16px;
+}
+
+
+#PostTitle {
+  height: 30px;
+  width: 99%;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-size: 25px;
+}
+
+#PostTitle::placeholder{
+  color:rgba(0,0,0,0.2);
+}
+
+#PostTitle:focus {
+  outline: none;
+}
+
+#PostTitle:focus::placeholder{
+  color:transparent;
+}

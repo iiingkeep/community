@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+.Main {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+}
+
+.Main .LeftSection {
+  width: 25%;
+  margin: 0 30px;
+}
+.Main .RightSection {
+  width: 75%;
+  display: flex;
+}
+
+.Main .LeftSection .LoginBox {
+  height: 140px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 40px;
+}
+.Main .LeftSection .CloudBox {
+  height: 140px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 40px;
+}
+.Main .RightSection .CommunityBox {
+  width: 50%;
+  height: 140px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 40px;
+}
+.Main .RightSection .NewsBox {
+  width: 50%;
+  height: 140px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 40px;
+}

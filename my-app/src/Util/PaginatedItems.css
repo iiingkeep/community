@@ -1,0 +1,17 @@
+.Pagination {
+  list-style: none;
+  display:flex;
+  margin: 0 auto;
+  width: 30%;
+}
+
+.Pagination button {
+  border: none;
+  background-color: white;
+  padding: 20px;
+}
+
+.page-item {
+  margin: 0 10px;
+  cursor: pointer;
+}

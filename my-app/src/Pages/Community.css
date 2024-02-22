@@ -1,0 +1,76 @@
+.PostListBox{
+  width:inherit;
+  margin: 50px 0;
+}
+.CategoryBox {
+  width:30%;
+  border-bottom: 3px solid rgba(0,0,0,0.2);
+  margin: 10px auto;
+}
+.CategoryBox button{
+  border:none;
+  background-color: transparent;
+  margin: 20px 
+}
+
+.CategoryBox button.active {
+  border-bottom: 3px solid rgb(83, 212, 92);
+}
+
+.SearchBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.SearchBoxExceptButton {
+  display: flex;
+  height: 35px;
+  margin-right: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 20px;
+}
+
+.SearchTypeBox, .SearchQueryBox {
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 5px;
+  border: none;
+  outline: none;
+  
+}
+
+.SearchBox button {
+  width: 60px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: rgb(83, 212, 92);
+  font-size:12px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color:white;
+}
+
+.PostListBox ul {
+  list-style: none;
+}
+
+.PostListBox li {
+  width: 800px;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.PostListBox li:first-child {
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.PostListBox li a {
+  width: 500px;
+  text-align: start;
+}

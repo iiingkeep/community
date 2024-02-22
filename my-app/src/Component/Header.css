@@ -1,0 +1,35 @@
+.Header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+
+.HeaderLeft button{
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+}
+
+.HeaderMenu button {
+  background-color: white;
+  border: none;
+  margin: 0 30px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+.HeaderRight button{
+  background-color: rgb(83, 212, 92);
+  font-size:12px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color:white;
+  margin-left: 10px;
+  cursor: pointer;
+}
