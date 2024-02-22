@@ -15,6 +15,10 @@ import { fileURLToPath } from 'url'
 // 현재 모듈의 디렉토리 경로를 가져옵니다.
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
+
+// 수정사항 확인용
+
+
 // dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
