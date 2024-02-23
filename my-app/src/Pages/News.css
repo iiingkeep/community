@@ -1,0 +1,99 @@
+/* 전체 div */
+.newsPage {
+  margin: 0 auto;
+}
+
+/* 상단 NEWS FEED */
+h1 {
+  text-align: center;
+  cursor: pointer;
+}
+
+/* 검색 div */
+.search {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 검색 인풋 */
+.search input {
+  margin-right: 10px;
+}
+
+/* 검색 버튼 */
+.search button {
+  margin-right: 10px;
+}
+
+/* 뉴스 목록 */
+.newsList li {
+  margin-bottom: 15px;
+  display: flex;
+  height: 115px;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  width: 850px;
+  margin: 0 auto;
+  padding-top: 15px;
+}
+
+/* 뉴스 목록 */
+.newsList li * {
+  height: 100px;
+  margin-right: 30px;
+}
+
+/* 뉴스 썸네일 */
+.newsList li img {
+  cursor: pointer;
+  width: 140px;
+}
+
+/* 뉴스 제목 */
+.newsList li a {
+  display: flex;
+  width: 300px;
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+/* 뉴스 조회수, 날짜 */
+.newsList li p {
+  margin: 0px 30px 0px 0px;
+  display: flex;
+  width: 100px;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.likeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 뉴스 좋아요 버튼 */
+.newsList li button {
+  margin: 0 auto;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 페이지네이션 */
+.pagination {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination li {
+  list-style: none;
+  margin-right: 30px;
+  display: inline-block; /* 가로 배치 */
+}

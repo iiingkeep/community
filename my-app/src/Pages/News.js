@@ -1,0 +1,284 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Pagination from "react-js-pagination";
+import { useNavigate, Link } from "react-router-dom";
+import "./News.css";
+
+const NewsItem = () => {
+  // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
+  const [news, setNews] = useState([]);
+  // page : 현재 페이지
+  const [page, setPage] = useState(1);
+  // currenPosts : 현재 페이지에 보이는 기사들
+  const [currenPosts, setCurrenPosts] = useState([]);
+  const [sortBy, setSortBy] = useState("latest"); // 정렬(sortBy에 기본값으로 'latest' 설정)
+  const [searchTerm, setSearchTerm] = useState(""); // 검색
+  const [searchButtonClicked, setSearchButtonClicked] = useState(false); // 검색 버튼
+  const [likedArticles, setLikedArticles] = useState([]); // 좋아요
+
+  const [loggedIn, setLoggedIn] = useState([]); // 로그인 상태
+  const [userid, setUserid] = useState([]); // userid 데이터
+
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem("loggedIn")) === true) {
+      // let loggedIn = JSON.parse(sessionStorage.getItem("loggedIn"));
+      // let userid = JSON.parse(sessionStorage.getItem("userData")).userid;
+      setLoggedIn(JSON.parse(sessionStorage.getItem("loggedIn")));
+      setUserid(JSON.parse(sessionStorage.getItem("userData")).userid);
+      console.log(loggedIn);
+      console.log(userid);
+    }
+  }, [loggedIn, userid]);
+
+  const navigate = useNavigate();
+
+  // 뉴스 정보 가져오기
+  useEffect(() => {
+    // /news 엔드포인트에서 데이터를 가져오는 함수 호출
+    axios
+      .get("http://localhost:8000/news")
+      .then((response) => {
+        // 최신순으로 정렬
+        const sortedNews = response.data.sort(
+          (a, b) => new Date(b.pubDate) - new Date(a.pubDate)
+        );
+        setNews(sortedNews);
+      })
+      .catch((error) => {
+        console.error("뉴스 데이터 불러오는 중 에러 발생:", error);
+      });
+  }, []);
+
+  // articlesPerPage : 한 페이지에서 보이는 기사 개수
+  // indexOfLastArticle : 한 페이지의 마지막 기사의 인덱스
+  // indexOfFirstArticle : 한 페이지의 첫번째 기사의 인덱스
+  const articlesPerPage = 10;
+  const indexOfLastArticle = page * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+
+  // 검색
+  // searchButtonClicked 상태가 true 이면 검색 버튼이 클릭되었다는 것을 의미하며
+  // news 배열에서 searchTerm에 해당하는 뉴스 필터링하고
+  // toLowerCase()를 사용해서 대소문자 무시하고 비교해 filteredNews 배열 생성
+  // searchButtonClicked 상태가 false 이면 그냥 news의 값을 사용
+
+  const filteredNews = searchButtonClicked
+    ? news.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : news;
+
+  useEffect(() => {
+    // filteredNews 배열에서 현재 페이지에 해당하는 기사들만 currenPosts의 값으로 설정
+    // setCurrenPosts() : 현재 페이지에서 보이는 뉴스기사들은 filteredNews를
+    // 해당 페이지의 첫 기사의 인덱스부터 마지막 기사의 인덱스까지 잘라서 보여줌
+    setCurrenPosts(filteredNews.slice(indexOfFirstArticle, indexOfLastArticle));
+  }, [page, filteredNews]);
+
+  // 정렬
+  useEffect(() => {
+    let sortedNews = [...news];
+
+    // 최신순
+    if (sortBy === "latest") {
+      sortedNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+      // 오래된순
+    } else if (sortBy === "oldest") {
+      sortedNews.sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
+      // 조회수 높은 순
+    } else if (sortBy === "viewsHigh") {
+      sortedNews.sort((a, b) => b.views - a.views);
+    }
+
+    setNews(sortedNews);
+  }, [sortBy]);
+
+  // 기사 클릭 시 조회수 증가(썸네일, 제목에 사용)
+  const handleClick = (item) => {
+    const clickedNews = news.map((n) =>
+      n.newsid === item.newsid ? { ...n, views: n.views + 1 } : n
+    );
+    setNews(clickedNews);
+
+    // 서버로 조회수 데이터 전송
+    axios
+      .post("http://localhost:8000/news/views", {
+        newsid: item.newsid, // newsid 이름으로 기사 newsid 정보를 넘겨줌
+        views: item.views + 1, // views라는 이름으로 기사 조회수 정보를 넘겨줌
+      })
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+
+    // 기사 링크 열기
+    window.open(item.url, "_blank");
+  };
+
+  // 로고 클릭시 초기페이지로 돌아감
+  const handelLogoClick = () => {
+    setPage(1);
+    setSearchTerm("");
+    setSortBy("latest");
+    setSearchButtonClicked(false);
+  };
+
+  // 페이지 변화 핸들링 함수
+  const handleChangePage = (page) => {
+    setPage(page);
+
+    // 페이지 이동 후 스크롤을 위로 이동 / top: 0, behavior: 'smooth' 부드럽게 맨 위로
+    window.scrollTo({ top: 0 });
+  };
+
+  // 검색 핸들링
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // 검색 버튼 핸들링
+  const handleSearchButtonClick = () => {
+    setSearchButtonClicked(true);
+  };
+
+  // 정렬 핸들링
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    setPage(1); // 정렬시 1페이지로 이동
+  };
+
+  // 좋아요
+  useEffect(() => {
+    // 로그인 안되어있는 경우
+    if (!sessionStorage.getItem("userData")) {
+      return;
+    }
+
+    axios.get("http://localhost:8000/news/likes").then((response) => {
+      const likedArticles = {};
+
+      // 현재 로그인된 사용자의 userid
+      const loggedInUserId = JSON.parse(
+        sessionStorage.getItem("userData")
+      ).userid;
+
+      // 서버에서 받아온 좋아요 데이터를 사용자별로 분류하여 저장
+      response.data.forEach((article) => {
+        const { userid, newsid, news_isLiked } = article;
+        // 현재 로그인된 사용자와 해당 기사의 userid가 일치하는 경우에만 추가
+        if (userid === loggedInUserId) {
+          likedArticles[newsid] = news_isLiked === 1;
+        }
+      });
+      setLikedArticles(likedArticles);
+      console.log(likedArticles);
+    });
+  }, []);
+
+  // 좋아요 버튼 클릭 시 호출되는 함수
+  const handleLikeClick = (newsid, loggedIn, userid) => {
+    console.log(loggedIn, userid);
+    if (loggedIn !== true) {
+      alert("로그인이 필요한 기능입니다.");
+      navigate("/Login");
+      return;
+    } else {
+      // 좋아요 상태 토글
+      const updatedLikedArticles = {
+        ...likedArticles,
+        [newsid]: !likedArticles[newsid],
+      };
+      setLikedArticles(updatedLikedArticles);
+
+      // 서버로 좋아요 상태 업데이트 요청
+      axios
+        .post("http://localhost:8000/news/likes", {
+          userid: userid,
+          newsid: newsid,
+          news_isLiked: !likedArticles[newsid] ? 1 : 0,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
+  return (
+    <div className="newsPage">
+      <Link to="/news">
+        <h1>
+          <strong>
+            <em onClick={handelLogoClick}>NEWS FEED</em>
+          </strong>
+        </h1>
+      </Link>
+      {/* 검색 */}
+      <div className="search">
+        <input
+          type="text"
+          placeholder="뉴스 검색"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        {/* 검색 버튼 추가 */}
+        <button onClick={handleSearchButtonClick}>검색</button>
+        {/* 정렬 */}
+        <select value={sortBy} onChange={handleSortChange}>
+          <option value="latest">최신순</option>
+          <option value="oldest">오래된순</option>
+          <option value="viewsHigh">조회수 높은순</option>
+        </select>
+      </div>
+      {/* 뉴스 목록 */}
+      <ul className="newsList">
+        {currenPosts.map((item) => (
+          <li key={item.newsid}>
+            {/* 썸네일 */}
+            <img
+              src={item.image_url}
+              alt="뉴스 썸네일"
+              onClick={() => handleClick(item)}
+            />
+            {/* 제목 */}
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleClick(item)}
+            >
+              {item.title}
+            </a>
+            {/* 조회수 */}
+            <p id="views">
+              조회수
+              <br />
+              {item.views}
+            </p>
+            {/* 좋아요 */}
+            <div className="likeButton">
+              <button
+                onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
+              >
+                {likedArticles[item.newsid] ? "❤️" : "🤍"}
+              </button>
+            </div>
+            <p>{item.pubDate}</p>
+          </li>
+        ))}
+      </ul>
+      {/* 페이지네이션 */}
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={articlesPerPage}
+        totalItemsCount={filteredNews.length}
+        pageRangeDisplayed={5}
+        prevPageText={"<"}
+        nextPageText={">"}
+        onChange={handleChangePage}
+      />
+    </div>
+  );
+};
+
+export default NewsItem;

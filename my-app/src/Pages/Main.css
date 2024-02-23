@@ -39,3 +39,17 @@
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 40px;
 }
+
+.NewsBox {
+  border: 1px solid black;
+  width: 400px;
+  font-size: 13px;
+  margin-left: 10px;
+  padding-left: 0px;
+  padding-top: 5px;
+}
+.NewsBox li {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  display: flex;
+}
