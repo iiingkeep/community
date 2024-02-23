@@ -7,6 +7,11 @@
 h1 {
   text-align: center;
   cursor: pointer;
+  text-decoration: none;
+}
+
+em {
+  text-decoration-line: none;
 }
 
 /* 검색 div */
@@ -22,19 +27,28 @@ h1 {
 
 /* 검색 버튼 */
 .search button {
+  width: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: rgb(83, 212, 92);
+  font-size: 12px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color: white;
   margin-right: 10px;
 }
 
 /* 뉴스 목록 */
 .newsList li {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   display: flex;
   height: 115px;
   justify-content: center;
-  border-bottom: 1px solid black;
   width: 850px;
   margin: 0 auto;
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 /* 뉴스 목록 */
@@ -47,6 +61,7 @@ h1 {
 .newsList li img {
   cursor: pointer;
   width: 140px;
+  box-sizing: border-box;
 }
 
 /* 뉴스 제목 */
@@ -54,6 +69,8 @@ h1 {
   display: flex;
   width: 300px;
   align-items: center; /* 세로 중앙 정렬 */
+  text-align: left;
+  text-decoration-line: none;
 }
 
 /* 뉴스 조회수, 날짜 */
@@ -82,6 +99,26 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 50px 50px 50px 50px;
+}
+.ddd {
+  margin: 0 auto;
+  width: 850px;
+  height: 130px;
+  border-bottom: 1px solid black;
+}
+
+a:link {
+  color: black;
+  text-decoration-line: none;
+}
+
+a:hover {
+  font-weight: bolder;
+}
+
+a:visited {
+  color: rgb(221, 221, 221);
 }
 
 /* 페이지네이션 */

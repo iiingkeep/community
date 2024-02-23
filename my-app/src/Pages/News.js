@@ -233,38 +233,40 @@ const NewsItem = () => {
       {/* 뉴스 목록 */}
       <ul className="newsList">
         {currenPosts.map((item) => (
-          <li key={item.newsid}>
-            {/* 썸네일 */}
-            <img
-              src={item.image_url}
-              alt="뉴스 썸네일"
-              onClick={() => handleClick(item)}
-            />
-            {/* 제목 */}
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => handleClick(item)}
-            >
-              {item.title}
-            </a>
-            {/* 조회수 */}
-            <p id="views">
-              조회수
-              <br />
-              {item.views}
-            </p>
-            {/* 좋아요 */}
-            <div className="likeButton">
-              <button
-                onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
+          <div className="ddd">
+            <li key={item.newsid}>
+              {/* 썸네일 */}
+              <img
+                src={item.image_url}
+                alt="뉴스 썸네일"
+                onClick={() => handleClick(item)}
+              />
+              {/* 제목 */}
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleClick(item)}
               >
-                {likedArticles[item.newsid] ? "❤️" : "🤍"}
-              </button>
-            </div>
-            <p>{item.pubDate}</p>
-          </li>
+                {item.title}
+              </a>
+              {/* 조회수 */}
+              <p id="views">
+                조회수
+                <br />
+                {item.views}
+              </p>
+              {/* 좋아요 */}
+              <div className="likeButton">
+                <button
+                  onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
+                >
+                  {likedArticles[item.newsid] ? "❤️" : "🤍"}
+                </button>
+              </div>
+              <p>{item.pubDate}</p>
+            </li>
+          </div>
         ))}
       </ul>
       {/* 페이지네이션 */}
