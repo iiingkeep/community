@@ -4,16 +4,16 @@
 }
 .CategoryBox {
   width:30%;
-  border-bottom: 3px solid rgba(0,0,0,0.2);
   margin: 10px auto;
 }
 .CategoryBox button{
   border:none;
+  border-bottom: 3px solid rgba(0,0,0,0.2);
   background-color: transparent;
-  margin: 20px 
+  padding: 20px 
 }
 
-.CategoryBox button.active {
+.CategoryBox button.selected {
   border-bottom: 3px solid rgb(83, 212, 92);
 }
 

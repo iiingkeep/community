@@ -6,8 +6,7 @@ import session from "express-session";
 // import MySQLStore from 'express-mysql-session';
 import MySQLSession from "express-mysql-session";//0213 김민호
 const MySQLStore = MySQLSession(session);
-
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import path from 'path';
@@ -39,7 +38,14 @@ app.use(function(req, res, next) {
 });
 
 // MySQL 연결 설정
-const connection = mysql.createConnection({
+// const connection = mysql.createConnection({
+//   host: "1.243.246.15",
+//   user: "root",
+//   password: "1234",
+//   database: "ezteam2",
+//   port: 5005,
+// });
+const poolPromise = mysql.createPool({
   host: "1.243.246.15",
   user: "root",
   password: "1234",
@@ -48,13 +54,24 @@ const connection = mysql.createConnection({
 });
 
 // MySQL 연결
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL: " + err.stack);
-    return;
+// connection.connect((err) => {
+//   if (err) {
+//     console.error("Error connecting to MySQL: " + err.stack);
+//     return;
+//   }
+//   console.log("Connected to MySQL as id " + connection.threadId);
+// });
+(async () => {
+  try {
+    const connection = await poolPromise.getConnection(); // getConnection() 메서드로 커넥션을 가져옵니다.
+    console.log("Connected to MySQL as id " + connection.threadId);
+
+    // 커넥션을 다 사용한 후에는 반드시 반환해야 합니다.
+    connection.release();
+  } catch (error) {
+    console.error("Error connecting to MySQL:", error);
   }
-  console.log("Connected to MySQL as id " + connection.threadId);
-});
+})();
 
 // 상호형
 app.get("/", (req, res) => res.send(`Hell'o World!`));
@@ -73,7 +90,7 @@ const sessionStore = new MySQLStore({
       data: 'data', // 세션 데이터를 저장하는 열의 이름
     },
   },
-}, connection);
+}, poolPromise);
 
 app.use(session({
   secret: 'secretKey', // 랜덤하고 안전한 문자열로 바꾸세요.
@@ -86,55 +103,37 @@ app.use(session({
   },
 }));
 //-------------------------------로그인------------------------------------
-
 app.post("/login", async (req, res) => {
-  const { email, password, usertype } = req.body;//usertype 추가 2/14 김민호
+  const { email, password, usertype } = req.body;
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
-    connection.query(
+    const [rows, fields] = await poolPromise.execute(
       "SELECT * FROM user WHERE email = ?",
-      [email],
-      async (err, result) => {
-        if (err) {
-          console.error("서버에서 에러 발생:", err);
-          res.status(500).send({ success: false, message: "서버 에러 발생" });
-        } else {
-          if (result.length > 0) {
-            const isPasswordMatch = await bcrypt.compare(
-              password,
-              result[0].password
-            );
-            if (isPasswordMatch && usertype == result[0].usertype) {
-            // 0213 김민호 세션스토리 초기화 확인
-            if (!req.session) {
-              req.session = {};
-            }
-            //세션데이터 저장(새로운 데이터 추가시 이부분 수정)
-            req.session.usertype = result[0].usertype;//0213 김민호 익스플로우 세션기능 추가
-            req.session.userid = result[0].userid;//0213 김민호 익스플로우 세션기능 추가
-
-              res.send({ success: true, message: "로그인 성공", data: result });
-            } else {
-              res.send({
-                success: false,
-                message: "정보가 일치하지 않습니다.",
-                //가입은 되어 있으나 정보가 맞지 않을 때
-              });
-            }
-          } else {
-            res.send({ success: false, message: "유저 정보가 없습니다." });
-            //가입된 정보가 없을 시 출력
-          }
-
-
-
-          
-        }
-      }
+      [email]
     );
+
+    if (rows.length > 0) {
+      const isPasswordMatch = await bcrypt.compare(password, rows[0].password);
+      if (isPasswordMatch && usertype == rows[0].usertype) {
+        if (!req.session) {
+          req.session = {};
+        }
+        req.session.usertype = rows[0].usertype;
+        req.session.userid = rows[0].userid;
+
+        res.send({ success: true, message: "로그인 성공", data: rows });
+      } else {
+        res.send({
+          success: false,
+          message: "정보가 일치하지 않습니다.",
+        });
+      }
+    } else {
+      res.send({ success: false, message: "유저 정보가 없습니다." });
+    }
   } catch (error) {
-    console.error("비밀번호 비교 중 오류:", error);
+    console.error("서버에서 에러 발생:", error);
     res.status(500).send({ success: false, message: "서버 에러 발생" });
   }
 });
@@ -198,22 +197,17 @@ async function generateUserid(usertype) {
 // });
 
 //-------------------------------이메일 중복 체크 2/14 김민호---------------------------------
-app.post("/checkEmailDuplication", (req, res) => {
+app.post("/checkEmailDuplication", async (req, res) => {
   const { email } = req.body;
 
-  // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
-  const sql = "SELECT * FROM user WHERE email = ?";
-  connection.query(sql, [email], (err, result) => {
-    if (err) {
-      console.error("MySQL에서 이메일 중복 확인 중 오류:", err);
-      return res.status(500).json({
-        success: false,
-        message: "이메일 중복 확인 중 오류가 발생했습니다.",
-        error: err.message,
-      });
-    }
+  try {
+    // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+    const [rows, fields] = await poolPromise.execute(
+      "SELECT * FROM user WHERE email = ?",
+      [email]
+    );
 
-    if (result.length > 0) {
+    if (rows.length > 0) {
       // 이미 등록된 이메일인 경우
       return res.status(200).json({
         success: false,
@@ -226,57 +220,43 @@ app.post("/checkEmailDuplication", (req, res) => {
         message: "사용 가능한 이메일입니다.",
       });
     }
-  });
+  } catch (err) {
+    console.error("MySQL에서 이메일 중복 확인 중 오류:", err);
+    return res.status(500).json({
+      success: false,
+      message: "이메일 중복 확인 중 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
 });
 //---------------------------회원가입 기능구현----------------------------------------------
 app.post("/register", async (req, res) => {
-  // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
   const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber } = req.body;
 
   try {
-    
-    // 비밀번호를 해시화합니다.
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // 회원번호를 생성합니다. (6자리)
     const userid = await generateUserid(clientUsertype);
-
-    // 클라이언트에서 받은 usertype을 서버에서 사용하는 usertype으로 변환합니다.
     const usertypeNumber = {
-      personal: 1, // 개인
-      business: 2, // 기업
-      organization: 3, // 단체
+      personal: 1,
+      business: 2,
+      organization: 3,
     };
-
     const serverUsertype = usertypeNumber[clientUsertype];
-
-    // MySQL 쿼리를 작성하여 회원 정보를 데이터베이스에 삽입합니다.
+    
     const sql =
       "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    connection.query(
+    const [result, fields] = await poolPromise.execute(
       sql,
-      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber],
-      (err, result) => {
-        if (err) {
-          // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
-          console.error("MySQL에 데이터 삽입 중 오류:", err);
-          return res.status(500).json({
-            success: false,
-            message: "회원가입 중 오류가 발생했습니다.",
-            error: err.message,
-          });
-        }
-        // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
-        console.log("사용자가 성공적으로 등록됨");
-        return res.status(200).json({
-          success: true,
-          message: "사용자가 성공적으로 등록됨",
-          usertype: serverUsertype,
-        });
-      }
+      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber]
     );
+    
+    console.log("사용자가 성공적으로 등록됨");
+    return res.status(200).json({
+      success: true,
+      message: "사용자가 성공적으로 등록됨",
+      usertype: serverUsertype,
+    });
   } catch (error) {
-    // 회원가입 중 다른 내부적인 오류가 발생한 경우 에러를 처리합니다.
     console.error("회원가입 중 오류:", error);
     return res.status(500).json({
       success: false,
@@ -356,6 +336,7 @@ app.post('/img', upload.single('img'), (req, res) => {
 app.get('/Community', async (req, res) => {
   try {
       // 클라이언트로부터 전달된 HTTP 요청의 'page' 쿼리 파라미터 값, 기본값은 1
+      const categoryId = req.query.categoryId || 1;
       const page = req.query.page || 1;
       // 페이지당 표시할 게시물 수
       const itemsPerPage = 4; 
@@ -366,22 +347,22 @@ app.get('/Community', async (req, res) => {
       const searchType = req.query.searchType || 'title';
 
       // 게시글을 가져오는 기본 쿼리문과 게시글 갯수를 조회하는 기본 쿼리문 설정
-      let query = 'SELECT * FROM ezteam2.community_posts';
-      let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts';
+      let query = 'SELECT * FROM ezteam2.community_posts WHERE categoryid = ?';
+      let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
 
       // 검색어 입력 후 검색버튼을 눌러 게시글을 불러올 경우
       // 제목 / 본문 / 제목+본문 검색 유형에 맞는 각각의 추가 쿼리문 설정
       // 제목이나 본문으로 검색 시 필요한 파라미터는 1개, 제목+본문 함께 검색 시 필요한 파라미터는 2개
     if (searchQuery) {
       if (searchType === 'title') {
-        query += ' WHERE title LIKE ?';
-        countQuery += ' WHERE title LIKE ?';
+        query += ' AND title LIKE ?';
+        countQuery += ' AND title LIKE ?';
       } else if (searchType === 'content') {
-        query += ' WHERE content LIKE ?';
-        countQuery += ' WHERE content LIKE ?';
+        query += ' AND content LIKE ?';
+        countQuery += ' AND content LIKE ?';
       } else if (searchType === 'titleAndContent') {
-        query += ' WHERE title LIKE ? OR content LIKE ?';
-        countQuery += ' WHERE title LIKE ? OR content LIKE ?';
+        query += ' AND (title LIKE ? OR content LIKE) ?';
+        countQuery += ' AND (title LIKE ? OR content LIKE) ?';
       }
 
       // 검색어가 일부만 일치해도 게시글이 검색될 수 있도록 하는 변수 설정
@@ -393,8 +374,8 @@ app.get('/Community', async (req, res) => {
         // 페이지 네이션과 최신순 정렬이 되도록 쿼리문 추가 설정
         query += ' ORDER BY createdat DESC LIMIT ?, ?';
         countQuery += '';
-      const [rows] = await pool.query(query, [searchParam, searchParam, offset, itemsPerPage]);
-      const [countRows] = await pool.query(countQuery, [searchParam, searchParam]);
+      const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
+      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
 
       const totalItems = countRows[0].total;
 
@@ -404,8 +385,8 @@ app.get('/Community', async (req, res) => {
       query += ' ORDER BY createdat DESC LIMIT ?, ?';
       countQuery += '';
     
-      const [rows] = await pool.query(query, [searchParam, offset, itemsPerPage]);
-      const [countRows] = await pool.query(countQuery, [searchParam]);
+      const [rows] = await poolPromise.query(query, [categoryId, searchParam, offset, itemsPerPage]);
+      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
       const totalItems = countRows[0].total;
 
       res.json({ posts: rows, totalItems });
@@ -413,9 +394,9 @@ app.get('/Community', async (req, res) => {
     } else {
       // 검색 기능을 이용하지 않은 모든 게시물 출력
       query += ' ORDER BY createdat DESC LIMIT ?, ?';
-      const [rows] = await pool.query(query, [offset, itemsPerPage]);
+      const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
 
-      const [countRows] = await pool.query(countQuery);
+      const [countRows] = await poolPromise.query(countQuery, [categoryId]);
       const totalItems = countRows[0].total;
 
       res.json({ posts: rows, totalItems });
@@ -429,25 +410,25 @@ app.get('/Community', async (req, res) => {
 
 
 
-//   // /Community/Write 엔드포인트에서  게시글 등록시 DB저장
-//   app.post('/Community/Write', async(req, res) => {
-//     // 요청 객체에서 title과 content 추출
-//     const { title, content } = req.body;
+  // /Community/Write 엔드포인트에서  게시글 등록시 DB저장
+  app.post('/Community/Write', async(req, res) => {
+    // 요청 객체에서 title과 content 추출
+    const { userid, categoryid, title, content } = req.body;
 
-//     try {
-//     // 클라이언트에서 받은 title, content데이터와 현재시간 데이터를 posts 테이블에 삽입
-//     const [results] = await pool.query(
-//       'INSERT INTO posts (title, content, createdat) VALUES (?, ?, NOW())',
-//       [title, content],
-//     );
-//     // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
-//     res.status(201).json({ message: 'Post created successfully' });
-//     } catch (error) {
-//     // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
-//     console.error('Error:', error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//     }
-//   });
+    try {
+    // 클라이언트에서 받은 title, content데이터와 현재시간 데이터를 posts 테이블에 삽입
+    const [results] = await poolPromise.query(
+      'INSERT INTO ezteam2.community_posts (userid, categoryid, title, content, createdat) VALUES (?, ?, ?, ?, NOW())',
+      [userid, categoryid, title, content],
+    );
+    // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
+    res.status(201).json({ message: 'Post created successfully' });
+    } catch (error) {
+    // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
   
 
 
@@ -455,100 +436,100 @@ app.get('/Community', async (req, res) => {
   
 
 
-//   // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
-//   app.get('/Community/Read/:id', async (req, res) => {
-//     // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
-//     const postId = req.params.id;
+  // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
+  app.get('/Community/Read/:id', async (req, res) => {
+    // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
+    const postId = req.params.id;
 
-//     try {
-//       // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
-//       const [rows] = await pool.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
-//       // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
-//       if (rows.length === 0) {
-//         console.log(`Post with id ${postId} not found`);
-//         res.status(404).json({ error: 'Post not found' });
-//       } else {
-//         // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
-//         console.log(`Post details sent for post id: ${postId}`);
-//         res.json(rows[0]);
-//       }
-//     } catch (error) {
-//       // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
-//       console.error('Error occurred while retrieving the post:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
+    try {
+      // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
+      const [rows] = await poolPromise.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
+      // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
+      if (rows.length === 0) {
+        console.log(`Post with id ${postId} not found`);
+        res.status(404).json({ error: 'Post not found' });
+      } else {
+        // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
+        console.log(`Post details sent for post id: ${postId}`);
+        res.json(rows[0]);
+      }
+    } catch (error) {
+      // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
+      console.error('Error occurred while retrieving the post:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 
 
-//   // /Community/Edit/:id 엔드포인트에서 이전에 작성된 게시글의 정보 가져옴
-//   app.get('/Community/Edit/:id', async (req, res) => {
-//     const postId = req.params.id;
+  // /Community/Edit/:id 엔드포인트에서 이전에 작성된 게시글의 정보 가져옴
+  app.get('/Community/Edit/:id', async (req, res) => {
+    const postId = req.params.id;
   
-//     try {
-//       // URL에서 추출한 id와 같은 id를 가지는 게시글의 데이터를 가져와 [rows]에 할당
-//       const [rows] = await pool.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
-//       if (rows.length === 0) {
-//         console.log(`Unable to find a post with ID ${postId}`);
-//         res.status(404).json({ error: 'Post not found' });
-//       } else {
-//         console.log(`Post details sent for post id: ${postId}`);
-//         res.json(rows[0]);
-//       }
-//     } catch (error) {
-//       console.error('Error occurred while retrieving the post:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
+    try {
+      // URL에서 추출한 id와 같은 id를 가지는 게시글의 데이터를 가져와 [rows]에 할당
+      const [rows] = await poolPromise.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
+      if (rows.length === 0) {
+        console.log(`Unable to find a post with ID ${postId}`);
+        res.status(404).json({ error: 'Post not found' });
+      } else {
+        console.log(`Post details sent for post id: ${postId}`);
+        res.json(rows[0]);
+      }
+    } catch (error) {
+      console.error('Error occurred while retrieving the post:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 
 
-//   // /Community/Edit/:id 엔트포인트에서 수정한 글의 데이터를 db에 업데이트
-//   app.put('/Community/Edit/:id', async (req, res) => {
-//     const postId = req.params.id;
-//     const { title, content } = req.body;
-//     const modifiedAt = new Date();
+  // /Community/Edit/:id 엔트포인트에서 수정한 글의 데이터를 db에 업데이트
+  app.put('/Community/Edit/:id', async (req, res) => {
+    const postId = req.params.id;
+    const { title, content } = req.body;
+    const modifiedAt = new Date();
   
-//     try {
-//       // URL에서 추출한 id와 일치하는 id를 가진 게시글의 title과 content데이터를 클라이언트에서 받은 데이터로 업데이트
-//       await pool.query(
-//         'UPDATE community.posts SET title = ?, content = ?, modifiedAt = ? WHERE id = ?',
-//         [title, content, modifiedAt, postId]
-//       );
+    try {
+      // URL에서 추출한 id와 일치하는 id를 가진 게시글의 title과 content데이터를 클라이언트에서 받은 데이터로 업데이트
+      await poolPromise.query(
+        'UPDATE community.posts SET title = ?, content = ?, modifiedAt = ? WHERE id = ?',
+        [title, content, modifiedAt, postId]
+      );
       
-//       res.status(200).json({ message: 'Post updated successfully' });
-//     } catch (error) {
-//       console.error('Error:', error);
-//       res.status(500).json({ message: 'Internal Server Error' });
-//     }
-//   });
+      res.status(200).json({ message: 'Post updated successfully' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
 
 
 
-//   // /Community/Read/:id 엔드포인트로의 HTTP DELETE 요청 처리 라우트 정의
-//   // 해당 id의 게시글 삭제
-//   app.delete('/Community/Read/:id', async (req, res) => {
-//     const postId = req.params.id;
+  // /Community/Read/:id 엔드포인트로의 HTTP DELETE 요청 처리 라우트 정의
+  // 해당 id의 게시글 삭제
+  app.delete('/Community/Read/:id', async (req, res) => {
+    const postId = req.params.id;
   
-//     try {
-//       // URL에서 추출한 id와 같은 id를 가지는 게시글 삭제
-//       const [result] = await pool.query('DELETE FROM community.posts WHERE id = ?', [postId]);
+    try {
+      // URL에서 추출한 id와 같은 id를 가지는 게시글 삭제
+      const [result] = await poolPromise.query('DELETE FROM community.posts WHERE id = ?', [postId]);
       
-//       // 해당 id의 게시글이 존재하지 않아 삭제된 행이 없을 시 서버에 기록, 클라이언트에 404상태 반환 및 메세지 응답
-//       // affectedRows: 영향을 받는 행 수
-//       if (result.affectedRows === 0) {
-//         console.log(`Unable to find a post with ID ${postId}`);
-//         res.status(404).json({ error: 'Post not found' });
-//         // 게시글 삭제 성공 시 서버 기록, 클라이언트에 204상태 반환 
-//       } else {
-//         console.log(`Post with ID ${postId} has been successfully deleted`);
-//         res.status(204).send();
-//       }
-//     } catch (error) {
-//       console.error('Error occurred while deleting the post:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
+      // 해당 id의 게시글이 존재하지 않아 삭제된 행이 없을 시 서버에 기록, 클라이언트에 404상태 반환 및 메세지 응답
+      // affectedRows: 영향을 받는 행 수
+      if (result.affectedRows === 0) {
+        console.log(`Unable to find a post with ID ${postId}`);
+        res.status(404).json({ error: 'Post not found' });
+        // 게시글 삭제 성공 시 서버 기록, 클라이언트에 204상태 반환 
+      } else {
+        console.log(`Post with ID ${postId} has been successfully deleted`);
+        res.status(204).send();
+      }
+    } catch (error) {
+      console.error('Error occurred while deleting the post:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 // //-------------------------------------
 // //************댓글 로직**************//

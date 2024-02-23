@@ -12,6 +12,7 @@ const CommunityWrite = () => {
   // 게시글 제목과 내용 상태 관리
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(1);
   const quillRef = useRef(null);
   
   // 게시글 제목(title)값 업데이트
@@ -21,6 +22,10 @@ const CommunityWrite = () => {
   // 게시글 내용(content)값 업데이트
   const handleContentChange = (value) => {
     setContent(value);
+  };
+
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
   };
 
  // quill-editor 사용 시 이미지가 base64 형태로 저장되어 DB에 데이터가 들어가지 않는 현상 방지를 위한 이미지 처리 핸들러
@@ -89,6 +94,7 @@ const CommunityWrite = () => {
       const response = await axios.post('http://localhost:8000/Community/Write', {
         title,
         content,
+        categoryid: selectedCategory
       });
       console.log(response.status);
       console.log(response.data);
@@ -162,6 +168,11 @@ const CommunityWrite = () => {
   ];
   return (
     <div className='CommunityWrite'>
+      <div className='CategoryBox'>
+        <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
+        <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
+        <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>
+      </div>
       {/* 글 작성을 위한 폼 */}
       <form onSubmit={handlePostSubmit}>
       <div className='TitleBox'>

@@ -44,10 +44,11 @@ function App() {
 
     // 로그아웃 시 세션 스토리지에서 로그인 상태 제거
     const handleLogout = () => {
+      sessionStorage.removeItem("usertype"); 
+      sessionStorage.removeItem("userData"); 
       sessionStorage.removeItem("loggedIn");
-      sessionStorage.removeItem("userData"); //0210 상호형 추가
       setLoggedIn(false);
-      navigate("/"); //0210 상호형 추가
+      navigate("/"); 
     };
 
 
@@ -85,7 +86,7 @@ function App() {
         <Route path='/FindInformation' element={<FindInformation />} />
         <Route path='/CarbonFootprint' element={<CarbonFootprint />} />
         <Route path='/EnvironmentalIssues' element={<EnvironmentalIssues />} />
-        <Route path='/Community' element={<Community />} />
+        <Route path='/Community' element={<Community loggedIn={loggedIn}/>} />
         <Route path='/Community/Edit/:id' element={<CommunityEdit />} />
         <Route path='/Community/Write' element={<CommunityWrite />} />
         <Route path='/uploads/' element={<CommunityWrite />} />
