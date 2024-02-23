@@ -64,8 +64,8 @@ const NewsItem = () => {
 
   const filteredNews = searchButtonClicked
     ? news.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : news;
 
   useEffect(() => {
@@ -132,11 +132,13 @@ const NewsItem = () => {
   // 검색 핸들링
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+    setSearchButtonClicked(false);
   };
 
   // 검색 버튼 핸들링
   const handleSearchButtonClick = () => {
     setSearchButtonClicked(true);
+    setPage(1);
   };
 
   // 정렬 핸들링
@@ -214,7 +216,8 @@ const NewsItem = () => {
         </h1>
       </Link>
       {/* 검색 */}
-      <div className="search">
+      <div className="searchLine">
+        <div className="search">
         <input
           type="text"
           placeholder="뉴스 검색"
@@ -223,17 +226,18 @@ const NewsItem = () => {
         />
         {/* 검색 버튼 추가 */}
         <button onClick={handleSearchButtonClick}>검색</button>
-        {/* 정렬 */}
-        <select value={sortBy} onChange={handleSortChange}>
-          <option value="latest">최신순</option>
-          <option value="oldest">오래된순</option>
-          <option value="viewsHigh">조회수 높은순</option>
-        </select>
+      </div>
+      {/* 정렬 */}
+      <select className="sorted" value={sortBy} onChange={handleSortChange}>
+        <option value="latest">최신순</option>
+        <option value="oldest">오래된순</option>
+        <option value="viewsHigh">조회수 높은순</option>
+      </select>
       </div>
       {/* 뉴스 목록 */}
       <ul className="newsList">
         {currenPosts.map((item) => (
-          <div className="ddd">
+          <div className="newsListBox">
             <li key={item.newsid}>
               {/* 썸네일 */}
               <img

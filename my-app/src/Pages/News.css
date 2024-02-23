@@ -8,30 +8,65 @@ h1 {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
+  text-shadow: 3px 4px 4px gray;
 }
 
-em {
+/* 상단, 페이지네이션에 적용됨 */
+a:link {
+  color: rgb(83, 212, 92);
   text-decoration-line: none;
+}
+
+/* 상단, 페이지네이션에 적용됨 */
+a:visited {
+  color: rgb(83, 212, 92);
+}
+
+/* 검색, 정렬 있는 줄 */
+.searchLine {
+  display: flex;
+  justify-content: space-between;
+  width: 850px;
+  height: 40px;
+  margin: 0 auto;
 }
 
 /* 검색 div */
 .search {
-  text-align: center;
   margin-bottom: 30px;
 }
 
 /* 검색 인풋 */
 .search input {
+  border: 2px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
   margin-right: 10px;
+  margin-bottom: 0;
+  height: 40px;
+}
+
+.search input:hover,
+.search input:focus {
+  border: 2px solid rgb(83, 212, 92);
+  box-sizing: border-box;
+  border-radius: 20px;
+  outline: 3px solid #ffffff;
 }
 
 /* 검색 버튼 */
 .search button {
   width: 60px;
+  height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: rgb(83, 212, 92);
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 20px;
   border: none;
   padding: 10px;
@@ -39,7 +74,32 @@ em {
   margin-right: 10px;
 }
 
+/* 정렬기능 */
+.sorted {
+  width: 130px;
+  height: 40px;
+  border: 2px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 6px 6px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.sorted:hover {
+  border: 2px solid rgb(83, 212, 92);
+  box-sizing: border-box;
+  border-radius: 20px;
+  outline: 3px solid #ffffff;
+}
+
 /* 뉴스 목록 */
+.newsList {
+  padding: 0;
+}
+
 .newsList li {
   margin-bottom: 30px;
   display: flex;
@@ -68,9 +128,25 @@ em {
 .newsList li a {
   display: flex;
   width: 300px;
-  align-items: center; /* 세로 중앙 정렬 */
+  align-items: center;
   text-align: left;
   text-decoration-line: none;
+}
+
+/* 방문 전 제목 */
+.newsList li a:link {
+  color: rgb(0, 0, 0);
+  text-decoration-line: none;
+}
+
+/* 제목 hover */
+.newsList li a:hover {
+  font-weight: bolder;
+}
+
+/* 방문 후 제목 */
+.newsList li a:visited {
+  color: rgb(190, 190, 190)
 }
 
 /* 뉴스 조회수, 날짜 */
@@ -78,9 +154,12 @@ em {
   margin: 0px 30px 0px 0px;
   display: flex;
   width: 100px;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  text-align: center; /* 텍스트 중앙 정렬 */
+  /* 가로 중앙 정렬 */
+  justify-content: center;
+  /* 세로 중앙 정렬 */
+  align-items: center;
+  /* 텍스트 중앙 정렬 */
+  text-align: center;
 }
 
 .likeButton {
@@ -101,24 +180,12 @@ em {
   text-align: center;
   border-radius: 50px 50px 50px 50px;
 }
-.ddd {
+
+.newsListBox {
   margin: 0 auto;
   width: 850px;
   height: 130px;
   border-bottom: 1px solid black;
-}
-
-a:link {
-  color: black;
-  text-decoration-line: none;
-}
-
-a:hover {
-  font-weight: bolder;
-}
-
-a:visited {
-  color: rgb(221, 221, 221);
 }
 
 /* 페이지네이션 */
@@ -132,5 +199,21 @@ a:visited {
 .pagination li {
   list-style: none;
   margin-right: 30px;
-  display: inline-block; /* 가로 배치 */
+  /* 가로 배치 */
+  display: inline-block;
 }
+
+/* 페이지네이션 현재 페이지 */
+.pagination .active {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.pagination a:link {
+  color: black;
+}
+
+.pagination a:hover {
+  color: rgb(83, 212, 92);
+}
+
