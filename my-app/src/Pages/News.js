@@ -64,8 +64,8 @@ const NewsItem = () => {
 
   const filteredNews = searchButtonClicked
     ? news.filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     : news;
 
   useEffect(() => {
@@ -139,6 +139,13 @@ const NewsItem = () => {
   const handleSearchButtonClick = () => {
     setSearchButtonClicked(true);
     setPage(1);
+  };
+
+  // 검색 input에서 엔터 키를 눌렀을 때 검색 버튼 클릭과 동일한 작동
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearchButtonClick();
+    }
   };
 
   // 정렬 핸들링
@@ -218,21 +225,22 @@ const NewsItem = () => {
       {/* 검색 */}
       <div className="searchLine">
         <div className="search">
-        <input
-          type="text"
-          placeholder="뉴스 검색"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        {/* 검색 버튼 추가 */}
-        <button onClick={handleSearchButtonClick}>검색</button>
-      </div>
-      {/* 정렬 */}
-      <select className="sorted" value={sortBy} onChange={handleSortChange}>
-        <option value="latest">최신순</option>
-        <option value="oldest">오래된순</option>
-        <option value="viewsHigh">조회수 높은순</option>
-      </select>
+          <input
+            type="text"
+            placeholder=" 뉴스 검색"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
+          />
+          {/* 검색 버튼 추가 */}
+          <button onClick={handleSearchButtonClick}>검색</button>
+        </div>
+        {/* 정렬 */}
+        <select className="sorted" value={sortBy} onChange={handleSortChange}>
+          <option value="latest">최신순</option>
+          <option value="oldest">오래된순</option>
+          <option value="viewsHigh">조회수 높은순</option>
+        </select>
       </div>
       {/* 뉴스 목록 */}
       <ul className="newsList">
