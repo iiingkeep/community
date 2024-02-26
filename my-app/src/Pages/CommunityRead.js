@@ -60,6 +60,8 @@ const CommunityRead = ({loggedIn, userid}) => {
         // 게시글 데이터 가져오기
         const postResponse = await axios.get(`http://localhost:8000/Community/Read/${id}`);
         setPost(postResponse.data);
+        // 게시글 조회수 증가 요청
+        await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);
 
         // 댓글 데이터 가져오기
         const commentsResponse = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
