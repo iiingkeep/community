@@ -104,7 +104,7 @@ const Community = (loggedIn) => {
             <span>{post.view}</span></p>
             <p className='Like'>
             <Icon icon="icon-park-outline:like" />
-            <span>좋아요</span></p>
+            <span>{post.totalLikes}</span></p>
             <p>{post.createdAt}</p>
           </li>
         ))}

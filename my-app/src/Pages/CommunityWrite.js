@@ -77,6 +77,7 @@ const CommunityWrite = ({userid}) => {
   // 글 작성 후 등록 버튼 클릭 시 호출되는 헨들러 함수
   const handlePostSubmit = async (e) => {
     e.preventDefault();
+    const view = 0;
     // 제목 또는 내용이 입력되어 있지 않은 경우 유저에게 알리고 입력하도록 포커스
     try {
       if (!title||!content) {
@@ -96,6 +97,7 @@ const CommunityWrite = ({userid}) => {
         categoryid: selectedCategory,
         title,
         content,
+        view: view
       });
       console.log(response.status);
       console.log(response.data);
@@ -167,6 +169,9 @@ const CommunityWrite = ({userid}) => {
     "color",
     "background",
   ];
+
+
+
   return (
     <div className='CommunityWrite'>
       <div className='CategoryBox'>

@@ -74,15 +74,21 @@
   text-align: start;
 }
 
-.PostListBox li .View {
+.PostListBox li .View, .Like {
+  display: flex;
+  align-items: center;
   width: 65px;
   text-align: start;
+}
+
+.PostListBox li .View {
 }
 
 .PostListBox li .View span {
   margin: 0 0 0 5px;
 }
 
-.PostListBox li .Like {
-  margin: 0 5px 0 0;
+.PostListBox li .Like span {
+  margin: 0 5px 0 5px;
 }
+
