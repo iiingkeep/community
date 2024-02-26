@@ -10,79 +10,58 @@ const CommunityRead = ({loggedIn, userid}) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState(null);
+  const [commentCount, setCommentCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
 
-  // useEffect(() => {
-  //   // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
-  //   // 불러온 데이터는 post에 업데이트.
-  //   const fetchPost = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);
-  //       console.log(response.data);
-  //       setPost(response.data);
-  //       // 게시글 조회수 증가 요청
-  //       await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);
-  //     } catch (error) {
-  //       console.error('게시물을 불러오는 중 에러 발생:', error);
-  //     }
-  //   };
-  //   fetchPost();
-    
-
-  //   // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
-  //   const fetchComments = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
-  //       setComments(response.data);
-  //     } catch (error) {
-  //       console.error('댓글을 불러오는 중 에러 발생:', error);
-  //     }
-  //   };
-  //   fetchComments();
-
-  //   // 게시글 좋아요 여부 확인
-  //   const checkLiked = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}`);
-  //       console.log(userid)
-  //       setIsLiked(response.data.isLiked);
-  //     } catch (error) {
-  //       console.error('좋아요 여부 확인 중 에러 발생:', error);
-  //     }
-  //   };
-  //   checkLiked();
-  // }, [id]);
   useEffect(() => {
-    const fetchData = async () => {
+    // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
+    const fetchPost = async () => {
       try {
-        // 게시글 데이터 가져오기
-        const postResponse = await axios.get(`http://localhost:8000/Community/Read/${id}`);
-        setPost(postResponse.data);
-        // 게시글 조회수 증가 요청
+        const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);
+        console.log(response.data);
+        setPost(response.data);
+        // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
         await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);
-
-        // 댓글 데이터 가져오기
-        const commentsResponse = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
-        setComments(commentsResponse.data);
-
-        // 좋아요 상태 확인하기
-        const likeResponse = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}` );
-        setIsLiked(likeResponse.data.isLiked);
       } catch (error) {
-        console.error('데이터를 불러오는 중 에러 발생:', error);
+        console.error('게시물을 불러오는 중 에러 발생:', error);
       }
     };
+    fetchPost();
+    
 
-    fetchData();
+    // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
+        setComments(response.data);
+        setCommentCount(response.data.length);
+      } catch (error) {
+        console.error('댓글을 불러오는 중 에러 발생:', error);
+      }
+    };
+    fetchComments();
+
+    // 서버의 다음 엔드포인트로 유저의 게시글 좋아요 여부를 확인하기 위한 GET요청
+    const checkLiked = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}`);
+        console.log(userid)
+        setIsLiked(response.data.isLiked);
+      } catch (error) {
+        console.error('좋아요 여부 확인 중 에러 발생:', error);
+      }
+    };
+    checkLiked();
   }, [id, userid]);
   
 
   
   // 등록한 댓글이 전에 있던 댓글 다음으로 바로 출력되어 나오도록 하는 함수 생성
   const refreshFunction = (newComment) => {
-    setComments(comments.concat(newComment))
+    setComments(comments.concat(newComment));
+    setCommentCount(commentCount + 1);
 }
   
   // post가 없을 경우 'Loading...' 표시
@@ -106,6 +85,8 @@ const CommunityRead = ({loggedIn, userid}) => {
     }
   }
   };
+
+
   const toggleLike = async () => {
     try {
       await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
@@ -142,7 +123,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       )}
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
-        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post}/>
+        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div>

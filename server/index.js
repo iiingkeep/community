@@ -532,17 +532,16 @@ app.get('/Community', async (req, res) => {
 
     let query = `
     SELECT 
-    cp.*,
-    u.username,
-    COUNT(il.postid) AS totalLikes
-  FROM 
-    ezteam2.community_posts cp
-  INNER JOIN 
-    user u ON cp.userid = u.userid
-  LEFT JOIN
-    ezteam2.is_like il ON cp.postid = il.postid
-  WHERE 
-    cp.categoryid = ?
+      cp.*,
+      u.username,
+      (SELECT COUNT(*) FROM ezteam2.community_comments cc WHERE cc.postid = cp.postid) AS commentCount,
+      (SELECT COUNT(*) FROM ezteam2.is_like il WHERE il.postid = cp.postid) AS totalLikes
+    FROM 
+      ezteam2.community_posts cp
+    INNER JOIN 
+      user u ON cp.userid = u.userid
+    WHERE 
+      cp.categoryid = ?
     `;
     let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
 

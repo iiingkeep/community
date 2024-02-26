@@ -3,9 +3,10 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
+import {Icon} from '@iconify/react';
 
 // 댓글 작성, 등록 컴포넌트
-const Comment = ({userid, commentLists, refreshFunction, }) =>{
+const Comment = ({userid, commentLists, refreshFunction, commentCount}) =>{
   const { id } = useParams();
   const [comment, setComment] = useState('');
 
@@ -51,7 +52,8 @@ const Comment = ({userid, commentLists, refreshFunction, }) =>{
   return(
     <div>
       <br />
-      <p>댓글</p>
+      <p><Icon icon="f7:ellipses-bubble" />
+            <span>{commentCount}</span></p>
       <hr />
       {/* 댓글 목록이 담긴 배열 commentLists를 map함수를 이용해 새로운 배열로 반환 */}
       {commentLists && commentLists.map((comment) => (

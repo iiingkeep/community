@@ -16,6 +16,7 @@ const Community = (loggedIn) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
   const [selectedCategory, setSelectedCategory] = useState(1);
+  
 
   const navigate = useNavigate();
   // 검색어 업데이트
@@ -95,7 +96,7 @@ const Community = (loggedIn) => {
       <ul>
         {posts.map((post) => (
           <li key={post.postid}>
-            <p>{post.username}</p>
+            <p className='Username'>{post.username}</p>
             <Link to={`/Community/Read/${post.postid}`}>
               <strong>{post.title}</strong>
             </Link>
@@ -105,6 +106,9 @@ const Community = (loggedIn) => {
             <p className='Like'>
             <Icon icon="icon-park-outline:like" />
             <span>{post.totalLikes}</span></p>
+            <p className='Comment'>
+            <Icon icon="f7:ellipses-bubble" />
+            <span>{post.commentCount}</span></p>
             <p>{post.createdAt}</p>
           </li>
         ))}
@@ -112,11 +116,11 @@ const Community = (loggedIn) => {
       {/* <CommunityItems posts={posts} /> */}
       </div>
       {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
-      <div>
+      <div className='WriteButtonBox'>
         <button onClick={goCommunityWrite}>글쓰기</button>
       </div>
       {/* 페이지네이션 */}
-      <div id="PagingBox">
+      <div className="PagingBox">
       <PaginatedItems
           totalItems={totalItems}
           itemsPerPage={4}

@@ -7,11 +7,12 @@ const PaginatedItems = ({ totalItems, itemsPerPage, currentPage, onPageChange })
 
   return (
     <div className="Pagination">
+      <div className="PagingButtons">
       <button
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
-        {'< Previous'}
+        {'<'}
       </button>
       {pageNumbers.map((number) => (
         <button
@@ -26,8 +27,9 @@ const PaginatedItems = ({ totalItems, itemsPerPage, currentPage, onPageChange })
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        {'Next >'}
+        {'>'}
       </button>
+      </div>
     </div>
   );
 };

@@ -39,10 +39,9 @@
   
 }
 
-.SearchBox button {
+.SearchBox button, .WriteButtonBox button {
   width: 60px;
   border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 10px;
   background-color: rgb(83, 212, 92);
   font-size:12px;
   border-radius: 20px;
@@ -70,19 +69,22 @@
 }
 
 .PostListBox li a {
-  width: 400px;
+  width: 300px;
   text-align: start;
 }
 
-.PostListBox li .View, .Like {
+.PostListBox li .Username {
+  width: 60px;
+  text-align: start;
+}
+
+.PostListBox li .View, .Like, .Comment {
   display: flex;
   align-items: center;
   width: 65px;
   text-align: start;
 }
 
-.PostListBox li .View {
-}
 
 .PostListBox li .View span {
   margin: 0 0 0 5px;
@@ -91,4 +93,9 @@
 .PostListBox li .Like span {
   margin: 0 5px 0 5px;
 }
+
+.PostListBox li .Comment span {
+  margin: 0 0 0 5px;
+}
+
 

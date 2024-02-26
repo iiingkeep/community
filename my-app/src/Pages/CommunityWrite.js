@@ -23,7 +23,7 @@ const CommunityWrite = ({userid}) => {
   const handleContentChange = (value) => {
     setContent(value);
   };
-
+  // 카테고리(category)값 업데이트
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
   };

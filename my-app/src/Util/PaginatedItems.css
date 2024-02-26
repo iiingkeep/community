@@ -5,6 +5,10 @@
   width: 30%;
 }
 
+.PagingButtons {
+  margin: 0 auto;
+}
+
 .Pagination button {
   border: none;
   background-color: white;
