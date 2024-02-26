@@ -15,6 +15,7 @@
 .Main .RightSection {
   width: 75%;
   display: flex;
+  height: 330px;
 }
 
 .Main .LeftSection .LoginBox {
@@ -35,11 +36,12 @@
 }
 .Main .RightSection .NewsBox {
   width: 50%;
-  height: 300px;
+  height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
 
+/* 워드클라우드 이미지 다운로드 버튼 */
 .wcDownload {
   width: 130px;
   background-color: rgb(83, 212, 92);
@@ -58,6 +60,19 @@
   padding-top: 5px;
 }
 
+.NewsBox > a:link {
+  font-size: 16px;
+  color: black;
+}
+
+.NewsBox > a:hover {
+  font-weight: bolder;
+}
+
+.NewsBox > a:visited {
+  color: black;
+}
+
 .NewsBox ul {
   margin: 0 auto;
   padding: 15px;
@@ -70,12 +85,15 @@
   text-align: left;
 }
 
-.NewsBox img {
+.NewsBox li img {
   cursor: pointer;
-  box-sizing: border-box;
   margin-right: 10px;
-  width: 80px;
+  width: 15%;
   height: 50px;
+}
+
+.NewsBox li a {
+  width: 85%;
 }
 
 .NewsBox li a:link {

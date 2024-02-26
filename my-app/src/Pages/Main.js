@@ -94,6 +94,7 @@ const Main = () => {
       <div className="RightSection">
         <div className="CommunityBox">커뮤니티</div>
         <div className="NewsBox">
+          <a href="/news">환경이슈</a>
           <ul>
             {topFiveNews.map((item) => (
               <li key={item.newsid}>
