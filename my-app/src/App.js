@@ -11,11 +11,13 @@ import RegisterGroup from "./Pages/RegisterGroup";
 import RegisterCorporate from "./Pages/RegisterCorporate";
 import FindInformation from './Pages/FindInformation';
 import CarbonFootprint from './Pages/CarbonFootprint';
-import EnvironmentalIssues from './Pages/EnvironmentalIssues';
 import Community from './Pages/Community';
 import CommunityEdit from './Pages/CommunityEdit';
 import CommunityWrite from './Pages/CommunityWrite';
 import CommunityRead from './Pages/CommunityRead';
+//-----뉴스
+import News from "./Pages/News";
+//-----뉴스
 import Campaign from './Pages/Campaign';
 import CampaignWrite from './Pages/CampaignWrite';
 import CampaignRead from './Pages/CampaignRead';
@@ -69,29 +71,39 @@ function App() {
   return (
     <div className="App">
       <Header
-      leftChild={<button onClick={() => navigate ('/')}>빵끗😊</button>} 
-      menu={<div className='HeaderMenu'>
-        <button>탄소중립이란? </button>
-        <button onClick={() => navigate ('/CarbonFootprint')}>탄소발자국 </button>
-        <button onClick={() => navigate ('/EnvironmentalIssues')}>환경이슈 </button>
-        <button onClick={() => navigate ('/Shop')}>빵끗샵 </button>
-        <button onClick={() => navigate ('/Community')}>커뮤니티 </button>
-        <button onClick = {() => navigate ('/Campaign')}>캠페인 </button>
-      </div>}
-      rightChild={
-        loggedIn ? 
-        (
-        <div>
-          <button onClick={() => navigate ('/MyPage')}>마이페이지</button>
-          <button onClick={handleLogout}>로그아웃</button></div>) :
-        (
-        <div>
-          <button onClick={() => navigate ('/Login')}>로그인</button>
-          <button onClick={() => navigate ('/Register')}>회원가입</button>
-      </div>)}/>
+        leftChild={<button onClick={() => navigate("/")}>빵끗😊</button>}
+        menu={
+          <div className="HeaderMenu">
+            <button>탄소중립이란? </button>
+            <button onClick={() => navigate("/CarbonFootprint")}>
+              탄소발자국{" "}
+            </button>
+            <button onClick={() => navigate("/news")}>
+              환경이슈{" "}
+            </button>
+            <button onClick={() => navigate("/Shop")}>빵끗샵 </button>
+            <button onClick={() => navigate("/Community")}>커뮤니티 </button>
+            <button onClick={() => navigate("/Campaign")}>캠페인 </button>
+          </div>
+        }
+        rightChild={
+          loggedIn ? (
+            <div>
+              <button onClick={() => navigate("/MyPage")}>마이페이지</button>
+              <button onClick={handleLogout}>로그아웃</button>
+            </div>
+          ) : (
+            <div>
+              <button onClick={() => navigate("/Login")}>로그인</button>
+              <button onClick={() => navigate("/Register")}>회원가입</button>
+            </div>
+          )
+        }
+      />
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
+<<<<<<< HEAD
           <Route path="/Modify" element={<Modify/>}></Route>
           <Route path="/Register" element={<Register />}></Route>
           <Route path="/Register/personal" element={<RegisterPersonal/>}></Route>
@@ -112,6 +124,32 @@ function App() {
         <Route path='/Shop/Detail' element={<ShopDetail />} />
         <Route path='/Shop/Basket' element={<ShopBasket />} />
         <Route path='/MyPage' element={<MyPage />} />
+=======
+        <Route path="/Modify" element={<Modify />}></Route>
+        <Route path="/Register" element={<Register />}></Route>
+        <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
+        <Route
+          path="/Register/corporate"
+          element={<RegisterCorporate />}
+        ></Route>
+        <Route path="/Register/group" element={<RegisterGroup />}></Route>
+        <Route path="/FindInformation" element={<FindInformation />} />
+        <Route path="/CarbonFootprint" element={<CarbonFootprint />} />
+        <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
+        <Route path="/Community/Edit/:id" element={<CommunityEdit />} />
+        <Route path="/Community/Write" element={<CommunityWrite />} />
+        <Route path="/uploads/" element={<CommunityWrite />} />
+        <Route path="/Community/Read/:id" element={<CommunityRead />} />
+        {/* 뉴스 추가 */}
+        <Route path="/news" element={<News />} /> 
+        <Route path="/Campaign" element={<Campaign />} />
+        <Route path="/Campaign/Write" element={<CampaignWrite />} />
+        <Route path="/Campaign/Read" element={<CampaignRead />} />
+        <Route path="/Shop" element={<Shop />} />
+        <Route path="/Shop/Detail" element={<ShopDetail />} />
+        <Route path="/Shop/Basket" element={<ShopBasket />} />
+        <Route path="/MyPage" element={<MyPage />} />
+>>>>>>> a99bb4ce0eb63a3e88d8ca14bf540afcd5b5fd8e
       </Routes>
     </div>
   );
