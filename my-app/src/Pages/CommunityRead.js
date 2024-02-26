@@ -104,7 +104,6 @@ const CommunityRead = ({loggedIn, userid}) => {
     }
   }
   };
-
   const toggleLike = async () => {
     try {
       await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {

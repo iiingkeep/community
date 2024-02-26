@@ -103,7 +103,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
-
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
@@ -115,10 +114,10 @@ function App() {
         <Route path="/FindInformation" element={<FindInformation />} />
         <Route path="/CarbonFootprint" element={<CarbonFootprint />} />
         <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
-        <Route path="/Community/Edit/:id" element={<CommunityEdit />} />
-        <Route path="/Community/Write" element={<CommunityWrite />} />
-        <Route path="/uploads/" element={<CommunityWrite />} />
-        <Route path="/Community/Read/:id" element={<CommunityRead />} />
+        <Route path='/Community/Edit/:id' element={<CommunityEdit userid={userid}/>} />
+        <Route path='/Community/Write' element={<CommunityWrite userid={userid}/>} />
+        <Route path='/uploads/' element={<CommunityWrite />} />
+        <Route path='/Community/Read/:id' element={<CommunityRead loggedIn={loggedIn} userid={userid}/>} />
         {/* 뉴스 추가 */}
         <Route path="/news" element={<News />} /> 
         <Route path="/Campaign" element={<Campaign />} />

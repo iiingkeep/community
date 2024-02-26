@@ -680,61 +680,7 @@ app.post("/Community/Write", async (req, res) => {
   }
 });
 
-// // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
-// app.get("/Community/Read/:id", async (req, res) => {
-//   // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
-//   const postId = req.params.id;
 
-//   try {
-//     // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
-//     const [rows] = await poolPromise.query(
-//       "SELECT * FROM community.posts WHERE id = ?",
-//       [postId]
-//     );
-//     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
-//     if (rows.length === 0) {
-//       console.log(`Post with id ${postId} not found`);
-//       res.status(404).json({ error: "Post not found" });
-//     } else {
-//       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답
-//       console.log(`Post details sent for post id: ${postId}`);
-//       res.json(rows[0]);
-//     }
-//   } catch (error) {
-//     // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
-//     console.error("Error occurred while retrieving the post:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
-
-
-
-
-  
-
-
-  // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
-  // app.get('/Community/Read/:id', async (req, res) => {
-  //   // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
-  //   const postId = req.params.id;
-  //   try {
-  //     // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
-  //     const [rows] = await poolPromise.query('SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
-  //     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
-  //     if (rows.length === 0) {
-  //       console.log(`Post with id ${postId} not found`);
-  //       res.status(404).json({ error: 'Post not found' });
-  //     } else {
-  //       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
-  //       console.log(`Post details sent for post id: ${postId}`);
-  //       res.json(rows[0]);
-  //     }
-  //   } catch (error) {
-  //     // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
-  //     console.error('Error occurred while retrieving the post:', error);
-  //     res.status(500).json({ error: 'Internal Server Error' });
-  //   }
-  // });
   app.get('/Community/Read/:id', async (req, res) => {
     const postId = req.params.id;
     try {
