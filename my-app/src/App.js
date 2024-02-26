@@ -103,28 +103,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
-<<<<<<< HEAD
-          <Route path="/Modify" element={<Modify/>}></Route>
-          <Route path="/Register" element={<Register />}></Route>
-          <Route path="/Register/personal" element={<RegisterPersonal/>}></Route>
-          <Route path="/Register/corporate" element={<RegisterCorporate/>}></Route>
-          <Route path="/Register/group" element={<RegisterGroup/>}></Route>
-        <Route path='/FindInformation' element={<FindInformation />} />
-        <Route path='/CarbonFootprint' element={<CarbonFootprint />} />
-        <Route path='/EnvironmentalIssues' element={<EnvironmentalIssues />} />
-        <Route path='/Community' element={<Community />} />
-        <Route path='/Community/Edit/:id' element={<CommunityEdit userid={userid}/>} />
-        <Route path='/Community/Write' element={<CommunityWrite userid={userid}/>} />
-        <Route path='/uploads/' element={<CommunityWrite />} />
-        <Route path='/Community/Read/:id' element={<CommunityRead loggedIn={loggedIn} userid={userid}/>} />
-        <Route path='/Campaign' element={<Campaign />} />
-        <Route path='/Campaign/Write' element={<CampaignWrite />} />
-        <Route path='/Campaign/Read' element={<CampaignRead />} />
-        <Route path='/Shop' element={<Shop />} />
-        <Route path='/Shop/Detail' element={<ShopDetail />} />
-        <Route path='/Shop/Basket' element={<ShopBasket />} />
-        <Route path='/MyPage' element={<MyPage />} />
-=======
+
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
@@ -149,7 +128,6 @@ function App() {
         <Route path="/Shop/Detail" element={<ShopDetail />} />
         <Route path="/Shop/Basket" element={<ShopBasket />} />
         <Route path="/MyPage" element={<MyPage />} />
->>>>>>> a99bb4ce0eb63a3e88d8ca14bf540afcd5b5fd8e
       </Routes>
     </div>
   );
