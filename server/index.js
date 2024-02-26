@@ -46,13 +46,6 @@ app.use(function (req, res, next) {
 });
 
 // MySQL 연결 설정
-// const connection = mysql.createConnection({
-//   host: "1.243.246.15",
-//   user: "root",
-//   password: "1234",
-//   database: "ezteam2",
-//   port: 5005,
-// });
 const poolPromise = mysql.createPool({
   host: "1.243.246.15",
   user: "root",
@@ -62,7 +55,6 @@ const poolPromise = mysql.createPool({
 });
 
 // const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.dotenv;
-
 const connection = mysql2.createConnection({
   host: "1.243.246.15",
   user: "root",

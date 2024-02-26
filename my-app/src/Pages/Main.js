@@ -88,7 +88,7 @@ const Main = () => {
             alt="wordcloud_img"
             style={{ width: "300px", height: "300px" }}
           />
-          <button onClick={handleDownload}>이미지 다운로드</button>
+          <button className="wcDownload" onClick={handleDownload}>이미지 다운로드</button>
         </div>
       </div>
       <div className="RightSection">
@@ -101,7 +101,6 @@ const Main = () => {
                   src={item.image_url}
                   alt="뉴스 썸네일"
                   onClick={() => handleClick(item)}
-                  style={{ cursor: "pointer", width: "70px", height: "50px" }}
                 />
                 <a
                   href={item.url}

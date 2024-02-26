@@ -19,34 +19,48 @@
 
 .Main .LeftSection .LoginBox {
   height: 140px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
 .Main .LeftSection .CloudBox {
   height: 140px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
 .Main .RightSection .CommunityBox {
   width: 50%;
   height: 140px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
 .Main .RightSection .NewsBox {
   width: 50%;
-  height: 140px;
-  border: 1px solid rgba(0,0,0,0.2);
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
 
+.wcDownload {
+  width: 130px;
+  background-color: rgb(83, 212, 92);
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  color: white;
+  padding: 10px;
+}
+
+/* --------------뉴스-------------- */
 .NewsBox {
-  border: 1px solid black;
-  width: 400px;
   font-size: 13px;
   margin-left: 10px;
   padding-left: 0px;
   padding-top: 5px;
+}
+
+.NewsBox ul {
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .NewsBox li {
@@ -55,3 +69,25 @@
   display: flex;
   text-align: left;
 }
+
+.NewsBox img {
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-right: 10px;
+  width: 80px;
+  height: 50px;
+}
+
+.NewsBox li a:link {
+  color: rgb(0, 0, 0);
+  text-decoration-line: none;
+}
+
+.NewsBox li a:hover {
+  font-weight: bolder;
+}
+
+.NewsBox li a:visited {
+  color: rgb(190, 190, 190);
+}
+/* --------------뉴스 끝-------------- */
