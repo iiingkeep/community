@@ -596,7 +596,66 @@ app.post("/img", upload.single("img"), (req, res) => {
 //     res.status(500).json({ error: 'Internal Server Error' });
 //   }
 // });
+app.get('/Community', async (req, res) => {
+  try {
+    const categoryId = req.query.categoryId || 1;
+    const page = req.query.page || 1;
+    const itemsPerPage = 4; 
+    const offset = (page - 1) * itemsPerPage;
+  
+    const searchQuery = req.query.searchQuery || '';
+    const searchType = req.query.searchType || 'title';
 
+    let query = `
+      SELECT 
+        cp.*,
+        u.username
+      FROM 
+        ezteam2.community_posts cp
+      INNER JOIN 
+        user u ON cp.userid = u.userid
+      WHERE 
+        cp.categoryid = ?
+    `;
+    let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
+
+    let likeQuery = `SELECT COUNT(*) AS count FROM is_like WHERE userid = ? AND postid = ?`
+
+    if (searchQuery) {
+      if (searchType === 'title') {
+        query += ' AND cp.title LIKE ?';
+        countQuery += ' AND title LIKE ?';
+      } else if (searchType === 'content') {
+        query += ' AND cp.content LIKE ?';
+        countQuery += ' AND content LIKE ?';
+      } else if (searchType === 'titleAndContent') {
+        query += ' AND (cp.title LIKE ? OR cp.content LIKE ?)';
+        countQuery += ' AND (title LIKE ? OR content LIKE ?)';
+      }
+
+      const searchParam = `%${searchQuery}%`;
+
+      query += ' ORDER BY cp.createdat DESC LIMIT ?, ?';
+      const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
+      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
+
+      const totalItems = countRows[0].total;
+
+      res.json({ posts: rows, totalItems });
+    } else {
+      query += ' ORDER BY cp.createdat DESC LIMIT ?, ?';
+      const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
+
+      const [countRows] = await poolPromise.query(countQuery, [categoryId]);
+      const totalItems = countRows[0].total;
+
+      res.json({ posts: rows, totalItems });
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
