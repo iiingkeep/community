@@ -5,7 +5,7 @@ import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 
 // 댓글 작성, 등록 컴포넌트
-const Comment = ({commentLists, refreshFunction}) =>{
+const Comment = ({userid, commentLists, refreshFunction, }) =>{
   const { id } = useParams();
   const [comment, setComment] = useState('');
 
@@ -20,10 +20,9 @@ const Comment = ({commentLists, refreshFunction}) =>{
     // 서버의 다음 엔드포인트로 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
     try{
     const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {
-        postId: id,
+        userid: userid,
+        postid: id,
         content: comment,
-        responseTo: null,
-        // **user정보 추가**
       });
       console.log(response.status);
       console.log(response.data);
@@ -60,8 +59,8 @@ const Comment = ({commentLists, refreshFunction}) =>{
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
         <React.Fragment key={comment.id}>
-        <SingleComment refreshFunction={refreshFunction} comment={comment}/>
-        <ReplyComment refreshFunction={refreshFunction} parentCommentId={comment.id}  commentLists={commentLists} postId={id}/>
+        <SingleComment userid={userid} refreshFunction={refreshFunction} comment={comment}/>
+        <ReplyComment userid={userid} refreshFunction={refreshFunction} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
         )
       ))}

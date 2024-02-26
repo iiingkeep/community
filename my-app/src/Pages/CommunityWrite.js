@@ -7,7 +7,7 @@ import axios from 'axios';
 import './CommunityWrite.css'
 
 // 게시글 작성 컴포넌트
-const CommunityWrite = () => {
+const CommunityWrite = ({userid}) => {
   const navigate = useNavigate();
   // 게시글 제목과 내용 상태 관리
   const [title, setTitle] = useState('');
@@ -92,9 +92,10 @@ const CommunityWrite = () => {
       } else {
       // 제목과 내용 작성을 완료했을 경우 서버의 다음 엔드포인트로 새 게시글 정보(제목, 내용) POST 요청
       const response = await axios.post('http://localhost:8000/Community/Write', {
+        userid,
+        categoryid: selectedCategory,
         title,
         content,
-        categoryid: selectedCategory
       });
       console.log(response.status);
       console.log(response.data);

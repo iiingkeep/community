@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import PaginatedItems from '../Util/PaginatedItems';
 import './Community.css';
+import {Icon} from '@iconify/react';
 // import {formattedDate} from '../Util/utils';
 // import CommunityItems from './CommunityItems';
 
@@ -50,20 +51,20 @@ const Community = (loggedIn) => {
       console.error('데이터를 가져오는 중 오류 발생:', error);
     }
   };
-  
 
   // 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
-    if (loggedIn) {
-      navigate('/Community/Write')
+    const loggedIn = sessionStorage.getItem("loggedIn");
+  if (loggedIn) {
+    // 로그인 상태일 경우 글쓰기 페이지로 이동
+    navigate('/Community/Write', { state: { selectedCategory } });
+  } else {
+    // 로그인 상태가 아닐 경우 로그인 페이지로 이동
+    if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      navigate('/Login');
     }
-    else {
-      const loginComfirm = window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
-      if(loginComfirm) {
-        navigate('/Login')
-      }
-    }
-  };
+  }
+};
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -93,10 +94,17 @@ const Community = (loggedIn) => {
       <div className="PostListBox">
       <ul>
         {posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`/Community/Read/${post.id}`}>
+          <li key={post.postid}>
+            <p>{post.username}</p>
+            <Link to={`/Community/Read/${post.postid}`}>
               <strong>{post.title}</strong>
             </Link>
+            <p className='View'>
+            <Icon icon="fluent-mdl2:view" />
+            <span>{post.view}</span></p>
+            <p className='Like'>
+            <Icon icon="icon-park-outline:like" />
+            <span>좋아요</span></p>
             <p>{post.createdAt}</p>
           </li>
         ))}

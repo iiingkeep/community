@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
-const SingleComment = ({comment, refreshFunction}) => {
+const SingleComment = ({userid, comment, refreshFunction}) => {
   const { id } = useParams();
   const [openReply, setOpenReply] = useState(false);
   const [commentValue, setCommentValue] = useState('');
@@ -24,13 +24,14 @@ const SingleComment = ({comment, refreshFunction}) => {
     try{
       // 서버의 다음 엔드포인트로 답글 정보(게시글id, 작성한 답글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
       const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {
+          userid: userid,
           postId: id,
           content: commentValue,
-          responseTo: comment.id,
-          // **user정보 추가**
+          responseTo: comment.commentid,
         });
         console.log(response.status);
         console.log(response.data);
+    
         // 답글 등록 성공 시 알림, 답글 창 초기화 및 닫힘
         // refreshFunction으로 새로 등록한 답글 즉시 렌더링
         if (response&&response.status===201) {
@@ -54,7 +55,9 @@ const SingleComment = ({comment, refreshFunction}) => {
     <div>
       <div>
       {/* 원본 단일 댓글+답글 달기 버튼 표시 */}
+      {comment.username}
       {comment.content}
+      {comment.createdAt}
       <span onClick={onClickReplyOpen}> --답글 달기</span>
       </div>
       {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}

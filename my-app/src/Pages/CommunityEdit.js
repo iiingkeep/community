@@ -5,12 +5,13 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 // 등록된 게시글 수정 컴포넌트
-const CommunityEdit = () => {
+const CommunityEdit = ({userid}) => {
   const { id } = useParams();
   const navigate = useNavigate();
   // 게시글 제목과 내용 상태 관리
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(1);
 
   // 서버의 다음 엔드포인트로 상세 게시글의 제목과 본문 데이터를 불러오기 위한 GET요청
   useEffect(() => {
@@ -19,6 +20,7 @@ const CommunityEdit = () => {
         const response = await axios.get(`http://localhost:8000/Community/Edit/${id}`);
         setTitle(response.data.title);
         setContent(response.data.content);
+        setSelectedCategory(response.data.categoryid);
       } catch (error) {
         console.error('게시물을 불러오는 중 에러 발생:', error);
       }
@@ -36,17 +38,23 @@ const CommunityEdit = () => {
     setContent(value);
   };
 
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
+
 
   // 등록버튼 클릭 시 호출되는 핸들러 함수
   const handlePostUpdate = async (e) => {
+    e.preventDefault();
     // 등록버튼 클릭 시 게시글 수정 완료를 묻는 메시지창 출력
     // 확인 선택 시 서버의 다음 엔드포인트로 글의 제목과 내용 데이터 PUT 요청
     const editComfirmed = window.confirm("게시글 수정을 완료하시겠습니까?");
     if (editComfirmed) {
-    e.preventDefault();
 
     try {
       const response = await axios.put(`http://localhost:8000/Community/Edit/${id}`, {
+        userid,
+        categoryid: selectedCategory,
         title,
         content,
       });
@@ -67,7 +75,8 @@ const CommunityEdit = () => {
   };
 
   // 취소 버튼 클릭 시 호출되는 핸들러
-  const onCancelHandler = () => {
+  const onCancelHandler = (e) => {
+    e.preventDefault();
     // 취소 버튼 클릭 시 게시글 수정 취소를 묻는 메세지창 출력
     // 확인 선택 시 수정을 취소하고 게시글 상세페이지로 이동
     const cancelConfirm = window.confirm('수정을 취소하시겠습니까?')
@@ -112,6 +121,11 @@ const CommunityEdit = () => {
 
   return (
     <div className='CommunityEdit'>
+      <div className='CategoryBox'>
+        <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
+        <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
+        <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>
+      </div>
       <form onSubmit={handlePostUpdate}>
         {/* 제목 입력 input 설정 */}
         <div className='TitleBox'>

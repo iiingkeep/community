@@ -3,7 +3,7 @@ import SingleComment from "./SingleComment";
 
 
 // 댓글에 달린 답글을 출력하는 컴포넌트
-const ReplyComment = ({refreshFunction, commentLists, parentCommentId, postId}) => {
+const ReplyComment = ({userid, refreshFunction, commentLists, parentCommentId, postId}) => {
   // 답글 갯수, 보기(펼침/접힘) 상태 관리
   const [childCommentNumber, setChildCommentNumber] = useState();
   const [openReplyComments, setOpenReplyComments] = useState();
@@ -28,8 +28,8 @@ const ReplyComment = ({refreshFunction, commentLists, parentCommentId, postId}) 
       { //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 그 답글에 다시 답글을 달고 표시할 수 있도록 SingleComment와 ReplyComment 컴포넌트 렌더링
         comment.responseTo === parentCommentId &&
       <div style={{width: '80%', marginLeft: '40px'}}>
-        <SingleComment refreshFunction={refreshFunction} comment={comment} postId={postId}/>
-        <ReplyComment refreshFunction={refreshFunction} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
+        <SingleComment userid={userid} refreshFunction={refreshFunction} comment={comment} postId={postId}/>
+        <ReplyComment userid={userid} refreshFunction={refreshFunction} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
         </div>
       }
       </React.Fragment>
@@ -40,7 +40,6 @@ const ReplyComment = ({refreshFunction, commentLists, parentCommentId, postId}) 
       setOpenReplyComments(!openReplyComments)
     }
 
-    
   return (
     <div className="ReplyComment">
       {/* 댓글에 대한 답글이 1개 이상일 경우 답글보기 버튼 표시 */}

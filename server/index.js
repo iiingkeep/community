@@ -333,67 +333,127 @@ app.post('/img', upload.single('img'), (req, res) => {
 
 
 // /Community 엔드포인트에서 게시글 목록을 가져옴
+// app.get('/Community', async (req, res) => {
+//   try {
+//       // 클라이언트로부터 전달된 HTTP 요청의 'page' 쿼리 파라미터 값, 기본값은 1
+//       const categoryId = req.query.categoryId || 1;
+//       const page = req.query.page || 1;
+//       // 페이지당 표시할 게시물 수
+//       const itemsPerPage = 4; 
+//       // 페이지별 첫번째 게시물의 인덱스
+//       const offset = (page - 1) * itemsPerPage;
+  
+//       const searchQuery = req.query.searchQuery || '';
+//       const searchType = req.query.searchType || 'title';
+
+//       // 게시글을 가져오는 기본 쿼리문과 게시글 갯수를 조회하는 기본 쿼리문 설정
+//       let query = 'SELECT * FROM ezteam2.community_posts WHERE categoryid = ?';
+//       let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
+
+//       // 검색어 입력 후 검색버튼을 눌러 게시글을 불러올 경우
+//       // 제목 / 본문 / 제목+본문 검색 유형에 맞는 각각의 추가 쿼리문 설정
+//       // 제목이나 본문으로 검색 시 필요한 파라미터는 1개, 제목+본문 함께 검색 시 필요한 파라미터는 2개
+//     if (searchQuery) {
+//       if (searchType === 'title') {
+//         query += ' AND title LIKE ?';
+//         countQuery += ' AND title LIKE ?';
+//       } else if (searchType === 'content') {
+//         query += ' AND content LIKE ?';
+//         countQuery += ' AND content LIKE ?';
+//       } else if (searchType === 'titleAndContent') {
+//         query += ' AND (title LIKE ? OR content LIKE) ?';
+//         countQuery += ' AND (title LIKE ? OR content LIKE) ?';
+//       }
+
+//       // 검색어가 일부만 일치해도 게시글이 검색될 수 있도록 하는 변수 설정
+//       const searchParam = `%${searchQuery}%`;
+
+//       // 제목 또는 본문으로 검색하는 경우와 제목+본문으로 검색하는 경우 전달해 줘야 하는 파라미터의 갯수가 다르기 때문에 나누어 작성
+//       // 제목+본문으로 검색할 시, 전달해 줘야 하는 파라미터는 총 4개
+//       if (searchType === 'titleAndContent') {
+//         // 페이지 네이션과 최신순 정렬이 되도록 쿼리문 추가 설정
+//         query += ' ORDER BY createdat DESC LIMIT ?, ?';
+//         countQuery += '';
+//       const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
+//       const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
+
+//       const totalItems = countRows[0].total;
+
+//       res.json({ posts: rows, totalItems });
+//     } else { // 제목 또는 본문으로 검색할 시, 전달해 줘야 하는 파라미터는 총 3개
+//       // 페이지 네이션과 최신순 정렬이 되도록 쿼리문 추가 설정
+//       query += ' ORDER BY createdat DESC LIMIT ?, ?';
+//       countQuery += '';
+    
+//       const [rows] = await poolPromise.query(query, [categoryId, searchParam, offset, itemsPerPage]);
+//       const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
+//       const totalItems = countRows[0].total;
+
+//       res.json({ posts: rows, totalItems });
+//     }
+//     } else {
+//       // 검색 기능을 이용하지 않은 모든 게시물 출력
+//       query += ' ORDER BY createdat DESC LIMIT ?, ?';
+//       const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
+
+//       const [countRows] = await poolPromise.query(countQuery, [categoryId]);
+//       const totalItems = countRows[0].total;
+
+//       res.json({ posts: rows, totalItems });
+//     }
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 app.get('/Community', async (req, res) => {
   try {
-      // 클라이언트로부터 전달된 HTTP 요청의 'page' 쿼리 파라미터 값, 기본값은 1
-      const categoryId = req.query.categoryId || 1;
-      const page = req.query.page || 1;
-      // 페이지당 표시할 게시물 수
-      const itemsPerPage = 4; 
-      // 페이지별 첫번째 게시물의 인덱스
-      const offset = (page - 1) * itemsPerPage;
+    const categoryId = req.query.categoryId || 1;
+    const page = req.query.page || 1;
+    const itemsPerPage = 4; 
+    const offset = (page - 1) * itemsPerPage;
   
-      const searchQuery = req.query.searchQuery || '';
-      const searchType = req.query.searchType || 'title';
+    const searchQuery = req.query.searchQuery || '';
+    const searchType = req.query.searchType || 'title';
 
-      // 게시글을 가져오는 기본 쿼리문과 게시글 갯수를 조회하는 기본 쿼리문 설정
-      let query = 'SELECT * FROM ezteam2.community_posts WHERE categoryid = ?';
-      let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
+    let query = `
+      SELECT 
+        cp.*,
+        u.username
+      FROM 
+        ezteam2.community_posts cp
+      INNER JOIN 
+        user u ON cp.userid = u.userid
+      WHERE 
+        cp.categoryid = ?
+    `;
+    let countQuery = 'SELECT COUNT(*) AS total FROM ezteam2.community_posts WHERE categoryid = ?';
 
-      // 검색어 입력 후 검색버튼을 눌러 게시글을 불러올 경우
-      // 제목 / 본문 / 제목+본문 검색 유형에 맞는 각각의 추가 쿼리문 설정
-      // 제목이나 본문으로 검색 시 필요한 파라미터는 1개, 제목+본문 함께 검색 시 필요한 파라미터는 2개
+    let likeQuery = `SELECT COUNT(*) AS count FROM is_like WHERE userid = ? AND postid = ?`
+
     if (searchQuery) {
       if (searchType === 'title') {
-        query += ' AND title LIKE ?';
+        query += ' AND cp.title LIKE ?';
         countQuery += ' AND title LIKE ?';
       } else if (searchType === 'content') {
-        query += ' AND content LIKE ?';
+        query += ' AND cp.content LIKE ?';
         countQuery += ' AND content LIKE ?';
       } else if (searchType === 'titleAndContent') {
-        query += ' AND (title LIKE ? OR content LIKE) ?';
-        countQuery += ' AND (title LIKE ? OR content LIKE) ?';
+        query += ' AND (cp.title LIKE ? OR cp.content LIKE ?)';
+        countQuery += ' AND (title LIKE ? OR content LIKE ?)';
       }
 
-      // 검색어가 일부만 일치해도 게시글이 검색될 수 있도록 하는 변수 설정
       const searchParam = `%${searchQuery}%`;
 
-      // 제목 또는 본문으로 검색하는 경우와 제목+본문으로 검색하는 경우 전달해 줘야 하는 파라미터의 갯수가 다르기 때문에 나누어 작성
-      // 제목+본문으로 검색할 시, 전달해 줘야 하는 파라미터는 총 4개
-      if (searchType === 'titleAndContent') {
-        // 페이지 네이션과 최신순 정렬이 되도록 쿼리문 추가 설정
-        query += ' ORDER BY createdat DESC LIMIT ?, ?';
-        countQuery += '';
+      query += ' ORDER BY cp.createdat DESC LIMIT ?, ?';
       const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
       const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
 
       const totalItems = countRows[0].total;
 
       res.json({ posts: rows, totalItems });
-    } else { // 제목 또는 본문으로 검색할 시, 전달해 줘야 하는 파라미터는 총 3개
-      // 페이지 네이션과 최신순 정렬이 되도록 쿼리문 추가 설정
-      query += ' ORDER BY createdat DESC LIMIT ?, ?';
-      countQuery += '';
-    
-      const [rows] = await poolPromise.query(query, [categoryId, searchParam, offset, itemsPerPage]);
-      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
-      const totalItems = countRows[0].total;
-
-      res.json({ posts: rows, totalItems });
-    }
     } else {
-      // 검색 기능을 이용하지 않은 모든 게시물 출력
-      query += ' ORDER BY createdat DESC LIMIT ?, ?';
+      query += ' ORDER BY cp.createdat DESC LIMIT ?, ?';
       const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
 
       const [countRows] = await poolPromise.query(countQuery, [categoryId]);
@@ -437,30 +497,135 @@ app.get('/Community', async (req, res) => {
 
 
   // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
+  // app.get('/Community/Read/:id', async (req, res) => {
+  //   // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
+  //   const postId = req.params.id;
+  //   try {
+  //     // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
+  //     const [rows] = await poolPromise.query('SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
+  //     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
+  //     if (rows.length === 0) {
+  //       console.log(`Post with id ${postId} not found`);
+  //       res.status(404).json({ error: 'Post not found' });
+  //     } else {
+  //       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
+  //       console.log(`Post details sent for post id: ${postId}`);
+  //       res.json(rows[0]);
+  //     }
+  //   } catch (error) {
+  //     // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
+  //     console.error('Error occurred while retrieving the post:', error);
+  //     res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // });
   app.get('/Community/Read/:id', async (req, res) => {
-    // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
     const postId = req.params.id;
-
     try {
-      // URL에서 추출한 id값과 같은 id를 가지는 게시물의 데이터를 [rows]에 할당
-      const [rows] = await poolPromise.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
-      // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
+      const query = `
+        SELECT 
+          cp.*,
+          u.username
+        FROM 
+          ezteam2.community_posts cp
+        INNER JOIN 
+          user u ON cp.userid = u.userid
+        WHERE 
+          cp.postid = ?
+      `;
+      const [rows] = await poolPromise.query(query, [postId]);
+  
       if (rows.length === 0) {
         console.log(`Post with id ${postId} not found`);
         res.status(404).json({ error: 'Post not found' });
       } else {
-        // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
         console.log(`Post details sent for post id: ${postId}`);
         res.json(rows[0]);
       }
     } catch (error) {
-      // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
       console.error('Error occurred while retrieving the post:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 
+  // Community/Read/:id/IncrementViews 엔드포인트에 조회수 증가를 db에 업데이트
+  app.put('/Community/Read/:id/IncrementViews', async (req, res) => {
+    const postId = req.params.id;
+    try {
+      // 해당 게시글의 조회수를 증가시키는 쿼리 실행
+      const query = `
+        UPDATE ezteam2.community_posts 
+        SET view = view + 1 
+        WHERE postid = ?
+      `;
+      await poolPromise.query(query, [postId]);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error('Error occurred while incrementing views:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
+
+
+  // /Community/Read/:id/ToggleLike 
+  app.put('/Community/Read/:id/ToggleLike', async (req, res) => {
+    const postId = req.params.id;
+    const { userid } = req.body;
+  
+    try {
+      // 해당 유저가 해당 게시글을 이미 좋아요 했는지 확인
+      const checkQuery = `
+        SELECT COUNT(*) AS count FROM is_like WHERE userid = ? AND postid = ?
+      `;
+      const [checkRows] = await poolPromise.query(checkQuery, [userid, postId]);
+      
+      // 이미 좋아요를 한 경우
+      if (checkRows[0].count > 0) {
+        // 좋아요 취소
+        const deleteQuery = `
+          DELETE FROM is_like WHERE userid = ? AND postid = ?
+        `;
+        await poolPromise.query(deleteQuery, [userid, postId]);
+      } else {
+        // 아직 좋아요를 하지 않은 경우
+        const insertQuery = `
+          INSERT INTO is_like (userid, postid, post_isLiked) VALUES (?, ?, 1)
+        `;
+        await poolPromise.query(insertQuery, [userid, postId]);
+      }
+      
+      console.log(`Post like toggled for post id: ${postId}`);
+      res.status(200).send('OK');
+    } catch (error) {
+      console.error('Error occurred while toggling post like:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+
+  
+  app.get('/Community/Read/:id/CheckLiked', async (req, res) => {
+    const postId = req.params.id;
+    const userid = req.query.userid;
+  
+    try {
+      // 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인
+      const query = `
+        SELECT COUNT(*) AS count FROM ezteam2.is_like
+        WHERE (userid = ? AND postid = ? AND post_isLiked = 1)
+      `;
+      const [rows] = await poolPromise.query(query, [userid, postId]);
+      
+      console.log(userid);
+      console.log(postId);
+      console.log(rows);
+      const isLiked = rows[0].count > 0;
+      res.status(200).json({ isLiked });
+    } catch (error) {
+      console.error('Error occurred while checking post like:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
   // /Community/Edit/:id 엔드포인트에서 이전에 작성된 게시글의 정보 가져옴
   app.get('/Community/Edit/:id', async (req, res) => {
@@ -468,7 +633,7 @@ app.get('/Community', async (req, res) => {
   
     try {
       // URL에서 추출한 id와 같은 id를 가지는 게시글의 데이터를 가져와 [rows]에 할당
-      const [rows] = await poolPromise.query('SELECT * FROM community.posts WHERE id = ?', [postId]);
+      const [rows] = await poolPromise.query('SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
       if (rows.length === 0) {
         console.log(`Unable to find a post with ID ${postId}`);
         res.status(404).json({ error: 'Post not found' });
@@ -487,14 +652,13 @@ app.get('/Community', async (req, res) => {
   // /Community/Edit/:id 엔트포인트에서 수정한 글의 데이터를 db에 업데이트
   app.put('/Community/Edit/:id', async (req, res) => {
     const postId = req.params.id;
-    const { title, content } = req.body;
-    const modifiedAt = new Date();
+    const { userid, categoryid, title, content } = req.body;
   
     try {
       // URL에서 추출한 id와 일치하는 id를 가진 게시글의 title과 content데이터를 클라이언트에서 받은 데이터로 업데이트
       await poolPromise.query(
-        'UPDATE community.posts SET title = ?, content = ?, modifiedAt = ? WHERE id = ?',
-        [title, content, modifiedAt, postId]
+        'UPDATE ezteam2.community_posts SET userid = ?, categoryid = ?, title = ?, content = ? WHERE postid = ?',
+        [userid, categoryid, title, content, postId]
       );
       
       res.status(200).json({ message: 'Post updated successfully' });
@@ -513,7 +677,7 @@ app.get('/Community', async (req, res) => {
   
     try {
       // URL에서 추출한 id와 같은 id를 가지는 게시글 삭제
-      const [result] = await poolPromise.query('DELETE FROM community.posts WHERE id = ?', [postId]);
+      const [result] = await poolPromise.query('DELETE FROM ezteam2.community_posts WHERE postid = ?', [postId]);
       
       // 해당 id의 게시글이 존재하지 않아 삭제된 행이 없을 시 서버에 기록, 클라이언트에 404상태 반환 및 메세지 응답
       // affectedRows: 영향을 받는 행 수
@@ -535,72 +699,92 @@ app.get('/Community', async (req, res) => {
 // //************댓글 로직**************//
 // //-------------------------------------
 
-// // /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
-// app.get('/Community/Read/:id/GetComments', async (req, res) => {
-//   // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
-//   const postId = req.params.id;
+// /Community/Read/:id 엔드포인트로 상세 게시물의 정보 가져오기
+app.get('/Community/Read/:id/GetComments', async (req, res) => {
+  // req.params를 통해 URL에서 추출한 동적 파라미터 :id 값을 가져옴
+  const postId = req.params.id;
 
-//   try {
-//     // URL에서 추출한 id값과 같은 id를 가지는 게시물의 댓글 데이터를 [rows]에 할당
-//     const [rows] = await pool.query('SELECT * FROM community.comments WHERE postId = ?', [postId]);
-//     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
-//     if (rows.length === 0) {
-//       console.log(`Post with id ${postId} not found`);
-//       res.status(404).json({ error: 'Post not found' });
-//     } else {
-//       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
-//       console.log(`Comment details sent for post id: ${postId}`);
-//       res.json(rows);
-//       console.log(rows)
-//     }
-//   } catch (error) {
-//     // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
-//     console.error('Error occurred while retrieving the post:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+  try {
+    // URL에서 추출한 id값과 같은 id를 가지는 게시물의 댓글 데이터를 [rows]에 할당
+    const [rows] = await poolPromise.query(`
+      SELECT 
+        community_comments.*, 
+        user.username 
+      FROM 
+        ezteam2.community_comments 
+      INNER JOIN 
+        ezteam2.user 
+      ON 
+        community_comments.userid = user.userid
+      WHERE 
+        community_comments.postid = ?`, [postId]);
+    // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
+    if (rows.length === 0) {
+      console.log(`Post with id ${postId} not found`);
+      res.status(404).json({ error: 'Post not found' });
+    } else {
+      // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
+      console.log(`Comment details sent for post id: ${postId}`);
+      res.json(rows);
+      console.log(rows)
+    }
+  } catch (error) {
+    // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
+    console.error('Error occurred while retrieving the post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
-// app.post('/Community/Read/:id/SaveComment', async(req, res) => {
+app.post('/Community/Read/:id/SaveComment', async(req, res) => {
   
-//   try {
-//     // 요청 객체에서 content 추출
-//     // url에서 postId 추출
-//     const { content, responseTo } = req.body;
-//     const postId = req.params.id;
-//     console.log(responseTo);
-//     console.log(content)
-//     // 유저정보 입력
-//   // 게시물 존재 여부 확인
-//   const [rows] = await pool.query(
-//     'SELECT * FROM community.posts WHERE id = ?', [postId]);
-//     console.log(rows.length);
-//   if (rows.length === 0) {
-//     return res.status(404).json({ error: 'Could not find the post.' });
-//   }
+  try {
+    // 요청 객체에서 content 추출
+    // url에서 postId 추출
+    const { userid, content, responseTo } = req.body;
+    const postId = req.params.id;
+    console.log(responseTo);
+    console.log(content)
+    // 유저정보 입력
+  // 게시물 존재 여부 확인
+  const [rows] = await poolPromise.query(
+    'SELECT * FROM ezteam2.community_comments WHERE postid = ?', [postId]);
+    console.log(rows.length);
+  if (rows.length === 0) {
+    return res.status(404).json({ error: 'Could not find the post.' });
+  }
   
-//   // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
+  // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
 
-//   const [results] = await pool.query(
-//     'INSERT INTO community.comments (content, postId, createdAt, responseTo) VALUES (?,?, NOW(),?)',
-//     [content, postId, responseTo],
-//   );
+  const [results] = await poolPromise.query(
+    'INSERT INTO ezteam2.community_comments (userid, postid, content, createdAt, responseTo) VALUES (?,?,?, NOW(),?)',
+    [userid, postId, content, responseTo],
+  );
 
-//   // 새로운 댓글의 ID를 사용하여 해당 댓글의 모든 정보를 데이터베이스에서 조회
-//   const newCommentId = results.insertId;
-//   const [newComment] = await pool.query(
-//   'SELECT * FROM community.comments WHERE id = ?',
-//   [newCommentId]
-//   );
-//   // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
-//   res.status(201).json({ message: 'Comment created successfully', result:newComment });
-//   } catch (error) {
-//   // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
-//   console.error('Error:', error);
-//   res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
+  // 새로운 댓글의 ID를 사용하여 해당 댓글의 모든 정보를 데이터베이스에서 조회
+  const newCommentId = results.insertId;
+  const [newComment] = await poolPromise.query(`
+  SELECT 
+    community_comments.*, 
+    user.username 
+  FROM 
+    ezteam2.community_comments 
+  INNER JOIN 
+    ezteam2.user 
+  ON 
+    community_comments.userid = user.userid
+  WHERE 
+    community_comments.commentid = ?`, 
+[newCommentId]);
+  // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
+  res.status(201).json({ message: 'Comment created successfully', result:newComment });
+  } catch (error) {
+  // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
+  console.error('Error:', error);
+  res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 
 
