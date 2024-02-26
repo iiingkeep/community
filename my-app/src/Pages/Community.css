@@ -60,7 +60,6 @@
   margin: 0px auto;
   display: flex;
   align-items: center;
-  justify-content: center;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   font-size: 14px;
   text-decoration: none;
@@ -71,6 +70,19 @@
 }
 
 .PostListBox li a {
-  width: 500px;
+  width: 400px;
   text-align: start;
+}
+
+.PostListBox li .View {
+  width: 65px;
+  text-align: start;
+}
+
+.PostListBox li .View span {
+  margin: 0 0 0 5px;
+}
+
+.PostListBox li .Like {
+  margin: 0 5px 0 0;
 }

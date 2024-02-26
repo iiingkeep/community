@@ -36,6 +36,10 @@ function App() {
 
   // 로그인 상태에 따라 화면에 표시되는 버튼을 달리하는 '조건부렌더링' 구현
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userid, setUserid] = useState('');
+  const [username, setUsername] = useState('');
+
+
   // 페이지가 로드될 때 로그인 상태를 확인하고 상태를 업데이트
   useEffect(() => {
     const storedLoggedIn = sessionStorage.getItem("loggedIn");
@@ -43,6 +47,16 @@ function App() {
       setLoggedIn(true);
     }
   }, [setLoggedIn]);
+
+  useEffect(() => {
+    // 세션 스토리지에서 userid 가져오기
+    const storedUserData = sessionStorage.getItem('userData');
+    if (storedUserData) {
+        const userData = JSON.parse(storedUserData);
+        setUserid(userData.userid);
+        setUsername(userData.username);
+    }
+}, []);
 
     // 로그아웃 시 세션 스토리지에서 로그인 상태 제거
     const handleLogout = () => {
@@ -89,6 +103,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
+
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/Register/personal" element={<RegisterPersonal />}></Route>

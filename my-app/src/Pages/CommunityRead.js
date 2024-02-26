@@ -3,40 +3,80 @@ import axios from 'axios';
 import DOMPurify from 'dompurify';
 import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
+import {Icon} from '@iconify/react';
 
 // 게시글 상세와 댓글을 출력하는 컴포넌트
-const CommunityRead = () => {
+const CommunityRead = ({loggedIn, userid}) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState();
+  const [isLiked, setIsLiked] = useState(false);
 
 
+  // useEffect(() => {
+  //   // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
+  //   // 불러온 데이터는 post에 업데이트.
+  //   const fetchPost = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);
+  //       console.log(response.data);
+  //       setPost(response.data);
+  //       // 게시글 조회수 증가 요청
+  //       await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);
+  //     } catch (error) {
+  //       console.error('게시물을 불러오는 중 에러 발생:', error);
+  //     }
+  //   };
+  //   fetchPost();
+    
+
+  //   // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
+  //   const fetchComments = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
+  //       setComments(response.data);
+  //     } catch (error) {
+  //       console.error('댓글을 불러오는 중 에러 발생:', error);
+  //     }
+  //   };
+  //   fetchComments();
+
+  //   // 게시글 좋아요 여부 확인
+  //   const checkLiked = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}`);
+  //       console.log(userid)
+  //       setIsLiked(response.data.isLiked);
+  //     } catch (error) {
+  //       console.error('좋아요 여부 확인 중 에러 발생:', error);
+  //     }
+  //   };
+  //   checkLiked();
+  // }, [id]);
   useEffect(() => {
-    // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
-    // 불러온 데이터는 post에 업데이트.
-    const fetchPost = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);
-        console.log(response.data);
-        setPost(response.data);
-      } catch (error) {
-        console.error('게시물을 불러오는 중 에러 발생:', error);
-      }
-    };
-    fetchPost();
+        // 게시글 데이터 가져오기
+        const postResponse = await axios.get(`http://localhost:8000/Community/Read/${id}`);
+        setPost(postResponse.data);
 
-    // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
-        setComments(response.data);
+        // 댓글 데이터 가져오기
+        const commentsResponse = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);
+        setComments(commentsResponse.data);
+
+        // 좋아요 상태 확인하기
+        const likeResponse = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}` );
+        setIsLiked(likeResponse.data.isLiked);
       } catch (error) {
-        console.error('댓글을 불러오는 중 에러 발생:', error);
+        console.error('데이터를 불러오는 중 에러 발생:', error);
       }
     };
-    fetchComments();
-  }, [id]);
+
+    fetchData();
+  }, [id, userid]);
+  
+
   
   // 등록한 댓글이 전에 있던 댓글 다음으로 바로 출력되어 나오도록 하는 함수 생성
   const refreshFunction = (newComment) => {
@@ -64,26 +104,48 @@ const CommunityRead = () => {
     }
   }
   };
+
+  const toggleLike = async () => {
+    try {
+      await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
+        userid: userid,
+      });
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error('좋아요 토글 중 에러 발생:', error);
+    }
+  };
+
+  // 로그인 한 유저가 게시글을 작성한 유저인지의 여부를 확인하는 변수 선언
+  const isOwner = loggedIn && post.userid === userid;
  
 
   return (
     <div className='CommunityRead'>
-      <h1>{post.title}</h1>
+      <div>
+      <p>{post.username}</p>
       <p>{post.createdAt}</p>
+      <p><Icon icon="fluent-mdl2:view" />
+      <span>{post.view}</span></p>
+      <p onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
+      </div>
+      <h1>{post.title}</h1>
       {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
-      {/* ***글 작성자 본인만 게시글 수정, 삭제 버튼 보이도록 설정해야함*** */}
-      <button onClick={() => navigate(`/Community/Edit/${id}`)}>수정</button>
-      <button onClick={onDeleteHandler}>삭제</button>
+      {/* 글 작성자 본인만 게시글 수정, 삭제 버튼 보이도록 설정 */}
+      {isOwner && (
+        <div className='ButtonBox'>
+          <button onClick={() => navigate(`/Community/Edit/${id}`)}>수정</button>
+          <button onClick={onDeleteHandler}>삭제</button>
+        </div>
+      )}
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
-        <Comment refreshFunction={refreshFunction} commentLists={comments} post={post}/>
+        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post}/>
       </div>
-      {/* 게시글 간 이동이 편하도록 버튼 구성 */}
+      {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div>
-        <button>이전글</button>
-        <button>다음글</button>
-        <button>목록</button>
+        <button onClick={() => navigate('/Community')}>목록</button>
       </div>
     </div>
   )
