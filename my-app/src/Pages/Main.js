@@ -1,12 +1,121 @@
 import React, { useState, useEffect } from "react";
+// 로그인 추가
+import { Link, useNavigate } from "react-router-dom";
+// 로그인 추가 끝
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "./Main.css";
 
 const Main = () => {
+  //------------------------로그인로그인----------------
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginStatus, setloginStatus] = useState("");
+  const [userTypes, setUserTypes] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedLoggedIn = sessionStorage.getItem("loggedIn");
+    if (storedLoggedIn) {
+      setLoggedIn(true);
+    }
+  }, [setLoggedIn]);
+
+  //어떤 체크박스가 클릭이 됬는지 확인 해주는 함수
+  const handleCheckboxChange = (type) => {
+    setUserTypes(type);
+  };
+
+  const LoginPageJs = () => {
+    console.log("LoginPageJs 함수 호출됨"); //스크립트 동작시 콘솔에 출력
+
+    // 로그인 요청 구현
+    axios
+      .post("http://localhost:8000/Login", {
+        email: email,
+        password: password,
+        usertype: userTypes,
+      }) //회원 정보 email, password, usertype의 정보를 가져옴
+      .then((response) => {
+        console.log("서버 응답:", response);
+        if (response.data.success) {
+          const { usertype, userid, username } = response.data.data[0]; //0213 김민호 익스플로우세션
+          const userData = {
+            userid: userid,
+            username: username,
+            usertype: usertype,
+          };
+          sessionStorage.setItem("loggedIn", true);
+          sessionStorage.setItem("userData", JSON.stringify(userData)); // 0210 상호형 추가 세션에 userNumber,username추가
+          sessionStorage.setItem("usertype", usertype); //익스플로우 세션 데이터 추가 0213 김민호
+          //Application에 세션스토리지 안에서 정보를 출력한다
+
+          navigate("/");
+          window.location.reload(); //0210 상호형 추가 페이지를강제로 리로드
+        } else {
+          // 로그인 실패 시 처리
+          console.log("로그인 실패:", response.data);
+          setloginStatus("로그인 실패: " + response.data.message);
+        }
+      });
+  };
+
+      const handleLogout = () => {
+        sessionStorage.removeItem("usertype");
+        sessionStorage.removeItem("userData");
+        sessionStorage.removeItem("loggedIn");
+        setLoggedIn(false);
+        navigate("/");
+      };
+
+  const renderContent = () => {
+    if (!loggedIn) {
+      // 로그인이 안되어 있는 경우
+      return (
+        <>
+          {/* 로그인 아이디, 비밀번호 입력 폼 */}
+          <input
+            id="id"
+            type="text"
+            placeholder="아이디"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <div className="loginButtonArea">
+            {/* 로그인 버튼 */}
+            <button onClick={LoginPageJs}>
+              로그인
+            </button>
+            {/* 회원가입 링크 */}
+            <button onClick={() => navigate("/Register")}>회원가입</button>
+          </div>
+          {loginStatus && <div>{loginStatus}</div>}
+        </>
+      );
+    } else {
+      // 로그인이 되어 있는 경우
+      return (
+        <>
+          <p>마이페이지</p>
+          {/* 로그아웃 버튼 */}
+          <button className="Btn" onClick={handleLogout}>
+            로그아웃
+          </button>
+        </>
+      );
+    }
+  }
+  //------------------------로그인 끝----------------
+
   //------------------------뉴스뉴스뉴스----------------
-  // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
   const [news, setNews] = useState([]);
 
   // 뉴스 정보 가져오기
@@ -80,7 +189,10 @@ const Main = () => {
   return (
     <div className="Main">
       <div className="LeftSection">
-        <div className="LoginBox">로그인</div>
+        {/* 로그인 구역 */}
+        <div className="LoginBox">
+          <p>로그인</p>{renderContent()}</div>
+        {/* 로그인 구역 끝 */}
         <div className="CloudBox">
           <img
             className=""
@@ -88,7 +200,9 @@ const Main = () => {
             alt="wordcloud_img"
             style={{ width: "300px", height: "300px" }}
           />
-          <button className="wcDownload" onClick={handleDownload}>이미지 다운로드</button>
+          <button className="wcDownload" onClick={handleDownload}>
+            이미지 다운로드
+          </button>
         </div>
       </div>
       <div className="RightSection">
