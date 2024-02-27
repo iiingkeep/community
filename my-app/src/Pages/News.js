@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate, Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import "./News.css";
 
 const NewsItem = () => {
@@ -264,9 +265,7 @@ const NewsItem = () => {
               </a>
               {/* 조회수 */}
               <p id="views">
-                조회수
-                <br />
-                {item.views}
+                <Icon icon="fluent-mdl2:view" />{item.views}
               </p>
               {/* 좋아요 */}
               <div className="likeButton">
