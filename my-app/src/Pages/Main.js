@@ -10,7 +10,6 @@ const Main = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setloginStatus] = useState("");
-  const [userTypes, setUserTypes] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -21,11 +20,6 @@ const Main = () => {
     }
   }, [setLoggedIn]);
 
-  //어떤 체크박스가 클릭이 됬는지 확인 해주는 함수
-  const handleCheckboxChange = (type) => {
-    setUserTypes(type);
-  };
-
   const LoginPageJs = () => {
     console.log("LoginPageJs 함수 호출됨"); //스크립트 동작시 콘솔에 출력
 
@@ -34,20 +28,17 @@ const Main = () => {
       .post("http://localhost:8000/Login", {
         email: email,
         password: password,
-        usertype: userTypes,
-      }) //회원 정보 email, password, usertype의 정보를 가져옴
+      }) //회원 정보 email, password의 정보를 가져옴
       .then((response) => {
         console.log("서버 응답:", response);
         if (response.data.success) {
-          const { usertype, userid, username } = response.data.data[0]; //0213 김민호 익스플로우세션
+          const { userid, username } = response.data.data[0]; //0213 김민호 익스플로우세션
           const userData = {
             userid: userid,
             username: username,
-            usertype: usertype,
           };
           sessionStorage.setItem("loggedIn", true);
           sessionStorage.setItem("userData", JSON.stringify(userData)); // 0210 상호형 추가 세션에 userNumber,username추가
-          sessionStorage.setItem("usertype", usertype); //익스플로우 세션 데이터 추가 0213 김민호
           //Application에 세션스토리지 안에서 정보를 출력한다
 
           navigate("/");
@@ -61,7 +52,6 @@ const Main = () => {
   };
 
       const handleLogout = () => {
-        sessionStorage.removeItem("usertype");
         sessionStorage.removeItem("userData");
         sessionStorage.removeItem("loggedIn");
         setLoggedIn(false);

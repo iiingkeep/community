@@ -255,7 +255,7 @@ app.use(
 );
 //-------------------------------로그인------------------------------------
 app.post("/login", async (req, res) => {
-  const { email, password, usertype } = req.body;
+  const { email, password } = req.body;
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
@@ -266,11 +266,10 @@ app.post("/login", async (req, res) => {
 
     if (rows.length > 0) {
       const isPasswordMatch = await bcrypt.compare(password, rows[0].password);
-      if (isPasswordMatch && usertype == rows[0].usertype) {
+      if (isPasswordMatch) {
         if (!req.session) {
           req.session = {};
         }
-        req.session.usertype = rows[0].usertype;
         req.session.userid = rows[0].userid;
 
         res.send({ success: true, message: "로그인 성공", data: rows });
@@ -292,14 +291,10 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
-async function generateUserid(usertype) {
+async function generateUserid() {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
-  const prefix = {
-    personal: 1,
-    business: 2,
-    organization: 3,
-  }[usertype];
+  const prefix = 1;
 
   // // 0219 추가_상호형
   // let randomDigits;
@@ -411,22 +406,15 @@ app.post("/register", async (req, res) => {
     address,
     detailedaddress,
     phonenumber,
-    usertype: clientUsertype,
     businessnumber,
   } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userid = await generateUserid(clientUsertype);
-    const usertypeNumber = {
-      personal: 1,
-      business: 2,
-      organization: 3,
-    };
-    const serverUsertype = usertypeNumber[clientUsertype];
+    const userid = await generateUserid();
 
     const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const [result, fields] = await poolPromise.execute(sql, [
       userid,
       username,
@@ -435,7 +423,6 @@ app.post("/register", async (req, res) => {
       address,
       detailedaddress,
       phonenumber,
-      serverUsertype,
       businessnumber,
     ]);
 
@@ -443,7 +430,6 @@ app.post("/register", async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "사용자가 성공적으로 등록됨",
-      usertype: serverUsertype,
     });
   } catch (error) {
     console.error("회원가입 중 오류:", error);
