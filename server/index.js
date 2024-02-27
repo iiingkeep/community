@@ -255,7 +255,7 @@ app.use(
 );
 //-------------------------------로그인------------------------------------
 app.post("/login", async (req, res) => {
-  const { email, password, usertype } = req.body;
+  const { email, password } = req.body;
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
@@ -266,11 +266,10 @@ app.post("/login", async (req, res) => {
 
     if (rows.length > 0) {
       const isPasswordMatch = await bcrypt.compare(password, rows[0].password);
-      if (isPasswordMatch && usertype == rows[0].usertype) {
+      if (isPasswordMatch) {
         if (!req.session) {
           req.session = {};
         }
-        req.session.usertype = rows[0].usertype;
         req.session.userid = rows[0].userid;
 
         res.send({ success: true, message: "로그인 성공", data: rows });
@@ -292,14 +291,10 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
-async function generateUserid(usertype) {
+async function generateUserid() {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
-  const prefix = {
-    personal: 1,
-    business: 2,
-    organization: 3,
-  }[usertype];
+  const prefix = 1;
 
   // // 0219 추가_상호형
   // let randomDigits;
@@ -411,22 +406,15 @@ app.post("/register", async (req, res) => {
     address,
     detailedaddress,
     phonenumber,
-    usertype: clientUsertype,
     businessnumber,
   } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userid = await generateUserid(clientUsertype);
-    const usertypeNumber = {
-      personal: 1,
-      business: 2,
-      organization: 3,
-    };
-    const serverUsertype = usertypeNumber[clientUsertype];
+    const userid = await generateUserid();
 
     const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const [result, fields] = await poolPromise.execute(sql, [
       userid,
       username,
@@ -435,7 +423,6 @@ app.post("/register", async (req, res) => {
       address,
       detailedaddress,
       phonenumber,
-      serverUsertype,
       businessnumber,
     ]);
 
@@ -443,7 +430,6 @@ app.post("/register", async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "사용자가 성공적으로 등록됨",
-      usertype: serverUsertype,
     });
   } catch (error) {
     console.error("회원가입 중 오류:", error);
@@ -888,159 +874,191 @@ app.post('/Community/Read/:id/SaveComment', async(req, res) => {
 //--------------------------------------------------------------------------//
 //---------------------------------곽별이----------------------------//
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//  마이페이지 -----------------------------------
+
+// 사용자 ID에 따라 프로필 데이터를 반환하는 엔드포인트
+app.get('/my/:formType/:userid', (req, res) => {
+  const userId = req.params.userid;
+  const formType = req.params.formType;
+  console.log("req.params | UserID:", userId, "FormType:", formType);
+
+  // MySQL 쿼리문 작성
+  let query = '';
+  let table = '';
+
+  // formType에 따라 쿼리문과 테이블 설정
+  switch (formType) {
+    case 'profile':
+      table = 'user';
+      break;
+    case 'edit':
+      table = 'user';
+      break;
+    case 'activity':
+      table = 'community_posts';
+      break;
+    case 'order':
+      table = 'orders';
+      break;
+    case 'islike':
+      table = 'is_like';
+      break;
+    default:
+      res.status(400).json({ message: '유효하지않은 form type' });
+      return;
+  }
+  // islike 폼 쿼리문
+  if (formType === 'islike') {
+    if (!userId) {
+      res.status(400).json({ message: 'islike: 유효하지 않은 사용자 ID' });
+      return;
+    }
+    
+    query = `SELECT A.* FROM community_posts A
+    LEFT JOIN is_like B
+    ON A.postid = B.postid
+    WHERE B.post_isLiked = 1 AND A.userid = ?`;
+  } else {
+    query = `SELECT * FROM ${table} WHERE userid = ?`;
+  }
+
+  // 이미 'islike'에 대한 쿼리가 설정되었기 때문에 다시 설정할 필요 없음
+  // query = `SELECT * FROM ${table} WHERE userid = ?`;
+
+  // 선택된 폼에 따른 쿼리문
+  connection.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+
+    const userData = results; // 첫 번째 요소만 사용
+    res.json(userData);
+    // console.log(results);
+  });
+});
+
+  // if (formType === 'islike') {
+  //   query = `SELECT A.title, A.url FROM news A
+  //   LEFT JOIN is_like B
+  //   ON A.newsid = B.postid
+  //   WHERE B.news_isLiked = 1`;
+  // } else {
+
+
+//  정보수정 -----------------------------------
+
+app.put('/my/edit/update/:userid', (req, res) => {
+  const userId = req.params.userid;
+  const profileData = req.body;
+
+  // 사용자 정보 업데이트 쿼리
+  const updateQuery = `
+      UPDATE user SET username = ?, phonenumber = ?, address = ?, detailedaddress = ?, email = ?
+      WHERE userid = ? `;
+
+  // 클라이언트에서 전달된 프로필 데이터
+  // userId를 values 배열에 추가
+  const { username, phonenumber, address, detailedaddress, email } = profileData;
+  const values = [username, phonenumber, address, detailedaddress, email, userId]; 
+
+  // 데이터베이스 쿼리 실행
+  connection.query(updateQuery, values, (error, results) => {
+      if (error) {
+          console.error('Error updating user profile:', error);
+          res.status(500).json({ error: 'Failed update profile' });
+          return;
+      }
+      // 업데이트된 사용자 정보 반환
+      console.log(results)
+      res.json(results);
+  });
+});
+
+
+//  정보수정 비밀번호 유효성 검사 -----------------------------------
+
+app.post('/pw-valid/:userid', async (req, res) => {
+  const { userId, password } = req.body;
+  const Id = req.params.userid;
+
+  try {
+      const connection = await poolPromise.getConnection(async conn => conn);
+      try {
+          // 기존 비밀번호를 가져온다
+          const [rows] = await connection.query('SELECT password FROM user WHERE userid = ?', [Id]);
+          const hashedPasswordFromDB = rows[0].password;
+
+          // 클라이언트에서 제공한 비밀번호를 해싱
+          const isPasswordValid = await bcrypt.compare(password, hashedPasswordFromDB);
+
+          // 비밀번호 비교
+          if (isPasswordValid) {
+              res.json({ isValid: true });
+          } else {
+              res.json({ isValid: false });
+          }
+      } catch (error) {
+          console.error('Error executing query:', error);
+          res.status(500).json({ error: 'Internal server error' });
+      } finally {
+          connection.release();
+      }
+  } catch (error) {
+      console.error('Error connecting to database:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+//  프로필 이미지 저장 -----------------------------------
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => { // 어디
+    cb(null, 'server/public/userimg') // 파일저장경로
+  },
+  filename: (req, file, cb) => { 
+    const ext = path.extname(file.originalname);
+    // const filename = file.originalname;
+    cb(null, `${Date.now()}${ext}`) // 파일명 설정
+  },
+});
+
+// 파일이 업로드될 때마다 해당 파일을 '~'/ 디렉토리에
+// 현재 시간을 기반으로 한 고유한 파일명으로 저장
+
+const imgup = multer({ storage: storage });
+
+app.post('/my/profile/img', imgup.single('img'), (req, res) => {
+  console.log(req.file.path)
+  console.log(req.file.destination)
+  if (!req.file) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  // 파일 업로드 경로
+  const filePath = req.file.filename;
+  // 이미지 URL 생성 (예: /uploads/파일명)
+  console.log('파일객체log',req.file)
+  const imageUrl = filePath;
+  // const imageUrl = `http://localhost:8000/public/userimg/${filePath}`;
+  // const imageUrl = `http://localhost:3000/${filePath}`;
+  // const imageUrl = "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg";
+
+  const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
+  connection.query(sql, [imageUrl], (err, results, fields) => {
+    if (err) {
+      console.error('Error: img into MySQL:', err);
+    }
+    console.log('success: img into MySQL');
+    res.send(imageUrl);
+  });
+});
 
 
 
