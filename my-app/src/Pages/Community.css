@@ -62,10 +62,19 @@
   border-bottom: 1px solid rgba(0,0,0,0.2);
   font-size: 14px;
   text-decoration: none;
+  height: 150px;
 }
 
 .PostListBox li:first-child {
   border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.PostListBox li .Thumbnail {
+  width: 130px;
+  height: 130px;
+  margin: 0 20px 0 0;
+  background-size: cover;
+  background-position: center;
 }
 
 .PostListBox li a {
@@ -96,6 +105,10 @@
 
 .PostListBox li .Comment span {
   margin: 0 0 0 5px;
+}
+
+.PostListBox li .Date {
+  width: 80px;
 }
 
 

@@ -4,6 +4,7 @@ import DOMPurify from 'dompurify';
 import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import {Icon} from '@iconify/react';
+import './CommunityRead.css'
 
 // 게시글 상세와 댓글을 출력하는 컴포넌트
 const CommunityRead = ({loggedIn, userid}) => {
@@ -104,16 +105,16 @@ const CommunityRead = ({loggedIn, userid}) => {
 
   return (
     <div className='CommunityRead'>
-      <div>
+      <div className='PostInfo'>
       <p>{post.username}</p>
       <p>{post.createdAt}</p>
       <p><Icon icon="fluent-mdl2:view" />
       <span>{post.view}</span></p>
       <p onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
       </div>
-      <h1>{post.title}</h1>
+      <div className='TitleBox'><h1>{post.title}</h1></div>
       {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
+      <div className='ContentBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
       {/* 글 작성자 본인만 게시글 수정, 삭제 버튼 보이도록 설정 */}
       {isOwner && (
         <div className='ButtonBox'>

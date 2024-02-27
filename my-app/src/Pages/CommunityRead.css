@@ -1,0 +1,24 @@
+.CommunityRead * {
+  margin: 0;
+}
+
+.CommunityRead {
+  width: 800px;
+  margin: 20px auto;
+}
+
+.CommunityRead .PostInfo {
+  text-align: start;
+}
+
+.CommunityRead .TitleBox {
+  margin: 40px 0;
+}
+
+.CommunityRead .TitleBox h1 {
+  text-align: start;
+}
+
+.CommunityRead .ContentBox img {
+  max-width: 800px;
+}

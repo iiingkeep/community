@@ -17,6 +17,7 @@ const Community = (loggedIn) => {
   const [searchType, setSearchType] = useState('title');
   const [selectedCategory, setSelectedCategory] = useState(1);
   
+  
 
   const navigate = useNavigate();
   // 검색어 업데이트
@@ -38,6 +39,8 @@ const Community = (loggedIn) => {
     setCurrentPage(1);
   };
 
+  
+
   useEffect(() => {
     fetchPosts();
   }, [currentPage,selectedCategory]);
@@ -52,6 +55,19 @@ const Community = (loggedIn) => {
       console.error('데이터를 가져오는 중 오류 발생:', error);
     }
   };
+
+  // 게시글 콘텐츠에서 이미지 URL을 추출하여 썸네일 생성
+const getPostThumbnail = (content) => {
+  // 정규 표현식을 사용하여 이미지 URL 추출
+  const regex = /<img\s+src\s*=\s*\"([^\"]+)\"/g;
+  const matches = content.match(regex);
+  console.log(matches)
+
+  // 게시글에 이미지가 있는 경우 첫 번째 이미지 URL 반환, 없는 경우 null 반환
+  const url = matches ? matches[0].replace('<img src="', '').replace('"', '') : null;
+  console.log(url)
+  return matches ? matches[0].replace('<img src="', '').replace('"', '') : 'https://img.freepik.com/free-vector/big-green-tropical-leaf-design-element-vector_53876-136546.jpg?t=st=1709001702~exp=1709005302~hmac=ef7e3256d83f1215b0ac3cafbaba39317184f077698c7700794dc84cdbd76a67&w=996';
+};
 
   // 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
@@ -96,6 +112,7 @@ const Community = (loggedIn) => {
       <ul>
         {posts.map((post) => (
           <li key={post.postid}>
+            <div className="Thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             <p className='Username'>{post.username}</p>
             <Link to={`/Community/Read/${post.postid}`}>
               <strong>{post.title}</strong>
@@ -109,7 +126,7 @@ const Community = (loggedIn) => {
             <p className='Comment'>
             <Icon icon="f7:ellipses-bubble" />
             <span>{post.commentCount}</span></p>
-            <p>{post.createdAt}</p>
+            <p className='Date'>{post.createdAt}</p>
           </li>
         ))}
       </ul>
