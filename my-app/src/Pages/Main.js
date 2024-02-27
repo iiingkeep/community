@@ -56,6 +56,7 @@ const Main = () => {
         sessionStorage.removeItem("loggedIn");
         setLoggedIn(false);
         navigate("/");
+        window.location.reload();
       };
 
   const renderContent = () => {
