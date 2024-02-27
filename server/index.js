@@ -819,8 +819,8 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
         community_comments.postid = ?`, [postId]);
     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
     if (rows.length === 0) {
-      console.log(`Post with id ${postId} not found`);
-      res.status(404).json({ error: 'Post not found' });
+      console.log(rows);
+      res.json(rows);
     } else {
       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
       console.log(`Comment details sent for post id: ${postId}`);
@@ -837,25 +837,23 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
 
 
 app.post('/Community/Read/:id/SaveComment', async(req, res) => {
-  
+  // 요청 객체에서 content 추출
+  // url에서 postId 추출
+  const { userid, content, responseTo } = req.body;
+  const postId = req.params.id;
+  console.log(responseTo);
+  console.log(content)
   try {
-    // 요청 객체에서 content 추출
-    // url에서 postId 추출
-    const { userid, content, responseTo } = req.body;
-    const postId = req.params.id;
-    console.log(responseTo);
-    console.log(content)
     // 유저정보 입력
   // 게시물 존재 여부 확인
   const [rows] = await poolPromise.query(
-    'SELECT * FROM ezteam2.community_comments WHERE postid = ?', [postId]);
+    'SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
     console.log(rows.length);
   if (rows.length === 0) {
     return res.status(404).json({ error: 'Could not find the post.' });
   }
   
   // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
-
   const [results] = await poolPromise.query(
     'INSERT INTO ezteam2.community_comments (userid, postid, content, createdAt, responseTo) VALUES (?,?,?, NOW(),?)',
     [userid, postId, content, responseTo],
