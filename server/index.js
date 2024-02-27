@@ -869,6 +869,59 @@ app.post('/Community/Read/:id/SaveComment', async(req, res) => {
   }
 });
 
+// 댓글 수정 엔드포인트
+app.put('/Community/Read/:id/UpdateComment', async (req, res) => {
+  const { postId } = req.params;
+  const { commentid, content } = req.body;
+
+  try {
+    // 댓글 업데이트 쿼리 실행
+    await poolPromise.query(
+      'UPDATE ezteam2.community_comments SET content = ? WHERE commentid = ?',
+      [content, commentid]
+    );
+
+    // 수정된 댓글 정보를 다시 가져와 클라이언트에 전송
+    const [updatedComment] = await poolPromise.query(
+      `SELECT 
+        community_comments.*, 
+        user.username 
+      FROM 
+        ezteam2.community_comments 
+      INNER JOIN 
+        ezteam2.user 
+      ON 
+        community_comments.userid = user.userid
+      WHERE 
+        community_comments.commentid = ?`,
+      [commentid]
+    );
+
+    res.status(200).json({ message: 'Comment updated successfully', result: updatedComment });
+  } catch (error) {
+    console.error('Error occurred while updating the comment:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// 댓글 삭제 엔드포인트
+app.delete('/Community/Read/:id/DeleteComment/:commentId', async (req, res) => {
+  const { postId, commentId } = req.params;
+
+  try {
+    // 댓글 삭제 쿼리 실행
+    await poolPromise.query(
+      'DELETE FROM ezteam2.community_comments WHERE commentid = ?',
+      [commentId]
+    );
+
+    res.status(200).json({ message: 'Comment deleted successfully', commentId });
+  } catch (error) {
+    console.error('Error occurred while deleting the comment:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 //--------------------------------------------------------------------------//

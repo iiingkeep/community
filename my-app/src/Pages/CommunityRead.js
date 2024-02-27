@@ -68,6 +68,28 @@ const CommunityRead = ({loggedIn, userid}) => {
     setComments(comments.concat(newComment));
     setCommentCount(commentCount + 1);
 }
+
+
+  // 댓글 수정 함수
+    const updateComment = (updatedComment) => {
+      const updatedComments = comments.map(comment => {
+        if (comment.commentid === updatedComment.commentid) {
+          return updatedComment; // 수정된 댓글일 경우 해당 댓글로 대체
+        } else {
+          return comment; // 그렇지 않은 경우 기존의 댓글 유지
+        }
+      });
+      setComments(updatedComments);
+    }
+
+  // 댓글 삭제 함수
+  const deleteComment = (deletedCommentId) => {
+    // 삭제된 댓글을 제외한 새로운 댓글 목록 생성
+    const updatedComments = comments.filter(comment => comment.commentid !== deletedCommentId);
+    // 댓글 목록 업데이트
+    setComments(updatedComments);
+    setCommentCount(commentCount - 1);
+  }
   
   // post가 없을 경우 'Loading...' 표시
   if (!post) {
@@ -137,7 +159,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       )}
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
-        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount}/>
+        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div>
