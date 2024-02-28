@@ -134,7 +134,7 @@ function App() {
           ) : (
             <div>
               <button onClick={() => navigate("/Login")}>로그인</button>
-              <button onClick={() => navigate("/Register")}>회원가입</button>
+              <button onClick={() => navigate("/Register/personal")}>회원가입</button>
             </div>
           )
         }
