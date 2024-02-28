@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import PaginatedItems from '../Util/PaginatedItems';
 import './Community.css';
 import {Icon} from '@iconify/react';
-// import {formattedDate} from '../Util/utils';
+import { formattedDateAndTime } from "../Util/utils";
 // import CommunityItems from './CommunityItems';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
@@ -82,6 +82,8 @@ const getPostThumbnail = (content) => {
     }
   }
 };
+
+
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -126,7 +128,7 @@ const getPostThumbnail = (content) => {
             <p className='Comment'>
             <Icon icon="f7:ellipses-bubble" />
             <span>{post.commentCount}</span></p>
-            <p className='Date'>{post.createdAt}</p>
+            <p className='Date'>{formattedDateAndTime(post.createdAt)}</p>
           </li>
         ))}
       </ul>

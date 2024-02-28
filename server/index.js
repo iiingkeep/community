@@ -291,14 +291,10 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
-async function generateUserid(usertype) {
+async function generateUserid() {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
-  const prefix = {
-    personal: 1,
-    business: 2,
-    organization: 3,
-  }[usertype];
+  const prefix = 1;
 
   // // 0219 추가_상호형
   // let randomDigits;
@@ -410,22 +406,15 @@ app.post("/register", async (req, res) => {
     address,
     detailedaddress,
     phonenumber,
-    usertype: clientUsertype,
     businessnumber,
   } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userid = await generateUserid(clientUsertype);
-    const usertypeNumber = {
-      personal: 1,
-      business: 2,
-      organization: 3,
-    };
-    const serverUsertype = usertypeNumber[clientUsertype];
+    const userid = await generateUserid();
 
     const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const [result, fields] = await poolPromise.execute(sql, [
       userid,
       username,
@@ -434,7 +423,6 @@ app.post("/register", async (req, res) => {
       address,
       detailedaddress,
       phonenumber,
-      serverUsertype,
       businessnumber,
     ]);
 
@@ -442,7 +430,6 @@ app.post("/register", async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "사용자가 성공적으로 등록됨",
-      usertype: serverUsertype,
     });
   } catch (error) {
     console.error("회원가입 중 오류:", error);
@@ -818,8 +805,8 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
         community_comments.postid = ?`, [postId]);
     // 일치하는 id가 없을 경우 서버 콘솔에 기록, 클라이언트에 404상태 코드와 JSON형식의 메세지 응답
     if (rows.length === 0) {
-      console.log(`Post with id ${postId} not found`);
-      res.status(404).json({ error: 'Post not found' });
+      console.log(rows);
+      res.json(rows);
     } else {
       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
       console.log(`Comment details sent for post id: ${postId}`);
@@ -836,25 +823,23 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
 
 
 app.post('/Community/Read/:id/SaveComment', async(req, res) => {
-  
+  // 요청 객체에서 content 추출
+  // url에서 postId 추출
+  const { userid, content, responseTo } = req.body;
+  const postId = req.params.id;
+  console.log(responseTo);
+  console.log(content)
   try {
-    // 요청 객체에서 content 추출
-    // url에서 postId 추출
-    const { userid, content, responseTo } = req.body;
-    const postId = req.params.id;
-    console.log(responseTo);
-    console.log(content)
     // 유저정보 입력
   // 게시물 존재 여부 확인
   const [rows] = await poolPromise.query(
-    'SELECT * FROM ezteam2.community_comments WHERE postid = ?', [postId]);
+    'SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
     console.log(rows.length);
   if (rows.length === 0) {
     return res.status(404).json({ error: 'Could not find the post.' });
   }
   
   // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
-
   const [results] = await poolPromise.query(
     'INSERT INTO ezteam2.community_comments (userid, postid, content, createdAt, responseTo) VALUES (?,?,?, NOW(),?)',
     [userid, postId, content, responseTo],
@@ -884,12 +869,65 @@ app.post('/Community/Read/:id/SaveComment', async(req, res) => {
   }
 });
 
+// 댓글 수정 엔드포인트
+app.put('/Community/Read/:id/UpdateComment', async (req, res) => {
+  const { postId } = req.params;
+  const { commentid, content } = req.body;
+
+  try {
+    // 댓글 업데이트 쿼리 실행
+    await poolPromise.query(
+      'UPDATE ezteam2.community_comments SET content = ? WHERE commentid = ?',
+      [content, commentid]
+    );
+
+    // 수정된 댓글 정보를 다시 가져와 클라이언트에 전송
+    const [updatedComment] = await poolPromise.query(
+      `SELECT 
+        community_comments.*, 
+        user.username 
+      FROM 
+        ezteam2.community_comments 
+      INNER JOIN 
+        ezteam2.user 
+      ON 
+        community_comments.userid = user.userid
+      WHERE 
+        community_comments.commentid = ?`,
+      [commentid]
+    );
+
+    res.status(200).json({ message: 'Comment updated successfully', result: updatedComment });
+  } catch (error) {
+    console.error('Error occurred while updating the comment:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// 댓글 삭제 엔드포인트
+app.delete('/Community/Read/:id/DeleteComment/:commentId', async (req, res) => {
+  const { postId, commentId } = req.params;
+
+  try {
+    // 댓글 삭제 쿼리 실행
+    await poolPromise.query(
+      'DELETE FROM ezteam2.community_comments WHERE commentid = ?',
+      [commentId]
+    );
+
+    res.status(200).json({ message: 'Comment deleted successfully', commentId });
+  } catch (error) {
+    console.error('Error occurred while deleting the comment:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 //--------------------------------------------------------------------------//
 //---------------------------------곽별이----------------------------//
 
-// ------------------------------- 마이페이지 -------------------------------
+//  마이페이지 -----------------------------------
 
 // 사용자 ID에 따라 프로필 데이터를 반환하는 엔드포인트
 app.get('/my/:formType/:userid', (req, res) => {
@@ -955,11 +993,20 @@ app.get('/my/:formType/:userid', (req, res) => {
 
     const userData = results; // 첫 번째 요소만 사용
     res.json(userData);
-    console.log(results);
+    // console.log(results);
   });
 });
 
-// ---------------------- 정보수정 ----------------------
+  // if (formType === 'islike') {
+  //   query = `SELECT A.title, A.url FROM news A
+  //   LEFT JOIN is_like B
+  //   ON A.newsid = B.postid
+  //   WHERE B.news_isLiked = 1`;
+  // } else {
+
+
+//  정보수정 -----------------------------------
+
 app.put('/my/edit/update/:userid', (req, res) => {
   const userId = req.params.userid;
   const profileData = req.body;
@@ -988,8 +1035,8 @@ app.put('/my/edit/update/:userid', (req, res) => {
 });
 
 
+//  정보수정 비밀번호 유효성 검사 -----------------------------------
 
-// ---------------------- 정보수정 비밀번호 유효성 검사 ----------------------
 app.post('/pw-valid/:userid', async (req, res) => {
   const { userId, password } = req.body;
   const Id = req.params.userid;
@@ -1023,11 +1070,11 @@ app.post('/pw-valid/:userid', async (req, res) => {
 });
 
 
+//  프로필 이미지 저장 -----------------------------------
 
-// ---------------------- 프로필 이미지 저장 ----------------------
 const storage = multer.diskStorage({
   destination: (req, file, cb) => { // 어디
-    cb(null, 'server/public/profileImg/') // 파일저장경로
+    cb(null, 'server/public/userimg') // 파일저장경로
   },
   filename: (req, file, cb) => { 
     const ext = path.extname(file.originalname);
@@ -1036,12 +1083,12 @@ const storage = multer.diskStorage({
   },
 });
 
-// 파일이 업로드될 때마다 해당 파일을 images/ 디렉토리에
+// 파일이 업로드될 때마다 해당 파일을 '~'/ 디렉토리에
 // 현재 시간을 기반으로 한 고유한 파일명으로 저장
 
-const profileImg = multer({ storage: storage });
+const imgup = multer({ storage: storage });
 
-app.post('/my/profile/img', profileImg.single('img'), (req, res) => {
+app.post('/my/profile/img', imgup.single('img'), (req, res) => {
   console.log(req.file.path)
   console.log(req.file.destination)
   if (!req.file) {
@@ -1050,10 +1097,10 @@ app.post('/my/profile/img', profileImg.single('img'), (req, res) => {
   // 파일 업로드 경로
   const filePath = req.file.filename;
   // 이미지 URL 생성 (예: /uploads/파일명)
-  console.log(req.file)
+  console.log('파일객체log',req.file)
   const imageUrl = filePath;
+  // const imageUrl = `http://localhost:8000/public/userimg/${filePath}`;
   // const imageUrl = `http://localhost:3000/${filePath}`;
-  // const imageUrl = `http://localhost:8000/my/profile/img/${filePath}`;
   // const imageUrl = "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg";
 
   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
@@ -1065,6 +1112,18 @@ app.post('/my/profile/img', profileImg.single('img'), (req, res) => {
     res.send(imageUrl);
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

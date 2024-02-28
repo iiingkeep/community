@@ -26,8 +26,6 @@ const NewsItem = () => {
       // let userid = JSON.parse(sessionStorage.getItem("userData")).userid;
       setLoggedIn(JSON.parse(sessionStorage.getItem("loggedIn")));
       setUserid(JSON.parse(sessionStorage.getItem("userData")).userid);
-      console.log(loggedIn);
-      console.log(userid);
     }
   }, [loggedIn, userid]);
 
