@@ -4,6 +4,7 @@
 
 .Main {
   width: 80%;
+  height: 90%;
   margin: 30px auto;
   display: flex;
 }
@@ -49,7 +50,7 @@
   font-size: 12px;
   color: white;
   padding: 10px;
-  margin: 0px 15px;
+  margin: 0 15px;
 }
 
 .LoginBox input {
@@ -77,12 +78,7 @@
 
 .loginButtonArea {
   display: flex;
-  /* 가로 중앙 정렬 */
   justify-content: center;
-  /* 세로 중앙 정렬 */
-  align-items: center;
-  /* 텍스트 중앙 정렬 */
-  text-align: center;
 }
 
 /* 워드클라우드 이미지 다운로드 버튼 */
