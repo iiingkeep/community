@@ -2,10 +2,18 @@
   box-sizing: border-box;
 }
 
+/* 화면에서 스크롤바 안보이게 */
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+
 .Main {
   width: 80%;
-  height: 90%;
+  height: 90vh;
   margin: 30px auto;
+  margin-top: 0;
+  margin-bottom: 0;
   display: flex;
 }
 
@@ -20,7 +28,7 @@
 }
 
 .Main .LeftSection .LoginBox {
-  height: 70%;
+  height: 30%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }

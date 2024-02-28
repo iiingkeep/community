@@ -178,47 +178,52 @@ const Main = () => {
   //------------------------워드클라우드 끝----------------
 
   return (
-    <div className="Main">
-      <div className="LeftSection">
-        {/* 로그인 구역 */}
-        <div className="LoginBox">
-          <p>로그인</p>{renderContent()}</div>
-        {/* 로그인 구역 끝 */}
-        <div className="CloudBox">
-          <img
-            className=""
-            src="./wc_image/result.png"
-            alt="wordcloud_img"
-            style={{ width: "300px", height: "300px" }}
-          />
-          <button className="wcDownload" onClick={handleDownload}>
-            이미지 다운로드
-          </button>
+    <div className="wrap">
+      <div className="Main" style={{backgroundColor : "green"}}>1</div>
+      <div className="Main">
+        <div className="LeftSection">
+          {/* 로그인 구역 */}
+          <div className="LoginBox">
+            <p>로그인</p>
+            {renderContent()}
+          </div>
+          {/* 로그인 구역 끝 */}
+          <div className="CloudBox">
+            <img
+              className=""
+              src="./wc_image/result.png"
+              alt="wordcloud_img"
+              style={{ width: "300px", height: "300px" }}
+            />
+            <button className="wcDownload" onClick={handleDownload}>
+              이미지 다운로드
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="RightSection">
-        <div className="CommunityBox">커뮤니티</div>
-        <div className="NewsBox">
-          <a href="/news">환경이슈</a>
-          <ul>
-            {topFiveNews.map((item) => (
-              <li key={item.newsid}>
-                <img
-                  src={item.image_url}
-                  alt="뉴스 썸네일"
-                  onClick={() => handleClick(item)}
-                />
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleClick(item)}
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="RightSection">
+          <div className="CommunityBox">커뮤니티</div>
+          <div className="NewsBox">
+            <a href="/news">환경이슈</a>
+            <ul>
+              {topFiveNews.map((item) => (
+                <li key={item.newsid}>
+                  <img
+                    src={item.image_url}
+                    alt="뉴스 썸네일"
+                    onClick={() => handleClick(item)}
+                  />
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleClick(item)}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
