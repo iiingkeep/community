@@ -47,7 +47,7 @@ const ProfileForm = ({userId}) => {
     }, [userId]); // userId가 변경될 때마다 호출
 
     return (
-        <div>
+        <div className="profile-form" >
             <h2>Profile Form</h2>
             {/* 이미지 표시 */}
             <div className="profileImg">

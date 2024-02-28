@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../Styles/PasswordValid.css";
 
 const PasswordValid = ({ onPasswordValid }) => {
     const [password, setPassword] = useState('');
@@ -10,13 +11,13 @@ const PasswordValid = ({ onPasswordValid }) => {
     };
 
     return (
-        <div>
-            <h4>본인 확인을 위해 비밀번호를 확인해주세요</h4>
+        <div className='ValidForm'>
+            <h3>본인 확인을 위해 비밀번호를 <br/> 다시 확인해주세요</h3>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Password:
+                    <h4>비밀번호 확인</h4>
                     <br />
-                    <input
+                    <input className='ValidInput'
                         type="password"
                         value={password}
                         placeholder='비밀번호를 입력해주세요.'
@@ -24,7 +25,7 @@ const PasswordValid = ({ onPasswordValid }) => {
                         required />
                 </label>
                 <br />
-                <button type="submit">확인</button>
+                <button className='ValidBtn' type="submit">비밀번호 확인</button>
             </form>
         </div>
     );
