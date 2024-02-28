@@ -1,0 +1,115 @@
+.FooterContent {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.FooterContent > *:not(:last-child) {
+    margin-right: 150px;
+}
+
+
+
+.FooterLayer1 {
+    border-bottom: #ddd solid 1px;
+    height: 34px;
+    text-align: center;
+    padding-top: 15px;
+    white-space: nowrap;
+}
+
+.FooterLayer3 {
+    border-bottom: #ddd solid 1px;
+    height: 34px;
+    text-align: center;
+    padding-top: 15px;
+    white-space: nowrap;
+}
+
+.FooterContent > address {
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    font-size: 12px;
+    margin-top : 10px;
+    line-height: 1.25rem;
+}
+
+.leftContent {
+    line-height: 0.2rem;
+    font-weight:700;
+}
+
+.leftContent > p {
+    font-size: 12px;
+}
+
+.related .label {
+    z-index: 999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 3rem;
+    border: 3px solid #717171;
+    line-height: 2.5rem;
+    display: block;
+    position: relative; 
+    padding: 0 1rem 0rem 1rem;
+    border-radius: 5rem;    
+    letter-spacing: -0.05rem;
+    transition: all 0.2s;
+}
+
+.list > ul {
+    width: 172.28px;
+    margin: 0 auto;
+    /* justify-content: ; */
+}
+
+.related .list {
+    visibility: hidden;
+    overflow: hidden;
+    top: 100%;
+    width: 172.28px;
+    /* height: 0 auto; */
+    opacity: 1;
+    position:absolute;
+    left: auto;
+    bottom: 100%;
+    /* min-width: 100%; */
+    padding: 4rem 0;
+    border-radius: 2rem;
+    border: 1px solid #717171;
+    /* background-color: #272E39; */
+    transition: all 0.2s;
+    z-index: 9999;
+  }
+  
+  .related .list a {
+    display: block;
+    width: auto;
+    height: auto;
+    font-size: 15px;
+    line-height: 1.4rem;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  
+  .related .list a:hover,
+  .related .list a:focus {
+    color: #838383;
+  }
+  
+  .related .label.active::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  
+  .related .list.active {
+    visibility: visible;
+    overflow: visible;
+    width: 172.28px;
+    height: auto;
+    opacity: 1;
+    bottom: calc(100% + 1rem);
+    /* padding: 2rem; */
+  }

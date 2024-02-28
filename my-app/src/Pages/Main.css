@@ -3,6 +3,7 @@
 }
 
 .Main {
+  min-height: calc(100% - 30px);
   width: 80%;
   margin: 30px auto;
   display: flex;

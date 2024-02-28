@@ -1,7 +1,8 @@
 import './App.css';
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import {useState, useEffect} from 'react'
-import Header from './Component/Header'
+import {useState, useEffect} from 'react';
+import Header from './Component/Header';
+import Footer from './Component/Footer';
 import Main from './Pages/Main';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
@@ -139,6 +140,7 @@ function App() {
           )
         }
       />
+
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
@@ -167,7 +169,11 @@ function App() {
         <Route path="/Shop/Basket" element={<ShopBasket />} />
         <Route path="/MyPage" element={<MyPage />} />
       </Routes>
-    </div>
+      
+      <Footer/>
+      s
+      </div>
+
   );
 }
 
