@@ -185,8 +185,11 @@ const NewsItem = () => {
   const handleLikeClick = (newsid, loggedIn, userid) => {
     console.log(loggedIn, userid);
     if (loggedIn !== true) {
-      alert("로그인이 필요한 기능입니다.");
-      navigate("/Login");
+      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+        navigate("/Login");
+      } else {
+        navigate("/News");
+      }
       return;
     } else {
       // 좋아요 상태 토글

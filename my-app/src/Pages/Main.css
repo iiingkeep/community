@@ -2,11 +2,6 @@
   box-sizing: border-box;
 }
 
-/* 화면에서 스크롤바 안보이게 */
-.outer::-webkit-scrollbar {
-  display: none;
-}
-
 
 .Main {
   width: 80%;
