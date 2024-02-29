@@ -89,13 +89,13 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
   }, []);
 
   return (
-    <div className="modal">
+    <div className="Modal">
       <Draggable>
-        <div className="modal-content">
+        <div className="ModalContent">
           <button onClick={onClose}>X</button>
           <br />
           {/* 업로드 버튼 참조 */}
-          <button className="upload-button" onClick={handleUploadBtnRef}>이미지 업로드</button>
+          <button className="UploadBtn" onClick={handleUploadBtnRef}>이미지 업로드</button>
           {/* 파일 업로드 버튼 */}
           <input
             type="file"
@@ -107,7 +107,7 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
           /> 
           <br />
           {imageUrl && ( // 이미지 URL이 존재할 경우 이미지 표시
-              <img src={imageUrl} alt="이미지" />
+              <img className="ProfileImg" src={imageUrl} alt="이미지" />
           )}
           <button onClick={handleSaveImage}>저장</button>
           <button onClick={handleImageDelete}>삭제</button>

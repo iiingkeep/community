@@ -1,6 +1,6 @@
 /* ImagePopup.css */
 
-.modal {
+.Modal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .modal-content {
+  .ModalContent {
     position: relative;
     background-color: white;
     border-radius: 10px;
@@ -23,7 +23,7 @@
   
   
   
-  .modal-content img {
+  .ModalContent img {
     display: block;
     max-width: 50%;
     max-height: 50%;
@@ -31,7 +31,7 @@
     margin: 0 auto; /* 이미지를 수평으로 중앙에 정렬합니다. */
   }
   
-  /* .upload-button {
+  /* .UploadBtn {
     position: absolute;
     top: 180px;
     left: 50%;
