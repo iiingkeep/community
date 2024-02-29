@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-img {
+.carbon img {
   position: fixed;
   top: 10vh;
   left: 0;
