@@ -939,7 +939,7 @@ app.get('/my/:formType/:userid', (req, res) => {
   let query = '';
   let table = '';
 
-  // formType에 따라 쿼리문과 테이블 설정
+  // formType에 따라 테이블 설정
   switch (formType) {
     case 'profile':
       table = 'user';
@@ -960,49 +960,46 @@ app.get('/my/:formType/:userid', (req, res) => {
       res.status(400).json({ message: '유효하지않은 form type' });
       return;
   }
+
+  // activity 폼 쿼리문
+  if (formType === 'activity') {
+    query = `SELECT * FROM community_posts
+             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+             WHERE community_posts.userid = ?`;
+
   // islike 폼 쿼리문
-  if (formType === 'islike' ) {
+  } else if (formType === 'islike') {
     if (!userId) {
-      res.status(400).json({ message: 'islike: 유효하지 않은 사용자 ID' });
+      res.status(400).json({ message: 'Invalid ID' });
       return;
     }
-    
-    query = `SELECT A.* FROM community_posts A
-    LEFT JOIN is_like B
-    ON A.postid = B.postid
-    WHERE B.post_isLiked = 1 AND A.userid = ?`;
+    // 수정 필요*
+    query = `SELECT title FROM community_posts A
+             LEFT JOIN is_like B ON A.postid = B.postid
+             WHERE B.post_isLiked = 1`;
+
+  // 나머지 선택된 폼의 쿼리문
   } else {
     query = `SELECT * FROM ${table} WHERE userid = ?`;
   }
 
-  // 이미 'islike'에 대한 쿼리가 설정되었기 때문에 다시 설정할 필요 없음
-  // query = `SELECT * FROM ${table} WHERE userid = ?`;
-
-  // 선택된 폼에 따른 쿼리문
+  // 데이터베이스 쿼리 실행
   connection.query(query, [userId], (err, results) => {
     if (err) {
       console.error('(Error) data from database:', err);
       res.status(500).json({ message: 'Internal server error' });
       return;
     }
-
     if (results.length === 0) {
       res.status(404).json({ message: 'Data not found' });
       return;
     }
-
-    const userData = results; // 첫 번째 요소만 사용
+    const userData = results;
     res.json(userData);
     console.log(results);
   });
 });
 
-  // if (formType === 'islike') {
-  //   query = `SELECT A.title, A.url FROM news A
-  //   LEFT JOIN is_like B
-  //   ON A.newsid = B.postid
-  //   WHERE B.news_isLiked = 1`;
-  // } else {
 
 
 //  정보수정 -----------------------------------

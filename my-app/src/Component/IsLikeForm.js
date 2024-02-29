@@ -1,6 +1,7 @@
 // IsLikeForm.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const IsLikeForm = ({ userId }) => {
   const [isLike, setIsLike] = useState([]); // 게시물 목록 상태
@@ -24,9 +25,14 @@ const IsLikeForm = ({ userId }) => {
       <h3>좋아요 한 목록</h3>
       <ul>
         {isLike.map(like => (
-          <li key={like.postid}>{like.title}</li>
+          <li key={like.postid}>
+            <Link to={`/Community/Read/${like.postid}`}>
+            <span>{like.title}</span>
+            </Link>
+          </li>
         ))}
       </ul>
+      {/* 뉴스Link to 추가 */}
     </div>
   );
 };
