@@ -8,7 +8,7 @@ import { formattedDateAndTime } from "../Util/utils";
 // import CommunityItems from './CommunityItems';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
-const Community = (loggedIn) => {
+const Community = ({loggedIn}) => {
   // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리
   const [posts, setPosts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -71,7 +71,6 @@ const getPostThumbnail = (content) => {
 
   // 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
-    const loggedIn = sessionStorage.getItem("loggedIn");
   if (loggedIn) {
     // 로그인 상태일 경우 글쓰기 페이지로 이동
     navigate('/Community/Write', { state: { selectedCategory } });
@@ -115,10 +114,15 @@ const getPostThumbnail = (content) => {
         {posts.map((post) => (
           <li key={post.postid}>
             <div className="Thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
-            <p className='Username'>{post.username}</p>
+            <div className='PostInfoBox'>
+            <div className='TitleBox'>
             <Link to={`/Community/Read/${post.postid}`}>
-              <strong>{post.title}</strong>
+              <p className='Title'>{post.title}</p>
+              <p className='Content'>{post.content}</p>
             </Link>
+            </div>
+            <div className='PostDetailBox'>
+            <p className='Username'>{post.username}</p>
             <p className='View'>
             <Icon icon="fluent-mdl2:view" />
             <span>{post.view}</span></p>
@@ -128,7 +132,14 @@ const getPostThumbnail = (content) => {
             <p className='Comment'>
             <Icon icon="f7:ellipses-bubble" />
             <span>{post.commentCount}</span></p>
-            <p className='Date'>{formattedDateAndTime(post.createdAt)}</p>
+            </div>
+            </div>
+            <div className='DateTime'>
+            <p className='Date'>{formattedDateAndTime(post.createdAt, 'date')}</p>
+            <p className='Date'>{formattedDateAndTime(post.createdAt, 'time')}</p>
+            </div>
+            
+            
           </li>
         ))}
       </ul>

@@ -6,6 +6,11 @@
   width: 80%;
   margin: 30px auto;
   display: flex;
+  /* background-image: url('../../../server/public/backgroundimg/planet.png');
+  background-repeat: no-repeat;
+  background-size: 400px 400px;
+  background-position: ; */
+
 }
 
 .Main .LeftSection {

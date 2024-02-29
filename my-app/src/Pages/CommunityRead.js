@@ -159,7 +159,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       )}
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
-        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
+        <Comment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div>

@@ -134,7 +134,7 @@ function App() {
           ) : (
             <div>
               <button onClick={() => navigate("/Login")}>로그인</button>
-              <button onClick={() => navigate("/Register")}>회원가입</button>
+              <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
             </div>
           )
         }
@@ -144,7 +144,7 @@ function App() {
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
-        <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
+        <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
         <Route
           path="/Register/corporate"
           element={<RegisterCorporate />}
