@@ -1,0 +1,24 @@
+.MyBtn {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* 버튼 그룹을 수평으로 중앙 정렬 */
+  }
+  
+  .MyBtn button {
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    margin: 0 4px; /* 버튼 간격을 설정합니다. 여기서는 좌우 간격을 10px로 지정했습니다. */
+  }
+  
+  .MyBtn button:focus {
+    outline: none;
+  }
+  
+  .MyBtn button.active {
+    background-color: #333;
+    color: #fff;
+  }
+  

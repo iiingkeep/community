@@ -266,7 +266,7 @@ app.post("/login", async (req, res) => {
 
     if (rows.length > 0) {
       const isPasswordMatch = await bcrypt.compare(password, rows[0].password);
-      if (isPasswordMatch) {
+      if (isPasswordMatch && email == rows[0].email) {
         if (!req.session) {
           req.session = {};
         }
@@ -957,7 +957,7 @@ app.get('/my/:formType/:userid', (req, res) => {
       return;
   }
   // islike 폼 쿼리문
-  if (formType === 'islike') {
+  if (formType === 'islike' ) {
     if (!userId) {
       res.status(400).json({ message: 'islike: 유효하지 않은 사용자 ID' });
       return;
@@ -989,7 +989,7 @@ app.get('/my/:formType/:userid', (req, res) => {
 
     const userData = results; // 첫 번째 요소만 사용
     res.json(userData);
-    // console.log(results);
+    console.log(results);
   });
 });
 

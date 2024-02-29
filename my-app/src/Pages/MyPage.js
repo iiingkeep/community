@@ -1,17 +1,16 @@
 // MyPage.js
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ProfileForm from "../Component/ProfileForm";
 import EditForm from '../Component/EditForm';
 import ActivityForm from '../Component/ActivityForm';
 import OrderForm from "../Component/OrderForm";
 import IsLikeForm from "../Component/IsLikeForm";
 import axios from "axios";
+import "../Styles/MyPage.css";
 
 const MyPage = () => {
   const [activeForm, setActiveForm] = useState('profile');
   const [formData, setFormData] = useState({});
-  const navigate = useNavigate();
 
    const storedUserData = sessionStorage.getItem("userData");
    const userData = JSON.parse(storedUserData);
@@ -44,16 +43,10 @@ const MyPage = () => {
     setActiveForm(formType);
   };
 
-  // 메인페이지 돌아가기
-  const handleBack = () => {
-    navigate('/');
-  } 
-
   return (
-    <div>
-      <button onClick={handleBack}>BACK</button>
+    <div className="MyForm">
       <h1>My Page</h1>
-      <div>
+      <div className="MyBtn">
         <button onClick={() => handleFormChange('profile')}>프로필</button>
         <button onClick={() => handleFormChange('edit')}>정보수정</button>
         <button onClick={() => handleFormChange('activity')}>나의활동</button>
