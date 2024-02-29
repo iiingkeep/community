@@ -21,13 +21,15 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
       );
       console.log('success: 서버응답', result.data);
 
-      
-      // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정
-      // setImageUrl(`http://localhost:8000/my/profile/img/${result.data}`);
-      const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
+
+      // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
+      const imageUrl = `http://localhost:8000/public/userimg/${result.data}`;
       setImageUrl(imageUrl);
       handleProfileImg(imageUrl);
-
+      // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정 - *오류코드
+      // const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
+      
+      
       // 이미지 URL을 부모 컴포넌트로 전달
       // handleProfileImg(`http://localhost:8000/my/profile/img/${result.data}`);
       // 이미지url 로컬스토리지 저장

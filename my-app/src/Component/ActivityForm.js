@@ -28,7 +28,8 @@ const ActivityForm = ({userId}) => {
           <li key={activity.postid}>
             <span>{activity.title}</span>
             <br />
-            <span>{moment(activity.date).format('MM월 DD일')}</span>
+            {/* 날짜가 현재 날짜로 표기되는 이슈 수정 date -> createdAt */}
+            <span>{moment(activity.createdAt).format('MM월 DD일')}</span>
           </li>
         ))}
       </ul>
