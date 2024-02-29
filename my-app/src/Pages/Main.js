@@ -50,14 +50,14 @@ const Main = () => {
         }
       });
   };
-
-      const handleLogout = () => {
-        sessionStorage.removeItem("userData");
-        sessionStorage.removeItem("loggedIn");
-        setLoggedIn(false);
-        navigate("/");
-        window.location.reload();
-      };
+  // 로그아웃
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("loggedIn");
+    setLoggedIn(false);
+    navigate("/");
+    window.location.reload();
+  };
 
   const renderContent = () => {
     if (!loggedIn) {
@@ -82,9 +82,7 @@ const Main = () => {
           <br />
           <div className="loginButtonArea">
             {/* 로그인 버튼 */}
-            <button onClick={LoginPageJs}>
-              로그인
-            </button>
+            <button onClick={LoginPageJs}>로그인</button>
             {/* 회원가입 링크 */}
             <button onClick={() => navigate("/Register")}>회원가입</button>
           </div>
@@ -103,7 +101,7 @@ const Main = () => {
         </>
       );
     }
-  }
+  };
   //------------------------로그인 끝----------------
 
   //------------------------뉴스뉴스뉴스----------------
@@ -179,6 +177,7 @@ const Main = () => {
 
   return (
     <div className="wrap">
+      <div className="Main2"><img src="7.jpg"></img></div>
       <div className="Main">
         <div className="LeftSection">
           {/* 로그인 구역 */}

@@ -87,36 +87,36 @@ const handleEmailDuplicationCheck = () => {
     
   
 // 클라이언트에서 서버로 회원가입 요청
-axios.post('http://localhost:8000/Register', {
-  username,
-  password,
-  email,
-  address,
-  detailedaddress,
-  phonenumber,
-  usertype: 'personal'
-})
-  .then(response => {
-    console.log('서버 응답:', response.data);
-    alert('회원가입이 완료되었습니다.');
-    if (response.data.userType === 1) {
-      // 개인 사용자 처리
-    } 
-    window.location.href = '/'; // 홈 페이지 또는 다른 페이지로 리디렉션
-  })
-  .catch(error => {
-    if (error.response) {
-      // 서버가 응답한 상태 코드가 2xx가 아닌 경우
-      console.error('서버 응답 오류:', error.response.status, error.response.data);
-    } else if (error.request) {
-      // 서버로 요청이 전송되었지만 응답이 없는 경우
-      console.error('서버 응답이 없음:', error.request);
-    } else {
-      // 요청을 설정하는 중에 에러가 발생한 경우
-      console.error('요청 설정 중 오류:', error.message);
-    }
-    alert('서버와의 통신 중 오류가 발생했습니다.');
-  });
+axios.post('http://localhost:8000/regester', {
+      username,
+      password,
+      email,
+      address,
+      detailedaddress,
+      phonenumber,
+      usertype: 'personal'
+    })
+      .then(response => {
+        console.log('서버 응답:', response.data);
+        alert('회원가입이 완료되었습니다.');
+        if (response.data.userType === 1) {
+          // 개인 사용자 처리
+        }
+        window.location.href = '/'; // 홈 페이지 또는 다른 페이지로 리디렉션
+      })
+      .catch(error => {
+        if (error.response) {
+          // 서버가 응답한 상태 코드가 2xx가 아닌 경우
+          console.error('서버 응답 오류:', error.response.status, error.response.data);
+        } else if (error.request) {
+          // 서버로 요청이 전송되었지만 응답이 없는 경우
+          console.error('서버 응답이 없음:', error.request);
+        } else {
+          // 요청을 설정하는 중에 에러가 발생한 경우
+          console.error('요청 설정 중 오류:', error.message);
+        }
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      });
   };
   
 
