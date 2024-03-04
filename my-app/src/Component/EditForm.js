@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 // import handlePostcode from "./Postcodehandle";
 // import DaumPostcod from "react-daum-postcode";
 import PasswordValid from "./PasswordValid";
+import "../Styles/EditForm.css";
 
 const EditForm = ({ userId }) => {
     const [profileData, setProfileData] = useState({});
@@ -68,15 +69,15 @@ const EditForm = ({ userId }) => {
     };
 
     return (
-        <div>
+        <div className="EditForm" >
             {!showEditForm ? (
                 <PasswordValid onPasswordValid={handlePasswordValid} />
             ) : (
-        <div>
+        <div className="EditInput" >
             <h2>Edit Profile</h2>
             <form onSubmit={handleEditSubmit}>
-                <label>
-                    회원이름:
+                <label className="LabelName">
+                    회원이름
                     <input
                         type="text"
                         name="username"
@@ -86,8 +87,19 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
+                <label className="LabelEmail">
+                    이메일
+                    <input
+                        type="text"
+                        name="email"
+                        value={profileData.email}
+                        placeholder={profileData.email}
+                        onChange={handleChange}
+                    />
+                </label>
+                <br />
                 <label>
-                    핸드폰번호:
+                    핸드폰번호<br/>
                     <input
                         type="text"
                         name="phonenumber"
@@ -98,7 +110,7 @@ const EditForm = ({ userId }) => {
                 </label>
                 <br />
                 <label>
-                    주소:
+                    주소<br/>
                     <input
                         type="text"
                         name="address"
@@ -109,7 +121,7 @@ const EditForm = ({ userId }) => {
                 </label>
                 <br />
                 <label>
-                    상세주소:
+                    상세주소<br/>
                     <input
                         type="text"
                         name="detailedaddress"
@@ -119,18 +131,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <label>
-                    이메일:
-                    <input
-                        type="text"
-                        name="email"
-                        value={profileData.email}
-                        placeholder={profileData.email}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <button type="submit">수정완료</button>
+                <button className="EditBtn" type="submit">수정완료</button>
             </form>
         </div>
         )}

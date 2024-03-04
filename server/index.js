@@ -291,47 +291,29 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
-async function generateUserid() {
+async function generateUserid(usertype) {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
-  const prefix = 1;
+  const prefix = {
+    personal: 1,
+  }[usertype];
 
-  // // 0219 추가_상호형
-  // let randomDigits;
-  // let userid;
-
-  // do {
-  //   randomDigits = Math.floor(10000 + Math.random() * 90000);
-  //   userid = `${prefix}${randomDigits}`;
-  // } while (usedUserNumbers.has(userid)); // 중복된 userid가 있다면 다시 생성
-  
-  //---------------------이주호 수정
-  function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  // 0219 추가_상호형
+  let randomDigits;
+  let userid;
 
   do {
-    randomDigits = getRandomNumber(1, 99999);
-    STRrandomDigits = randomDigits.toString();
-
-    if (STRrandomDigits.length == 1) {
-      userid = `${prefix}0000${randomDigits}`;
-    } else if (STRrandomDigits.length == 2) {
-      userid = `${prefix}000${randomDigits}`;
-    } else if (STRrandomDigits.length == 3) {
-      userid = `${prefix}00${randomDigits}`;
-    } else if (STRrandomDigits.length == 4) {
-      userid = `${prefix}0${randomDigits}`;
-    } else {
-      userid = `${prefix}${randomDigits}`;
-    }
+    randomDigits = Math.floor(10000 + Math.random() * 90000);
+    userid = `${prefix}${randomDigits}`;
   } while (usedUserNumbers.has(userid)); // 중복된 userid가 있다면 다시 생성
-  //---------------------이주호 수정
-
   usedUserNumbers.add(userid); // Set에 추가
+
 
   return userid;
 }
+  
+  
+// }
 //-------------------------------사업자 중복 체크 2/14 김민호---------------------------------
 // app.post("/checkbusinessnumber", (req, res) => {
 //   const { businessnumber} = req.body;
@@ -398,40 +380,54 @@ app.post("/checkEmailDuplication", async (req, res) => {
   }
 });
 //---------------------------회원가입 기능구현----------------------------------------------
-app.post("/register", async (req, res) => {
-  const {
-    username,
-    password,
-    email,
-    address,
-    detailedaddress,
-    phonenumber,
-    businessnumber,
-  } = req.body;
+app.post("/regester", async (req, res) => {
+  // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
+  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber, uniquenumber } = req.body;
 
   try {
+    
+    // 비밀번호를 해시화합니다.
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userid = await generateUserid();
 
+    // 회원번호를 생성합니다. (6자리)
+    const userid = await generateUserid(clientUsertype);
+
+    // 클라이언트에서 받은 usertype을 서버에서 사용하는 usertype으로 변환합니다.
+    const usertypeNumber = {
+      personal: 1, // 개인
+      // business: 2, // 기업
+      // organization: 3, // 단체
+    };
+
+    const serverUsertype = usertypeNumber[clientUsertype];
+
+    // MySQL 쿼리를 작성하여 회원 정보를 데이터베이스에 삽입합니다.
     const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    const [result, fields] = await poolPromise.execute(sql, [
-      userid,
-      username,
-      email,
-      hashedPassword,
-      address,
-      detailedaddress,
-      phonenumber,
-      businessnumber,
-    ]);
-
-    console.log("사용자가 성공적으로 등록됨");
-    return res.status(200).json({
-      success: true,
-      message: "사용자가 성공적으로 등록됨",
-    });
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    connection.query(
+      sql,
+      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype],
+      (err, result) => {
+        if (err) {
+          // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
+          console.error("MySQL에 데이터 삽입 중 오류:", err);
+          return res.status(500).json({
+            success: false,
+            message: "회원가입 중 오류가 발생했습니다.",
+            error: err.message,
+          });
+        }
+        // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
+        console.log("사용자가 성공적으로 등록됨");
+        return res.status(200).json({
+          success: true,
+          message: "사용자가 성공적으로 등록됨",
+          usertype: serverUsertype,
+        });
+      }
+    );
   } catch (error) {
+    // 회원가입 중 다른 내부적인 오류가 발생한 경우 에러를 처리합니다.
     console.error("회원가입 중 오류:", error);
     return res.status(500).json({
       success: false,
@@ -939,7 +935,7 @@ app.get('/my/:formType/:userid', (req, res) => {
   let query = '';
   let table = '';
 
-  // formType에 따라 쿼리문과 테이블 설정
+  // formType에 따라 테이블 설정
   switch (formType) {
     case 'profile':
       table = 'user';
@@ -960,49 +956,46 @@ app.get('/my/:formType/:userid', (req, res) => {
       res.status(400).json({ message: '유효하지않은 form type' });
       return;
   }
+
+  // activity 폼 쿼리문
+  if (formType === 'activity') {
+    query = `SELECT * FROM community_posts
+             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+             WHERE community_posts.userid = ?`;
+
   // islike 폼 쿼리문
-  if (formType === 'islike') {
+  } else if (formType === 'islike') {
     if (!userId) {
-      res.status(400).json({ message: 'islike: 유효하지 않은 사용자 ID' });
+      res.status(400).json({ message: 'Invalid ID' });
       return;
     }
-    
-    query = `SELECT A.* FROM community_posts A
-    LEFT JOIN is_like B
-    ON A.postid = B.postid
-    WHERE B.post_isLiked = 1 AND A.userid = ?`;
+    // 수정 필요*
+    query = `SELECT title FROM community_posts A
+             LEFT JOIN is_like B ON A.postid = B.postid
+             WHERE B.post_isLiked = 1`;
+
+  // 나머지 선택된 폼의 쿼리문
   } else {
     query = `SELECT * FROM ${table} WHERE userid = ?`;
   }
 
-  // 이미 'islike'에 대한 쿼리가 설정되었기 때문에 다시 설정할 필요 없음
-  // query = `SELECT * FROM ${table} WHERE userid = ?`;
-
-  // 선택된 폼에 따른 쿼리문
+  // 데이터베이스 쿼리 실행
   connection.query(query, [userId], (err, results) => {
     if (err) {
       console.error('(Error) data from database:', err);
       res.status(500).json({ message: 'Internal server error' });
       return;
     }
-
     if (results.length === 0) {
       res.status(404).json({ message: 'Data not found' });
       return;
     }
-
-    const userData = results; // 첫 번째 요소만 사용
+    const userData = results;
     res.json(userData);
-    // console.log(results);
+    console.log(results);
   });
 });
 
-  // if (formType === 'islike') {
-  //   query = `SELECT A.title, A.url FROM news A
-  //   LEFT JOIN is_like B
-  //   ON A.newsid = B.postid
-  //   WHERE B.news_isLiked = 1`;
-  // } else {
 
 
 //  정보수정 -----------------------------------

@@ -2,20 +2,28 @@
   box-sizing: border-box;
 }
 
-/* 화면에서 스크롤바 안보이게 */
-.outer::-webkit-scrollbar {
-  display: none;
+.wrap {
+  width: 100vw;
+  height: 90vh;
+  /* background-image: url('../../../server/public/backgroundimg/main_icon1.png'), url('../../../server/public/backgroundimg/main_icon2.png'), url('../../../server/public/backgroundimg/main_icon3.png') ; */
+  /* background-repeat: no-repeat;
+  background-size:  200px 200px, 200px 200px, 200px 200px ;
+  background-position: 25% 60%, 50% 60%, 75% 60%; */
 }
-
 
 .Main {
   min-height: calc(100% - 30px);
   width: 80%;
   height: 90vh;
   margin: 30px auto;
-  margin-top: 0;
+  margin-top: 10vh;
   margin-bottom: 0;
   display: flex;
+  /* background-image: url('../../../server/public/backgroundimg/planet.png');
+  background-repeat: no-repeat;
+  background-size: 400px 400px;
+  background-position: ; */
+
 }
 
 .Main .LeftSection {
@@ -49,6 +57,14 @@
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
+}
+
+.Main2 img {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  width: 60%;
+  height: 90vh;
 }
 
 /* 로그인 */

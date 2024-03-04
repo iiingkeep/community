@@ -1,8 +1,10 @@
 /* Paging.css */
-/* .pagination {
-    display: flex;
-    justify-content: center;
-  } */
+.pagination {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   .pagination li {
     display: inline-block;
@@ -11,7 +13,7 @@
   
   .pagination li a {
     padding: 5px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,0.2);
     text-decoration: none;
     color: #333;
   }

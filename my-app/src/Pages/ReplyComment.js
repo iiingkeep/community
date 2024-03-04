@@ -1,9 +1,10 @@
 import React, {useState,useEffect} from "react";
 import SingleComment from "./SingleComment";
+import "./ReplyComment.css"
 
 
 // 댓글에 달린 답글을 출력하는 컴포넌트
-const ReplyComment = ({userid, refreshFunction, updateComment, deleteComment, commentLists, parentCommentId, postId}) => {
+const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteComment, commentLists, parentCommentId, postId}) => {
   // 답글 갯수, 보기(펼침/접힘) 상태 관리
   const [childCommentNumber, setChildCommentNumber] = useState();
   const [openReplyComments, setOpenReplyComments] = useState();
@@ -28,8 +29,8 @@ const ReplyComment = ({userid, refreshFunction, updateComment, deleteComment, co
       { //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 그 답글에 다시 답글을 달고 표시할 수 있도록 SingleComment와 ReplyComment 컴포넌트 렌더링
         comment.responseTo === parentCommentId &&
       <div style={{width: '80%', marginLeft: '40px'}}>
-        <SingleComment userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId}/>
-        <ReplyComment userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
+        <SingleComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId}/>
+        <ReplyComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
         </div>
       }
       </React.Fragment>
@@ -44,7 +45,7 @@ const ReplyComment = ({userid, refreshFunction, updateComment, deleteComment, co
     <div className="ReplyComment">
       {/* 댓글에 대한 답글이 1개 이상일 경우 답글보기 버튼 표시 */}
       {childCommentNumber > 0 && 
-      <p style={{ fontSize:'14px', margin: 0, color:'gray'}} onClick={onHandleChange}>
+      <p className='reply_comment__view' onClick={onHandleChange}>
         답글 보기
       </p>
       }

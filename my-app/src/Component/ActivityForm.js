@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const ActivityForm = ({userId}) => {
     const [actiData, setActiData] = useState([]);
@@ -22,17 +23,38 @@ const ActivityForm = ({userId}) => {
 
   return (
     <div>
+      <div className='PostList'>
       <h2>게시물</h2>
       <ul>
         {actiData.map(activity => (
           <li key={activity.postid}>
+            <Link to={`/Community/Read/${activity.postid}`}>
             <span>{activity.title}</span>
+            </Link>
             <br />
-            <span>{moment(activity.date).format('MM월 DD일')}</span>
+            {/* 날짜가 현재 날짜로 표기되는 이슈 수정 date -> createdAt */}
+            <span>{moment(activity.createdAt).format('MM월 DD일')}</span>
           </li>
         ))}
       </ul>
+      </div>
+      <div className='CommList'>
       <h2>댓글</h2>
+      <ul>
+        {actiData.map(activity => (
+          <li key={activity.postid}>
+            <Link to={`/Community/Read/${activity.postid}`}>
+            <span>{activity.content}</span>
+            </Link>
+            <br />
+            {/* 날짜가 현재 날짜로 표기되는 이슈 수정 date -> createdAt */}
+            <span>{moment(activity.createdAt).format('MM월 DD일')}</span>
+          </li>
+        ))}
+      </ul>
+      </div>
+      
+      
     </div>
   );
 };

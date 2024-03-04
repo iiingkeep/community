@@ -1,0 +1,46 @@
+.Comment .comment_cnt {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.Comment .comment_cnt span {
+  margin-left: 5px;
+}
+
+.Comment .comment_form {
+  display: flex;
+  height: 50px;
+}
+
+.Comment .comment_form_origin {
+  margin-top: 30px;
+}
+
+.Comment .comment_form .comment_content {
+  width: 83%;
+  resize: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  outline: none;
+  margin-right: 10px;
+}
+
+
+.Comment .comment_form .comment_content::placeholder {
+  color: rgba(0,0,0,0.3);
+}
+
+
+
+.Comment .comment_form .btn_submit {
+  width: 15%;
+  height: 50px;
+  background-color: rgb(83, 212, 92);
+  font-size:12px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color:white;
+}

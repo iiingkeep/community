@@ -185,8 +185,11 @@ const NewsItem = () => {
   const handleLikeClick = (newsid, loggedIn, userid) => {
     console.log(loggedIn, userid);
     if (loggedIn !== true) {
-      alert("로그인이 필요한 기능입니다.");
-      navigate("/Login");
+      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+        navigate("/Login");
+      } else {
+        navigate("/News");
+      }
       return;
     } else {
       // 좋아요 상태 토글
@@ -226,7 +229,7 @@ const NewsItem = () => {
         <div className="search">
           <input
             type="text"
-            placeholder=" 뉴스 검색"
+            placeholder="뉴스 검색"
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
@@ -263,7 +266,8 @@ const NewsItem = () => {
               </a>
               {/* 조회수 */}
               <p id="views">
-                <Icon icon="fluent-mdl2:view" />{item.views}
+                <Icon icon="fluent-mdl2:view" />
+                {item.views}
               </p>
               {/* 좋아요 */}
               <div className="likeButton">
@@ -279,15 +283,15 @@ const NewsItem = () => {
         ))}
       </ul>
       {/* 페이지네이션 */}
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={articlesPerPage}
-        totalItemsCount={filteredNews.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handleChangePage}
-      />
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={articlesPerPage}
+          totalItemsCount={filteredNews.length}
+          pageRangeDisplayed={5}
+          prevPageText={"<"}
+          nextPageText={">"}
+          onChange={handleChangePage}
+        />
     </div>
   );
 };

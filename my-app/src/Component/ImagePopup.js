@@ -21,13 +21,15 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
       );
       console.log('success: 서버응답', result.data);
 
-      
-      // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정
-      // setImageUrl(`http://localhost:8000/my/profile/img/${result.data}`);
-      const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
+
+      // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
+      const imageUrl = `http://localhost:8000/public/userimg/${result.data}`;
       setImageUrl(imageUrl);
       handleProfileImg(imageUrl);
-
+      // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정 - *오류코드
+      // const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
+      
+      
       // 이미지 URL을 부모 컴포넌트로 전달
       // handleProfileImg(`http://localhost:8000/my/profile/img/${result.data}`);
       // 이미지url 로컬스토리지 저장
@@ -87,13 +89,13 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
   }, []);
 
   return (
-    <div className="modal">
+    <div className="Modal">
       <Draggable>
-        <div className="modal-content">
+        <div className="ModalContent">
           <button onClick={onClose}>X</button>
           <br />
           {/* 업로드 버튼 참조 */}
-          <button className="upload-button" onClick={handleUploadBtnRef}>이미지 업로드</button>
+          <button className="UploadBtn" onClick={handleUploadBtnRef}>이미지 업로드</button>
           {/* 파일 업로드 버튼 */}
           <input
             type="file"
@@ -105,7 +107,7 @@ const ImagePopup = ({ onClose, handleProfileImg }) => {
           /> 
           <br />
           {imageUrl && ( // 이미지 URL이 존재할 경우 이미지 표시
-              <img src={imageUrl} alt="이미지" />
+              <img className="ProfileImg" src={imageUrl} alt="이미지" />
           )}
           <button onClick={handleSaveImage}>저장</button>
           <button onClick={handleImageDelete}>삭제</button>

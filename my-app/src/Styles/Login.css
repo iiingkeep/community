@@ -128,8 +128,3 @@
     -moz-osx-font-smoothing: grayscale;      
   }
 
-  /* 체크박스와 라벨 숨기기 */
-input[type="checkbox"],
-label {
-  display: none;
-}

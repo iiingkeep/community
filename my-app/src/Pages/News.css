@@ -4,7 +4,7 @@
 }
 
 /* 상단 NEWS FEED */
-h1 {
+.newsPage h1 {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -42,6 +42,7 @@ a:visited {
   box-sizing: border-box;
   border-radius: 20px;
   padding: 8px;
+  padding-left: 15px;
   font-family: 'Roboto';
   font-style: normal;
   font-size: 14px;
@@ -185,35 +186,7 @@ a:visited {
   margin: 0 auto;
   width: 850px;
   height: 130px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-/* 페이지네이션 */
-.pagination {
-  margin-top: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination li {
-  list-style: none;
-  margin-right: 30px;
-  /* 가로 배치 */
-  display: inline-block;
-}
-
-/* 페이지네이션 현재 페이지 */
-.pagination .active {
-  font-weight: bold;
-  font-size: x-large;
-}
-
-.pagination a:link {
-  color: black;
-}
-
-.pagination a:hover {
-  color: rgb(83, 212, 92);
-}
 

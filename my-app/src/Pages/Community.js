@@ -3,12 +3,13 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import PaginatedItems from '../Util/PaginatedItems';
 import './Community.css';
+import DOMPurify from 'dompurify';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 // import CommunityItems from './CommunityItems';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
-const Community = (loggedIn) => {
+const Community = ({loggedIn}) => {
   // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리
   const [posts, setPosts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -69,9 +70,15 @@ const getPostThumbnail = (content) => {
   return matches ? matches[0].replace('<img src="', '').replace('"', '') : 'https://img.freepik.com/free-vector/big-green-tropical-leaf-design-element-vector_53876-136546.jpg?t=st=1709001702~exp=1709005302~hmac=ef7e3256d83f1215b0ac3cafbaba39317184f077698c7700794dc84cdbd76a67&w=996';
 };
 
+
+// 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
+const getPostContentWithoutImages = (content) => {
+  return content.replace(/<img\s+[^>]*src="[^"]*"[^>]*>/g, '');
+};
+
+
   // 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
-    const loggedIn = sessionStorage.getItem("loggedIn");
   if (loggedIn) {
     // 로그인 상태일 경우 글쓰기 페이지로 이동
     navigate('/Community/Write', { state: { selectedCategory } });
@@ -109,35 +116,50 @@ const getPostThumbnail = (content) => {
         </div>
         <button onClick={handleSearchButtonClick}>검색</button>
       </div>
+      {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
+      <div className='WriteButtonBox'>
+        <button onClick={goCommunityWrite}>글쓰기</button>
+      </div>
       {/* 게시글 목록 출력 */}
       <div className="PostListBox">
       <ul>
         {posts.map((post) => (
           <li key={post.postid}>
-            <div className="Thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
-            <p className='Username'>{post.username}</p>
             <Link to={`/Community/Read/${post.postid}`}>
-              <strong>{post.title}</strong>
+            <div className="Thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             </Link>
+            <div className='PostInfoBox'>
+            <div className='TitleBox'>
+            <Link to={`/Community/Read/${post.postid}`}>
+              <p className='Title'>{post.title}</p>
+              <p className='Content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></p>
+            </Link>
+            </div>
+            <div className='PostDetailBox'>
+            <p className='Username'>{post.username}</p>
             <p className='View'>
-            <Icon icon="fluent-mdl2:view" />
+            <Icon icon="fluent-mdl2:view" className='icon'/>
             <span>{post.view}</span></p>
             <p className='Like'>
-            <Icon icon="icon-park-outline:like" />
+            <Icon icon="icon-park-outline:like" className='icon'/>
             <span>{post.totalLikes}</span></p>
             <p className='Comment'>
-            <Icon icon="f7:ellipses-bubble" />
+            <Icon icon="f7:ellipses-bubble" className='icon'/>
             <span>{post.commentCount}</span></p>
-            <p className='Date'>{formattedDateAndTime(post.createdAt)}</p>
+            </div>
+            </div>
+            <div className='DateTime'>
+            <p className='Date'>{formattedDateAndTime(post.createdAt, 'date')}</p>
+            <p className='Date'>{formattedDateAndTime(post.createdAt, 'time')}</p>
+            </div>
+            
+            
           </li>
         ))}
       </ul>
       {/* <CommunityItems posts={posts} /> */}
       </div>
-      {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
-      <div className='WriteButtonBox'>
-        <button onClick={goCommunityWrite}>글쓰기</button>
-      </div>
+      
       {/* 페이지네이션 */}
       <div className="PagingBox">
       <PaginatedItems
