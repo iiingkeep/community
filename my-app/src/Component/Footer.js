@@ -32,8 +32,6 @@ function Footer() {
                         "등록번호 : 000-0000-000"
                     </address>
                     <div className="labelList">
-                        <div className="related">
-                            <div>
                             <button className={`label ${isListVisible ? 'active' : ''}`} onClick={toggleListVisibility}>
                                     관련 사이트 바로가기 {isListVisible ? '▲' : '▼'}
                                 </button>
@@ -44,8 +42,6 @@ function Footer() {
                                     <a onClick={() => window.open("https://www.gihoo.or.kr/zerolife", "_blank")} title="새창">탄소중립 실천포털</a>
                                     <a onClick={() => window.open("https://www.gihoo.or.kr/greencampus/", "_blank")} title="새창">그린캠퍼스</a>
                                     </ul>
-                                     </div>
-                            </div>
                         </div>
                     </div>
                 </div>

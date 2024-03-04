@@ -36,7 +36,7 @@
 }
 
 .leftContent {
-    line-height: 0.2rem;
+    line-height: 1.27rem;
     font-weight:700;
 }
 
@@ -44,7 +44,11 @@
     font-size: 12px;
 }
 
-.related .label {
+.labelList {
+    position: relative;
+}
+
+.labelList .label {
     z-index: 999;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -62,54 +66,64 @@
 
 .list > ul {
     width: 172.28px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    position: absolute;
+    top: 5%;
     /* justify-content: ; */
 }
 
-.related .list {
+.labelList .list {
     visibility: hidden;
     overflow: hidden;
-    top: 100%;
+    top: -300%;
     width: 172.28px;
     /* height: 0 auto; */
     opacity: 1;
-    position:absolute;
+    position: absolute;
     left: auto;
     bottom: 100%;
     /* min-width: 100%; */
+    /* margin-bottom: 30%; */
     padding: 4rem 0;
     border-radius: 2rem;
-    border: 1px solid #717171;
-    /* background-color: #272E39; */
+    border: 1px solid #b3b3b3;
+    background-color: #b3b3b3;
     transition: all 0.2s;
     z-index: 9999;
-  }
-  
-  .related .list a {
+}
+
+.labelList .list a {
     display: block;
     width: auto;
     height: auto;
-    font-size: 15px;
+    font-size: 12px;
+    margin-right: 25%;
     line-height: 1.4rem;
+    margin-bottom: 5%;
     text-align: center;
+    opacity: 0.9;
     transition: all 0.2s;
-  }
-  
-  .related .list a:hover,
-  .related .list a:focus {
-    color: #838383;
-  }
-  
-  .related .label.active::after {
+    background-color: antiquewhite;
+    border-color: antiquewhite;
+    border: 1px dotted;
+    border-radius: 3rem;
+}
+x
+.labelList .list a:hover,
+.labelList .list a:focus {
+    color: #535353;
+}
+
+.labelList .label.active::after {
     transform: translateY(-50%) rotate(180deg);
-  }
-  
-  .related .list.active {
+}
+
+.labelList .list.active {
     visibility: visible;
     overflow: visible;
     width: 172.28px;
     height: auto;
-    opacity: 1;
+    opacity: 0.855;
     bottom: calc(100% + 1rem);
     /* padding: 2rem; */
-  }
+}
