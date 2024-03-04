@@ -1,6 +1,22 @@
 .comment_single {
-  padding: 30px 0;
+  padding: 30px 0 10px 0;
   border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.Comment .comment_form .name_box__editing {
+  font-size: 14px;
+  width: 10%;
+  text-align: center;
+}
+
+.Comment .comment_form .comment_single_content {
+  width: 75%;
+  resize: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  outline: none;
+  margin-right: 10px;
 }
 
 .Comment .comment_form .btn_box {
@@ -22,20 +38,46 @@
   margin-right: 5px;
 }
 
-.single_comment_box .name_date_box {
+.single_comment_box {
+  display: flex;
+}
+
+.single_comment_box .comment_detail_box {
+  width: 80%;
+  margin-right: 30px;
+}
+
+.single_comment_box .comment_detail_box .name_date_box {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   font-size: 14px;
 }
 
-
-
-.single_comment_box .content_box {
+.single_comment_box .comment_detail_box .content_box {
   margin-bottom: 10px;
 }
 
-.single_comment_box .btn_reply {
+.single_comment_box .comment_detail_box .btn_reply {
   font-size: 14px;
-  color:rgba(0,0,0,0.5)
+  color:rgba(0,0,0,0.5);
+  cursor: pointer;
+  position: relative;
+}
+
+.single_comment_box .btn_edit_delete {
+  display: flex;
+  align-items:center;
+}
+
+.single_comment_box .btn_edit_delete button {
+  font-size:12px;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  padding: 10px;
+}
+
+.reply_comment_box__write {
+  padding-bottom: 20px;
 }

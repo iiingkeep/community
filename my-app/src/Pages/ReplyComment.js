@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import SingleComment from "./SingleComment";
+import "./ReplyComment.css"
 
 
 // 댓글에 달린 답글을 출력하는 컴포넌트
@@ -44,7 +45,7 @@ const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteC
     <div className="ReplyComment">
       {/* 댓글에 대한 답글이 1개 이상일 경우 답글보기 버튼 표시 */}
       {childCommentNumber > 0 && 
-      <p style={{ fontSize:'14px', margin: 0, color:'gray'}} onClick={onHandleChange}>
+      <p className='reply_comment__view' onClick={onHandleChange}>
         답글 보기
       </p>
       }

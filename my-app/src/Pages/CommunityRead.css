@@ -23,7 +23,7 @@
   display: flex;
   justify-content: space-between;
   text-align: start;
-  margin: 10px 0;
+  margin: 30px 0 10px 0;
 }
 
 .CommunityRead .PostInfo .NameAndDateBox {

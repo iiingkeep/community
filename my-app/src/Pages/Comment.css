@@ -27,6 +27,7 @@
   margin-right: 10px;
 }
 
+
 .Comment .comment_form .comment_content::placeholder {
   color: rgba(0,0,0,0.3);
 }

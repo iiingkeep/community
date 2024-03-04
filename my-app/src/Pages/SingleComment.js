@@ -129,51 +129,67 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     };
     
     return (
-      <div className='Comment'>
-        <div className='comment_single'>
+      <div className="Comment">
+        <div className="comment_single">
           {isEditing ? ( // 수정 상태일 때 폼 출력
-          <form className='comment_form' onSubmit={onUpdateComment}>
-            {comment.username}
-            <textarea className='comment_content' value={commentValue} onChange={onHandleCommentChange} />
-            <div className='btn_box'>
-            <button type="submit">등록</button>
-            <button type="button" onClick={handleCancel}>취소</button>
+            <form className="comment_form" onSubmit={onUpdateComment}>
+              <span className='name_box__editing'>{comment.username}</span>
+              <textarea
+                className="comment_single_content"
+                value={commentValue}
+                onChange={onHandleCommentChange}
+              />
+              <div className="btn_box">
+                <button type="submit">등록</button>
+                <button type="button" onClick={handleCancel}>
+                  취소
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="single_comment_box">
+              <div className="comment_detail_box">
+                <div className="name_date_box">
+                  {comment.username}
+                  <p className="date_box">
+                    {formattedDateAndTime(comment.createdAt)}
+                  </p>
+                </div>
+                <div className="content_box">{comment.content}</div>
+                <span className="btn_reply" onClick={onClickReplyOpen}>
+                  {" "}
+                  답글 달기
+                </span>
+              </div>
+              <div className="btn_edit_delete">
+                {userid === comment.userid && (
+                  <>
+                    <button onClick={handleEdit}>수정</button>
+                    <button onClick={onDeleteComment}>삭제</button>
+                  </>
+                )}
+              </div>
             </div>
-          </form>
-        ) : (
-          <div className='single_comment_box'>
-            <div className='name_date_box'>
-            {comment.username}
-            <p className='date_box'>{formattedDateAndTime(comment.createdAt)}</p>
-            </div>
-            <div className='content_box'>
-            {comment.content}
-            </div>
-            <span className='btn_reply' onClick={onClickReplyOpen}> 답글 달기</span>
-            {userid === comment.userid && (
-              <>
-                <button onClick={handleEdit}>수정</button>
-                <button onClick={onDeleteComment}>삭제</button>
-              </>
-            )}
-          </div>
-        )}
-      </div>
-      {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
-      <div className='Comment'>
-      {openReply && 
-          <form onSubmit={onReplySubmit} className='comment_form'>
-          <textarea className='comment_content'
-            onChange={onHandleChange}
-            value={commentValue}
-            placeholder='답글을 작성해 보세요.'/>
-          <button className='btn_submit' onClick={onReplySubmit}>답글 등록</button>
-        </form>}
+          )}
         </div>
-
-      
-    </div>
-  );
+        {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
+        <div className="reply_comment_box__write">
+          {openReply && (
+            <form onSubmit={onReplySubmit} className="comment_form">
+              <textarea
+                className="comment_content"
+                onChange={onHandleChange}
+                value={commentValue}
+                placeholder="답글을 작성해 보세요."
+              />
+              <button className="btn_submit" onClick={onReplySubmit}>
+                답글 등록
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    );
 }
 
 export default SingleComment;
