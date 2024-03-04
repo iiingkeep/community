@@ -6,7 +6,7 @@ import ReplyComment from './ReplyComment';
 import {Icon} from '@iconify/react';
 
 // 댓글 작성, 등록 컴포넌트
-const Comment = ({userid, commentLists, refreshFunction, commentCount}) =>{
+const Comment = ({userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount}) =>{
   const { id } = useParams();
   const [comment, setComment] = useState('');
 
@@ -61,8 +61,8 @@ const Comment = ({userid, commentLists, refreshFunction, commentCount}) =>{
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
         <React.Fragment key={comment.id}>
-        <SingleComment userid={userid} refreshFunction={refreshFunction} comment={comment}/>
-        <ReplyComment userid={userid} refreshFunction={refreshFunction} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
+        <SingleComment userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment}/>
+        <ReplyComment userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
         )
       ))}

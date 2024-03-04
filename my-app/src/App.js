@@ -115,15 +115,15 @@ function App() {
         menu={
           <div className="HeaderMenu">
             <button>탄소중립이란? </button>
-            <button onClick={() => navigate("/CarbonFootprint")}>
+            {/* <button onClick={() => navigate("/CarbonFootprint")}>
               탄소발자국{" "}
-            </button>
+            </button> */}
             <button onClick={() => navigate("/news")}>
               환경이슈{" "}
             </button>
-            <button onClick={() => navigate("/Shop")}>빵끗샵 </button>
+            {/* <button onClick={() => navigate("/Shop")}>빵끗샵 </button> */}
             <button onClick={() => navigate("/Community")}>커뮤니티 </button>
-            <button onClick={() => navigate("/Campaign")}>캠페인 </button>
+            {/* <button onClick={() => navigate("/Campaign")}>캠페인 </button> */}
           </div>
         }
         rightChild={
@@ -135,7 +135,7 @@ function App() {
           ) : (
             <div>
               <button onClick={() => navigate("/Login")}>로그인</button>
-              <button onClick={() => navigate("/Register")}>회원가입</button>
+              <button onClick={() => navigate("/Register/personal")}>회원가입</button>
             </div>
           )
         }

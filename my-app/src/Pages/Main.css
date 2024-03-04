@@ -2,10 +2,19 @@
   box-sizing: border-box;
 }
 
+/* 화면에서 스크롤바 안보이게 */
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+
 .Main {
   min-height: calc(100% - 30px);
   width: 80%;
+  height: 90vh;
   margin: 30px auto;
+  margin-top: 0;
+  margin-bottom: 0;
   display: flex;
 }
 
@@ -20,7 +29,7 @@
 }
 
 .Main .LeftSection .LoginBox {
-  height: 140px;
+  height: 30%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
@@ -40,6 +49,45 @@
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
+}
+
+/* 로그인 */
+.LoginBox button {
+  background-color: rgb(83, 212, 92);
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  color: white;
+  padding: 10px;
+  margin: 0 15px;
+}
+
+.LoginBox input {
+  border: 2px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 15px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 10px;
+  width: 150px;
+  height: 40px;
+}
+
+.LoginBox input:hover,
+.LoginBox input:focus {
+  border: 2px solid rgb(83, 212, 92);
+  box-sizing: border-box;
+  border-radius: 20px;
+  outline: 3px solid #ffffff;
+}
+
+.loginButtonArea {
+  display: flex;
+  justify-content: center;
 }
 
 /* 워드클라우드 이미지 다운로드 버튼 */

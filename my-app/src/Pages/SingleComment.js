@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { formattedDateAndTime } from "../Util/utils";
 
 // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
-const SingleComment = ({userid, comment, refreshFunction}) => {
+const SingleComment = ({userid, comment, refreshFunction, updateComment, deleteComment}) => {
   const { id } = useParams();
   const [openReply, setOpenReply] = useState(false);
   const [commentValue, setCommentValue] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  // 댓글 수정 버튼 클릭 시 호출되는 함수
+  const handleEdit = () => {
+    setCommentValue(comment.content); // 댓글 내용을 폼에 채우기 위해 상태 업데이트
+    setIsEditing(true); // 수정 상태로 변경
+  };
+
+  // 댓글 취소 버튼 클릭 시 호출되는 함수
+  const handleCancel = () => {
+    setIsEditing(false); // 수정 상태 취소
+    setCommentValue(''); // 폼 초기화
+  };
+
+  // 댓글 내용 변경 시 호출되는 함수
+  const onHandleCommentChange = (e) => {
+    setCommentValue(e.target.value);
+  };
 
   // 댓글에 답글을 다는 폼을 열고 닫는 함수
   // '답글 달기' 클릭 시 아래에 폼 제공
@@ -18,7 +37,7 @@ const SingleComment = ({userid, comment, refreshFunction}) => {
     setCommentValue(e.target.value);
   }
   // 답글 등록 버튼 클릭 시 호출되는 핸들러 함수
-  const onSubmit = async (e) => {
+  const onReplySubmit = async (e) => {
     e.preventDefault();
 
     try{
@@ -51,25 +70,86 @@ const SingleComment = ({userid, comment, refreshFunction}) => {
       }
     }
   
-  return (
-    <div>
+    const onUpdateComment = async (e) => {
+      const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");
+      if (editComfirmed) {
+      try {
+        const response = await axios.put(`http://localhost:8000/Community/Read/${id}/UpdateComment`, {
+          commentid: comment.commentid,
+          content: commentValue,
+        });
+        if (response && response.status === 200) {
+          console.log('댓글이 수정되었습니다.');
+          alert('댓글이 수정되었습니다.');
+          updateComment(response.data.result);
+          setIsEditing(false); // 수정 상태 종료
+        } else {
+          console.error('예상치 못한 응답:', response);
+          alert('댓글 수정에 실패했습니다. 다시 한 번 시도해주세요.');
+        }
+      } catch (error) {
+        console.error('에러 발생:', error);
+        alert('댓글 수정에 실패했습니다. 다시 한 번 시도해주세요.');
+      }
+    }
+    };
+    
+    const onDeleteComment = async () => {
+      const userConfirmed = window.confirm('정말로 댓글을 삭제하시겠습니까?');
+
+      // 사용자가 확인을 선택한 경우에만 삭제 진행
+      if (userConfirmed) {
+      try {
+        const response = await axios.delete(`http://localhost:8000/Community/Read/${id}/DeleteComment/${comment.commentid}`);
+        if (response && response.status === 200) {
+          console.log('댓글이 삭제되었습니다.');
+          alert('댓글이 삭제되었습니다.');
+          deleteComment(comment.commentid); // 해당 댓글 삭제 후 UI 갱신
+        } else {
+          console.error('예상치 못한 응답:', response);
+          alert('댓글 삭제에 실패했습니다. 다시 한 번 시도해주세요.');
+        }
+      } catch (error) {
+        console.error('에러 발생:', error);
+        alert('댓글 삭제에 실패했습니다. 다시 한 번 시도해주세요.');
+      }
+    }
+    };
+    
+    return (
       <div>
-      {/* 원본 단일 댓글+답글 달기 버튼 표시 */}
-      {comment.username}
-      {comment.content}
-      {comment.createdAt}
-      <span onClick={onClickReplyOpen}> --답글 달기</span>
+        <div>
+          {comment.username}
+          {isEditing ? ( // 수정 상태일 때 폼 출력
+          <form onSubmit={onUpdateComment}>
+            <textarea value={commentValue} onChange={onHandleCommentChange} />
+            <button type="submit">등록</button>
+            <button type="button" onClick={handleCancel}>취소</button>
+          </form>
+        ) : (
+          <>
+            {comment.content}
+            {formattedDateAndTime(comment.createdAt)}
+            {userid === comment.userid && (
+              <>
+                <span onClick={onClickReplyOpen}> --답글 달기</span>
+                <button onClick={handleEdit}>수정</button>
+                <button onClick={onDeleteComment}>삭제</button>
+              </>
+            )}
+          </>
+        )}
       </div>
       {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
       {openReply && 
-          <form style ={{display: 'flex'}} onSubmit={onSubmit} >
+          <form style ={{display: 'flex'}} onSubmit={onReplySubmit} >
           <textarea 
             style={{width: '100%', borderRadius: '5px'}}
             onChange={onHandleChange}
             value={commentValue}
             placeholder='답글을 작성해 보세요.'/>
           <br />
-          <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>답글 등록</button>
+          <button style={{ width: '20%', height: '52px' }} onClick={onReplySubmit}>답글 등록</button>
         </form>}
 
       

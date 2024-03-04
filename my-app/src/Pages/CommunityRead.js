@@ -4,6 +4,7 @@ import DOMPurify from 'dompurify';
 import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import {Icon} from '@iconify/react';
+import { formattedDateAndTime } from "../Util/utils";
 import './CommunityRead.css'
 
 // 게시글 상세와 댓글을 출력하는 컴포넌트
@@ -18,20 +19,23 @@ const CommunityRead = ({loggedIn, userid}) => {
 
   useEffect(() => {
     // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
-    const fetchPost = async () => {
+    const fetchPostAndIncrementViews = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);
         console.log(response.data);
         setPost(response.data);
+        
         // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
         await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);
       } catch (error) {
         console.error('게시물을 불러오는 중 에러 발생:', error);
       }
     };
-    fetchPost();
-    
+  
+    fetchPostAndIncrementViews();
+  }, [id]);
 
+  useEffect(() => {
     // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
     const fetchComments = async () => {
       try {
@@ -64,6 +68,28 @@ const CommunityRead = ({loggedIn, userid}) => {
     setComments(comments.concat(newComment));
     setCommentCount(commentCount + 1);
 }
+
+
+  // 댓글 수정 함수
+    const updateComment = (updatedComment) => {
+      const updatedComments = comments.map(comment => {
+        if (comment.commentid === updatedComment.commentid) {
+          return updatedComment; // 수정된 댓글일 경우 해당 댓글로 대체
+        } else {
+          return comment; // 그렇지 않은 경우 기존의 댓글 유지
+        }
+      });
+      setComments(updatedComments);
+    }
+
+  // 댓글 삭제 함수
+  const deleteComment = (deletedCommentId) => {
+    // 삭제된 댓글을 제외한 새로운 댓글 목록 생성
+    const updatedComments = comments.filter(comment => comment.commentid !== deletedCommentId);
+    // 댓글 목록 업데이트
+    setComments(updatedComments);
+    setCommentCount(commentCount - 1);
+  }
   
   // post가 없을 경우 'Loading...' 표시
   if (!post) {
@@ -89,6 +115,8 @@ const CommunityRead = ({loggedIn, userid}) => {
 
 
   const toggleLike = async () => {
+  if (loggedIn) {
+    // 로그인 상태일 경우 좋아요 반영
     try {
       await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
         userid: userid,
@@ -97,7 +125,14 @@ const CommunityRead = ({loggedIn, userid}) => {
     } catch (error) {
       console.error('좋아요 토글 중 에러 발생:', error);
     }
-  };
+  } else {
+    // 로그인 상태가 아닐 경우 로그인 페이지로 이동
+    if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      navigate('/Login');
+    }
+  }
+};
+    
 
   // 로그인 한 유저가 게시글을 작성한 유저인지의 여부를 확인하는 변수 선언
   const isOwner = loggedIn && post.userid === userid;
@@ -107,7 +142,7 @@ const CommunityRead = ({loggedIn, userid}) => {
     <div className='CommunityRead'>
       <div className='PostInfo'>
       <p>{post.username}</p>
-      <p>{post.createdAt}</p>
+      <p>{formattedDateAndTime(post.createdAt)}</p>
       <p><Icon icon="fluent-mdl2:view" />
       <span>{post.view}</span></p>
       <p onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
@@ -124,7 +159,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       )}
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
-        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount}/>
+        <Comment userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div>

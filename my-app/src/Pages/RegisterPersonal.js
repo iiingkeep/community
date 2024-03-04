@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { handlePostcode } from "./Postcodehandle";
 import axios from 'axios';
-import './Register.css'
+// import './Register.css'
+import "../Styles/RegisterPersonal.css"
 
 function RegisterPersonal() {
   const [username, setUsername] = useState('');//이름
@@ -120,7 +121,9 @@ axios.post('http://localhost:8000/Register', {
   
 
   return (
-    <div>
+    <div className="regi-page">
+    <div className="regi-form">
+    <h2>회원가입</h2>
       <input
         type="text"
         placeholder="사용자명"
@@ -150,7 +153,7 @@ axios.post('http://localhost:8000/Register', {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button onClick={handleEmailDuplicationCheck}>확인</button>
+      <button className="emailcheck" onClick={handleEmailDuplicationCheck}>이메일 확인</button>
       {/* 이메일 유효성 검사 02/14 김민호 */}
 
       <br />
@@ -170,7 +173,7 @@ axios.post('http://localhost:8000/Register', {
         onChange={(e) => setAddress(e.target.value)}
       />
     
-      <button onClick={handle.clickButton}>선택</button>
+      <button className="adrrselect" onClick={handle.clickButton}>주소 선택</button>
       {openPostcode && (
         <DaumPostcode
           onComplete={handle.selectAddress}
@@ -192,6 +195,7 @@ axios.post('http://localhost:8000/Register', {
       <div>
         <Link to="/Login">로그인창</Link>
       </div>
+    </div>
     </div>
   );
 }
