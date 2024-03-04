@@ -7,20 +7,105 @@
   margin: 20px auto;
 }
 
-.CommunityRead .PostInfo {
-  text-align: start;
-}
-
 .CommunityRead .TitleBox {
-  margin: 40px 0;
-  padding-bottom: 20px;
+  margin: 150px 0 10px;
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 .CommunityRead .TitleBox h1 {
   text-align: start;
+  color: rgb(83, 212, 92);
+  font-weight: 700;
+  font-size: 35px;
+}
+
+.CommunityRead .PostInfo {
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+  margin: 10px 0;
+}
+
+.CommunityRead .PostInfo .NameAndDateBox {
+  display: flex;
+}
+
+.CommunityRead .PostInfo .NameAndDateBox .NameBox {
+  margin-right: 10px;
+}
+
+.CommunityRead .PostInfo .NameAndDateBox .DateBox span {
+  font-size: 14px;
+  vertical-align: text-bottom;
+}
+
+.CommunityRead .PostInfo .ViewAndLikeBox, .ViewBox, .LikeBox {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.CommunityRead .PostInfo .ViewAndLikeBox .ViewBox span {
+  margin: 0 10px 0 5px;
+}
+
+.CommunityRead .PostInfo .ViewAndLikeBox .LikeBox span {
+  margin-left: 3px;
+}
+
+.CommunityRead .icon_box {
+  text-align: right;
+  font-size: 20px;
+  position: relative;
+}
+
+.CommunityRead .icon_box .icon {
+  cursor: pointer;
+  
+}
+
+.CommunityRead .icon_box .EditDeleteMenu {
+  position:absolute;
+  right:-70px;
+  top:20px;
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  height: 80px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+
+.CommunityRead .EditDeleteMenu button {
+  border:none;
+  background-color: white;
+  color:rgba(0,0,0,0.5);
+  height:40px;
+}
+
+.CommunityRead .EditDeleteMenu button:first-child {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.CommunityRead .ContentBox {
+  margin-bottom: 70px;
 }
 
 .CommunityRead .ContentBox img {
   max-width: 800px;
+}
+
+.CommunityRead .ButtonBox_list {
+  margin: 20px 0 50px;
+  text-align: center;
+}
+
+.CommunityRead .ButtonBox_list button {
+  width: 60px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgb(83, 212, 92);
+  font-size:12px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color:white;
 }

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 import {Icon} from '@iconify/react';
+import './Comment.css'
 
 
 // 댓글 작성, 등록 컴포넌트
@@ -61,11 +62,10 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
   
 
   return(
-    <div>
-      <br />
-      <p><Icon icon="f7:ellipses-bubble" />
+    <div className='Comment'>
+      {/* 댓글 갯수 표현 */}
+      <p className='comment_cnt'><Icon icon="f7:ellipses-bubble" />
             <span>{commentCount}</span></p>
-      <hr />
       {/* 댓글 목록이 담긴 배열 commentLists를 map함수를 이용해 새로운 배열로 반환 */}
       {commentLists && commentLists.map((comment) => (
         // !comment.responseTo: 답글이 아닌 원본 댓글만 리렌더링
@@ -79,14 +79,13 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
       ))}
 
       {/* 댓글 작성, 등록 폼 */}
-      <form style ={{display: 'flex'}} onSubmit={onSubmit} >
-        <textarea 
-          style={{width: '100%', borderRadius: '5px'}}
+      <form onSubmit={onSubmit} className='comment_form comment_form_origin'>
+        <textarea className='comment_content'
           onChange={onCommentHandle}
           value={comment}
           placeholder='댓글을 작성해 보세요.'/>
         <br />
-        <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>댓글 등록</button>
+        <button className='btn_submit' onClick={onSubmit}>댓글 등록</button>
       </form>
     </div>
   )

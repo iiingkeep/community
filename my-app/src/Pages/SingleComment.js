@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formattedDateAndTime } from "../Util/utils";
+import './SingleComment.css'
 
 // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
 const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateComment, deleteComment}) => {
@@ -128,40 +129,47 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     };
     
     return (
-      <div>
-        <div>
-          {comment.username}
+      <div className='Comment'>
+        <div className='comment_single'>
           {isEditing ? ( // 수정 상태일 때 폼 출력
-          <form onSubmit={onUpdateComment}>
-            <textarea value={commentValue} onChange={onHandleCommentChange} />
+          <form className='comment_form' onSubmit={onUpdateComment}>
+            {comment.username}
+            <textarea className='comment_content' value={commentValue} onChange={onHandleCommentChange} />
+            <div className='btn_box'>
             <button type="submit">등록</button>
             <button type="button" onClick={handleCancel}>취소</button>
+            </div>
           </form>
         ) : (
-          <>
+          <div className='single_comment_box'>
+            <div className='name_date_box'>
+            {comment.username}
+            <p className='date_box'>{formattedDateAndTime(comment.createdAt)}</p>
+            </div>
+            <div className='content_box'>
             {comment.content}
-            {formattedDateAndTime(comment.createdAt)}
-            <span onClick={onClickReplyOpen}> --답글 달기</span>
+            </div>
+            <span className='btn_reply' onClick={onClickReplyOpen}> 답글 달기</span>
             {userid === comment.userid && (
               <>
                 <button onClick={handleEdit}>수정</button>
                 <button onClick={onDeleteComment}>삭제</button>
               </>
             )}
-          </>
+          </div>
         )}
       </div>
       {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
+      <div className='Comment'>
       {openReply && 
-          <form style ={{display: 'flex'}} onSubmit={onReplySubmit} >
-          <textarea 
-            style={{width: '100%', borderRadius: '5px'}}
+          <form onSubmit={onReplySubmit} className='comment_form'>
+          <textarea className='comment_content'
             onChange={onHandleChange}
             value={commentValue}
             placeholder='답글을 작성해 보세요.'/>
-          <br />
-          <button style={{ width: '20%', height: '52px' }} onClick={onReplySubmit}>답글 등록</button>
+          <button className='btn_submit' onClick={onReplySubmit}>답글 등록</button>
         </form>}
+        </div>
 
       
     </div>

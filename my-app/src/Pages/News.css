@@ -4,7 +4,7 @@
 }
 
 /* 상단 NEWS FEED */
-h1 {
+.newsPage h1 {
   text-align: center;
   cursor: pointer;
   text-decoration: none;

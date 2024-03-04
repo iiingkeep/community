@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import ReactQuill from "react-quill";
+import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import ImageResize from "quill-image-resize-module-react";
 
 // 등록된 게시글 수정 컴포넌트
 const CommunityEdit = ({userid}) => {
@@ -12,6 +13,8 @@ const CommunityEdit = ({userid}) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(1);
+
+  const quillRef = useRef(null);
 
   // 서버의 다음 엔드포인트로 상세 게시글의 제목과 본문 데이터를 불러오기 위한 GET요청
   useEffect(() => {
@@ -41,6 +44,52 @@ const CommunityEdit = ({userid}) => {
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
   };
+
+  // quill-editor 사용 시 이미지가 base64 형태로 저장되어 DB에 데이터가 들어가지 않는 현상 방지를 위한 이미지 처리 핸들러
+ // 따로 생성한 input에서 이미지를 받아 서버로 보내면 서버에서 이미지 src를 url로 변환 후 그 값을 받아와 에디터에 이미지가 나타나게끔 설정
+ const imageHandler = () => {
+
+  console.log('에디터에서 이미지 버튼을 클릭하면 이 핸들러가 시작됩니다!');
+
+  // 이미지를 저장할 input type=file DOM을 만든다.
+  const input = document.createElement('input');
+  // input의 속성 지정
+  input.setAttribute('type', 'file');
+  input.setAttribute('accept', 'image/*');
+  // 에디터의 이미지버튼 클릭 시 이 input이 클릭되도록 설정.
+  // input이 클릭되면 파일 선택창 표시
+  input.click(); 
+
+  // input요소 값이 변할 경우(이미지를 선택했을 때) 이벤트 헨들러 함수 호출
+  input.addEventListener('change', async () => {
+    // 선택한 파일 중 첫 번째 파일 할당
+    const file = input.files[0];
+    // multer에 맞는 형식으로 데이터 생성
+    // formData는 key-value구조로, key는 img, value는 선택된 파일로 설정하여 추가
+    const formData = new FormData();
+    formData.append('img', file); 
+
+    // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
+    try {
+      const result = await axios.post('http://localhost:8000/img', formData);
+      console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
+
+      // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
+      // 이 url을 img 태그의 src에 넣어 에디터의 커서에 삽입 시 에디터 내 이미지 출력
+      const IMG_URL = result.data.url;
+
+      // 에디터에 이미지 태그 넣기
+      // useRef를 이용해 에디터 객체 선택
+      const editor = quillRef.current.getEditor();
+      // 현재 에디터 커서 위치값 가져오기
+      const range = editor.getSelection();
+      // 가져온 위치에 이미지를 삽입
+      editor.insertEmbed(range.index, 'image', IMG_URL);
+    } catch (error) { //에러 발생 시 알림
+      console.log('failed');
+    }
+  });
+};
 
 
   // 등록버튼 클릭 시 호출되는 핸들러 함수
@@ -85,8 +134,14 @@ const CommunityEdit = ({userid}) => {
     }
   }
 
-  // quill editor의 module과 format 설정
-  const modules = {
+  // quill 에디터 이용을 위한 modules와 formats 설정
+  // modules: 에디터의 여러 기능 활성화 또는 비활성화
+  // formats: 텍스트 스타일링과 형식 정의
+  Quill.register("modules/imageResize", ImageResize);
+  // modules설정. toolbar와 imageResize 모듈 사용.
+  //useMemo를 이용해 이전 값을 기억해 성능 최적화.
+  const modules = useMemo(() => {
+    return {
     toolbar: {
       container: [
         [{ header: [1, 2, 3, 4, 5, false] }],
@@ -100,8 +155,21 @@ const CommunityEdit = ({userid}) => {
         ["link", "image"],
         [{ align: [] }, { color: [] }, { background: [] }]
       ],
+      handlers : {image: imageHandler,},
+    },
+    // 이미지 크기를 조절하기 위한 모듈
+    // parchment를 import하여 imageRiseze모듈이 이미지 처리하는 방식 지정
+    imageResize: {
+      parchment: Quill.import("parchment"),
+      // imageResize module의 구성
+      // Resize: 이미지 선택시 크기 조절 핸들이 나타나 크기 조절 가능
+      // DisplaySize: 이미지 선택시 이미지의 현재 크기 표시
+      // Toolbar: 툴바에 이미지 리사이즈 관련 버튼 생성
+      modules: [
+        "Resize", "DisplaySize", "Toolbar"],
     },
   };
+  },[]);
   const formats = [
     "header",
     "bold",
@@ -140,6 +208,7 @@ const CommunityEdit = ({userid}) => {
         {/* 내용 입력을 위한 react-quill 에디터 설정 */}
         <div className='ContentBox'>
           <ReactQuill
+          ref={quillRef}
             style={{ width: "800px", height: "400px", margin: "100px auto 50px" }}
             modules={modules}
             formats={formats}

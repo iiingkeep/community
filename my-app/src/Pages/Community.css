@@ -2,13 +2,10 @@
   margin: 0
 }
 
-.PostListBox{
-  width:inherit;
-  margin: 50px 0;
-}
 .CategoryBox {
   width:30%;
-  margin: 10px auto;
+  margin: 30px auto;
+  text-align: center;
 }
 .CategoryBox button{
   border:none;
@@ -29,6 +26,7 @@
   justify-content: center;
   margin-top: 20px;
 }
+
 
 .SearchBoxExceptButton {
   display: flex;
@@ -58,6 +56,11 @@
   border: none;
   padding: 10px;
   color:white;
+}
+
+.PostListBox{
+  width:inherit;
+  margin: 10px 0;
 }
 
 .PostListBox ul {
@@ -94,19 +97,24 @@
 }
 
 .PostListBox li .TitleBox {
-  width: 500px;
-  text-align: start;
+  width: 530px;
   font-size: 20px;
   margin: 20px 0 0 0;
 }
 
 .PostListBox li .TitleBox .Title {
   margin-bottom: 10px;
+  font-weight: 500;
+  color: rgb(83, 212, 92);
 }
 
 .PostListBox li .TitleBox .Content {
   font-size: 14px;
   color: black;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .PostListBox li .PostDetailBox {
@@ -114,18 +122,21 @@
   align-items: center;
   position:absolute;
   bottom: 10px;
+  font-size: 13px;
+}
+
+.PostListBox li .PostDetailBox .icon {
+  font-size:15px;
 }
 
 .PostListBox li .Username {
   width: 60px;
-  text-align: start;
 }
 
-.PostListBox li .View, .Like, .Comment {
+.PostListBox li .View, .PostListBox li .Like, .PostListBox li .Comment {
   display: flex;
   align-items: center;
   width: 65px;
-  text-align: start;
 }
 
 
@@ -134,15 +145,25 @@
 }
 
 .PostListBox li .Like span {
-  margin: 0 5px 0 5px;
+  margin: 0 0 0 3px;
 }
 
 .PostListBox li .Comment span {
-  margin: 0 0 0 5px;
+  margin: 0 0 0 3px;
 }
 
 .PostListBox li .DateTime {
   width: 100px;
+  text-align: center;
 }
 
+.WriteButtonBox {
+  width:800px;
+  margin: 20px auto 0;
+  text-align: right;
+}
+
+.WriteButtonBox button {
+  width: 64px;
+}
 

@@ -177,6 +177,7 @@ const Main = () => {
 
   return (
     <div className="wrap">
+      <div className="Main2"></div>
       <div className="Main">
         <div className="LeftSection">
           {/* 로그인 구역 */}
