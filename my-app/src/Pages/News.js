@@ -229,7 +229,7 @@ const NewsItem = () => {
         <div className="search">
           <input
             type="text"
-            placeholder=" 뉴스 검색"
+            placeholder="뉴스 검색"
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
