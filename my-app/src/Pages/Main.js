@@ -41,6 +41,7 @@ const Main = () => {
   //         sessionStorage.setItem("userData", JSON.stringify(userData)); // 0210 상호형 추가 세션에 userNumber,username추가
   //         //Application에 세션스토리지 안에서 정보를 출력한다
 
+<<<<<<< HEAD
   //         navigate("/");
   //         window.location.reload(); //0210 상호형 추가 페이지를강제로 리로드
   //       } else {
@@ -105,6 +106,70 @@ const Main = () => {
   //   }
   // }
   // //------------------------로그인 끝----------------
+=======
+          navigate("/");
+          window.location.reload(); //0210 상호형 추가 페이지를강제로 리로드
+        } else {
+          // 로그인 실패 시 처리
+          console.log("로그인 실패:", response.data);
+          setloginStatus("로그인 실패: " + response.data.message);
+        }
+      });
+  };
+  // 로그아웃
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("loggedIn");
+    setLoggedIn(false);
+    navigate("/");
+    window.location.reload();
+  };
+
+  const renderContent = () => {
+    if (!loggedIn) {
+      // 로그인이 안되어 있는 경우
+      return (
+        <>
+          {/* 로그인 아이디, 비밀번호 입력 폼 */}
+          <input
+            id="id"
+            type="text"
+            placeholder="아이디"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <div className="loginButtonArea">
+            {/* 로그인 버튼 */}
+            <button onClick={LoginPageJs}>로그인</button>
+            {/* 회원가입 링크 */}
+            <button onClick={() => navigate("/Register")}>회원가입</button>
+          </div>
+          {loginStatus && <div>{loginStatus}</div>}
+        </>
+      );
+    } else {
+      // 로그인이 되어 있는 경우
+      return (
+        <>
+          <p>마이페이지</p>
+          {/* 로그아웃 버튼 */}
+          <button className="Btn" onClick={handleLogout}>
+            로그아웃
+          </button>
+        </>
+      );
+    }
+  };
+  //------------------------로그인 끝----------------
+>>>>>>> cd40f4b55f0b528664f20ac3d60699c96b38ea5d
 
   // //------------------------뉴스뉴스뉴스----------------
   // const [news, setNews] = useState([]);
@@ -179,7 +244,57 @@ const Main = () => {
 
   return (
     <div className="wrap">
+<<<<<<< HEAD
       
+=======
+      <div className="Main2"><img src="7.jpg"></img></div>
+      <div className="Main">
+        <div className="LeftSection">
+          {/* 로그인 구역 */}
+          <div className="LoginBox">
+            <p>로그인</p>
+            {renderContent()}
+          </div>
+          {/* 로그인 구역 끝 */}
+          <div className="CloudBox">
+            <img
+              className=""
+              src="./wc_image/result.png"
+              alt="wordcloud_img"
+              style={{ width: "300px", height: "300px" }}
+            />
+            <button className="wcDownload" onClick={handleDownload}>
+              이미지 다운로드
+            </button>
+          </div>
+        </div>
+        <div className="RightSection">
+          <div className="CommunityBox">커뮤니티</div>
+          <div className="NewsBox">
+            <a href="/news">환경이슈</a>
+            <ul>
+              {topFiveNews.map((item) => (
+                <li key={item.newsid}>
+                  <img
+                    src={item.image_url}
+                    alt="뉴스 썸네일"
+                    onClick={() => handleClick(item)}
+                  />
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleClick(item)}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+>>>>>>> cd40f4b55f0b528664f20ac3d60699c96b38ea5d
     </div>
   );
 };
