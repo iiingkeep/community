@@ -23,7 +23,6 @@
   background-repeat: no-repeat;
   background-size: 400px 400px;
   background-position: ; */
-
 }
 
 .Main .LeftSection {
@@ -36,12 +35,12 @@
   height: 330px;
 }
 
-.Main .LeftSection .LoginBox {
+.Main .LeftSection .login_box {
   height: 30%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
-.Main .LeftSection .CloudBox {
+.Main .LeftSection .cloud_box {
   height: 140px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
@@ -52,7 +51,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
-.Main .RightSection .NewsBox {
+.Main .RightSection .news_box {
   width: 50%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -68,7 +67,7 @@
 }
 
 /* 로그인 */
-.LoginBox button {
+.login_box button {
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
   border: none;
@@ -78,13 +77,13 @@
   margin: 0 15px;
 }
 
-.LoginBox input {
-  border: 2px solid #C4C4C4;
+.login_box input {
+  border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
   padding: 8px;
   padding-left: 15px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-size: 14px;
   line-height: 16px;
@@ -93,21 +92,21 @@
   height: 40px;
 }
 
-.LoginBox input:hover,
-.LoginBox input:focus {
+.login_box input:hover,
+.login_box input:focus {
   border: 2px solid rgb(83, 212, 92);
   box-sizing: border-box;
   border-radius: 20px;
   outline: 3px solid #ffffff;
 }
 
-.loginButtonArea {
+.login_button_area {
   display: flex;
   justify-content: center;
 }
 
 /* 워드클라우드 이미지 다운로드 버튼 */
-.wcDownload {
+.wc_download {
   width: 130px;
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
@@ -118,59 +117,60 @@
 }
 
 /* --------------뉴스-------------- */
-.NewsBox {
+.news_box {
   font-size: 13px;
   margin-left: 10px;
   padding-left: 0px;
   padding-top: 5px;
 }
 
-.NewsBox > a:link {
+.news_box > a:link {
   font-size: 16px;
   color: black;
+  text-decoration-line: none;
 }
 
-.NewsBox > a:hover {
+.news_box > a:hover {
   font-weight: bolder;
 }
 
-.NewsBox > a:visited {
+.news_box > a:visited {
   color: black;
 }
 
-.NewsBox ul {
+.news_box ul {
   margin: 0 auto;
   padding: 15px;
 }
 
-.NewsBox li {
+.news_box li {
   margin-left: 5px;
   margin-bottom: 5px;
   display: flex;
   text-align: left;
 }
 
-.NewsBox li img {
+.news_box li img {
   cursor: pointer;
   margin-right: 10px;
   width: 15%;
   height: 50px;
 }
 
-.NewsBox li a {
+.news_box li a {
   width: 85%;
 }
 
-.NewsBox li a:link {
+.news_box li a:link {
   color: rgb(0, 0, 0);
   text-decoration-line: none;
 }
 
-.NewsBox li a:hover {
+.news_box li a:hover {
   font-weight: bolder;
 }
 
-.NewsBox li a:visited {
+.news_box li a:visited {
   color: rgb(190, 190, 190);
 }
 /* --------------뉴스 끝-------------- */
