@@ -216,7 +216,7 @@ const NewsItem = () => {
   };
 
   return (
-    <div className="newsPage">
+    <div className="news_page">
       <Link to="/news">
         <h1>
           <strong>
@@ -225,11 +225,11 @@ const NewsItem = () => {
         </h1>
       </Link>
       {/* 검색 */}
-      <div className="searchLine">
+      <div className="search_line">
         <div className="search">
           <input
             type="text"
-            placeholder=" 뉴스 검색"
+            placeholder="뉴스 검색"
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleKeyDown}
@@ -245,9 +245,9 @@ const NewsItem = () => {
         </select>
       </div>
       {/* 뉴스 목록 */}
-      <ul className="newsList">
+      <ul className="news_list">
         {currenPosts.map((item) => (
-          <div className="newsListBox">
+          <div className="news_list_box">
             <li key={item.newsid}>
               {/* 썸네일 */}
               <img
@@ -266,10 +266,11 @@ const NewsItem = () => {
               </a>
               {/* 조회수 */}
               <p id="views">
-                <Icon icon="fluent-mdl2:view" />{item.views}
+                <Icon icon="fluent-mdl2:view" />
+                {item.views}
               </p>
               {/* 좋아요 */}
-              <div className="likeButton">
+              <div className="like_button">
                 <button
                   onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
                 >
@@ -282,15 +283,15 @@ const NewsItem = () => {
         ))}
       </ul>
       {/* 페이지네이션 */}
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={articlesPerPage}
-        totalItemsCount={filteredNews.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handleChangePage}
-      />
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={articlesPerPage}
+          totalItemsCount={filteredNews.length}
+          pageRangeDisplayed={5}
+          prevPageText={"<"}
+          nextPageText={">"}
+          onChange={handleChangePage}
+        />
     </div>
   );
 };

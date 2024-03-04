@@ -80,7 +80,7 @@ const Main = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <div className="loginButtonArea">
+          <div className="login_button_area">
             {/* 로그인 버튼 */}
             <button onClick={LoginPageJs}>로그인</button>
             {/* 회원가입 링크 */}

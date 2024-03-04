@@ -1,29 +1,27 @@
 /* 전체 div */
-.newsPage {
+.news_page {
   margin: 0 auto;
 }
 
 /* 상단 NEWS FEED */
-.newsPage h1 {
+.news_page h1 {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
   text-shadow: 3px 4px 4px gray;
 }
 
-/* 상단, 페이지네이션에 적용됨 */
-a:link {
+.news_page a:link {
   color: rgb(83, 212, 92);
   text-decoration-line: none;
 }
 
-/* 상단, 페이지네이션에 적용됨 */
-a:visited {
+.news_page a:visited {
   color: rgb(83, 212, 92);
 }
 
 /* 검색, 정렬 있는 줄 */
-.searchLine {
+.search_line {
   display: flex;
   justify-content: space-between;
   width: 850px;
@@ -38,11 +36,12 @@ a:visited {
 
 /* 검색 인풋 */
 .search input {
-  border: 2px solid #C4C4C4;
+  border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
   padding: 8px;
-  font-family: 'Roboto';
+  padding-left: 15px;
+  font-family: "Roboto";
   font-style: normal;
   font-size: 14px;
   line-height: 16px;
@@ -78,11 +77,11 @@ a:visited {
 .sorted {
   width: 130px;
   height: 40px;
-  border: 2px solid #C4C4C4;
+  border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
   padding: 6px 6px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-size: 14px;
   line-height: 16px;
@@ -96,11 +95,11 @@ a:visited {
 }
 
 /* 뉴스 목록 */
-.newsList {
+.news_list {
   padding: 0;
 }
 
-.newsList li {
+.news_list li {
   margin-bottom: 30px;
   display: flex;
   height: 115px;
@@ -112,20 +111,20 @@ a:visited {
 }
 
 /* 뉴스 목록 */
-.newsList li * {
+.news_list li * {
   height: 100px;
   margin-right: 30px;
 }
 
 /* 뉴스 썸네일 */
-.newsList li img {
+.news_list li img {
   cursor: pointer;
   width: 140px;
   box-sizing: border-box;
 }
 
 /* 뉴스 제목 */
-.newsList li a {
+.news_list li a {
   display: flex;
   width: 300px;
   align-items: center;
@@ -134,23 +133,23 @@ a:visited {
 }
 
 /* 방문 전 제목 */
-.newsList li a:link {
+.news_list li a:link {
   color: rgb(0, 0, 0);
   text-decoration-line: none;
 }
 
 /* 제목 hover */
-.newsList li a:hover {
+.news_list li a:hover {
   font-weight: bolder;
 }
 
 /* 방문 후 제목 */
-.newsList li a:visited {
-  color: rgb(190, 190, 190)
+.news_list li a:visited {
+  color: rgb(190, 190, 190);
 }
 
 /* 뉴스 조회수, 날짜 */
-.newsList li p {
+.news_list li p {
   margin: 0px 30px 0px 0px;
   display: flex;
   width: 100px;
@@ -162,7 +161,7 @@ a:visited {
   text-align: center;
 }
 
-.likeButton {
+.like_button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,7 +169,7 @@ a:visited {
 }
 
 /* 뉴스 좋아요 버튼 */
-.newsList li button {
+.news_list li button {
   margin: 0 auto;
   display: flex;
   width: 30px;
@@ -181,39 +180,9 @@ a:visited {
   border-radius: 50px 50px 50px 50px;
 }
 
-.newsListBox {
+.news_list_box {
   margin: 0 auto;
   width: 850px;
   height: 130px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-
-/* 페이지네이션 */
-.pagination {
-  margin-top: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination li {
-  list-style: none;
-  margin-right: 30px;
-  /* 가로 배치 */
-  display: inline-block;
-}
-
-/* 페이지네이션 현재 페이지 */
-.pagination .active {
-  font-weight: bold;
-  font-size: x-large;
-}
-
-.pagination a:link {
-  color: black;
-}
-
-.pagination a:hover {
-  color: rgb(83, 212, 92);
-}
-
