@@ -43,7 +43,7 @@ function Footer() {
     return (
         <footer className="Footer">
             <div className="FooterLayer1">
-                <div className="layerWrap">
+                <div className="LayerWrap">
                     <ul className="FooterLink">
                         <li>
                         <a>이용약관</a>
@@ -58,10 +58,16 @@ function Footer() {
                         <a>저작권정책</a>
                         </li>
                     </ul>
-                </div>
-                <div className="LayerDivWrap">
+                    <div className="LayerDivWrap">
+                        <ul className="FooterLinkDivWrap">
+                    <li>
                     <a>공지사항</a>
+                    </li>
+                    <li>
                     <a>FAQ</a>
+                    </li>
+                    </ul>
+                </div>
                 </div>
             </div>
             <div className="FooterLayer2">
@@ -97,7 +103,7 @@ function Footer() {
                 </div>
             </div>
             <div className="FooterLayer3">
-                <span>FooterIsNarrowed</span>
+                {/* <span>FooterIsNarrowed</span> */}
             </div>
         </footer>
     );
