@@ -188,32 +188,4 @@ a:visited {
   border-bottom: 1px solid black;
 }
 
-/* 페이지네이션 */
-.pagination {
-  margin-top: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination li {
-  list-style: none;
-  margin-right: 30px;
-  /* 가로 배치 */
-  display: inline-block;
-}
-
-/* 페이지네이션 현재 페이지 */
-.pagination .active {
-  font-weight: bold;
-  font-size: x-large;
-}
-
-.pagination a:link {
-  color: black;
-}
-
-.pagination a:hover {
-  color: rgb(83, 212, 92);
-}
 

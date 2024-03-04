@@ -266,7 +266,8 @@ const NewsItem = () => {
               </a>
               {/* 조회수 */}
               <p id="views">
-                <Icon icon="fluent-mdl2:view" />{item.views}
+                <Icon icon="fluent-mdl2:view" />
+                {item.views}
               </p>
               {/* 좋아요 */}
               <div className="likeButton">
@@ -282,15 +283,15 @@ const NewsItem = () => {
         ))}
       </ul>
       {/* 페이지네이션 */}
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={articlesPerPage}
-        totalItemsCount={filteredNews.length}
-        pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
-        onChange={handleChangePage}
-      />
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={articlesPerPage}
+          totalItemsCount={filteredNews.length}
+          pageRangeDisplayed={5}
+          prevPageText={"<"}
+          nextPageText={">"}
+          onChange={handleChangePage}
+        />
     </div>
   );
 };
