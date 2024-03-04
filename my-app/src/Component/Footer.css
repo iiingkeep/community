@@ -1,3 +1,9 @@
+.Footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
 .FooterContent {
     display: flex; 
     justify-content: center;
@@ -12,10 +18,36 @@
 
 .FooterLayer1 {
     border-bottom: #ddd solid 1px;
-    height: 34px;
+    height: 3rem;
     text-align: center;
     padding-top: 15px;
     white-space: nowrap;
+}
+
+.layerWrap {
+    width: 800px;
+    padding-left: 5%;
+    margin-right: 10%;
+
+}
+
+.FooterLink {
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+
+.FooterLink > li {
+    border-left: 2px solid; 
+    padding-left: 3%;
+}
+
+.LayerDivWrap {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
 }
 
 .FooterLayer3 {
@@ -36,6 +68,7 @@
 }
 
 .leftContent {
+    height:3rem;
     line-height: 1.27rem;
     font-weight:700;
 }
@@ -75,7 +108,7 @@
 .labelList .list {
     visibility: hidden;
     overflow: hidden;
-    top: -300%;
+    /* top: -300%; */
     width: 172.28px;
     /* height: 0 auto; */
     opacity: 1;
