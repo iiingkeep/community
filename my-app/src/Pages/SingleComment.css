@@ -1,0 +1,41 @@
+.comment_single {
+  padding: 30px 0;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.Comment .comment_form .btn_box {
+  width: 15%;
+}
+
+.Comment .comment_form .btn_box button {
+  width: 46%;
+  height: 50px;
+  background-color: rgb(83, 212, 92);
+  font-size:12px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color:white;
+}
+
+.Comment .comment_form .btn_box button:first-child {
+  margin-right: 5px;
+}
+
+.single_comment_box .name_date_box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+
+
+.single_comment_box .content_box {
+  margin-bottom: 10px;
+}
+
+.single_comment_box .btn_reply {
+  font-size: 14px;
+  color:rgba(0,0,0,0.5)
+}

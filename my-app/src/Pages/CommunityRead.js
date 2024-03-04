@@ -15,6 +15,7 @@ const CommunityRead = ({loggedIn, userid}) => {
   const [comments, setComments] = useState(null);
   const [commentCount, setCommentCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
   useEffect(() => {
@@ -140,29 +141,42 @@ const CommunityRead = ({loggedIn, userid}) => {
 
   return (
     <div className='CommunityRead'>
-      <div className='PostInfo'>
-      <p>{post.username}</p>
-      <p>{formattedDateAndTime(post.createdAt)}</p>
-      <p><Icon icon="fluent-mdl2:view" />
-      <span>{post.view}</span></p>
-      <p onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
+      <div className='TitleBox'>
+        <h1>{post.title}</h1>
+        <div className='PostInfo'>
+      <div className='NameAndDateBox'>
+      <p className='NameBox'>{post.username}</p>
+      <p className='DateBox'><span>{formattedDateAndTime(post.createdAt)}</span></p>
       </div>
-      <div className='TitleBox'><h1>{post.title}</h1></div>
-      {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
-      <div className='ContentBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
-      {/* 글 작성자 본인만 게시글 수정, 삭제 버튼 보이도록 설정 */}
-      {isOwner && (
-        <div className='ButtonBox'>
+      <div className='ViewAndLikeBox'>
+      <p className='ViewBox'><Icon icon="fluent-mdl2:view" />
+      <span>{post.view}</span></p>
+      <p className='LikeBox' onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
+      </div>
+      </div>
+      </div>
+      {/* 글 작성자 본인만 게시글 수정, 삭제 가능한 메뉴 버튼 보이도록 설정 */}
+      {isOwner &&(
+      <div className='icon_box'>
+      <Icon icon="uis:ellipsis-v" className='icon' onClick={() => setIsMenuOpen(!isMenuOpen)} />
+      {isMenuOpen && ( /* 수정: 작은 박스 열린 상태일 때만 아래의 내용을 표시 */
+        <div className='EditDeleteMenu'>
           <button onClick={() => navigate(`/Community/Edit/${id}`)}>수정</button>
           <button onClick={onDeleteHandler}>삭제</button>
         </div>
       )}
+      </div>
+      )}
+      {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
+      <div className='ContentBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
+      
+
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
         <Comment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
-      <div>
+      <div className='ButtonBox_list'>
         <button onClick={() => navigate('/Community')}>목록</button>
       </div>
     </div>
