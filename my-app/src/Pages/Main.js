@@ -177,7 +177,6 @@ const Main = () => {
 
   return (
     <div className="wrap">
-      <div className="Main2"><img src="7.jpg"></img></div>
       <div className="Main">
         <div className="LeftSection">
           {/* 로그인 구역 */}
