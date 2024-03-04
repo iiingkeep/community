@@ -46,25 +46,25 @@ function Footer() {
                 <div className="LayerWrap">
                     <ul className="FooterLink">
                         <li>
-                        <a>이용약관</a>
+                        <a href="">이용약관</a>
                         </li>
                         <li>
-                        <a>개인정보처리방침</a>
+                        <a href="" className="personal">개인정보처리방침</a>
                         </li>
                         <li>
-                        <a>이메일 무단수집 거부</a>
+                        <a href="">이메일 무단수집 거부</a>
                         </li>
                         <li>
-                        <a>저작권정책</a>
+                        <a href="">저작권정책</a>
                         </li>
                     </ul>
                     <div className="LayerDivWrap">
                         <ul className="FooterLinkDivWrap">
                     <li>
-                    <a>공지사항</a>
+                    <a href="">공지사항</a>
                     </li>
                     <li>
-                    <a>FAQ</a>
+                    <a href="">FAQ</a>
                     </li>
                     </ul>
                 </div>
