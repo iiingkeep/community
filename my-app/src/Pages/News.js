@@ -216,7 +216,7 @@ const NewsItem = () => {
   };
 
   return (
-    <div className="newsPage">
+    <div className="news_page">
       <Link to="/news">
         <h1>
           <strong>
@@ -225,7 +225,7 @@ const NewsItem = () => {
         </h1>
       </Link>
       {/* 검색 */}
-      <div className="searchLine">
+      <div className="search_line">
         <div className="search">
           <input
             type="text"
@@ -245,9 +245,9 @@ const NewsItem = () => {
         </select>
       </div>
       {/* 뉴스 목록 */}
-      <ul className="newsList">
+      <ul className="news_list">
         {currenPosts.map((item) => (
-          <div className="newsListBox">
+          <div className="news_list_box">
             <li key={item.newsid}>
               {/* 썸네일 */}
               <img
@@ -270,7 +270,7 @@ const NewsItem = () => {
                 {item.views}
               </p>
               {/* 좋아요 */}
-              <div className="likeButton">
+              <div className="like_button">
                 <button
                   onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
                 >
