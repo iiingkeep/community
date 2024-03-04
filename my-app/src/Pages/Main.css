@@ -5,9 +5,6 @@
 .wrap {
   width: 100vw;
   height: 90vh;
-  background-color: rgb(17, 28, 65);
-  background-image: url('../../../server/public/backgroundimg/earth4.png');
-  background-size: 100vw 100vh;
   /* background-image: url('../../../server/public/backgroundimg/main_icon1.png'), url('../../../server/public/backgroundimg/main_icon2.png'), url('../../../server/public/backgroundimg/main_icon3.png') ; */
   /* background-repeat: no-repeat;
   background-size:  200px 200px, 200px 200px, 200px 200px ;
@@ -21,15 +18,10 @@
   margin-top: 10vh;
   margin-bottom: 0;
   display: flex;
-<<<<<<< HEAD
-  
-=======
-  background-color: rgb(169,250,254);
   /* background-image: url('../../../server/public/backgroundimg/planet.png');
   background-repeat: no-repeat;
   background-size: 400px 400px;
   background-position: ; */
->>>>>>> cd40f4b55f0b528664f20ac3d60699c96b38ea5d
 
 }
 
