@@ -1,3 +1,7 @@
+.Comment {
+  position: relative;
+}
+
 .Comment .comment_cnt {
   display: flex;
   align-items: center;
@@ -43,4 +47,10 @@
   border: none;
   padding: 10px;
   color:white;
+}
+
+
+
+.SingleCommentBox {
+  position: relative;
 }

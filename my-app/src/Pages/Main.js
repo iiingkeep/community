@@ -176,51 +176,66 @@ const Main = () => {
   //------------------------워드클라우드 끝----------------
 
   return (
-    <div className="wrap">
-      <div className="Main2"></div>
-      <div className="Main">
-        <div className="LeftSection">
-          {/* 로그인 구역 */}
-          <div className="LoginBox">
-            <p>로그인</p>
-            {renderContent()}
+    <div className="MainBody">
+      <div className="wrap">
+        <div className="section s1">
+          <div className="slogan_box">
+            <p>Bring Back</p>
+            <p>A</p>
+            <p>Natural ,</p>
+            <p>Green environment</p>
           </div>
-          {/* 로그인 구역 끝 */}
-          <div className="CloudBox">
-            <img
-              className=""
-              src="./wc_image/result.png"
-              alt="wordcloud_img"
-              style={{ width: "300px", height: "300px" }}
-            />
-            <button className="wcDownload" onClick={handleDownload}>
-              이미지 다운로드
-            </button>
-          </div>
+          <img
+            src="/background_img/earth9.png"
+            className="earth"
+            alt="지구 이미지"
+          />
         </div>
-        <div className="RightSection">
-          <div className="CommunityBox">커뮤니티</div>
-          <div className="NewsBox">
-            <a href="/news">환경이슈</a>
-            <ul>
-              {topFiveNews.map((item) => (
-                <li key={item.newsid}>
-                  <img
-                    src={item.image_url}
-                    alt="뉴스 썸네일"
-                    onClick={() => handleClick(item)}
-                  />
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleClick(item)}
-                  >
-                    {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        <div className="section s2"></div>
+        <div className="section s3">
+          <div className="LeftSection">
+            {/* 로그인 구역 */}
+            <div className="LoginBox">
+              <p>로그인</p>
+              {renderContent()}
+            </div>
+            {/* 로그인 구역 끝 */}
+            <div className="CloudBox">
+              <img
+                className=""
+                src="./wc_image/result.png"
+                alt="wordcloud_img"
+                style={{ width: "300px", height: "300px" }}
+              />
+              <button className="wcDownload" onClick={handleDownload}>
+                이미지 다운로드
+              </button>
+            </div>
+          </div>
+          <div className="RightSection">
+            <div className="CommunityBox">커뮤니티</div>
+            <div className="NewsBox">
+              <a href="/news">환경이슈</a>
+              <ul>
+                {topFiveNews.map((item) => (
+                  <li key={item.newsid}>
+                    <img
+                      src={item.image_url}
+                      alt="뉴스 썸네일"
+                      onClick={() => handleClick(item)}
+                    />
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleClick(item)}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

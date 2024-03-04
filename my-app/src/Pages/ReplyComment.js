@@ -28,7 +28,7 @@ const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteC
       <React.Fragment key={index}>
       { //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 그 답글에 다시 답글을 달고 표시할 수 있도록 SingleComment와 ReplyComment 컴포넌트 렌더링
         comment.responseTo === parentCommentId &&
-      <div style={{width: '80%', marginLeft: '40px'}}>
+      <div style={{marginLeft: '40px'}}>
         <SingleComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId}/>
         <ReplyComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
         </div>

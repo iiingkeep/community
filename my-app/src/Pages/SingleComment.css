@@ -62,7 +62,6 @@
   font-size: 14px;
   color:rgba(0,0,0,0.5);
   cursor: pointer;
-  position: relative;
 }
 
 .single_comment_box .btn_edit_delete {

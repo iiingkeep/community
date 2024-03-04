@@ -1,17 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+
 * {
   box-sizing: border-box;
 }
 
+.MainBody {
+}
+
 .wrap {
-  width: 100vw;
-  height: 90vh;
+  height: 100vh;
   /* background-image: url('../../../server/public/backgroundimg/main_icon1.png'), url('../../../server/public/backgroundimg/main_icon2.png'), url('../../../server/public/backgroundimg/main_icon3.png') ; */
   /* background-repeat: no-repeat;
   background-size:  200px 200px, 200px 200px, 200px 200px ;
   background-position: 25% 60%, 50% 60%, 75% 60%; */
 }
 
-.Main {
+.wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.s1 {
+  background-color: rgb(34, 56, 117);
+  position: relative;
+}
+
+.s1 .slogan_box {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 80px;
+  color:white;
+  position: absolute;
+  left: 5%;
+  z-index: 1;
+}
+
+.s1 .earth {
+  width: 600px;
+  height: 600px;
+  position: sticky;
+  bottom: 10%;
+  left: 50%;
+  z-index:0;
+}
+
+.s2 {
+  background-color: bisque;
+}
+
+.s3 {
+  background-color: rgb(255, 255, 255);
   width: 80%;
   height: 90vh;
   margin: 30px auto;
@@ -25,11 +70,11 @@
 
 }
 
-.Main .LeftSection {
+.s3 .LeftSection {
   width: 25%;
   margin: 0 30px;
 }
-.Main .RightSection {
+.s3 .RightSection {
   width: 75%;
   display: flex;
   height: 330px;

@@ -1,6 +1,7 @@
 .ReplyComment .reply_comment__view {
     font-size: 14px;
     color: rgba(0,0,0,0.5);
-    position: absolute;
-    left: 50px;
+    left: 65px;
+    top: 153px;
+    cursor: pointer;
 }
