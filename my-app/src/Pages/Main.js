@@ -80,7 +80,7 @@ const Main = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <div className="login_button_area">
+          <div className="main-login-form__button">
             {/* 로그인 버튼 */}
             <button onClick={LoginPageJs}>로그인</button>
             {/* 회원가입 링크 */}
@@ -195,26 +195,29 @@ const Main = () => {
         <div className="section s3">
           <div className="LeftSection">
             {/* 로그인 구역 */}
-            <div className="LoginBox">
+            <div className="main-login-form">
               <p>로그인</p>
               {renderContent()}
             </div>
             {/* 로그인 구역 끝 */}
-            <div className="CloudBox">
+            <div className="main-wordcloud-box">
               <img
                 className=""
                 src="./wc_image/result.png"
                 alt="wordcloud_img"
                 style={{ width: "300px", height: "300px" }}
               />
-              <button className="wcDownload" onClick={handleDownload}>
+              <button
+                className="main-wordcloud__button"
+                onClick={handleDownload}
+              >
                 이미지 다운로드
               </button>
             </div>
           </div>
           <div className="RightSection">
             <div className="CommunityBox">커뮤니티</div>
-            <div className="NewsBox">
+            <div className="main-news-box">
               <a href="/news">환경이슈</a>
               <ul>
                 {topFiveNews.map((item) => (

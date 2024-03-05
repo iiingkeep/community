@@ -82,7 +82,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
-.Main .LeftSection .cloud_box {
+.Main .LeftSection .main-wordcloud-box {
   height: 140px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
@@ -93,7 +93,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
-.Main .RightSection .news_box {
+.Main .RightSection .main-news-box {
   width: 50%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -109,7 +109,7 @@
 }
 
 /* 로그인 */
-.login_box button {
+.main-login-form button {
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
   border: none;
@@ -119,7 +119,7 @@
   margin: 0 15px;
 }
 
-.login_box input {
+.main-login-form input {
   border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
@@ -134,21 +134,21 @@
   height: 40px;
 }
 
-.login_box input:hover,
-.login_box input:focus {
+.main-login-form input:hover,
+.main-login-form input:focus {
   border: 2px solid rgb(83, 212, 92);
   box-sizing: border-box;
   border-radius: 20px;
   outline: 3px solid #ffffff;
 }
 
-.login_button_area {
+.main-login-form__button {
   display: flex;
   justify-content: center;
 }
 
 /* 워드클라우드 이미지 다운로드 버튼 */
-.wc_download {
+.main-wordcloud__button {
   width: 130px;
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
@@ -159,60 +159,60 @@
 }
 
 /* --------------뉴스-------------- */
-.news_box {
+.main-news-box {
   font-size: 13px;
   margin-left: 10px;
   padding-left: 0px;
   padding-top: 5px;
 }
 
-.news_box > a:link {
+.main-news-box > a:link {
   font-size: 16px;
   color: black;
   text-decoration-line: none;
 }
 
-.news_box > a:hover {
+.main-news-box > a:hover {
   font-weight: bolder;
 }
 
-.news_box > a:visited {
+.main-news-box > a:visited {
   color: black;
 }
 
-.news_box ul {
+.main-news-box ul {
   margin: 0 auto;
   padding: 15px;
 }
 
-.news_box li {
+.main-news-box li {
   margin-left: 5px;
   margin-bottom: 5px;
   display: flex;
   text-align: left;
 }
 
-.news_box li img {
+.main-news-box li img {
   cursor: pointer;
   margin-right: 10px;
   width: 15%;
   height: 50px;
 }
 
-.news_box li a {
+.main-news-box li a {
   width: 85%;
 }
 
-.news_box li a:link {
+.main-news-box li a:link {
   color: rgb(0, 0, 0);
   text-decoration-line: none;
 }
 
-.news_box li a:hover {
+.main-news-box li a:hover {
   font-weight: bolder;
 }
 
-.news_box li a:visited {
+.main-news-box li a:visited {
   color: rgb(190, 190, 190);
 }
 /* --------------뉴스 끝-------------- */

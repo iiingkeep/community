@@ -225,8 +225,8 @@ const NewsItem = () => {
         </h1>
       </Link>
       {/* 검색 */}
-      <div className="search_line">
-        <div className="search">
+      <div className="news-search-box-line">
+        <div className="news-search-box">
           <input
             type="text"
             placeholder="뉴스 검색"
@@ -238,16 +238,16 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
-        <select className="sorted" value={sortBy} onChange={handleSortChange}>
+        <select className="news-sorted" value={sortBy} onChange={handleSortChange}>
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>
         </select>
       </div>
       {/* 뉴스 목록 */}
-      <ul className="news_list">
+      <ul className="news-list">
         {currenPosts.map((item) => (
-          <div className="news_list_box">
+          <div className="news-list-box">
             <li key={item.newsid}>
               {/* 썸네일 */}
               <img
@@ -270,7 +270,7 @@ const NewsItem = () => {
                 {item.views}
               </p>
               {/* 좋아요 */}
-              <div className="like_button">
+              <div className="news-like__button">
                 <button
                   onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
                 >
