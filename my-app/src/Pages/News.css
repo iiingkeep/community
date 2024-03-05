@@ -9,6 +9,7 @@
   cursor: pointer;
   text-decoration: none;
   text-shadow: 3px 4px 4px gray;
+  margin-bottom: 15px;
 }
 
 .news_page a:link {
@@ -97,6 +98,7 @@
 /* 뉴스 목록 */
 .news-list {
   padding: 0;
+  margin-top: 15px;
 }
 
 .news-list-box li {
