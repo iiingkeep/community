@@ -88,47 +88,34 @@ app.get("/", (req, res) => res.send(`Hell'o World!`));
 //------------------------이주호 추가
 const execPromise = util.promisify(exec); // exec함수를 Promise(비동기) 방식으로 변환
 
+// 스케줄 함수 정의
+async function executePythonScript(scriptName, message) {
+  try {
+    await execPromise(`python ${scriptName}`);
+    console.log(`${message} 실행 완료`);
+  } catch (error) {
+    console.error(`오류: ${error.message}`);
+  }
+}
 // 지정시간에 파일 실행 (초(0-59), 분(0-59), 시(0-23), 일(1-31), 월(1-12), 요일(0-7))
 // * 로 표시한 경우 반복됨(e.g. * 0 6 * * * : 06시 00분 00초, 01초, 02초...59초)
 // 06시 크롤링 실행
 schedule.scheduleJob("0 0 6 * * *", async () => {
-  try {
-    await execPromise("python newsAPI.py");
-    console.log("크롤링 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+  await executePythonScript("newsAPI.py", "크롤링 파일");
 });
-
-// 06시 00분 30초 워드클라우드 실행
-schedule.scheduleJob("30 0 6 * * *", async () => {
-  try {
-    await execPromise("python newsWC.py");
-    console.log("워드클라우드 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+// 06시 00분 20초 워드클라우드 실행
+schedule.scheduleJob("20 0 6 * * *", async () => {
+  await executePythonScript("newsWC.py", "워드클라우드 파일");
 });
-
 // 18시 크롤링 실행
 schedule.scheduleJob("0 0 18 * * *", async () => {
-  try {
-    await execPromise("python newsAPI.py");
-    console.log("크롤링 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+  await executePythonScript("newsAPI.py", "크롤링 파일");
+});
+// 18시 00분 20초 워드클라우드 실행
+schedule.scheduleJob("20 0 18 * * *", async () => {
+  await executePythonScript("newsWC.py", "워드클라우드 파일");
 });
 
-// 18시 00분 30초 워드클라우드 실행
-schedule.scheduleJob("30 0 18 * * *", async () => {
-  try {
-    await execPromise("python newsWC.py");
-    console.log("워드클라우드 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
-});
 
 // DB에 있는 뉴스 데이터 가져오기
 app.get("/news", (req, res) => {
