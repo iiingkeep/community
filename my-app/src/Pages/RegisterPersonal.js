@@ -121,84 +121,86 @@ function RegisterPersonal() {
 
   return (
     <div className="regi-page">
-      <h2>회원가입</h2>
-      <input
-        type="text"
-        placeholder="사용자명"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="비밀번호"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-
-      <input
-        type="password"
-        placeholder="비밀번호 확인"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <br />
-
-      <input
-        type="text"
-        placeholder="이메일"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button
-        className="regi-email__button"
-        onClick={handleEmailDuplicationCheck}
-      >
-        이메일 확인
-      </button>
-      {/* 이메일 유효성 검사 02/14 김민호 */}
-
-      <br />
-
-      <input
-        type="text"
-        placeholder="핸드폰번호"
-        value={phonenumber}
-        onChange={(e) => setphonenumber(e.target.value)}
-      />
-
-      <br />
-      <input
-        type="text"
-        placeholder="주소"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-
-      <button className="regi-addr__button" onClick={handle.clickButton}>
-        주소 선택
-      </button>
-      {openPostcode && (
-        <DaumPostcode
-          onComplete={handle.selectAddress}
-          autoClose={false}
-          defaultQuery=""
+      <div className="regi-form">
+        <h2>회원가입</h2>
+        <input
+          type="text"
+          placeholder="사용자명"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
-      )}
-      <br />
-      <input
-        type="text"
-        placeholder="상세주소"
-        value={detailedaddress}
-        onChange={(e) => setdetailedaddress(e.target.value)}
-      />
-      <br />
-      <button className="regi-complete__button" onClick={handleRegisterClick}>
-        가입완료
-      </button>
-      <div>
-        <Link to="/Login">로그인창</Link>
+        <br />
+        <input
+          type="password"
+          placeholder="비밀번호"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+
+        <input
+          type="password"
+          placeholder="비밀번호 확인"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <br />
+
+        <input
+          type="text"
+          placeholder="이메일"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button
+          className="regi-email__button"
+          onClick={handleEmailDuplicationCheck}
+        >
+          이메일 확인
+        </button>
+        {/* 이메일 유효성 검사 02/14 김민호 */}
+
+        <br />
+
+        <input
+          type="text"
+          placeholder="핸드폰번호"
+          value={phonenumber}
+          onChange={(e) => setphonenumber(e.target.value)}
+        />
+
+        <br />
+        <input
+          type="text"
+          placeholder="주소"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+
+        <button className="regi-addr__button" onClick={handle.clickButton}>
+          주소 선택
+        </button>
+        {openPostcode && (
+          <DaumPostcode
+            onComplete={handle.selectAddress}
+            autoClose={false}
+            defaultQuery=""
+          />
+        )}
+        <br />
+        <input
+          type="text"
+          placeholder="상세주소"
+          value={detailedaddress}
+          onChange={(e) => setdetailedaddress(e.target.value)}
+        />
+        <br />
+        <button className="regi-complete__button" onClick={handleRegisterClick}>
+          가입완료
+        </button>
+        <div>
+          <Link to="/Login">로그인창</Link>
+        </div>
       </div>
     </div>
   );
