@@ -21,7 +21,7 @@
 }
 
 /* 검색, 정렬 있는 줄 */
-.news-search-box-line {
+.news-search-and-sort-box {
   display: flex;
   justify-content: space-between;
   width: 850px;
@@ -74,7 +74,7 @@
 }
 
 /* 정렬기능 */
-.news-sorted {
+.news-sort-box {
   width: 130px;
   height: 40px;
   border: 2px solid #c4c4c4;
@@ -87,7 +87,7 @@
   line-height: 16px;
 }
 
-.news-sorted:hover {
+.news-sort-box:hover {
   border: 2px solid rgb(83, 212, 92);
   box-sizing: border-box;
   border-radius: 20px;

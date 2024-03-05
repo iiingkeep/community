@@ -174,7 +174,7 @@ const CommunityWrite = ({userid}) => {
 
   return (
     <div className='CommunityWrite'>
-      <div className='CategoryBox'>
+      <div className='commu-category-box'>
         <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
         <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
         <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>

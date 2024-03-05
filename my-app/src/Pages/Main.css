@@ -6,12 +6,9 @@
 }
 
 
-.wrap {
-  height: 100vh;
-  /* background-image: url('../../../server/public/backgroundimg/main_icon1.png'), url('../../../server/public/backgroundimg/main_icon2.png'), url('../../../server/public/backgroundimg/main_icon3.png') ; */
-  /* background-repeat: no-repeat;
-  background-size:  200px 200px, 200px 200px, 200px 200px ;
-  background-position: 25% 60%, 50% 60%, 75% 60%; */
+.inner {
+  width: 900px;
+  margin: 60px auto 100px;
 }
 
 .wrap::-webkit-scrollbar {

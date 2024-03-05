@@ -84,7 +84,7 @@ const Main = () => {
             {/* 로그인 버튼 */}
             <button onClick={LoginPageJs}>로그인</button>
             {/* 회원가입 링크 */}
-            <button onClick={() => navigate("/Register")}>회원가입</button>
+            <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
           </div>
           {loginStatus && <div>{loginStatus}</div>}
         </>

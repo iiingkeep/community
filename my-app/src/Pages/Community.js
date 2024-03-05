@@ -97,67 +97,75 @@ const getPostContentWithoutImages = (content) => {
   };
 
   return (
-    <div className="Community">
+    <div className="community-page inner">
+      <h1 className='commu-header'>커뮤니티</h1>
       {/* 게시글 카테고리 탭 */}
-      <div className='CategoryBox'>
-        <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
-        <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
-        <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>
+      <div className='commu-category-box'>
+        <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>
+        <button className={'commu-category__button' + (selectedCategory === 2 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(2)}>자유게시판</button>
+        <button className={'commu-category__button' + (selectedCategory === 3 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(3)}>고민과질문</button>
       </div>
+      <div className='commu-search-and-go-write-box'>
         {/* 검색창 */}
-      <div className='SearchBox'>
-        <div className='SearchBoxExceptButton'>
-        <select className='SearchTypeBox' value={searchType} onChange={handleSearchTypeChange}>
+      <div className='commu-search-box'>
+        <div className='commu-search-box--except-button'>
+        <select className='commu-search-box__option' value={searchType} onChange={handleSearchTypeChange}>
           <option value="title">제목</option>
           <option value="content">본문</option>
           <option value="titleAndContent">제목+본문</option>
         </select>
-        <input className='SearchQueryBox' type="text" value={searchQuery} onChange={handleSearchInputChange} />
+        <input className='commu-search-box__input' type="text" value={searchQuery} onChange={handleSearchInputChange} />
         </div>
-        <button onClick={handleSearchButtonClick}>검색</button>
+        <button className='commu-search-box__button' onClick={handleSearchButtonClick}>검색</button>
       </div>
       {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
-      <div className='WriteButtonBox'>
-        <button onClick={goCommunityWrite}>글쓰기</button>
+      <div className='commu-go-write-box'>
+        <button className='commu-go-write-box__button' onClick={goCommunityWrite}>글쓰기</button>
       </div>
+      </div>
+
       {/* 게시글 목록 출력 */}
-      <div className="PostListBox">
-      <ul>
+      <ul className='commu-post-list-box'>
         {posts.map((post) => (
-          <li key={post.postid}>
+          <li key={post.postid} className='commu-post-list'>
             <Link to={`/Community/Read/${post.postid}`}>
-            <div className="Thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
+            <div className="commu-post-list__thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             </Link>
-            <div className='PostInfoBox'>
-            <div className='TitleBox'>
+            <div className='commu-post-info-box'>
+            <div className='commu-post-list__title-and-content-and-datetime'>
+            <div className='commu-post-list__title-and-content'>
             <Link to={`/Community/Read/${post.postid}`}>
-              <p className='Title'>{post.title}</p>
-              <p className='Content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></p>
+              <p className='commu-post-list__title'>{post.title}</p>
+              <p className='commu-post-list__content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></p>
             </Link>
             </div>
-            <div className='PostDetailBox'>
-            <p className='Username'>{post.username}</p>
-            <p className='View'>
-            <Icon icon="fluent-mdl2:view" className='icon'/>
-            <span>{post.view}</span></p>
-            <p className='Like'>
-            <Icon icon="icon-park-outline:like" className='icon'/>
-            <span>{post.totalLikes}</span></p>
-            <p className='Comment'>
-            <Icon icon="f7:ellipses-bubble" className='icon'/>
-            <span>{post.commentCount}</span></p>
+            <div className='commu-post-list__datetime'>
+            <p className='commu-post-list__datetime--date'>{formattedDateAndTime(post.createdAt, 'date')}</p>
+            <p className='commu-post-list__datetime--time'>{formattedDateAndTime(post.createdAt, 'time')}</p>
             </div>
             </div>
-            <div className='DateTime'>
-            <p className='Date'>{formattedDateAndTime(post.createdAt, 'date')}</p>
-            <p className='Date'>{formattedDateAndTime(post.createdAt, 'time')}</p>
+            <div className='commu-post-list__detail'>
+              <div className='commu_post-list__detail--userinfo'>
+            <span>{post.username}</span>
+              </div>
+              <div className='commu_post-list__detail--attention'>
+            <span className='commu-post-list__view'>
+            <Icon icon="fluent-mdl2:view" className='commu-post-list__icon'/>
+            {post.view}</span>
+            <span className='commu-post-list__like'>
+            <Icon icon="icon-park-outline:like" className='commu-post-list__icon'/>
+            {post.totalLikes}</span>
+            <span className='commu-post-list__comment'>
+            <Icon icon="f7:ellipses-bubble" className='commu-post-list__icon'/>
+            {post.commentCount}</span>
+            </div>
+            </div>
             </div>
             
             
           </li>
         ))}
       </ul>
-      </div>
       
       {/* 페이지네이션 */}
       <div className="PagingBox">
