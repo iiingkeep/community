@@ -4,6 +4,7 @@ import Pagination from "react-js-pagination";
 import { useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import "./News.css";
+import { formattedDateAndTime } from "../Util/utils";
 
 const NewsItem = () => {
   // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
@@ -238,7 +239,15 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
+<<<<<<< HEAD
         <select className="news-sort-box" value={sortBy} onChange={handleSortChange}>
+=======
+        <select
+          className="news-sort-box"
+          value={sortBy}
+          onChange={handleSortChange}
+        >
+>>>>>>> e798b6c7b7034efed09b0a86bdb90ee56809b7bd
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>
@@ -274,24 +283,33 @@ const NewsItem = () => {
                 <button
                   onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
                 >
-                  {likedArticles[item.newsid] ? "❤️" : "🤍"}
+                  {likedArticles[item.newsid] ? (
+                    <Icon icon="icon-park-solid:like" />
+                  ) : (
+                    <Icon icon="icon-park-outline:like" />
+                  )}
                 </button>
               </div>
-              <p>{item.pubDate}</p>
+              <div>
+                <p className="Date">
+                  {formattedDateAndTime(item.pubDate, "date")}
+                  {formattedDateAndTime(item.pubDate, "time")}
+                </p>
+              </div>
             </li>
           </div>
         ))}
       </ul>
       {/* 페이지네이션 */}
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={articlesPerPage}
-          totalItemsCount={filteredNews.length}
-          pageRangeDisplayed={5}
-          prevPageText={"<"}
-          nextPageText={">"}
-          onChange={handleChangePage}
-        />
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={articlesPerPage}
+        totalItemsCount={filteredNews.length}
+        pageRangeDisplayed={5}
+        prevPageText={"<"}
+        nextPageText={">"}
+        onChange={handleChangePage}
+      />
     </div>
   );
 };
