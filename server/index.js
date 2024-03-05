@@ -681,12 +681,22 @@ app.post("/Community/Write", async (req, res) => {
         await poolPromise.query(insertQuery, [userid, postId]);
       }
       console.log(`Post like toggled for post id: ${postId}`);
-      res.status(200).send('OK');
+
+      // 업데이트된 좋아요 수를 조회
+      const likeCountQuery = `
+      SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
+      `;
+      const [likeCountRows] = await poolPromise.query(likeCountQuery, [postId]);
+      const likeCount = likeCountRows[0].likeCount;
+
+      res.status(200).json({ likeCount });
     } catch (error) {
       console.error('Error occurred while toggling post like:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+
   
 
   // 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인하여 클라이언트에 정보 반환
@@ -706,6 +716,24 @@ app.post("/Community/Write", async (req, res) => {
     } catch (error) {
       console.error('Error occurred while checking post like:', error);
       res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+  // db에서 게시글의 좋아요 갯수를 반환
+  app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
+    const postId = req.params.id;
+    
+    try {
+      const query = `
+        SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
+      `;
+      const [rows] = await poolPromise.query(query, [postId]);
+      const likeCount = rows[0].likeCount;
+      res.status(200).json({ likeCount });
+    } catch (error) {
+      console.error('좋아요 수를 가져오는 중 에러 발생:', error);
+      res.status(500).json({ error: '내부 서버 오류' });
     }
   });
 

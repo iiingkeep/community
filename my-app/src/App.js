@@ -8,8 +8,6 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Modify from "./Pages/Modify";
 import RegisterPersonal from "./Pages/RegisterPersonal";
-import RegisterGroup from "./Pages/RegisterGroup";
-import RegisterCorporate from "./Pages/RegisterCorporate";
 import FindInformation from './Pages/FindInformation';
 import Community from './Pages/Community';
 import CommunityEdit from './Pages/CommunityEdit';
@@ -134,11 +132,6 @@ function App() {
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
-        <Route
-          path="/Register/corporate"
-          element={<RegisterCorporate />}
-        ></Route>
-        <Route path="/Register/group" element={<RegisterGroup />} />
         <Route path="/FindInformation" element={<FindInformation />} />
         <Route path="/NetZero" element={<NetZero />} />
         <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
@@ -161,7 +154,6 @@ function App() {
       </Routes>
       
       <Footer/>
-      s
       </div>
 
   );

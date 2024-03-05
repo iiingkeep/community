@@ -16,6 +16,7 @@ const CommunityRead = ({loggedIn, userid}) => {
   const [commentCount, setCommentCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
 
   useEffect(() => {
@@ -62,6 +63,17 @@ const CommunityRead = ({loggedIn, userid}) => {
     checkLiked();
   }, [id, userid]);
   
+  useEffect(() => {
+    const fetchLikeCount = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetLikeCount`);
+        setLikeCount(response.data.likeCount);
+      } catch (error) {
+        console.error('좋아요 수를 불러오는 중 에러 발생:', error);
+      }
+    };
+    fetchLikeCount();
+  }, [id]);
 
   
   // 등록한 댓글이 전에 있던 댓글 다음으로 바로 출력되어 나오도록 하는 함수 생성
@@ -119,10 +131,11 @@ const CommunityRead = ({loggedIn, userid}) => {
   if (loggedIn) {
     // 로그인 상태일 경우 좋아요 반영
     try {
-      await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
+      const response = await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
         userid: userid,
       });
       setIsLiked(!isLiked);
+      setLikeCount(response.data.likeCount);
     } catch (error) {
       console.error('좋아요 토글 중 에러 발생:', error);
     }
@@ -133,7 +146,7 @@ const CommunityRead = ({loggedIn, userid}) => {
     }
   }
 };
-    
+
 
   // 로그인 한 유저가 게시글을 작성한 유저인지의 여부를 확인하는 변수 선언
   const isOwner = loggedIn && post.userid === userid;
@@ -151,7 +164,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       <div className='ViewAndLikeBox'>
       <p className='ViewBox'><Icon icon="fluent-mdl2:view" />
       <span>{post.view}</span></p>
-      <p className='LikeBox' onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>좋아요</span></p>
+      <p className='LikeBox' onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span>{likeCount}</span></p>
       </div>
       </div>
       </div>
@@ -170,7 +183,7 @@ const CommunityRead = ({loggedIn, userid}) => {
       {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
       <div className='ContentBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
       
-
+      
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='CommentBox'>
         <Comment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>

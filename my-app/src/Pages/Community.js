@@ -157,7 +157,6 @@ const getPostContentWithoutImages = (content) => {
           </li>
         ))}
       </ul>
-      {/* <CommunityItems posts={posts} /> */}
       </div>
       
       {/* 페이지네이션 */}
