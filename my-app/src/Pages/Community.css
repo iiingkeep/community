@@ -14,14 +14,14 @@
   justify-content: center;
   font-size: 50px;
   font-family: 'TTHakgyoansimJiugaeR';
-  color:rgb(234, 232, 89);
+  color:rgb(255, 255, 255);
   background-color: rgb(76, 134, 188);
   /* background-image: url('../../public/background_img/bubble6.png');
-  background-size: 180px 180px;
+  background-size: 80px 80px;
   background-repeat:no-repeat;
-  background-position: 40% 50%; */
+  background-position: 43% 10%; */
   position: relative;
-  transform: translateX(-19%);
+  transform: translateX(-26%);
   z-index: 2;
 }
 
@@ -72,7 +72,7 @@
   outline: none;
 }
 
-.commu-search-box__button, .commu-go-write-box__button {
+.button {
   width: 60px;
   border: 1px solid rgba(0,0,0,0.2);
   background-color: rgb(83, 212, 92);
@@ -121,10 +121,9 @@
   background-position: center;
 }
 
-.commu-post-info-box {
+.commu-post-list__info-box {
   width:100%;
   height: 160px;
-  position:relative;
 }
 
 .commu-post-list__title-and-content-and-datetime {
@@ -180,15 +179,27 @@
   width:100%;
   height:30%;
   display: flex;
-  align-items: center;
-  position:absolute;
-  bottom: -17px;
+  align-items: end;
   font-size: 13px;
 }
 
 .commu_post-list__detail--userinfo {
   width: 72%;
+  display: flex;
+  align-items:end;
 }
+
+/* .commu-post-list__detail--userinfo__img-box {
+  border-radius: 50%;
+  margin-right: 5px;
+  height: 40px;
+}
+
+.commu-post-list__detail--userinfo__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+} */
 
 .commu_post-list__detail--attention {
   display: flex;

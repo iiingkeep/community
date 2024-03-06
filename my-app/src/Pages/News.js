@@ -239,15 +239,7 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
-<<<<<<< HEAD
         <select className="news-sort-box" value={sortBy} onChange={handleSortChange}>
-=======
-        <select
-          className="news-sort-box"
-          value={sortBy}
-          onChange={handleSortChange}
-        >
->>>>>>> e798b6c7b7034efed09b0a86bdb90ee56809b7bd
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>

@@ -11,8 +11,8 @@
   margin: 60px auto 100px;
 }
 
-.wrap::-webkit-scrollbar {
-  display: none;
+.wrap {
+  overflow-x: hidden;
 }
 
 .section {
@@ -33,7 +33,7 @@
   font-size: 80px;
   color:white;
   position: absolute;
-  left: 5%;
+  left: 10%;
   z-index: 1;
 }
 
@@ -42,7 +42,7 @@
   height: 600px;
   position: sticky;
   bottom: 10%;
-  left: 50%;
+  left: 60%;
   z-index:0;
 }
 

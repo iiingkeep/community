@@ -17,6 +17,7 @@ const Community = ({loggedIn}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
   const [selectedCategory, setSelectedCategory] = useState(1);
+  // const [imageUrl, setImageUrl] = useState("");
   
   
 
@@ -40,11 +41,17 @@ const Community = ({loggedIn}) => {
     setCurrentPage(1);
   };
 
-  
 
   useEffect(() => {
     fetchPosts();
   }, [currentPage,selectedCategory]);
+
+  // useEffect(() => {
+  // const savedImageUrl = localStorage.getItem('storageImg');
+  // if (savedImageUrl) {
+  //     setImageUrl(savedImageUrl);
+  //   }
+  // },[posts])
 
   // 서버의 다음 엔드포인트에 게시글 목록과 게시글의 총 갯수 GET요청
   const fetchPosts = async () => {
@@ -90,6 +97,8 @@ const getPostContentWithoutImages = (content) => {
   }
 };
 
+// const userImage = localStorage.getItem('storageImg');
+// console.log('프로필:',userImage);
 
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
@@ -98,6 +107,7 @@ const getPostContentWithoutImages = (content) => {
 
   return (
     <div className="community-page inner">
+      {/* 커뮤니티 헤더 */}
       <h1 className='commu-header'>커뮤니티</h1>
       {/* 게시글 카테고리 탭 */}
       <div className='commu-category-box'>
@@ -116,11 +126,11 @@ const getPostContentWithoutImages = (content) => {
         </select>
         <input className='commu-search-box__input' type="text" value={searchQuery} onChange={handleSearchInputChange} />
         </div>
-        <button className='commu-search-box__button' onClick={handleSearchButtonClick}>검색</button>
+        <button className='commu-search-box__button button' onClick={handleSearchButtonClick}>검색</button>
       </div>
       {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
       <div className='commu-go-write-box'>
-        <button className='commu-go-write-box__button' onClick={goCommunityWrite}>글쓰기</button>
+        <button className='commu-go-write-box__button button' onClick={goCommunityWrite}>글쓰기</button>
       </div>
       </div>
 
@@ -128,10 +138,11 @@ const getPostContentWithoutImages = (content) => {
       <ul className='commu-post-list-box'>
         {posts.map((post) => (
           <li key={post.postid} className='commu-post-list'>
+            {/* 게시글 썸네일, 클릭 시 상세 게시글 이동 */}
             <Link to={`/Community/Read/${post.postid}`}>
             <div className="commu-post-list__thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             </Link>
-            <div className='commu-post-info-box'>
+            <div className='commu-post-list__info-box'>
             <div className='commu-post-list__title-and-content-and-datetime'>
             <div className='commu-post-list__title-and-content'>
             <Link to={`/Community/Read/${post.postid}`}>
@@ -146,7 +157,11 @@ const getPostContentWithoutImages = (content) => {
             </div>
             <div className='commu-post-list__detail'>
               <div className='commu_post-list__detail--userinfo'>
-            <span>{post.username}</span>
+                {/* 유저 프로필사진 추가 */}
+                {/* <div className='commu-post-list__detail--userinfo__img-box'>
+                {imageUrl ? ( <img className='commu-post-list__detail--userinfo__img' src={imageUrl} alt="Profile" /> ) : ( <img className='commu-post-list__detail--userinfo__img' src="/user_img/basic.png" alt="DefaultIMG" /> )}
+                </div> */}
+                <p>{post.username}</p>
               </div>
               <div className='commu_post-list__detail--attention'>
             <span className='commu-post-list__view'>

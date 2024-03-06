@@ -1,27 +1,27 @@
-.Comment {
+.commu-comment-box {
   position: relative;
 }
 
-.Comment .comment_cnt {
+.commu-comment__count-box {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
 }
 
-.Comment .comment_cnt span {
+.commu-comment__count {
   margin-left: 5px;
 }
 
-.Comment .comment_form {
+.commu-comment__form {
   display: flex;
   height: 50px;
 }
 
-.Comment .comment_form_origin {
+.commu-comment__form--origin {
   margin-top: 30px;
 }
 
-.Comment .comment_form .comment_content {
+.commu-comment__content {
   width: 83%;
   resize: none;
   border: 1px solid rgba(0,0,0,0.2);
@@ -31,14 +31,11 @@
   margin-right: 10px;
 }
 
-
-.Comment .comment_form .comment_content::placeholder {
+.commu-comment__content::placeholder {
   color: rgba(0,0,0,0.3);
 }
 
-
-
-.Comment .comment_form .btn_submit {
+.commu-comment__button--submit {
   width: 15%;
   height: 50px;
   background-color: rgb(83, 212, 92);
@@ -49,8 +46,6 @@
   color:white;
 }
 
-
-
-.SingleCommentBox {
+.commu-single-comment-box {
   position: relative;
 }

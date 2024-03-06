@@ -62,30 +62,32 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
   
 
   return(
-    <div className='Comment'>
+    <div className='commu-comment-box'>
       {/* 댓글 갯수 표현 */}
-      <p className='comment_cnt'><Icon icon="f7:ellipses-bubble" />
-            <span>{commentCount}</span></p>
+      <p className='commu-comment__count-box'>
+        <Icon icon="f7:ellipses-bubble" />
+        <span className='commu-comment__count'>{commentCount}</span>
+      </p>
       {/* 댓글 목록이 담긴 배열 commentLists를 map함수를 이용해 새로운 배열로 반환 */}
       {commentLists && commentLists.map((comment) => (
         // !comment.responseTo: 답글이 아닌 원본 댓글만 리렌더링
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
         <React.Fragment key={comment.id}>
-        <SingleComment className='SingleCommentBox' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment}/>
-        <ReplyComment className='ReplyCommentBox' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
+        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment}/>
+        <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
         )
       ))}
 
       {/* 댓글 작성, 등록 폼 */}
-      <form onSubmit={onSubmit} className='comment_form comment_form_origin'>
-        <textarea className='comment_content'
+      <form onSubmit={onSubmit} className='commu-comment__form commu-comment__form--origin'>
+        <textarea className='commu-comment__content'
           onChange={onCommentHandle}
           value={comment}
           placeholder='댓글을 작성해 보세요.'/>
         <br />
-        <button className='btn_submit' onClick={onSubmit}>댓글 등록</button>
+        <button className='commu-comment__button--submit' onClick={onSubmit}>댓글 등록</button>
       </form>
     </div>
   )
