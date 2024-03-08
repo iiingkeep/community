@@ -184,16 +184,18 @@ const Main = () => {
       <div className="wrap">
         <div className="section s1">
           <div className="slogan_box">
-            <p>Bring Back</p>
-            <p>A</p>
-            <p>Natural ,</p>
-            <p>Green environment</p>
+            <p className="slogan__title">Bring Back A Natural, Green environment</p>
+            <div className="slogan__content">
+            <p>지속 가능한 미래를 위한</p>
+            <p>탄소중립 실천</p>
+            <p>빵끗과 함께 해요</p>
+            </div>
           </div>
           <div className="main-login-form">
               {renderContent()}
             </div>
           <img
-            src="/background_img/earth9.png"
+            src="/background_img/earth1.png"
             className="earth"
             alt="지구 이미지"
           />
@@ -288,15 +290,26 @@ const Main = () => {
               </ul>
             </div>
             </div>
+        <div className="main-issue__phrase main-issue__phrase--community">
+            <p className="main-issue__phrase--title">커뮤니티</p>
+            <p className="main-issue__phrase--content">
+              탄소중립 실천 경험 나누기 
+            </p>
+            <p className="main-issue__phrase--content--detail">
+            다른 사람들은 탄소중립을 어떻게 실천하고 있을까요?<br />
+            팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !<br />
+            </p>
             </div>
 
+            <div className="main-issue__news-box main-issue__community-box">
+            
+            </div>
+
+            </div>
         </div>
-          <div className="main-issue__community-box">
-            <div className="CommunityBox">커뮤니티</div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -7,7 +7,7 @@
 }
 
 .commu-header {
-  width: 100vw;
+  width: 2500px;
   height: 200px;
   display: flex;
   align-items: center;
@@ -21,7 +21,7 @@
   background-repeat:no-repeat;
   background-position: 43% 10%; */
   position: relative;
-  transform: translateX(-26%);
+  transform: translateX(-32%);
   z-index: 2;
 }
 
@@ -37,8 +37,10 @@
   background-color: transparent;
   padding: 20px;
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 500;
   font-style: normal;
+  color: rgb(40, 40, 40);
 }
 
 .commu-category__button--selected {
