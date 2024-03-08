@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // 로그인 추가 끝
 import axios from "axios";
+import {Icon} from '@iconify/react';
 import "./Main.css";
 
 const Main = () => {
@@ -46,7 +47,8 @@ const Main = () => {
         } else {
           // 로그인 실패 시 처리
           console.log("로그인 실패:", response.data);
-          setloginStatus("로그인 실패: " + response.data.message);
+          setloginStatus(response.data.message);
+          alert("일치하는 유저가 없습니다. 다시 입력해 주세요")
         }
       });
   };
@@ -65,28 +67,30 @@ const Main = () => {
       return (
         <>
           {/* 로그인 아이디, 비밀번호 입력 폼 */}
+          <div className="main-login-form--input-and-button">
           <input
             id="id"
+            className="main-login__form--id"
             type="text"
             placeholder="아이디"
             value={email}
             onChange={(e) => setemail(e.target.value)}
           />
-          <br />
           <input
             type="password"
+            className="main-login__form--password"
             placeholder="비밀번호"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <br />
-          <div className="main-login-form__button">
+          <div className="main-login__form--button-box">
             {/* 로그인 버튼 */}
-            <button onClick={LoginPageJs}>로그인</button>
+            <button className="main-login__form--button--login" onClick={LoginPageJs}>로그인</button>
             {/* 회원가입 링크 */}
-            <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
+            <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
           </div>
-          {loginStatus && <div>{loginStatus}</div>}
+          </div>
+          {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
         </>
       );
     } else {
@@ -144,7 +148,7 @@ const Main = () => {
     window.open(item.url, "_blank");
   };
 
-  const topFiveNews = news.slice(0, 5);
+  const topFiveNews = news.slice(0, 4);
   //------------------------뉴스뉴스뉴스 끝----------------
   //------------------------워드클라우드----------------
   // 워드클라우드 이미지 다운로드
@@ -185,40 +189,84 @@ const Main = () => {
             <p>Natural ,</p>
             <p>Green environment</p>
           </div>
+          <div className="main-login-form">
+              {renderContent()}
+            </div>
           <img
             src="/background_img/earth9.png"
             className="earth"
             alt="지구 이미지"
           />
         </div>
-        <div className="section s2"></div>
-        <div className="section s3">
-          <div className="LeftSection">
-            {/* 로그인 구역 */}
-            <div className="main-login-form">
-              <p>로그인</p>
-              {renderContent()}
+        <div className="section s2 ">
+          <div className="main-inner main-intro-box1">
+          <p className="main-header">탄소중립, 함께 실천해요</p>
+          <div className="main-intro-box2">
+            <div className="main-intro main-intro__net-zero">
+              <img src="/background_img/netzero1.png"
+              className="main-intro__img" />
+              <p className="main-intro__title">탄소중립이란?</p>
+              <p className="main-intro__content">탄소중립이 무엇인지,
+             </p>
+             <p className="main-intro__content main-intro__content--line2">어떻게 실천해야 하는지 알아봐요</p>
+             <p className="main-intro__content main-intro__link" onClick={() => navigate("/NetZero")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
             </div>
+            <div className="main-intro main-intro__news">
+            <img src="/background_img/news7.png"
+              className="main-intro__img" />
+              <p className="main-intro__title">환경이슈</p>
+              <p className="main-intro__content">하루 두 번, 오전 6시와 오후 6시</p>
+              <p className="main-intro__content main-intro__content--line2">최신 환경 이슈들을 만나 봐요</p>
+              <p className="main-intro__content main-intro__link" onClick={() => navigate("/News")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+            </div>
+            <div className="main-intro main-intro__community">
+            <img src="/background_img/community3.png"
+              className="main-intro__img" />
+              <p className="main-intro__title">커뮤니티</p>
+              <p className="main-intro__content">자유롭게 소통해요</p>
+              <p className="main-intro__content main-intro__content--line2">탄소중립 실천 기록도 남기고, 고민도 나눠요</p>
+              <p className="main-intro__content main-intro__link" onClick={() => navigate("/Community")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div className="section s3">
+          <p className="main-header main-issue__header">오늘의 핫 이슈에요🔥</p>
+            {/* 로그인 구역 */}
+            {/* <div className="main-login-form">
+              {renderContent()}
+            </div> */}
             {/* 로그인 구역 끝 */}
-            <div className="main-wordcloud-box">
+            <div className="main-issue-box">
+            <div className="main-issue-inner">
+            <div className="main-issue__phrase">
+            <p className="main-issue__phrase--title">환경이슈</p>
+            <p className="main-issue__phrase--content">
+              최신 환경뉴스와 핫 토픽
+            </p>
+            <p className="main-issue__phrase--content--detail">
+            아침에 일어나서 한 번, 저녁 식사 후 한 번<br />
+            업데이트 되는 환경 뉴스를 통해 최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요<br />
+            지난 12시간동안 가장 핫했던 키워드가 무엇인지 바로 알 수 있는 클라우드 이미지도 제공하고 있답니다
+            </p>
+            </div>
+            <div className="main-issue__wordcloud-and-news-box">
+            <div className="main-issue__wordcloud-box">
+              <p className="main-issue__name">클라우드 이미지</p>
               <img
-                className=""
+                className="main-issue__wordcloud"
                 src="./wc_image/result.png"
                 alt="wordcloud_img"
-                style={{ width: "300px", height: "300px" }}
               />
               <button
-                className="main-wordcloud__button"
+                className="main-issue__wordcloud__button"
                 onClick={handleDownload}
               >
                 이미지 다운로드
               </button>
             </div>
-          </div>
-          <div className="RightSection">
-            <div className="CommunityBox">커뮤니티</div>
-            <div className="main-news-box">
-              <a href="/news">환경이슈</a>
+            <div className="main-issue__news-box">
+            <p className="main-issue__name">뉴스 미리보기</p>
               <ul>
                 {topFiveNews.map((item) => (
                   <li key={item.newsid}>
@@ -239,6 +287,12 @@ const Main = () => {
                 ))}
               </ul>
             </div>
+            </div>
+            </div>
+
+        </div>
+          <div className="main-issue__community-box">
+            <div className="CommunityBox">커뮤니티</div>
           </div>
         </div>
       </div>

@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;700&family=Nanum+Gothic+Coding:wght@400;700&display=swap');
-@font-face {
-	font-family: 'TTHakgyoansimJiugaeR';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimJiugaeR.woff2') format('woff2');
-	font-weight: normal;
-	font-style: normal;
-}
+
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -66,5 +61,3 @@ table {
 button:hover {
   cursor:pointer
 }
-
-

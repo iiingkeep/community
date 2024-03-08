@@ -17,20 +17,21 @@
 
 .section {
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 90vh;
+  
 }
 
 .s1 {
   background-color: rgb(34, 56, 117);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .s1 .slogan_box {
   font-family: "Luckiest Guy", cursive;
-  font-size: 80px;
+  font-size:100px;
   color:white;
   position: absolute;
   left: 10%;
@@ -38,61 +39,145 @@
 }
 
 .s1 .earth {
-  width: 600px;
-  height: 600px;
+  width: 700;
+  height: 700px;
   position: sticky;
   bottom: 10%;
-  left: 60%;
+  left: 55%;
   z-index:0;
 }
 
 .s2 {
-  background-color: bisque;
+  height: 100%;
+  background-color: rgb(200, 224, 238);
+}
+
+.main-inner {
+  width: 80%;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.main-header {
+  width: 900px;
+  margin: 0 auto 200px;
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.main-intro-box2 {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.main-intro {
+  width: 32%;
+  height: 300px;
+  border: none;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+}
+
+.main-intro__img {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: -27%;
+  left: 33%;
+}
+
+.main-intro__title {
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  top: 30%;
+  left: 10%;
+}
+
+.main-intro__content {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(112, 112, 112);
+  position:absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.main-intro__content--line2 {
+ top: 60%; 
+}
+
+.main-intro__link {
+  display: flex;
+  align-items: center;
+  top: 80%;
+  color: rgb(64, 64, 64);
+  cursor:pointer;
+}
+
+.main-intro__icon {
+  font-size: 28px;
+  margin-right: 5px;
 }
 
 .s3 {
   background-color: rgb(255, 255, 255);
-  width: 80%;
-  height: 90vh;
-  margin: 30px auto;
-  margin-top: 10vh;
-  margin-bottom: 0;
-  display: flex;
   /* background-image: url('../../../server/public/backgroundimg/planet.png');
   background-repeat: no-repeat;
   background-size: 400px 400px;
   background-position: ; */
 }
 
-.s3 .LeftSection {
-  width: 25%;
-  margin: 0 30px;
-}
-.s3 .RightSection {
-  width: 75%;
-  display: flex;
-  height: 330px;
+.main-issue__header {
+  padding-top: 100px;
+  margin-bottom: 100px;
 }
 
+
+.main-issue-box {
+  width: 100%;
+  height: 750px;
+  background-color: rgb(254, 252, 210);
+  display:flex;
+  justify-content: center;
+}
+
+.main-issue-inner {
+  width: 80%;
+}
+
+.main-issue__phrase {
+  font-weight: bold;
+  margin: 50px 0;
+}
+.main-issue__phrase--title {
+  font-size: 25px;
+  line-height: 50px;
+  color:rgb(48, 48, 48)
+}
+.main-issue__phrase--content {
+  font-size: 20px;
+  margin: 10px 0;
+  color:#737373;
+}
+.main-issue__phrase--content--detail {
+  line-height: 20px;
+  color:rgb(129, 128, 128);
+  font-weight: lighter;
+}
 .Main .LeftSection .login_box {
   height: 30%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
-.Main .LeftSection .main-wordcloud-box {
-  height: 140px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
+
 .Main .RightSection .CommunityBox {
   width: 50%;
   height: 140px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
-.Main .RightSection .main-news-box {
-  width: 50%;
-  height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 40px;
 }
@@ -106,6 +191,21 @@
 }
 
 /* 로그인 */
+.main-login-form {
+  position: absolute;
+  bottom: 10%;
+  left:10%;
+  
+}
+
+.main-login-form--input-and-button {
+  display: flex;
+}
+
+.main-login__form--id {
+  margin-right: 5px;
+}
+
 .main-login-form button {
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
@@ -113,7 +213,11 @@
   font-size: 12px;
   color: white;
   padding: 10px;
-  margin: 0 15px;
+  height:40px;
+}
+
+.main-login__form--button--login {
+  margin: 0 5px 0 10px;
 }
 
 .main-login-form input {
@@ -144,8 +248,45 @@
   justify-content: center;
 }
 
+.main-login__form--message {
+  color:rgb(138, 136, 136);
+}
+
+
+
+.main-issue__wordcloud-and-news-box {
+  background-color: transparent;
+  height: 500px;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.main-issue__wordcloud-box {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 450px;
+  border-radius: 40px;
+  padding: 20px;
+  background-color: white;
+}
+
+.main-issue__name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.main-issue__wordcloud {
+  width: 280px;
+  height: 280px;
+  margin: 40px auto 20px;
+}
+
 /* 워드클라우드 이미지 다운로드 버튼 */
-.main-wordcloud__button {
+.main-issue__wordcloud__button {
   width: 130px;
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
@@ -156,60 +297,69 @@
 }
 
 /* --------------뉴스-------------- */
-.main-news-box {
-  font-size: 13px;
+.main-issue__news-box {
+  width: 50%;
+  height: 450px;
+  font-size: 14px;
+  line-height: 20px;
   margin-left: 10px;
   padding-left: 0px;
   padding-top: 5px;
+  border-radius: 40px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
 }
 
-.main-news-box > a:link {
+.main-issue__news-box > a:link {
   font-size: 16px;
   color: black;
   text-decoration-line: none;
 }
 
-.main-news-box > a:hover {
+.main-issue__news-box > a:hover {
   font-weight: bolder;
 }
 
-.main-news-box > a:visited {
+.main-issue__news-box > a:visited {
   color: black;
 }
 
-.main-news-box ul {
+.main-issue__news-box ul {
   margin: 0 auto;
-  padding: 15px;
+  padding: 40px 15px 15px;
 }
 
-.main-news-box li {
+.main-issue__news-box li {
   margin-left: 5px;
   margin-bottom: 5px;
   display: flex;
+  align-items: center;
   text-align: left;
 }
 
-.main-news-box li img {
+.main-issue__news-box li img {
   cursor: pointer;
   margin-right: 10px;
-  width: 15%;
-  height: 50px;
+  width: 25%;
+  height: 80px;
+  border-radius: 20px;
 }
 
-.main-news-box li a {
+.main-issue__news-box li a {
   width: 85%;
 }
 
-.main-news-box li a:link {
+.main-issue__news-box li a:link {
   color: rgb(0, 0, 0);
   text-decoration-line: none;
 }
 
-.main-news-box li a:hover {
+.main-issue__news-box li a:hover {
   font-weight: bolder;
 }
 
-.main-news-box li a:visited {
+.main-issue__news-box li a:visited {
   color: rgb(190, 190, 190);
 }
 /* --------------뉴스 끝-------------- */

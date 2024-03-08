@@ -33,12 +33,12 @@ for content in newsList['content']:
 
 # 동일 단어 횟수 추출
 word_list_count = Counter(word_list) # 각 단어의 빈도수 추출 후 딕셔너리 형태로 저장
-total_word_count = sum(word_list_count.values()) # 딕셔너리의 값들을 모두 합해서 총 단어 등장 횟수 계산
+total_word_count = sum(word_list_count.values()) # 딕셔너리의 값들을 모두 합해서 총 단어 등장 횟수 계산npm 
 print(word_list_count)
 print(total_word_count)
 
 # 마스크가 될 이미지 불러오기
-icon = Image.open('./apple.png') # 사용할 이미지를 변수에 할당
+icon = Image.open('./earth.png') # 사용할 이미지를 변수에 할당
 
 mask = Image.new("RGB", icon.size, (255,255,255))
 mask.paste(icon,icon) # icon 이미지를 새로 생성한 mask에 붙임
