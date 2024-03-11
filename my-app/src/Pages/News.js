@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import "./News.css";
 import { formattedDateAndTime } from "../Util/utils";
 
-const NewsItem = () => {
+const News = () => {
   // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
   const [news, setNews] = useState([]);
   // page : 현재 페이지
@@ -308,4 +308,4 @@ const NewsItem = () => {
   );
 };
 
-export default NewsItem;
+export default News;
