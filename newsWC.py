@@ -45,8 +45,28 @@ mask.paste(icon,icon) # icon 이미지를 새로 생성한 mask에 붙임
 mask = np.array(mask) # mask를 numpy배열로 변환
 
 # 색상 팔레트 정의
-def color_func(word, font_size, position, **kwargs):
-    if np.random.rand() < 0.5:  # 글자 색상을 50% 확률로 초록색과 파란색 계열로 나눔
+def color_func(word, font_size, position, random_state=None, **kwargs):
+    x, y = position
+    if (44 <= x <= 144 and 16 <= y <= 232) \
+        or (62 <= x <= 128 and 232 <= y <= 283) \
+        or (144 <= x <= 181 and 23 <= y <= 196) \
+        or (181 <= x <= 196 and 40 <= y <= 177) \
+        or (196 <= x <= 223 and 54 <= y <= 132) \
+        or (223 <= x <= 243 and 80 <= y <= 136) \
+        or (243 <= x <= 265 and 112 <= y <= 153) \
+        or (265 <= x <= 343 and 130 <= y <= 237) \
+        or (276 <= x <= 386 and 237 <= y <= 268) \
+        or (290 <= x <= 365 and 268 <= y <= 291) \
+        or (343 <= x <= 363 and 152 <= y <= 237) \
+        or (363 <= x <= 410 and 177 <= y <= 257) \
+        or (410 <= x <= 473 and 193 <= y <= 241) \
+        or (81 <= x <= 133 and 375 <= y <= 393) \
+        or (68 <= x <= 140 and 393 <= y) \
+        or (140 <= x <= 173 and 456 <= y) \
+        or (173 <= x <= 207 and 352 <= y) \
+        or (207 <= x <= 272 and 335 <= y) \
+        or (272 <= x <= 288 and 365 <= y) \
+        or (288 <= x <= 415 and 424 <= y):
         return "hsl(120, 100%, {}%)".format(np.random.randint(40, 70))  # 초록색 계열 (채도 100%)
     else:
         return "hsl(210, 100%, {}%)".format(np.random.randint(40, 70))  # 파란색 계열 (채도 100%)
@@ -54,6 +74,6 @@ def color_func(word, font_size, position, **kwargs):
 # 워드클라우드 객체 선언 및 출력
 wc =  WordCloud(font_path='malgun', width=400, height=400, background_color='white', mask=mask, color_func=color_func)
 result = wc.generate_from_frequencies(word_list_count)
-plt.axis('off') # 그래프 축 제거
+# plt.axis('off') # 그래프 축 제거
 plt.imshow(result)
 wc.to_file("./my-app/public/wc_image/result.png") # png 파일로 저장
