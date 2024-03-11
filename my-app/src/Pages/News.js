@@ -114,7 +114,7 @@ const NewsItem = () => {
   };
 
   // 로고 클릭시 초기페이지로 돌아감
-  const handelLogoClick = () => {
+  const handleLogoClick = () => {
     setPage(1);
     setSearchTerm("");
     setSortBy("latest");
@@ -219,7 +219,7 @@ const NewsItem = () => {
   return (
     <div className="news-page inner">
       <Link to="/news">
-        <h1 className="news-header" onClick={handelLogoClick}>
+        <h1 className="news-header" onClick={handleLogoClick}>
           환경이슈
         </h1>
       </Link>
