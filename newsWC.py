@@ -44,7 +44,7 @@ mask = Image.new("RGB", icon.size, (255,255,255))
 mask.paste(icon,icon) # icon 이미지를 새로 생성한 mask에 붙임
 mask = np.array(mask) # mask를 numpy배열로 변환
 
-# 색상 팔레트 정의
+# 좌표마다 글자 색 설정
 def color_func(word, font_size, position, random_state=None, **kwargs):
     x, y = position
     if (44 <= x <= 144 and 16 <= y <= 232) \

@@ -219,7 +219,9 @@ const NewsItem = () => {
   return (
     <div className="news-page inner">
       <Link to="/news">
-      <h1 className='commu-header'>환경이슈</h1>
+        <h1 className="news-header" onClick={handelLogoClick}>
+          환경이슈
+        </h1>
       </Link>
       {/* 검색 */}
       <div className="news-search-and-sort-box">
@@ -235,7 +237,11 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
-        <select className="news-sort-box" value={sortBy} onChange={handleSortChange}>
+        <select
+          className="news-sort-box"
+          value={sortBy}
+          onChange={handleSortChange}
+        >
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>
