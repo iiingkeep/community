@@ -122,7 +122,7 @@
 /* 뉴스 목록 */
 .news-list-box li * {
   height: 100px;
-  margin-right: 30px;
+  margin : 0 15px;
 }
 
 /* 뉴스 썸네일 */
