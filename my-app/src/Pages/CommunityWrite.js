@@ -52,6 +52,7 @@ const CommunityWrite = ({userid}) => {
     const formData = new FormData();
     formData.append('img', file); 
 
+
     // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
     try {
       const result = await axios.post('http://localhost:8000/img', formData);
@@ -171,31 +172,34 @@ const CommunityWrite = ({userid}) => {
   ];
 
 
-
   return (
-    <div className='CommunityWrite'>
-      <div className='CategoryBox'>
-        <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
-        <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
-        <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>
+    <div className='commu-write-page inner'>
+      {/* 커뮤니티 헤더 */}
+      <h1 className='commu-header'>커뮤니티</h1>
+      {/* 게시글 카테고리 탭 */}
+      <div className='commu-category-box commu-write__category-box'>
+        <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>
+        <button className={'commu-category__button' + (selectedCategory === 2 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(2)}>자유게시판</button>
+        <button className={'commu-category__button' + (selectedCategory === 3 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(3)}>고민과질문</button>
       </div>
       {/* 글 작성을 위한 폼 */}
       <form onSubmit={handlePostSubmit}>
-      <div className='TitleBox'>
-        {/* <label htmlFor="PostTitle">제목</label> */}
+        {/* 제목 입력 input 설정 */}
+      <div className='commu-write__title-box'>
         <input
-            id='PostTitle'
+            id='post_title'
+            className="commu-write__title"
             type='text'
             value={title}
             onChange={handleTitleChange}
             placeholder="제목을 입력해 주세요"
           />
       </div>
-      {/* 본문 작성을 위한 quill-editor 설정 */}
-      <div className='ContentBox'>
+      {/* 내용 입력을 위한 quill-editor 설정 */}
+      <div className='commu-write__content-box' >
         <ReactQuill 
         ref={quillRef}
-        style={{width: "800px", height: "400px", margin: "50px auto 50px"}}
+        className="commu-write__content"
         modules={modules}
         formats={formats}
         theme='snow'
@@ -203,9 +207,9 @@ const CommunityWrite = ({userid}) => {
         onChange={handleContentChange}/>
       </div>
       {/* 게시물 등록/취소 버튼 */}
-      <div className='ButtonBox'>
-        <button type='submit'>등록</button>
-        <button>취소</button>
+      <div className='commu-write__button'>
+        <button className="commu-write__button--submit button" type='submit'>등록</button>
+        <button className="commu-write__button--cancel button">취소</button>
       </div>
       </form>
     </div>

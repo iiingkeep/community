@@ -49,7 +49,7 @@ function Login() {
   
   return (
     <div className="login-page">
-      <div className="form">
+      <div className="login-box">
         <form className="login-form">
           {/* 로그인 아이디 비밀번호 표시 */}
           {/* <p>아이디</p> */}
@@ -67,8 +67,9 @@ function Login() {
             placeholder="비밀번호를 입력해주세요."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          /><br/>
-          
+          />
+          <br />
+
           {/* 체크박스 표시  */}
           {/* <div>
           <input
@@ -96,8 +97,14 @@ function Login() {
             <label htmlFor="organizationCheckbox">단체</label>
           </div> */}
           {/* 로그인 버튼 표시 */}
-          <button className="Btn" onClick={(e) => 
-            { e.preventDefault(); console.log('버튼 클릭됨'); LoginPageJs() ; }}>
+          <button
+            className="login-form__button"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("버튼 클릭됨");
+              LoginPageJs();
+            }}
+          >
             로그인
           </button>
           <div>

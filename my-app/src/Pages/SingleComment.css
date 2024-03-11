@@ -2,7 +2,10 @@
   padding: 30px 0 10px 0;
   border-top: 1px solid rgba(0,0,0,0.2);
 }
-
+.comment_form {
+  display: flex;
+  
+}
 .Comment .comment_form .name_box__editing {
   font-size: 14px;
   width: 10%;
@@ -10,7 +13,7 @@
 }
 
 .Comment .comment_form .comment_single_content {
-  width: 75%;
+  width: 65%;
   resize: none;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 0;
@@ -20,7 +23,7 @@
 }
 
 .Comment .comment_form .btn_box {
-  width: 15%;
+  width: 25%;
 }
 
 .Comment .comment_form .btn_box button {

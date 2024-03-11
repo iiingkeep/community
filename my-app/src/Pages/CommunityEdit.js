@@ -188,39 +188,41 @@ const CommunityEdit = ({userid}) => {
   ];
 
   return (
-    <div className='CommunityEdit'>
-      <div className='CategoryBox'>
-        <button className={selectedCategory === 1 ? 'selected' : ''} onClick={() => handleCategoryClick(1)}>실천기록</button>
-        <button className={selectedCategory === 2 ? 'selected' : ''} onClick={() => handleCategoryClick(2)}>자유게시판</button>
-        <button className={selectedCategory === 3 ? 'selected' : ''} onClick={() => handleCategoryClick(3)}>고민과질문</button>
+    <div className='commu-edit-page inner'>
+      {/* 커뮤니티 헤더 */}
+      <h1 className='commu-header'>커뮤니티</h1>
+      {/* 게시글 카테고리 탭 */}
+      <div className='commu-category-box commu-write__category-box'>
+        <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>
+        <button className={'commu-category__button' + (selectedCategory === 2 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(2)}>자유게시판</button>
+        <button className={'commu-category__button' + (selectedCategory === 3 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(3)}>고민과질문</button>
       </div>
+      {/* 글 수정을 위한 폼 */}
       <form onSubmit={handlePostUpdate}>
         {/* 제목 입력 input 설정 */}
-        <div className='TitleBox'>
-          <label htmlFor="PostTitle">제목</label>
+        <div className='commu-write__title-box'>
           <input
-            id='PostTitle'
+            id='post_title'
+            className="commu-write__title"
             type='text'
             value={title}
             onChange={handleTitleChange}
           />
         </div>
         {/* 내용 입력을 위한 react-quill 에디터 설정 */}
-        <div className='ContentBox'>
-          <ReactQuill
-          ref={quillRef}
-            style={{ width: "800px", height: "400px", margin: "100px auto 50px" }}
-            modules={modules}
-            formats={formats}
-            theme='snow'
-            value={content}
-            onChange={handleContentChange}
-          />
-          
-        </div>
-        <div className='ButtonBox'>
-          <button type='submit'>등록</button>
-          <button onClick={onCancelHandler}>취소</button>
+        <div className='commu-write__content-box'>
+        <ReactQuill 
+        ref={quillRef}
+        className="commu-write__content"
+        modules={modules}
+        formats={formats}
+        theme='snow'
+        value={content}
+        onChange={handleContentChange}/>
+      </div>
+        <div className='commu-write__button'>
+          <button type='submit' className='commu-write__button--submit button' >등록</button>
+          <button className="commu-write__button--cancel button" onClick={onCancelHandler}>취소</button>
         </div>
       </form>
     </div>

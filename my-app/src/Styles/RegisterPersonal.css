@@ -46,8 +46,8 @@
   border-radius: 4px;
 }
 
-.regi-form .emailcheck,
-.regi-form .adrrselect {
+.regi-form .regi-email__button,
+.regi-form .regi-addr__button {
   font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -62,17 +62,17 @@
     margin: 15px 0;
 }
 
-.regi-form .emailcheck:hover,
-.regi-form .adrrselect:hover {
+.regi-form .regi-email__button:hover,
+.regi-form .regi-addr__button:hover {
   background-color: #4CAF50; /* 호버 배경색 */
 }
 
-.regi-form .emailcheck:focus,
-.regi-form .adrrselect:focus {
+.regi-form .regi-email__button:focus,
+.regi-form .regi-addr__button:focus {
   outline: none;
 }
 
-.regi-form .RegisterBtn {
+.regi-form .regi-complete__button {
   font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -88,6 +88,6 @@
 }
 
 
-.regi-form .RegisterBtn:focus {
+.regi-form .regi-complete__button:focus {
   outline: none;
 }

@@ -131,7 +131,9 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     return (
       <div className="Comment">
         <div className="comment_single">
-          {isEditing ? ( // 수정 상태일 때 폼 출력
+          {/* 댓글 수정버튼 클릭 했을 때와 클릭하지 않았을 때(기본)
+          출력상태 지정 */}
+          {isEditing ? ( // 댓글 수정 상태일 때 폼 출력
             <form className="comment_form" onSubmit={onUpdateComment}>
               <span className='name_box__editing'>{comment.username}</span>
               <textarea
@@ -146,7 +148,7 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
                 </button>
               </div>
             </form>
-          ) : (
+          ) : ( // 댓글을 수정하지 않는 기본 상태
             <div className="single_comment_box">
               <div className="comment_detail_box">
                 <div className="name_date_box">

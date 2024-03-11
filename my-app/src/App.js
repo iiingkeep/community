@@ -8,8 +8,6 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Modify from "./Pages/Modify";
 import RegisterPersonal from "./Pages/RegisterPersonal";
-import RegisterGroup from "./Pages/RegisterGroup";
-import RegisterCorporate from "./Pages/RegisterCorporate";
 import FindInformation from './Pages/FindInformation';
 import Community from './Pages/Community';
 import CommunityEdit from './Pages/CommunityEdit';
@@ -65,67 +63,30 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div className="App">
-      <Header
-        leftChild={<button onClick={() => navigate("/")}>빵끗😊</button>}
-        menu={
-          <div className="HeaderMenu">
-            <button onClick={() => navigate("/NetZero")}>탄소중립이란? </button>
-            <button onClick={() => navigate("/news")}>환경이슈 </button>
-            <button onClick={() => navigate("/Community")}>커뮤니티 </button>
-          </div>
-        }
-        rightChild={
-          loggedIn ? (
-            <div>
-              <button onClick={() => navigate("/MyPage")}>마이페이지</button>
-              <button onClick={handleLogout}>로그아웃</button>
-            </div>
-          ) : (
-            <div>
-              <button onClick={() => navigate("/Login")}>로그인</button>
-              <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
-            </div>
-          )
-        }
+      <Header loggedIn={loggedIn} handleLogout={handleLogout}
+        // leftChild={<button onClick={() => navigate("/")}>빵끗😊</button>}
+        // menu={
+        //   <div className="HeaderMenu">
+        //     <button onClick={() => navigate("/NetZero")}>탄소중립이란? </button>
+        //     <button onClick={() => navigate("/news")}>환경이슈 </button>
+        //     <button onClick={() => navigate("/Community")}>커뮤니티 </button>
+        //   </div>
+        // }
+        // rightChild={
+        //   loggedIn ? (
+        //     <div>
+        //       <button onClick={() => navigate("/MyPage")}>마이페이지</button>
+        //       <button onClick={handleLogout}>로그아웃</button>
+        //     </div>
+        //   ) : (
+        //     <div>
+        //       <button onClick={() => navigate("/Login")}>로그인</button>
+        //       <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
+        //     </div>
+        //   )
+        // }
       />
 
       <Routes>
@@ -134,11 +95,6 @@ function App() {
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
-        <Route
-          path="/Register/corporate"
-          element={<RegisterCorporate />}
-        ></Route>
-        <Route path="/Register/group" element={<RegisterGroup />} />
         <Route path="/FindInformation" element={<FindInformation />} />
         <Route path="/NetZero" element={<NetZero />} />
         <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
@@ -161,7 +117,6 @@ function App() {
       </Routes>
       
       <Footer/>
-      s
       </div>
 
   );

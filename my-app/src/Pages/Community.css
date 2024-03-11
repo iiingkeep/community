@@ -2,168 +2,244 @@
   margin: 0
 }
 
-.CategoryBox {
-  width:30%;
-  margin: 30px auto;
-  text-align: center;
-}
-.CategoryBox button{
-  border:none;
-  border-bottom: 3px solid rgba(0,0,0,0.2);
-  background-color: transparent;
-  padding: 20px;
-  font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.CategoryBox button.selected {
-  border-bottom: 3px solid rgb(83, 212, 92);
-}
-
-.SearchBox {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-
-.SearchBoxExceptButton {
-  display: flex;
-  height: 35px;
-  margin-right: 10px;
-  border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 20px;
-  font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 400;
-}
-
-.SearchTypeBox, .SearchQueryBox {
-  box-sizing: border-box;
-  background-color: transparent;
-  padding: 5px;
-  border: none;
-  outline: none;
-  
-}
-
-.SearchBox button, .WriteButtonBox button {
-  width: 60px;
+/* 공통 */
+.button {
   border: 1px solid rgba(0,0,0,0.2);
   background-color: rgb(83, 212, 92);
-  font-size:12px;
+  font-size:14px;
   border-radius: 20px;
   border: none;
   padding: 10px;
   color:white;
 }
 
-.PostListBox{
-  width:inherit;
-  margin: 10px 0;
+.community-page {
+  position:relative;
+}
+/* 헤더 */
+.commu-header {
+  width: 1500px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 700;
+  color:rgb(255, 255, 255);
+  /* background-color: rgb(76, 134, 188); */
+  background-image:  url('../../public/background_img/back3.jpg');
+  background-size: 1502px  ;
+  background-repeat:no-repeat;
+  background-position: 20% 210%;
+  position: relative;
+  transform: translateX(-16%);
+  z-index: 2;
+  border-radius: 40px;
+  /* border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px; */
+}
+/* .commu-header-title {
+  position: absolute;
+  top: 60%;
+  left: 19%;
+} */
+
+
+/* 카테고리 */
+.commu-category-box {
+  width:100%;
+  margin: 30px auto;
+  text-align: center;
 }
 
-.PostListBox ul {
+.commu-category__button {
+  border:none;
+  /* border-bottom: 3px solid rgba(0,0,0,0.2); */
+  background-color: transparent;
+  padding: 20px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  color: rgb(40, 40, 40);
+}
+
+.commu-category__button--selected {
+  border-bottom: 3px solid rgb(83, 212, 92);
+}
+
+/* 검색창, 글쓰기 버튼 */
+.commu-search-and-go-write-box {
+  display: flex;
+  align-items: center;
+  margin: 100px 0 15px;
+}
+
+.commu-search-box {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.commu-search-box__button {
+  width: 65px;
+}
+
+.commu-search-box--except-button {
+  display: flex;
+  height: 35px;
+  margin-right: 10px;
+  border: 2px solid #c4c4c4;
+  border-radius: 20px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+}
+
+.commu-search-box__option, .commu-search-box__input {
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.commu-go-write-box {
+  width:100%;
+  text-align: right;
+}
+
+.commu-go-write-box__button {
+  width: 64px;
+  border-radius: 0;
+}
+
+/* 게시글 목록 */
+.commu-post-list-box{
+  width: 100%;
+  margin: 10px 0;
   list-style: none;
 }
 
-.PostListBox li {
-  width: 800px;
+.commu-post-list {
+  width: 100%;
+  height: 180px;
   margin: 0px auto;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.5);
   font-size: 14px;
-  text-decoration: none;
-  height: 150px;
 }
 
-.PostListBox li:first-child {
-  border-top: 1px solid rgba(0,0,0,0.2);
+.commu-post-list:first-child {
+  border-top: 1px solid rgba(0,0,0,0.5);
 }
 
-.PostListBox li .Thumbnail {
-  width: 130px;
-  height: 130px;
+.commu-post-list__thumbnail {
+  width: 160px;
+  height: 160px;
   margin: 0 20px 0 0;
   background-size: cover;
   background-position: center;
 }
 
-.PostListBox li .PostInfoBox {
-  width:550px;
-  height: 150px;
-  position:relative;
+.commu-post-list__info-box {
+  width:100%;
+  height: 160px;
 }
 
-.PostListBox li .TitleBox {
-  width: 530px;
-  font-size: 20px;
-  margin: 20px 0 0 0;
+.commu-post-list__title-and-content-and-datetime {
+  display: flex;
+  width: 100%;
+  height:70%;
 }
 
-.PostListBox li .TitleBox .Title {
-  margin-bottom: 10px;
+.commu-post-list__title-and-content {
+  width: 80%;
+  padding: 20px 0 0 0;
+}
+
+.commu-post-list__title-and-content > a {
+  text-decoration: none;
+}
+
+.commu-post-list__title {
+  max-width: 90%;
+  margin-bottom: 15px;
+  font-size: 23px;
   font-weight: 500;
   color: rgb(83, 212, 92);
-}
-
-.PostListBox li .TitleBox .Content {
-  font-size: 14px;
-  color: black;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
-.PostListBox li .PostDetailBox {
+.commu-post-list__content {
+  max-width: 95%;
+  line-height: 1.5em;
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.commu-post-list__datetime {
+  width: 20%;
+  text-align: center;
+  padding-top: 55px;
+}
+
+.commu-post-list__datetime--date,
+.commu-post-list__datetime--time {
+  line-height: 1.2em;
+}
+
+.commu-post-list__detail {
+  width:100%;
+  height:30%;
   display: flex;
-  align-items: center;
-  position:absolute;
-  bottom: 10px;
+  align-items: end;
   font-size: 13px;
 }
 
-.PostListBox li .PostDetailBox .icon {
+.commu_post-list__detail--userinfo {
+  width: 72%;
+  display: flex;
+  align-items:end;
+}
+
+/* .commu-post-list__detail--userinfo__img-box {
+  border-radius: 50%;
+  margin-right: 5px;
+  height: 40px;
+}
+
+.commu-post-list__detail--userinfo__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+} */
+
+.commu_post-list__detail--attention {
+  display: flex;
+  justify-content: space-between;
+  width:28%;
+}
+
+.commu-post-list__icon {
   font-size:15px;
+  margin-right: 5px;
 }
 
-.PostListBox li .Username {
-  width: 60px;
-}
-
-.PostListBox li .View, .PostListBox li .Like, .PostListBox li .Comment {
+.commu-post-list__view,
+.commu-post-list__like,
+.commu-post-list__comment {
   display: flex;
   align-items: center;
-  width: 65px;
-}
-
-
-.PostListBox li .View span {
-  margin: 0 0 0 5px;
-}
-
-.PostListBox li .Like span {
-  margin: 0 0 0 3px;
-}
-
-.PostListBox li .Comment span {
-  margin: 0 0 0 3px;
-}
-
-.PostListBox li .DateTime {
-  width: 100px;
-  text-align: center;
-}
-
-.WriteButtonBox {
-  width:800px;
-  margin: 20px auto 0;
-  text-align: right;
-}
-
-.WriteButtonBox button {
-  width: 64px;
+  width: 33%;
+  margin-left:10px;
 }
 

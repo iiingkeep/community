@@ -4,8 +4,9 @@ import Pagination from "react-js-pagination";
 import { useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import "./News.css";
+import { formattedDateAndTime } from "../Util/utils";
 
-const NewsItem = () => {
+const News = () => {
   // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
   const [news, setNews] = useState([]);
   // page : 현재 페이지
@@ -113,7 +114,7 @@ const NewsItem = () => {
   };
 
   // 로고 클릭시 초기페이지로 돌아감
-  const handelLogoClick = () => {
+  const handleLogoClick = () => {
     setPage(1);
     setSearchTerm("");
     setSortBy("latest");
@@ -216,17 +217,15 @@ const NewsItem = () => {
   };
 
   return (
-    <div className="news_page">
+    <div className="news-page inner">
       <Link to="/news">
-        <h1>
-          <strong>
-            <em onClick={handelLogoClick}>NEWS FEED</em>
-          </strong>
+        <h1 className="news-header" onClick={handleLogoClick}>
+          환경이슈
         </h1>
       </Link>
       {/* 검색 */}
-      <div className="search_line">
-        <div className="search">
+      <div className="news-search-and-sort-box">
+        <div className="news-search-box">
           <input
             type="text"
             placeholder="뉴스 검색"
@@ -238,16 +237,20 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
-        <select className="sorted" value={sortBy} onChange={handleSortChange}>
+        <select
+          className="news-sort-box"
+          value={sortBy}
+          onChange={handleSortChange}
+        >
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>
         </select>
       </div>
       {/* 뉴스 목록 */}
-      <ul className="news_list">
+      <ul className="news-list">
         {currenPosts.map((item) => (
-          <div className="news_list_box">
+          <div className="news-list-box">
             <li key={item.newsid}>
               {/* 썸네일 */}
               <img
@@ -265,35 +268,44 @@ const NewsItem = () => {
                 {item.title}
               </a>
               {/* 조회수 */}
-              <p id="views">
+              <p>
                 <Icon icon="fluent-mdl2:view" />
-                {item.views}
+                <span className="news-list__views">{item.views}</span>
               </p>
               {/* 좋아요 */}
-              <div className="like_button">
+              <div className="news-like__button">
                 <button
                   onClick={() => handleLikeClick(item.newsid, loggedIn, userid)}
                 >
-                  {likedArticles[item.newsid] ? "❤️" : "🤍"}
+                  {likedArticles[item.newsid] ? (
+                    <Icon icon="icon-park-solid:like" />
+                  ) : (
+                    <Icon icon="icon-park-outline:like" />
+                  )}
                 </button>
               </div>
-              <p>{item.pubDate}</p>
+              <div className="news-list__datetime">
+                <p>
+                  {formattedDateAndTime(item.pubDate, "date")}
+                  {formattedDateAndTime(item.pubDate, "time")}
+                </p>
+              </div>
             </li>
           </div>
         ))}
       </ul>
       {/* 페이지네이션 */}
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={articlesPerPage}
-          totalItemsCount={filteredNews.length}
-          pageRangeDisplayed={5}
-          prevPageText={"<"}
-          nextPageText={">"}
-          onChange={handleChangePage}
-        />
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={articlesPerPage}
+        totalItemsCount={filteredNews.length}
+        pageRangeDisplayed={5}
+        prevPageText={"<"}
+        nextPageText={">"}
+        onChange={handleChangePage}
+      />
     </div>
   );
 };
 
-export default NewsItem;
+export default News;

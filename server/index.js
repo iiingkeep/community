@@ -90,47 +90,34 @@ app.get("/", (req, res) => res.send(`Hell'o World!`));
 //------------------------이주호 추가
 const execPromise = util.promisify(exec); // exec함수를 Promise(비동기) 방식으로 변환
 
+// 스케줄 함수 정의
+async function executePythonScript(scriptName, message) {
+  try {
+    await execPromise(`python ${scriptName}`);
+    console.log(`${message} 실행 완료`);
+  } catch (error) {
+    console.error(`오류: ${error.message}`);
+  }
+}
 // 지정시간에 파일 실행 (초(0-59), 분(0-59), 시(0-23), 일(1-31), 월(1-12), 요일(0-7))
 // * 로 표시한 경우 반복됨(e.g. * 0 6 * * * : 06시 00분 00초, 01초, 02초...59초)
 // 06시 크롤링 실행
 schedule.scheduleJob("0 0 6 * * *", async () => {
-  try {
-    await execPromise("python newsAPI.py");
-    console.log("크롤링 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+  await executePythonScript("newsAPI.py", "크롤링 파일");
 });
-
-// 06시 00분 30초 워드클라우드 실행
-schedule.scheduleJob("30 0 6 * * *", async () => {
-  try {
-    await execPromise("python newsWC.py");
-    console.log("워드클라우드 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+// 06시 00분 20초 워드클라우드 실행
+schedule.scheduleJob("20 0 6 * * *", async () => {
+  await executePythonScript("newsWC.py", "워드클라우드 파일");
 });
-
 // 18시 크롤링 실행
 schedule.scheduleJob("0 0 18 * * *", async () => {
-  try {
-    await execPromise("python newsAPI.py");
-    console.log("크롤링 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
+  await executePythonScript("newsAPI.py", "크롤링 파일");
+});
+// 18시 00분 20초 워드클라우드 실행
+schedule.scheduleJob("20 0 18 * * *", async () => {
+  await executePythonScript("newsWC.py", "워드클라우드 파일");
 });
 
-// 18시 00분 30초 워드클라우드 실행
-schedule.scheduleJob("30 0 18 * * *", async () => {
-  try {
-    await execPromise("python newsWC.py");
-    console.log("워드클라우드 파일 실행 완료");
-  } catch (error) {
-    console.error(`오류: ${error.message}`);
-  }
-});
 
 // DB에 있는 뉴스 데이터 가져오기
 app.get("/news", (req, res) => {
@@ -523,7 +510,7 @@ app.get('/Community', async (req, res) => {
     FROM 
       ezteam2.community_posts cp
     INNER JOIN 
-      user u ON cp.userid = u.userid
+      ezteam2.user u ON cp.userid = u.userid
     WHERE 
       cp.categoryid = ?
     `;
@@ -683,12 +670,22 @@ app.post("/Community/Write", async (req, res) => {
         await poolPromise.query(insertQuery, [userid, postId]);
       }
       console.log(`Post like toggled for post id: ${postId}`);
-      res.status(200).send('OK');
+
+      // 업데이트된 좋아요 수를 조회
+      const likeCountQuery = `
+      SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
+      `;
+      const [likeCountRows] = await poolPromise.query(likeCountQuery, [postId]);
+      const likeCount = likeCountRows[0].likeCount;
+
+      res.status(200).json({ likeCount });
     } catch (error) {
       console.error('Error occurred while toggling post like:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+
   
 
   // 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인하여 클라이언트에 정보 반환
@@ -708,6 +705,24 @@ app.post("/Community/Write", async (req, res) => {
     } catch (error) {
       console.error('Error occurred while checking post like:', error);
       res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+  // db에서 게시글의 좋아요 갯수를 반환
+  app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
+    const postId = req.params.id;
+    
+    try {
+      const query = `
+        SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
+      `;
+      const [rows] = await poolPromise.query(query, [postId]);
+      const likeCount = rows[0].likeCount;
+      res.status(200).json({ likeCount });
+    } catch (error) {
+      console.error('좋아요 수를 가져오는 중 에러 발생:', error);
+      res.status(500).json({ error: '내부 서버 오류' });
     }
   });
 

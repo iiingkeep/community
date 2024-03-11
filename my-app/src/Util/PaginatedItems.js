@@ -1,5 +1,5 @@
 import React from "react";
-import './PaginatedItems.css';
+import '../Styles/PaginatedItems.css';
 
 const PaginatedItems = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
