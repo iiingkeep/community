@@ -74,7 +74,7 @@ const getPostThumbnail = (content) => {
   // 게시글에 이미지가 있는 경우 첫 번째 이미지 URL 반환, 없는 경우 null 반환
   const url = matches ? matches[0].replace('<img src="', '').replace('"', '') : null;
   console.log(url)
-  return matches ? matches[0].replace('<img src="', '').replace('"', '') : 'https://img.freepik.com/free-vector/big-green-tropical-leaf-design-element-vector_53876-136546.jpg?t=st=1709001702~exp=1709005302~hmac=ef7e3256d83f1215b0ac3cafbaba39317184f077698c7700794dc84cdbd76a67&w=996';
+  return matches ? matches[0].replace('<img src="', '').replace('"', '') : '/background_img/thumb4.png';
 };
 
 
@@ -108,7 +108,7 @@ const getPostContentWithoutImages = (content) => {
   return (
     <div className="community-page inner">
       {/* 커뮤니티 헤더 */}
-      <h1 className='commu-header'>커뮤니티</h1>
+      <div className='commu-header'><h1 className='commu-header-title'>커뮤니티</h1></div>
       {/* 게시글 카테고리 탭 */}
       <div className='commu-category-box'>
         <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>

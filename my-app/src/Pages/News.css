@@ -100,46 +100,42 @@
   width: 100%;
   padding: 0;
   margin-top: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .news-list-box li {
   margin-bottom: 30px;
   display: flex;
-  height: 115px;
-  justify-content: center;
+  align-items: center;
   margin: 0 auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.news-list-box li:first-child {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .news-list-box {
   margin: 0 auto;
   height: 130px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-/* 뉴스 목록 */
-.news-list-box li * {
-  height: 100px;
-  margin-right: 30px;
+  
 }
 
 /* 뉴스 썸네일 */
 .news-list-box li img {
   cursor: pointer;
   width: 140px;
+  height: 110px;
   box-sizing: border-box;
+  margin-right: 20px;
 }
 
 /* 뉴스 제목 */
 .news-list-box li a {
   display: flex;
-  width: 300px;
+  width: 50%;
   align-items: center;
+  margin-right:20px;
+  line-height: 25px;
+  font-weight: 500;
   text-align: left;
   text-decoration-line: none;
 }
@@ -164,13 +160,15 @@
 .news-list-box li p {
   margin: 0px 30px 0px 0px;
   display: flex;
-  width: 100px;
   /* 가로 중앙 정렬 */
   justify-content: center;
   /* 세로 중앙 정렬 */
   align-items: center;
   /* 텍스트 중앙 정렬 */
   text-align: center;
+}
+.news-list__views {
+  margin-left: 5px;
 }
 
 /* 뉴스 좋아요 버튼 */
@@ -191,4 +189,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-right:30px;
+}
+
+.news-list__datetime {
+  width: 20%;
 }

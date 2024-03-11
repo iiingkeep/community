@@ -254,7 +254,7 @@ const Main = () => {
             </div>
             <div className="main-issue__wordcloud-and-news-box">
             <div className="main-issue__wordcloud-box">
-              <p className="main-issue__name">클라우드 이미지</p>
+              <p className="main-issue__name">지구촌 이슈</p>
               <img
                 className="main-issue__wordcloud"
                 src="./wc_image/result.png"

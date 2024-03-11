@@ -66,7 +66,7 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
       {/* 댓글 갯수 표현 */}
       <p className='commu-comment__count-box'>
         <Icon icon="f7:ellipses-bubble" />
-        <span className='commu-comment__count'>{commentCount}</span>
+        <span className='commu-comment__count'>{commentCount}개의 댓글</span>
       </p>
       {/* 댓글 목록이 담긴 배열 commentLists를 map함수를 이용해 새로운 배열로 반환 */}
       {commentLists && commentLists.map((comment) => (

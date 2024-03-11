@@ -2,21 +2,25 @@
   position: relative;
 }
 
+/* 댓글 수 */
 .commu-comment__count-box {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
+  border-bottom: 1px solid gray;
 }
 
 .commu-comment__count {
   margin-left: 5px;
 }
 
+/* 댓글+답글 작성 폼 */
 .commu-comment__form {
   display: flex;
   height: 50px;
 }
 
+/* 답글이 아닌 댓글 작성 폼 */
 .commu-comment__form--origin {
   margin-top: 30px;
 }

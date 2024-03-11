@@ -262,9 +262,9 @@ const NewsItem = () => {
                 {item.title}
               </a>
               {/* 조회수 */}
-              <p id="views">
+              <p>
                 <Icon icon="fluent-mdl2:view" />
-                {item.views}
+                <span className="news-list__views">{item.views}</span>
               </p>
               {/* 좋아요 */}
               <div className="news-like__button">
@@ -278,8 +278,8 @@ const NewsItem = () => {
                   )}
                 </button>
               </div>
-              <div>
-                <p className="Date">
+              <div className="news-list__datetime">
+                <p>
                   {formattedDateAndTime(item.pubDate, "date")}
                   {formattedDateAndTime(item.pubDate, "time")}
                 </p>

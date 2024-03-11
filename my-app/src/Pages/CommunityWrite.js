@@ -52,6 +52,7 @@ const CommunityWrite = ({userid}) => {
     const formData = new FormData();
     formData.append('img', file); 
 
+
     // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
     try {
       const result = await axios.post('http://localhost:8000/img', formData);
@@ -170,6 +171,13 @@ const CommunityWrite = ({userid}) => {
     "background",
   ];
 
+  var bold = Quill.import('formats/bold');
+bold.tagName = 'b';   // Quill uses <strong> by default
+Quill.register(bold, true);
+
+var italic = Quill.import('formats/italic');
+italic.tagName = 'i';   // Quill uses <em> by default
+Quill.register(italic, true);
 
 
   return (

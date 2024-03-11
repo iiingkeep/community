@@ -2,29 +2,50 @@
   margin: 0
 }
 
+/* 공통 */
+.button {
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgb(83, 212, 92);
+  font-size:14px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color:white;
+}
+
 .community-page {
   position:relative;
 }
-
+/* 헤더 */
 .commu-header {
-  width: 2500px;
+  width: 1500px;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 700;
   color:rgb(255, 255, 255);
-  background-color: rgb(76, 134, 188);
-  /* background-image: url('../../public/background_img/bubble6.png');
-  background-size: 80px 80px;
+  /* background-color: rgb(76, 134, 188); */
+  background-image:  url('../../public/background_img/back3.jpg');
+  background-size: 1502px  ;
   background-repeat:no-repeat;
-  background-position: 43% 10%; */
+  background-position: 20% 210%;
   position: relative;
-  transform: translateX(-32%);
+  transform: translateX(-16%);
   z-index: 2;
+  border-radius: 40px;
+  /* border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px; */
 }
+/* .commu-header-title {
+  position: absolute;
+  top: 60%;
+  left: 19%;
+} */
 
+
+/* 카테고리 */
 .commu-category-box {
   width:100%;
   margin: 30px auto;
@@ -47,20 +68,28 @@
   border-bottom: 3px solid rgb(83, 212, 92);
 }
 
+/* 검색창, 글쓰기 버튼 */
 .commu-search-and-go-write-box {
   display: flex;
+  align-items: center;
   margin: 100px 0 15px;
 }
 
 .commu-search-box {
+  width: 50%;
   display: flex;
+  align-items: center;
+}
+
+.commu-search-box__button {
+  width: 65px;
 }
 
 .commu-search-box--except-button {
   display: flex;
   height: 35px;
   margin-right: 10px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 2px solid #c4c4c4;
   border-radius: 20px;
   font-family: "IBM Plex Sans KR", sans-serif;
   font-weight: 400;
@@ -74,17 +103,6 @@
   outline: none;
 }
 
-.button {
-  width: 60px;
-  border: 1px solid rgba(0,0,0,0.2);
-  background-color: rgb(83, 212, 92);
-  font-size:12px;
-  border-radius: 20px;
-  border: none;
-  padding: 10px;
-  color:white;
-}
-
 .commu-go-write-box {
   width:100%;
   text-align: right;
@@ -95,6 +113,7 @@
   border-radius: 0;
 }
 
+/* 게시글 목록 */
 .commu-post-list-box{
   width: 100%;
   margin: 10px 0;
@@ -107,12 +126,12 @@
   margin: 0px auto;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.5);
   font-size: 14px;
 }
 
 .commu-post-list:first-child {
-  border-top: 1px solid rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(0,0,0,0.5);
 }
 
 .commu-post-list__thumbnail {
@@ -136,7 +155,6 @@
 
 .commu-post-list__title-and-content {
   width: 80%;
-  font-size: 20px;
   padding: 20px 0 0 0;
 }
 
@@ -147,6 +165,7 @@
 .commu-post-list__title {
   max-width: 90%;
   margin-bottom: 15px;
+  font-size: 23px;
   font-weight: 500;
   color: rgb(83, 212, 92);
   overflow: hidden;
@@ -158,7 +177,8 @@
 .commu-post-list__content {
   max-width: 95%;
   line-height: 1.5em;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 400;
   color: black;
   overflow: hidden;
   display: -webkit-box;
