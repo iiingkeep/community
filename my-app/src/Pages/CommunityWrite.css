@@ -46,6 +46,42 @@
   margin: 50px auto 0px;
 }
 
+.ql-editor strong{
+  font-weight:bold;
+}
+.ql-editor em {
+  font-style: italic;
+}
+
+.ql-editor u {
+  text-decoration: underline;
+}
+.ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 16px;
+}
+.ql-editor s {
+  text-decoration: line-through;
+}
+.ql-editor ol, ul {
+  padding-left: 0;
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.ql-editor li:not(.ql-direction-rtl)::before {
+  margin-left: -1.5em;
+  margin-right: 0.3em;
+  text-align: right;
+}
+.ql-editor ul li {
+  list-style:none;
+}
+.ql-editor li:before {
+  content: counter(list-0, decimal) '. ';
+}
+
+
 .commu-write__button {
   text-align: right;
   margin-top: 50px;

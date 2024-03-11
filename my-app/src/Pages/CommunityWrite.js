@@ -171,14 +171,6 @@ const CommunityWrite = ({userid}) => {
     "background",
   ];
 
-  var bold = Quill.import('formats/bold');
-bold.tagName = 'b';   // Quill uses <strong> by default
-Quill.register(bold, true);
-
-var italic = Quill.import('formats/italic');
-italic.tagName = 'i';   // Quill uses <em> by default
-Quill.register(italic, true);
-
 
   return (
     <div className='commu-write-page inner'>
@@ -204,7 +196,7 @@ Quill.register(italic, true);
           />
       </div>
       {/* 내용 입력을 위한 quill-editor 설정 */}
-      <div className='commu-write__content-box'>
+      <div className='commu-write__content-box' >
         <ReactQuill 
         ref={quillRef}
         className="commu-write__content"
