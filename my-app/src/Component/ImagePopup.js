@@ -1,6 +1,6 @@
 // ImagePopup.js
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import '../Styles/ImagePopup.css';
 import Draggable from "./Draggable";
@@ -53,22 +53,24 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
   };
 
 // 이미지를 가져오는 함수 *수정중
-const handleSaveImage = async () => {
-  try {
-    const response = await axios.get(`http://localhost:8000/imgsave/${userId}`, {
-      responseType: 'arraybuffer', // 이진 데이터로 처리 *추가
-    });
-    // const imageData = response.data; // 이미지 데이터
-    const imageData = Buffer.from(response.data, 'binary').toString('base64');
-    // 이미지 데이터를 상태에 설정하여 이미지를 표시합니다.
-    // setImageUrl(imageData.path); // 예시: 서버로부터 받은 이미지 데이터에 따라서 설정
-    const imageUrl = `data:image/png;base64,${imageData}`;
-    setImageUrl(imageUrl); // 이미지 표시
-  } catch (error) {
-    console.error('이미지 가져오기 오류:', error);
-    alert('이미지 가져오기 오류');
-  }
-};
+// const handleSaveImage = async () => {
+//   try {
+//     const response = await axios.get(`http://localhost:8000/imgsave/${userId}`);
+//     // 이미지 파일의 경로를 받아옵니다.
+//     const imageUrl = response.data;
+//     console.log(imageUrl);
+//     // 이미지 파일의 경로를 상태에 설정하여 이미지를 표시합니다.
+//     setImageUrl(imageUrl); 
+//   } catch (error) {
+//     console.error('이미지 가져오기 오류:', error);
+//     alert('이미지 가져오기 오류');
+//   }
+// };
+
+// useEffect(() => {
+//   handleSaveImage();
+// }, [userId]);
+
 
   // 이미지를 서버에서 삭제
   // const handleImageDelete = async () => {
@@ -115,7 +117,7 @@ const handleSaveImage = async () => {
           {imageUrl && ( // 이미지 URL이 존재할 경우 이미지 표시
               <img className="ProfileImg" src={imageUrl} alt="이미지" />
           )}
-          <button onClick={handleSaveImage}>저장</button>
+          {/* <button onClick={handleSaveImage}>저장</button> */}
           {/* <button onClick={handleImageDelete}>삭제</button> */}
         </div>
       </Draggable>

@@ -1080,7 +1080,7 @@ app.post('/pw-valid/:userid', async (req, res) => {
 });
 
 
-//  프로필 이미지 저장 -----------------------------------
+//  프로필 이미지 저장(수정전) -----------------------------------
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => { // 어디
@@ -1126,44 +1126,25 @@ app.post('/pw-valid/:userid', async (req, res) => {
 
 //  프로필 이미지 저장(DB) -----------------------------------
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => { // 어디
-//     cb(null, 'server/public/userimg') // 파일저장경로
-//   },
-//   filename: (req, file, cb) => { 
-//     const ext = path.extname(file.originalname);
-//     // const filename = file.originalname;
-//     cb(null, `${Date.now()}${ext}`) // 파일명 설정
-//   },
-// });
-
-// 수정중*
+// userid를 넣어서 파일이름 생성 *수정됨
 const storage = multer.diskStorage({
   destination: (req, file, cb) => { // 어디
-
-    const uploadDirectory = 'server/public/userimg';  
-//     if (!fs.existsSync(uploadDirectory)) {
-//       fs.mkdirSync(uploadDirectory, {recursive : true});
-// }
-    cb(null, uploadDirectory) // 파일저장경로
+    cb(null, 'server/public/userimg') // 파일저장경로
   },
   filename: (req, file, cb) => { 
     const ext = path.extname(file.originalname);
-    // const filename = file.originalname;
-    cb(null, 'profile_' + req.body.userid + path.extname(file.originalname)); // 파일명 설정
+    const userId = req.params.userid || 'default'
+    // console.log('사용자id:',userId)
+    cb(null, 'profile_' + userId + path.extname(file.originalname));
   },
 });
 
-// 파일이 업로드될 때마다 해당 파일을 '~'/ 디렉토리에
-// 현재 시간을 기반으로 한 고유한 파일명으로 저장
-
+// 파일이 업로드될 때마다 해당 파일을 지정 디렉토리에 저장
 const imgup = multer({ storage: storage });
 
 app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   const userId = req.params.userid;
-  console.log("받은파일경로",req.file.path);
-  console.log("받은파일경로",req.file.filename);
-  // console.log(req.file.destination)
+  console.log("파일경로",req.file.path);
   if (!req.file) {
     return res.status(400).send('No files were uploaded.');
   }
@@ -1173,8 +1154,7 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   console.log('파일객체log',req.file)
   const imageUrl = filePath;
 
-// 이미지 저장 DB테이블 *변경코드
-// 중복키가 존재하면 이미 존재하는 img_url을 업데이트
+// 중복키가 존재하면 이미 존재하는 img_url을 업데이트 *수정됨
   const sql = `
   INSERT INTO user_img (userid, img_url) VALUES (?, ?) 
   ON DUPLICATE KEY UPDATE img_url = VALUES(img_url)
@@ -1189,7 +1169,7 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   });
 });
 
-// 이미지 저장 DB테이블 *기존코드
+// 이미지 저장 DB테이블 *수정전
 //   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
 //   connection.query(sql, [imageUrl], (err, results, fields) => {
 //     if (err) {
@@ -1202,10 +1182,21 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
 
 //  프로필 이미지 get요청 -----------------------------------
 
+// app.use("/public", express.static(path.join(__dirname, "public"))); ---경로설정
 app.get('/imgsave/:userid', (req, res) => {
   const userId = req.params.userid;
-  // 이미지 경로를 사용해서 클라이언트에 이미지 제공
-  res.sendFile(path.join(__dirname, `public/userimg/${userId}`));
+  const filePath = path.join(__dirname, `public/userimg/profile_${userId}.png`);
+
+  // 파일 존재 여부 확인
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error('Error accessing file:', err);
+      return res.status(404).send('Image not found');
+    }
+
+    // 파일이 존재하면 해당 파일을 응답으로 보냄
+    res.sendFile(filePath);
+  });
 });
 
 //  프로필 이미지 삭제 -----------------------------------
