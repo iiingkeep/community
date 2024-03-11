@@ -1,31 +1,56 @@
-.CommunityWrite {
- 
+
+/* .commu-category__button {
+  padding:10px 0;
+  margin-right: 10px
+} */
+
+.commu-category__button--selected {
+  border-bottom: 3px solid rgb(83, 212, 92);
 }
 
-.TitleBox {
-  width:800px;
-  margin: 100px auto 0px;
+
+.commu-write__title-box {
+  width:100%;
+  margin: 100px auto 0;
   text-align: start;
   font-size: 16px;
 }
 
 
-#PostTitle {
-  height: 30px;
-  width: 99%;
+.commu-write__title {
+  height: 50px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   font-size: 25px;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
-#PostTitle::placeholder{
+.commu-write__title::placeholder{
   color:rgba(0,0,0,0.2);
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
-#PostTitle:focus {
+.commu-write__title:focus {
   outline: none;
 }
 
-#PostTitle:focus::placeholder{
+.commu-write__title:focus::placeholder{
   color:transparent;
+}
+
+.commu-write__content {
+  width: 100%;
+  height: 400px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  margin: 50px auto 0px;
+}
+
+.commu-write__button {
+  text-align: right;
+  margin-top: 50px;
+}
+
+.commu-write__button--submit {
+  margin-right: 5px;
 }

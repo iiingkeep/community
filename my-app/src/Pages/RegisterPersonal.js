@@ -177,7 +177,7 @@ function RegisterPersonal() {
           onChange={(e) => setAddress(e.target.value)}
         />
 
-        <button className="regi-addr__button" onClick={handle.clickButton}>
+        <button type="button" className="regi-addr__button" onClick={handle.clickButton}>
           주소 선택
         </button>
         {openPostcode && (

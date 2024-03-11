@@ -217,13 +217,9 @@ const NewsItem = () => {
   };
 
   return (
-    <div className="news_page">
+    <div className="news-page inner">
       <Link to="/news">
-        <h1>
-          <strong>
-            <em onClick={handelLogoClick}>NEWS FEED</em>
-          </strong>
-        </h1>
+      <h1 className='commu-header'>환경이슈</h1>
       </Link>
       {/* 검색 */}
       <div className="news-search-and-sort-box">

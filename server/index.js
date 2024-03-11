@@ -508,7 +508,7 @@ app.get('/Community', async (req, res) => {
     FROM 
       ezteam2.community_posts cp
     INNER JOIN 
-      user u ON cp.userid = u.userid
+      ezteam2.user u ON cp.userid = u.userid
     WHERE 
       cp.categoryid = ?
     `;
