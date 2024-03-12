@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { handlePostcode } from "./Postcodehandle";
@@ -10,11 +9,13 @@ function RegisterPersonal() {
   const [email, setEmail] = useState(""); // 아이디
   const [password, setPassword] = useState(""); // 비밀번호
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
+  const [phonenumber, setphonenumber] = useState(""); // 휴대폰 번호
   const [openPostcode, setOpenPostcode] = useState(false); // 주소
   const [address, setAddress] = useState(""); // 주소
   const [detailedaddress, setdetailedaddress] = useState(""); // 상세 주소
-  const [phonenumber, setphonenumber] = useState(""); // 휴대폰 번호
   const [emailDuplication, setEmailDuplication] = useState(false); // 아이디 유효성
+  const [usernameDuplication, setUsernameDuplication] = useState(false); // 닉네임 유효성
+  const [phonenumberDuplication, setPhonenumberDuplication] = useState(false); // 휴대폰 번호 유효성
 
   const handle = handlePostcode(openPostcode, setOpenPostcode, setAddress);
 
@@ -30,7 +31,7 @@ function RegisterPersonal() {
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
 
   // 아이디 유효성 검사
-  const handleEmailDuplicationCheck = () => {
+  const handleEmailCheck = () => {
     if (!email) {
       alert("아이디를 입력하세요.");
       return;
@@ -60,41 +61,70 @@ function RegisterPersonal() {
         alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
       });
   };
-
-  const handleRegisterClick = () => {
-    if (!email) {
-      alert("아이디를 입력해주세요!");
-      return;
-    }
-    if (!emailDuplication) {
-      alert("아이디 중복확인을 해주세요.");
-      return;
-    }
+  //-----------------------------------------------------------------------
+  // 닉네임 중복 검사
+  const handleUsernameCheck = () => {
     if (!NICKcheck.test(username)) {
       alert("닉네임 형식이 올바르지 않습니다.");
       return;
+    } else {
+      setUsernameDuplication(true);
     }
-    if (!PWcheck.test(password)) {
-      alert("비밀번호 형식이 올바르지 않습니다.");
-      return;
-    }
-    if (password.match(spacebar)) {
-      alert("비밀번호에 공백을 포함할 수 없습니다.");
-      return;
-    }
-    // if (password.match(PWcheck) && !spacebar.test(password)) {
-      
-    // }
-    if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      setPasswordMatch(false);
-      return;
-    }
+
+    axios
+      .post("http://localhost:8000/checkUsernameDuplication", { username })
+      .then((response) => {
+        console.log("서버 응답:", response.data);
+        setUsernameDuplication(response.data.success);
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.error("닉네임 중복 확인 중 오류:", error);
+        alert("client :: 닉네임 중복 확인 중 오류가 발생했습니다.");
+      });
+  };
+
+  // 휴대폰 번호 중복 검사
+  const handlePhonenumberCheck = () => {
     if (!tel.test(phonenumber)) {
       alert("휴대폰 번호 형식이 올바르지 않습니다.");
       return;
+    } else {
+      setPhonenumberDuplication(true);
     }
-    if (
+
+    axios
+      .post("http://localhost:8000/checkPhonenumberDuplication", { phonenumber })
+      .then((response) => {
+        console.log("서버 응답:", response.data);
+        setPhonenumberDuplication(response.data.success);
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.error("휴대폰 번호 중복 확인 중 오류:", error);
+        alert("client :: 휴대폰 번호 중복 확인 중 오류가 발생했습니다.");
+      });
+  };
+  //-----------------------------------------------------------------------
+
+  const handleRegisterClick = () => {
+    if (!emailDuplication) {
+      alert("아이디 중복 확인을 해주세요.");
+      return;
+    } else if (!usernameDuplication) {
+      alert("닉네임 중복 확인을 해주세요.");
+      return;
+    } else if (!PWcheck.test(password) || password.match(spacebar)) {
+      alert("비밀번호 형식이 올바르지 않습니다.");
+      return;
+    } else if (password !== confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      setPasswordMatch(false);
+      return;
+    } else if (!phonenumberDuplication) {
+      alert("휴대폰 번호 중복 확인을 해주세요.");
+      return;
+    } else if (
       !email ||
       !username ||
       !password ||
@@ -105,44 +135,44 @@ function RegisterPersonal() {
     ) {
       alert("정보를 모두 입력해주세요");
       return;
+    } else {
+      // 클라이언트에서 서버로 회원가입 요청
+      axios
+        .post("http://localhost:8000/register", {
+          username,
+          password,
+          email,
+          address,
+          detailedaddress,
+          phonenumber,
+          usertype: "personal",
+        })
+        .then((response) => {
+          console.log("서버 응답:", response.data);
+          alert("회원가입이 완료되었습니다.");
+          if (response.data.userType === 1) {
+            // 개인 사용자 처리
+          }
+          window.location.href = "/Login"; // 홈 페이지 또는 다른 페이지로 리디렉션
+        })
+        .catch((error) => {
+          if (error.response) {
+            // 서버가 응답한 상태 코드가 2xx가 아닌 경우
+            console.error(
+              "서버 응답 오류:",
+              error.response.status,
+              error.response.data
+            );
+          } else if (error.request) {
+            // 서버로 요청이 전송되었지만 응답이 없는 경우
+            console.error("서버 응답이 없음:", error.request);
+          } else {
+            // 요청을 설정하는 중에 에러가 발생한 경우
+            console.error("요청 설정 중 오류:", error.message);
+          }
+          alert("서버와의 통신 중 오류가 발생했습니다.");
+        });
     }
-
-    // 클라이언트에서 서버로 회원가입 요청
-    axios
-      .post("http://localhost:8000/register", {
-        username,
-        password,
-        email,
-        address,
-        detailedaddress,
-        phonenumber,
-        usertype: "personal",
-      })
-      .then((response) => {
-        console.log("서버 응답:", response.data);
-        alert("회원가입이 완료되었습니다.");
-        if (response.data.userType === 1) {
-          // 개인 사용자 처리
-        }
-        window.location.href = "/Login"; // 홈 페이지 또는 다른 페이지로 리디렉션
-      })
-      .catch((error) => {
-        if (error.response) {
-          // 서버가 응답한 상태 코드가 2xx가 아닌 경우
-          console.error(
-            "서버 응답 오류:",
-            error.response.status,
-            error.response.data
-          );
-        } else if (error.request) {
-          // 서버로 요청이 전송되었지만 응답이 없는 경우
-          console.error("서버 응답이 없음:", error.request);
-        } else {
-          // 요청을 설정하는 중에 에러가 발생한 경우
-          console.error("요청 설정 중 오류:", error.message);
-        }
-        alert("서버와의 통신 중 오류가 발생했습니다.");
-      });
   };
 
   return (
@@ -157,10 +187,10 @@ function RegisterPersonal() {
         />
         {/* 아이디 유효성 검사 */}
         <button
-          className="regi-email__button"
-          onClick={handleEmailDuplicationCheck}
+          className="regi-dupl__button"
+          onClick={handleEmailCheck}
         >
-          아이디 중복확인
+          아이디 중복 확인
         </button>
         <br />
         <input
@@ -169,6 +199,13 @@ function RegisterPersonal() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {/* 닉네임 유효성 검사 */}
+        <button
+          className="regi-dupl__button"
+          onClick={handleUsernameCheck}
+        >
+          닉네임 중복 확인
+        </button>
         <br />
         <input
           type="password"
@@ -201,6 +238,13 @@ function RegisterPersonal() {
           value={phonenumber}
           onChange={(e) => setphonenumber(e.target.value)}
         />
+        {/* 휴대폰 번호 유효성 검사 */}
+        <button
+          className="regi-dupl__button"
+          onClick={handlePhonenumberCheck}
+        >
+          휴대폰 번호 중복 확인
+        </button>
         <br />
         <input
           type="text"
@@ -234,9 +278,6 @@ function RegisterPersonal() {
         <button className="regi-complete__button" onClick={handleRegisterClick}>
           가입완료
         </button>
-        <div className="regi-button__to-login">
-          <Link to="/Login">로그인창</Link>
-        </div>
       </div>
     </div>
   );

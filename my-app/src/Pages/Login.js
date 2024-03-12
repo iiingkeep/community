@@ -33,8 +33,8 @@ function Login() {
         window.location.reload(); // 페이지 리로드
       } else {
         // 로그인 실패 시 처리
-        console.log('로그인 실패:', response.data);
-        setloginStatus('로그인 실패: '+ response.data.message);
+        console.log('로그인 실패 : ', response.data);
+        setloginStatus('로그인 실패 : '+ response.data.message);
       }
     })
   };

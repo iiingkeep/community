@@ -11,11 +11,9 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
-//--------------------이주호 추가
 import util from "util";
 import { exec } from "child_process";
 import schedule from "node-schedule";
-//--------------------이주호 추가
 //--------------------곽별이 추가
 import fs from "fs";
 
@@ -239,7 +237,7 @@ app.post("/login", async (req, res) => {
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
-    const [rows, fields] = await poolPromise.execute(
+    const [rows] = await poolPromise.execute(
       "SELECT * FROM user WHERE email = ?",
       [email]
     );
@@ -256,11 +254,11 @@ app.post("/login", async (req, res) => {
       } else {
         res.send({
           success: false,
-          message: "정보가 일치하지 않습니다.",
+          message: "비밀번호가 틀렸습니다.",
         });
       }
     } else {
-      res.send({ success: false, message: "유저 정보가 없습니다." });
+      res.send({ success: false, message: "가입된 정보가 없습니다." });
     }
   } catch (error) {
     console.error("서버에서 에러 발생:", error);
@@ -296,7 +294,7 @@ app.post("/checkEmailDuplication", async (req, res) => {
 
   try {
     // 데이터베이스에서 아이디가 이미 존재하는지 확인
-    const [rows, fields] = await poolPromise.execute(
+    const [rows] = await poolPromise.execute(
       "SELECT * FROM user WHERE email = ?",
       [email]
     );
@@ -319,6 +317,74 @@ app.post("/checkEmailDuplication", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "이메일 중복 확인 중 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
+});
+
+//-------------------------------닉네임 중복 체크---------------------------------
+app.post("/checkUsernameDuplication", async (req, res) => {
+  const { username } = req.body;
+
+  try {
+    // 데이터베이스에서 아이디가 이미 존재하는지 확인
+    const [rows] = await poolPromise.execute(
+      "SELECT * FROM user WHERE username = ?",
+      [username]
+    );
+
+    if (rows.length > 0) {
+      // 이미 등록된 아이디인 경우
+      return res.status(200).json({
+        success: false,
+        message: "이미 등록된 닉네임입니다.",
+      });
+    } else {
+      // 중복되지 않은 아이디인 경우
+      return res.status(200).json({
+        success: true,
+        message: "사용 가능한 닉네임입니다.",
+      });
+    }
+  } catch (err) {
+    console.error("MySQL에서 닉네임 중복 확인 중 오류:", err);
+    return res.status(500).json({
+      success: false,
+      message: "닉네임 중복 확인 중 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
+});
+
+//-------------------------------휴대폰 번호 중복 체크---------------------------------
+app.post("/checkPhonenumberDuplication", async (req, res) => {
+  const { phonenumber } = req.body;
+
+  try {
+    // 데이터베이스에서 아이디가 이미 존재하는지 확인
+    const [rows] = await poolPromise.execute(
+      "SELECT * FROM user WHERE phonenumber = ?",
+      [phonenumber]
+    );
+
+    if (rows.length > 0) {
+      // 이미 등록된 아이디인 경우
+      return res.status(200).json({
+        success: false,
+        message: "이미 등록된 휴대폰 번호입니다.",
+      });
+    } else {
+      // 중복되지 않은 아이디인 경우
+      return res.status(200).json({
+        success: true,
+        message: "사용 가능한 휴대폰 번호입니다.",
+      });
+    }
+  } catch (err) {
+    console.error("MySQL에서 휴대폰 번호 중복 확인 중 오류:", err);
+    return res.status(500).json({
+      success: false,
+      message: "휴대폰 번호 중복 확인 중 오류가 발생했습니다.",
       error: err.message,
     });
   }

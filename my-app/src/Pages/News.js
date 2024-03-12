@@ -61,7 +61,6 @@ const News = () => {
   // news 배열에서 searchTerm에 해당하는 뉴스 필터링하고
   // toLowerCase()를 사용해서 대소문자 무시하고 비교해 filteredNews 배열 생성
   // searchButtonClicked 상태가 false 이면 그냥 news의 값을 사용
-
   const filteredNews = searchButtonClicked
     ? news.filter((item) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase())

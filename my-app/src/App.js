@@ -11,9 +11,7 @@ import Community from './Pages/Community';
 import CommunityEdit from './Pages/CommunityEdit';
 import CommunityWrite from './Pages/CommunityWrite';
 import CommunityRead from './Pages/CommunityRead';
-//-----뉴스
 import News from "./Pages/News";
-//-----뉴스
 import NetZero from "./Pages/NetZero";
 import MyPage from './Pages/MyPage';
 //-----프로필이미지 context 추가
