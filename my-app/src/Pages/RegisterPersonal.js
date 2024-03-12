@@ -132,7 +132,10 @@ function RegisterPersonal() {
     } else if (!usernameDuplication) {
       alert("닉네임 중복 확인을 해주세요.");
       return;
-    } else if (!PWcheck.test(password) || password.match(spacebar)) {
+    } else if (password.match(spacebar)) {
+      alert("비밀번호에 공백을 포함할 수 없습니다.");
+      return;
+    } else if (!PWcheck.test(password)) {
       alert("비밀번호 형식이 올바르지 않습니다.");
       return;
     } else if (password !== confirmPassword) {
