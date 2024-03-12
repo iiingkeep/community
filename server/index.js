@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
-// import MySQLStore from 'express-mysql-session';
-import MySQLSession from "express-mysql-session"; //0213 김민호
+import MySQLSession from "express-mysql-session";
 const MySQLStore = MySQLSession(session);
 import mysql from "mysql2/promise";
 import mysql2 from "mysql2";
@@ -66,13 +65,6 @@ const connection = mysql2.createConnection({
 
 
 // MySQL 연결
-// connection.connect((err) => {
-//   if (err) {
-//     console.error("Error connecting to MySQL: " + err.stack);
-//     return;
-//   }
-//   console.log("Connected to MySQL as id " + connection.threadId);
-// });
 (async () => {
   try {
     const connection = await poolPromise.getConnection(); // getConnection() 메서드로 커넥션을 가져옵니다.
@@ -85,7 +77,6 @@ const connection = mysql2.createConnection({
   }
 })();
 
-// 상호형
 app.get("/", (req, res) => res.send(`Hell'o World!`));
 //------------------------이주호 추가
 const execPromise = util.promisify(exec); // exec함수를 Promise(비동기) 방식으로 변환
@@ -388,31 +379,6 @@ app.post("/register", async (req, res) => {
     });
   }
 });
-//---------------------------회원가입 수정구현----------------------------------------------
-// app.get("/user", (req, res) => {
-//   const { usertype, userid } = req.session;
-
-//   if (!usertype || !userid) {
-//     return res.status(401).json({ success: false, message: "로그인되어 있지 않습니다." });
-//   }
-
-//   // 여기에서 데이터베이스에서 사용자 정보를 가져오는 로직을 구현합니다.
-//   const sql = "SELECT * FROM user WHERE userid = ?";
-//   connection.query(sql, [userid], (err, result) => {
-//     if (err) {
-//       console.error("사용자 정보 조회 중 오류:", err);
-//       return res.status(500).json({ success: false, message: "사용자 정보 조회 중 오류가 발생했습니다." });
-//     }
-
-//     const userData = result[0]; // 첫 번째 사용자 정보를 가져옴
-
-//     if (!userData) {
-//       return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
-//     }
-
-//     res.status(200).json(userData);
-//   });
-// });
 
 // //------------------------quill editor 이미지 데이터를 url로 변환---------------------------//
 
