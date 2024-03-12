@@ -2,11 +2,12 @@
 
 .login-page {
     width: 400px;
-    height: 330px;
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    height: 400px;
+    margin:auto;
+    margin-top: 20%;
+    position: relative;
+    /* top: 50%; */
+    left: 10.5%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     display: flex;

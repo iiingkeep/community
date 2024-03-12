@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import "./News.css";
 import { formattedDateAndTime } from "../Util/utils";
 
-const NewsItem = () => {
+const News = () => {
   // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
   const [news, setNews] = useState([]);
   // page : 현재 페이지
@@ -114,7 +114,7 @@ const NewsItem = () => {
   };
 
   // 로고 클릭시 초기페이지로 돌아감
-  const handelLogoClick = () => {
+  const handleLogoClick = () => {
     setPage(1);
     setSearchTerm("");
     setSortBy("latest");
@@ -219,7 +219,9 @@ const NewsItem = () => {
   return (
     <div className="news-page inner">
       <Link to="/news">
-      <h1 className='commu-header'>환경이슈</h1>
+        <h1 className="news-header" onClick={handleLogoClick}>
+          환경이슈
+        </h1>
       </Link>
       {/* 검색 */}
       <div className="news-search-and-sort-box">
@@ -235,7 +237,11 @@ const NewsItem = () => {
           <button onClick={handleSearchButtonClick}>검색</button>
         </div>
         {/* 정렬 */}
-        <select className="news-sort-box" value={sortBy} onChange={handleSortChange}>
+        <select
+          className="news-sort-box"
+          value={sortBy}
+          onChange={handleSortChange}
+        >
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
           <option value="viewsHigh">조회수 높은순</option>
@@ -280,8 +286,7 @@ const NewsItem = () => {
               </div>
               <div className="news-list__datetime">
                 <p>
-                  {formattedDateAndTime(item.pubDate, "date")}
-                  {formattedDateAndTime(item.pubDate, "time")}
+                  {formattedDateAndTime(item.pubDate, "date")} {formattedDateAndTime(item.pubDate, "time")}
                 </p>
               </div>
             </li>
@@ -302,4 +307,4 @@ const NewsItem = () => {
   );
 };
 
-export default NewsItem;
+export default News;

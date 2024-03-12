@@ -18,7 +18,8 @@ import News from "./Pages/News";
 //-----뉴스
 import NetZero from "./Pages/NetZero";
 import MyPage from './Pages/MyPage';
-
+//-----프로필이미지 context 추가
+import { ImageProvider } from './Component/ImageContext';
 
 
 // 수정 사항 적용 확인용
@@ -64,6 +65,8 @@ function App() {
 
 
   return (
+    // ImageContext 추가
+    <ImageProvider>
     <div className="App">
       <Header loggedIn={loggedIn} handleLogout={handleLogout}
         // leftChild={<button onClick={() => navigate("/")}>빵끗😊</button>}
@@ -118,6 +121,8 @@ function App() {
       
       <Footer/>
       </div>
+      </ImageProvider>
+
 
   );
 }
