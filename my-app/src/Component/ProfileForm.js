@@ -3,12 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ImagePopup from "./ImagePopup";
 import "../Styles/ProfileForm.css"
+import { useImage } from "./ImageContext"; // context추가
 
 const ProfileForm = ({userId}) => {
     // 회원 정보 상태관리
     const [profileData, setProfileData] = useState([]);
     // 이미지 URL 상태관리
-    const [imageUrl, setImageUrl] = useState("");
+    const { imageUrl, setImageUrl } = useImage(); // 수정후*
+    // const [imageUrl, setImageUrl] = useState(""); // 수정전*
+    
     // 이미지팝업창 클릭이벤트 상태관리
     const [showPopup, setShowPopup] = useState(false);
 
@@ -43,8 +46,9 @@ const ProfileForm = ({userId}) => {
         };
 
         // fetchProfile 함수 호출
+        // userId가 변경될 때마다 호출
         fetchProfile();
-    }, [userId]); // userId가 변경될 때마다 호출
+    }, [userId, setImageUrl]); // 오류 해결을 위해 setImageUrl 추가
 
     return (
         <div className="profile-form" >

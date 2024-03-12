@@ -72,7 +72,7 @@ function Login() {
           >
             로그인
           </button>
-          <div>
+          <div className="login-page__to-register">
             <Link to="/RegisterPersonal">회원이 아니신가요?</Link>
           </div>
           {loginStatus && <div>{loginStatus}</div>}

@@ -74,7 +74,7 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
         <React.Fragment key={comment.id}>
-        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment}/>
+        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment}  comment={comment}/>
         <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
         )

@@ -3,8 +3,12 @@
 
 * {
   box-sizing: border-box;
+
 }
 
+.MainBody {
+  height:100%;
+}
 
 .inner {
   width: 1000px;
@@ -13,12 +17,12 @@
 
 .wrap {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .section {
   width: 100vw;
-  height: 90vh;
-  
+  height: 100%;
 }
 
 .s1 {
@@ -27,6 +31,7 @@
   position: relative;
   display: flex;
   align-items:end;
+  height: 900px;
 }
 
 .s1 .slogan_box {

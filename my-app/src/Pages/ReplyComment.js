@@ -29,12 +29,13 @@ const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteC
       { //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 그 답글에 다시 답글을 달고 표시할 수 있도록 SingleComment와 ReplyComment 컴포넌트 렌더링
         comment.responseTo === parentCommentId &&
       <div style={{marginLeft: '40px'}}>
-        <SingleComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId}/>
-        <ReplyComment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.id} postId={postId}/>
+        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId} />
+        <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.commentid} postId={postId}/>
         </div>
       }
       </React.Fragment>
     ))
+
 
     // 답글 보기를 클릭했을 때 접히고 펼쳐지는 상태를 업데이트 하는 함수
     const onHandleChange = () => {
@@ -42,10 +43,10 @@ const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteC
     }
 
   return (
-    <div className="ReplyComment">
+    <div className="commu-reply-comment-box">
       {/* 댓글에 대한 답글이 1개 이상일 경우 답글보기 버튼 표시 */}
       {childCommentNumber > 0 && 
-      <p className='reply_comment__view' onClick={onHandleChange}>
+      <p className='commu-reply-comment__view' onClick={onHandleChange}>
         답글 보기
       </p>
       }
