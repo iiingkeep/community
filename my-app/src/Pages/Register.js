@@ -9,11 +9,11 @@ function Register() {
     navigate(path);
   };
 
-  const handleRegesterClick = () => {
+  // const handleRegesterClick = () => {
     
-    // 회원가입이 성공하면 다음 경로로 이동합니다.
-    navigate("/");
-  };
+  //   // 회원가입이 성공하면 다음 경로로 이동합니다.
+  //   navigate("/");
+  // };
 
   return (
     <div>

@@ -31,6 +31,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	/* height:100%;
+    overflow-y: hidden; */
 	line-height: 1;
 }
 ol, ul {
@@ -52,6 +54,7 @@ table {
 
 
 .App {
+
   font-family: "IBM Plex Sans KR", sans-serif;
   font-weight: 400;
   font-style: normal;
