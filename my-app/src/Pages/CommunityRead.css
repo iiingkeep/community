@@ -116,11 +116,36 @@
   margin-right: 0.3em;
   text-align: right;
 }
-.commu-post-detail__content-box ol li:before {
+.commu-post-detail__content-box ol li::before {
   content: counter(list-0, decimal) '. ';
 }
 .commu-post-detail__content-box ul li {
   list-style:disc;
+}
+.commu-post-detail__content-box .ql-indent-1 {
+  padding-left: 40px;
+}
+.commu-post-detail__content-box .ql-indent-2 {
+  padding-left: 80px;
+}
+.commu-post-detail__content-box .ql-indent-3 {
+  padding-left: 120px;
+}
+.commu-post-detail__content-box .ql-indent-4 {
+  padding-left: 160px;
+}
+.commu-post-detail__content-box .ql-indent-5 {
+  padding-left: 200px;
+}
+
+.commu-post-detail__content-box .ql-align-justify {
+  text-align: justify;
+}
+.commu-post-detail__content-box .ql-align-center {
+  text-align: center;
+}
+.commu-post-detail__content-box .ql-align-right {
+  text-align: right;
 }
 
 

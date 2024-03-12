@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import ImageResize from "quill-image-resize-module-react";
+import {ImageDrop} from 'quill-image-drop-module'
 
 // 등록된 게시글 수정 컴포넌트
 const CommunityEdit = ({userid}) => {
@@ -28,9 +29,9 @@ const CommunityEdit = ({userid}) => {
         console.error('게시물을 불러오는 중 에러 발생:', error);
       }
     };
-
     fetchPost();
   }, [id]);
+  console.log('콘텐트',content);
 
   // 게시글 제목 업데이트
   const handleTitleChange = (e) => {
@@ -73,7 +74,7 @@ const CommunityEdit = ({userid}) => {
     try {
       const result = await axios.post('http://localhost:8000/img', formData);
       console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
-
+      // const {width, height} = result.data;
       // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
       // 이 url을 img 태그의 src에 넣어 에디터의 커서에 삽입 시 에디터 내 이미지 출력
       const IMG_URL = result.data.url;
@@ -84,7 +85,7 @@ const CommunityEdit = ({userid}) => {
       // 현재 에디터 커서 위치값 가져오기
       const range = editor.getSelection();
       // 가져온 위치에 이미지를 삽입
-      editor.insertEmbed(range.index, 'image', IMG_URL);
+      editor.insertEmbed(range.index, 'image', IMG_URL, );
     } catch (error) { //에러 발생 시 알림
       console.log('failed');
     }
@@ -166,8 +167,9 @@ const CommunityEdit = ({userid}) => {
       // DisplaySize: 이미지 선택시 이미지의 현재 크기 표시
       // Toolbar: 툴바에 이미지 리사이즈 관련 버튼 생성
       modules: [
-        "Resize", "DisplaySize", "Toolbar"],
+        "Resize", "DisplaySize"],
     },
+    
   };
   },[]);
   const formats = [

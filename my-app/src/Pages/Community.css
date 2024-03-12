@@ -118,6 +118,7 @@
   width: 100%;
   margin: 10px 0;
   list-style: none;
+  padding-left: 0;
 }
 
 .commu-post-list {
@@ -184,6 +185,26 @@
   display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+.commu-post-list__content a {
+  text-decoration: none;
+  color:black;
+}
+.commu-post-list__content span {
+  color:black !important;
+  background-color: white !important;
+}
+.commu-post-list__content li:not(.ql-direction-rtl)::marker {
+  margin-left: -1.5em;
+  margin-right: 0.3em;
+  text-align: right;
+}
+.commu-post-list__content ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+}
+.commu-post-list__content ul {
+  list-style: disc;
 }
 
 .commu-post-list__datetime {

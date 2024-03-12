@@ -147,7 +147,7 @@ const getPostContentWithoutImages = (content) => {
             <div className='commu-post-list__title-and-content'>
             <Link to={`/Community/Read/${post.postid}`}>
               <p className='commu-post-list__title'>{post.title}</p>
-              <p className='commu-post-list__content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></p>
+              <div className='commu-post-list__content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></div>
             </Link>
             </div>
             <div className='commu-post-list__datetime'>

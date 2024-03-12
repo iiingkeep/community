@@ -1,18 +1,23 @@
-.comment_single {
+.commu-single-comment-box {
+  width:100%;
+}
+
+.commu-single-comment {
   padding: 30px 0 10px 0;
   border-top: 1px solid rgba(0,0,0,0.2);
+  width: 100%;
 }
-.comment_form {
+.commu-single-comment__form {
   display: flex;
   
 }
-.Comment .comment_form .name_box__editing {
+.commu-single-comment__name-box--editing {
   font-size: 14px;
   width: 10%;
   text-align: center;
 }
 
-.Comment .comment_form .comment_single_content {
+.commu-single-comment__content--editing {
   width: 65%;
   resize: none;
   border: 1px solid rgba(0,0,0,0.2);
@@ -22,11 +27,11 @@
   margin-right: 10px;
 }
 
-.Comment .comment_form .btn_box {
+.commu-single-comment__button-box--editing {
   width: 25%;
 }
 
-.Comment .comment_form .btn_box button {
+.commu-single-comment__button--editing {
   width: 46%;
   height: 50px;
   background-color: rgb(83, 212, 92);
@@ -37,42 +42,42 @@
   color:white;
 }
 
-.Comment .comment_form .btn_box button:first-child {
+.commu-single-comment__button--editing:first-child {
   margin-right: 5px;
 }
 
-.single_comment_box {
+.commu-single-comment-box--basic {
   display: flex;
 }
 
-.single_comment_box .comment_detail_box {
+.commu-single-comment__detail-box {
   width: 80%;
   margin-right: 30px;
 }
 
-.single_comment_box .comment_detail_box .name_date_box {
+.commu-single-comment__name-date-box {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   font-size: 14px;
 }
 
-.single_comment_box .comment_detail_box .content_box {
+.commu-single-comment__content-box {
   margin-bottom: 10px;
 }
 
-.single_comment_box .comment_detail_box .btn_reply {
+.commu-single-comment__reply-button--write {
   font-size: 14px;
   color:rgba(0,0,0,0.5);
   cursor: pointer;
 }
 
-.single_comment_box .btn_edit_delete {
+.commu-single-comment__button--edit-and-delete {
   display: flex;
   align-items:center;
 }
 
-.single_comment_box .btn_edit_delete button {
+.commu-single-comment__button--edit-and-delete button {
   font-size:12px;
   border-radius: 5px;
   border: none;
@@ -80,6 +85,6 @@
   padding: 10px;
 }
 
-.reply_comment_box__write {
+.commu-single-comment__reply-comment-box--write {
   padding-bottom: 20px;
 }

@@ -57,7 +57,7 @@ const CommunityWrite = ({userid}) => {
     try {
       const result = await axios.post('http://localhost:8000/img', formData);
       console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
-
+      // const {width, height} = result.data;
       // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
       // 이 url을 img 태그의 src에 넣어 에디터의 커서에 삽입 시 에디터 내 이미지 출력
       const IMG_URL = result.data.url;
@@ -68,7 +68,7 @@ const CommunityWrite = ({userid}) => {
       // 현재 에디터 커서 위치값 가져오기
       const range = editor.getSelection();
       // 가져온 위치에 이미지를 삽입
-      editor.insertEmbed(range.index, 'image', IMG_URL);
+      editor.insertEmbed(range.index, 'image', IMG_URL,  );
     } catch (error) { //에러 발생 시 알림
       console.log('failed');
     }

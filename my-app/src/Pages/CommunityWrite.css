@@ -65,7 +65,7 @@
 .ql-editor s {
   text-decoration: line-through;
 }
-.ql-editor ol, ul {
+.ql-editor ol, .ql-editor ul {
   padding-left: 0;
   counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
 }
@@ -80,7 +80,31 @@
 .ql-editor li:before {
   content: counter(list-0, decimal) '. ';
 }
+.ql-editor .ql-indent-1 {
+  padding-left: 40px;
+}
+.ql-editor .ql-indent-2 {
+  padding-left: 80px;
+}
+.ql-editor .ql-indent-3 {
+  padding-left: 120px;
+}
+.ql-editor .ql-indent-4 {
+  padding-left: 160px;
+}
+.ql-editor .ql-indent-5 {
+  padding-left: 200px;
+}
 
+.ql-editor .ql-align-justify {
+  text-align: justify;
+}
+.ql-editor .ql-align-center {
+  text-align: center;
+}
+.ql-editor .ql-align-right {
+  text-align: right;
+}
 
 .commu-write__button {
   text-align: right;

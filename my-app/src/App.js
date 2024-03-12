@@ -112,7 +112,7 @@ function App() {
           element={<CommunityRead loggedIn={loggedIn} userid={userid} />}
         />
         {/* 뉴스 추가 */}
-        <Route path="/news" element={<News />} />
+        <Route path="/News" element={<News />} />
         <Route path="/MyPage" element={<MyPage />} />
       </Routes>
       
