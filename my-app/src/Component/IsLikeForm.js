@@ -21,20 +21,45 @@ const IsLikeForm = ({ userId }) => {
   }, [userId])
 
   return (
-    <div>
-      <h3>좋아요 한 목록</h3>
-      <ul>
-        {isLike.map(like => (
-          <li key={like.postid}>
-            <Link to={`/Community/Read/${like.postid}`}>
-            <span>{like.title}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="like-form">
+      <h3 className="my-form__title">좋아요 한 목록</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>제목</th>
+          </tr>
+        </thead>
+        <tbody>
+          {isLike.map(like => (
+            <tr key={like.postid}>
+              <td>
+                <Link to={`/Community/Read/${like.postid}`}>
+                  <span>{like.title}</span>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       {/* 뉴스Link to 추가 */}
     </div>
   );
+  
+  // return (
+  //   <div className="like-form">
+  //     <h3 className="my-form__title">좋아요 한 목록</h3>
+  //     <ul>
+  //       {isLike.map(like => (
+  //         <li key={like.postid}>
+  //           <Link to={`/Community/Read/${like.postid}`}>
+  //           <span>{like.title}</span>
+  //           </Link>
+  //         </li>
+  //       ))}
+  //     </ul>
+  //     {/* 뉴스Link to 추가 */}
+  //   </div>
+  // );
 };
 
 export default IsLikeForm;

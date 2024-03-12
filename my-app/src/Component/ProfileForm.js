@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ImagePopup from "./ImagePopup";
-import "../Styles/ProfileForm.css"
+import "../Styles/MyPage.css";
 import { useImage } from "./ImageContext"; // context추가
 
 const ProfileForm = ({userId}) => {
@@ -51,10 +51,10 @@ const ProfileForm = ({userId}) => {
     }, [userId, setImageUrl]); // 오류 해결을 위해 setImageUrl 추가
 
     return (
-        <div className="profile-form" >
-            <h2>Profile Form</h2>
+        <div className="profile-form inner" >
+            <h2 className="my-form__title">Profile Form</h2>
             {/* 업로드 된 이미지가 없다면 user_img폴더의 이미지를 표시 */}
-            <div className="profileImg">
+            <div className="profile-form__img">
             {imageUrl ? ( <img src={imageUrl} alt="Profile" /> ) : ( <img src="/user_img/basic.png" alt="DefaultIMG" /> )}
             </div>
             <br />

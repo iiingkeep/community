@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // import handlePostcode from "./Postcodehandle";
 // import DaumPostcod from "react-daum-postcode";
 import PasswordValid from "./PasswordValid";
-import "../Styles/EditForm.css";
+import "../Styles/MyPage.css";
 
 const EditForm = ({ userId }) => {
     const [profileData, setProfileData] = useState({});
@@ -69,14 +69,14 @@ const EditForm = ({ userId }) => {
     };
 
     return (
-        <div className="EditForm" >
+        <div className="edit-form inner" >
+            <h2 className="my-form__title">Edit Profile</h2>
             {!showEditForm ? (
                 <PasswordValid onPasswordValid={handlePasswordValid} />
             ) : (
-        <div className="EditInput" >
-            <h2>Edit Profile</h2>
+        <div className="edit-form__input">
             <form onSubmit={handleEditSubmit}>
-                <label className="LabelName">
+                <label className="edit-form__label">
                     회원이름
                     <input
                         type="text"
@@ -87,7 +87,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <label className="LabelEmail">
+                <label className="edit-form__label">
                     이메일
                     <input
                         type="text"
@@ -98,7 +98,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <label>
+                <label className="edit-form__label">
                     핸드폰번호<br/>
                     <input
                         type="text"
@@ -109,7 +109,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <label>
+                <label className="edit-form__label">
                     주소<br/>
                     <input
                         type="text"
@@ -120,7 +120,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <label>
+                <label className="edit-form__label">
                     상세주소<br/>
                     <input
                         type="text"
@@ -131,7 +131,7 @@ const EditForm = ({ userId }) => {
                     />
                 </label>
                 <br />
-                <button className="EditBtn" type="submit">수정완료</button>
+                <button className="edit-form__btn" type="submit">수정완료</button>
             </form>
         </div>
         )}
