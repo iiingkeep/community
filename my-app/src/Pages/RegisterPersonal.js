@@ -198,7 +198,7 @@ function RegisterPersonal() {
         <button className="regi-complete__button" onClick={handleRegisterClick}>
           가입완료
         </button>
-        <div>
+        <div className="regi-button__to-login">
           <Link to="/Login">로그인창</Link>
         </div>
       </div>
