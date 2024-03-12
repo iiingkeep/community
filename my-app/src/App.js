@@ -5,8 +5,6 @@ import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Main from './Pages/Main';
 import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Modify from "./Pages/Modify";
 import RegisterPersonal from "./Pages/RegisterPersonal";
 import FindInformation from './Pages/FindInformation';
 import Community from './Pages/Community';
@@ -92,8 +90,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />}></Route>
-        <Route path="/Modify" element={<Modify />}></Route>
-        <Route path="/Register" element={<Register />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
         <Route path="/FindInformation" element={<FindInformation />} />
         <Route path="/NetZero" element={<NetZero />} />

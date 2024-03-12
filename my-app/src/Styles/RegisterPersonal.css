@@ -12,7 +12,6 @@
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
-  
 }
 
 .regi-form {
@@ -20,7 +19,6 @@
   display: flex;
   flex-direction: column;
   margin-top: 25px;
-  
 }
 
 .regi-form input[type="text"],
@@ -49,22 +47,22 @@
 .regi-form .regi-email__button,
 .regi-form .regi-addr__button {
   font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #b4b4b4;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 15px 0;
+  text-transform: uppercase;
+  outline: 0;
+  background: #b4b4b4;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 15px 0;
 }
 
 .regi-form .regi-email__button:hover,
 .regi-form .regi-addr__button:hover {
-  background-color: #4CAF50; /* 호버 배경색 */
+  background-color: #4caf50; /* 호버 배경색 */
 }
 
 .regi-form .regi-email__button:focus,
@@ -74,19 +72,18 @@
 
 .regi-form .regi-complete__button {
   font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #4CAF50;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 15px 0;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 15px 0;
 }
-
 
 .regi-form .regi-complete__button:focus {
   outline: none;

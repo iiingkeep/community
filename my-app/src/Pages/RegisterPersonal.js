@@ -3,20 +3,18 @@ import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { handlePostcode } from "./Postcodehandle";
 import axios from "axios";
-// import './Register.css'
 import "../Styles/RegisterPersonal.css";
 
 function RegisterPersonal() {
-  const [username, setUsername] = useState(""); //이름
-  const [email, setEmail] = useState(""); //이메일
-  const [password, setPassword] = useState(""); //비밀번호
-  const [confirmPassword, setConfirmPassword] = useState(""); //비밀번호확인
-  const [openPostcode, setOpenPostcode] = useState(false); //주소
-  const [address, setAddress] = useState(""); //주소
-  const [detailedaddress, setdetailedaddress] = useState(""); //상세주소
-  const [phonenumber, setphonenumber] = useState(""); //핸드폰번호
-  const [emailDuplication, setEmailDuplication] = useState(true); //이메일 유효성
-  // 이메일 유효성 검사 02/14 김민호
+  const [username, setUsername] = useState(""); // 이름
+  const [email, setEmail] = useState(""); // 아이디
+  const [password, setPassword] = useState(""); // 비밀번호
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
+  const [openPostcode, setOpenPostcode] = useState(false); // 주소
+  const [address, setAddress] = useState(""); // 주소
+  const [detailedaddress, setdetailedaddress] = useState(""); // 상세 주소
+  const [phonenumber, setphonenumber] = useState(""); // 휴대폰 번호
+  const [emailDuplication, setEmailDuplication] = useState(false); // 아이디 유효성
 
   const handle = handlePostcode(openPostcode, setOpenPostcode, setAddress);
 
@@ -24,14 +22,32 @@ function RegisterPersonal() {
     // setPasswordMatch(true) 또는 setPasswordMatch(false) 등으로 사용
   };
 
-  // 이메일 유효성 검사 02/14 김민호
+  const spacebar = /\s/g; // 공백 정규표현식
+  const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g; // 특수문자 정규표현식
+  const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/; // ID 정규표현식
+  const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
+  const PWcheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,16}$/; // PW 정규표현식
+  const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
+
+  // 아이디 유효성 검사
   const handleEmailDuplicationCheck = () => {
     if (!email) {
-      alert("이메일을 입력해주세요!");
+      alert("아이디를 입력하세요.");
       return;
+    } else if (email.match(spacebar)) {
+      alert("아이디에 공백을 포함할 수 없습니다.");
+      return;
+    } else if (email.match(special)) {
+      alert("아이디에 특수문자를 포함할 수 없습니다.");
+      return;
+    } else if (!IDcheck.test(email)) {
+      alert("아이디 형식이 올바르지 않습니다.");
+      return;
+    } else {
+      setEmailDuplication(true);
     }
 
-    // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
+    // 클라이언트가 서버에 아이디 중복 확인을 요청
     axios
       .post("http://localhost:8000/checkEmailDuplication", { email })
       .then((response) => {
@@ -40,50 +56,60 @@ function RegisterPersonal() {
         alert(response.data.message);
       })
       .catch((error) => {
-        console.error("이메일 중복 확인 중 오류:", error);
-        alert("client :: 이메일 중복 확인 중 오류가 발생했습니다.");
+        console.error("아이디 중복 확인 중 오류:", error);
+        alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
       });
   };
 
   const handleRegisterClick = () => {
-    if (!username || !email || !password || !confirmPassword || !address) {
-      alert("정보를 모두 입력해주세요!");
-      return;
-    }
-    if (!emailDuplication) {
-      alert("이메일 중복 확인을 해주세요.");
-      return;
-    }
-
     if (!email) {
-      alert("이메일을 입력해주세요!");
+      alert("아이디를 입력해주세요!");
       return;
     }
     if (!emailDuplication) {
-      alert("이미 등록된 이메일입니다.");
+      alert("아이디 중복확인을 해주세요.");
       return;
     }
-    // if (!email.includes('@')) {
-    //   alert('이메일을 입력해주세요!');
-    //   return;
+    if (!NICKcheck.test(username)) {
+      alert("닉네임 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (!PWcheck.test(password)) {
+      alert("비밀번호 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (password.match(spacebar)) {
+      alert("비밀번호에 공백을 포함할 수 없습니다.");
+      return;
+    }
+    // if (password.match(PWcheck) && !spacebar.test(password)) {
+      
     // }
-
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
       setPasswordMatch(false);
       return;
     }
-    // 이메일이 중복되었는지 확인합니다.
-    // 이메일 유효성 검사 02/14 김민호
-
-    // if (password.length < 10 || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    //   alert('비밀번호는 최소 10글자 이상이어야 하며, 특수문자를 포함해야 합니다.');
-    //   return;
-    // }
+    if (!tel.test(phonenumber)) {
+      alert("휴대폰 번호 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (
+      !email ||
+      !username ||
+      !password ||
+      !confirmPassword ||
+      !phonenumber ||
+      !address ||
+      !detailedaddress
+    ) {
+      alert("정보를 모두 입력해주세요");
+      return;
+    }
 
     // 클라이언트에서 서버로 회원가입 요청
     axios
-      .post("http://localhost:8000/regester", {
+      .post("http://localhost:8000/register", {
         username,
         password,
         email,
@@ -98,7 +124,7 @@ function RegisterPersonal() {
         if (response.data.userType === 1) {
           // 개인 사용자 처리
         }
-        window.location.href = "/"; // 홈 페이지 또는 다른 페이지로 리디렉션
+        window.location.href = "/Login"; // 홈 페이지 또는 다른 페이지로 리디렉션
       })
       .catch((error) => {
         if (error.response) {
@@ -125,59 +151,69 @@ function RegisterPersonal() {
         <h2>회원가입</h2>
         <input
           type="text"
-          placeholder="사용자명"
+          placeholder="ID : 영문·숫자로만 5~20 자리"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {/* 아이디 유효성 검사 */}
+        <button
+          className="regi-email__button"
+          onClick={handleEmailDuplicationCheck}
+        >
+          아이디 중복확인
+        </button>
+        <br />
+        <input
+          type="text"
+          placeholder="NICKNAME : 한글·영문·숫자로만 4~10 자리"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
         <input
           type="password"
-          placeholder="비밀번호"
+          placeholder="PW : 영문·숫자·특수문자 섞어서 8~16 자리"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <p style={{ fontSize: 12, color: "gray" }}>
+          사용 가능한 특수문자 : @#$%^&+=!
+        </p>
         <br />
-
         <input
           type="password"
-          placeholder="비밀번호 확인"
+          placeholder="PW 재입력"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        {/* 비밀번호 일치 여부 확인 */}
+        {password && confirmPassword && (
+          <p>
+            {password === confirmPassword
+              ? "비밀번호가 일치합니다."
+              : "비밀번호가 일치하지 않습니다."}
+          </p>
+        )}
         <br />
-
         <input
           type="text"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button
-          className="regi-email__button"
-          onClick={handleEmailDuplicationCheck}
-        >
-          이메일 확인
-        </button>
-        {/* 이메일 유효성 검사 02/14 김민호 */}
-
-        <br />
-
-        <input
-          type="text"
-          placeholder="핸드폰번호"
+          placeholder="휴대폰 번호를 입력하세요."
           value={phonenumber}
           onChange={(e) => setphonenumber(e.target.value)}
         />
-
         <br />
         <input
           type="text"
-          placeholder="주소"
+          placeholder="주소를 입력하세요."
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
 
-        <button type="button" className="regi-addr__button" onClick={handle.clickButton}>
+        <button
+          type="button"
+          className="regi-addr__button"
+          onClick={handle.clickButton}
+        >
           주소 선택
         </button>
         {openPostcode && (
@@ -190,7 +226,7 @@ function RegisterPersonal() {
         <br />
         <input
           type="text"
-          placeholder="상세주소"
+          placeholder="상세 주소를 입력하세요."
           value={detailedaddress}
           onChange={(e) => setdetailedaddress(e.target.value)}
         />
@@ -198,9 +234,6 @@ function RegisterPersonal() {
         <button className="regi-complete__button" onClick={handleRegisterClick}>
           가입완료
         </button>
-        <div>
-          <Link to="/Login">로그인창</Link>
-        </div>
       </div>
     </div>
   );

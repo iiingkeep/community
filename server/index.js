@@ -213,7 +213,7 @@ app.post("/news/likes", (req, res) => {
 
 //-------------------------------로그인-----------------------------------------------
 
-//-------------------------------익스플로스 세션 0213------------------------------------
+//-------------------------------익스플로스 세션------------------------------------
 const sessionStore = new MySQLStore(
   {
     expiration: 3600000, // 세션의 유효시간 (1시간)
@@ -232,7 +232,7 @@ const sessionStore = new MySQLStore(
 
 app.use(
   session({
-    secret: "secretKey", // 랜덤하고 안전한 문자열로 바꾸세요.
+    secret: "secretKey", // 랜덤하고 안전한 문자열로 바꿈
     resave: false,
     saveUninitialized: true,
     store: sessionStore,
@@ -287,7 +287,6 @@ async function generateUserid(usertype) {
     personal: 1,
   }[usertype];
 
-  // 0219 추가_상호형
   let randomDigits;
   let userid;
 
@@ -297,70 +296,35 @@ async function generateUserid(usertype) {
   } while (usedUserNumbers.has(userid)); // 중복된 userid가 있다면 다시 생성
   usedUserNumbers.add(userid); // Set에 추가
 
-
   return userid;
 }
-  
-  
-// }
-//-------------------------------사업자 중복 체크 2/14 김민호---------------------------------
-// app.post("/checkbusinessnumber", (req, res) => {
-//   const { businessnumber} = req.body;
 
-//   // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
-//   const sql = "SELECT * FROM user WHERE email = ?";
-//   connection.query(sql, [businessnumber], (err, result) => {
-//     if (err) {
-//       console.error("MySQL에서 사업자번호 중복 확인 중 오류:", err);
-//       return res.status(500).json({
-//         success: false,
-//         message: "사업자 중복 확인 중 오류가 발생했습니다.",
-//         error: err.message,
-//       });
-//     }
-
-//     if (result.length > 0) {
-//       // 이미 등록된 사업자인 경우
-//       return res.status(200).json({
-//         success: false,
-//         message: "이미 등록된 사업자입니다.",
-//       });
-//     } else {
-//       // 중복되지 않은 사업자인 경우
-//       return res.status(200).json({
-//         success: true,
-//         message: "사용 가능한 사업자 입니다.",
-//       });
-//     }
-//   });
-// });
-
-//-------------------------------이메일 중복 체크 2/14 김민호---------------------------------
+//-------------------------------아이디 중복 체크---------------------------------
 app.post("/checkEmailDuplication", async (req, res) => {
   const { email } = req.body;
 
   try {
-    // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+    // 데이터베이스에서 아이디가 이미 존재하는지 확인
     const [rows, fields] = await poolPromise.execute(
       "SELECT * FROM user WHERE email = ?",
       [email]
     );
 
     if (rows.length > 0) {
-      // 이미 등록된 이메일인 경우
+      // 이미 등록된 아이디인 경우
       return res.status(200).json({
         success: false,
-        message: "이미 등록된 이메일입니다.",
+        message: "이미 등록된 아이디입니다.",
       });
     } else {
-      // 중복되지 않은 이메일인 경우
+      // 중복되지 않은 아이디인 경우
       return res.status(200).json({
         success: true,
-        message: "사용 가능한 이메일입니다.",
+        message: "사용 가능한 아이디입니다.",
       });
     }
   } catch (err) {
-    console.error("MySQL에서 이메일 중복 확인 중 오류:", err);
+    console.error("MySQL에서 아이디 중복 확인 중 오류:", err);
     return res.status(500).json({
       success: false,
       message: "이메일 중복 확인 중 오류가 발생했습니다.",
@@ -368,10 +332,11 @@ app.post("/checkEmailDuplication", async (req, res) => {
     });
   }
 });
-//---------------------------회원가입 기능구현----------------------------------------------
-app.post("/regester", async (req, res) => {
+
+//---------------------------회원가입----------------------------------------------
+app.post("/register", async (req, res) => {
   // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
-  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber, uniquenumber } = req.body;
+  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype } = req.body;
 
   try {
     
@@ -384,8 +349,6 @@ app.post("/regester", async (req, res) => {
     // 클라이언트에서 받은 usertype을 서버에서 사용하는 usertype으로 변환합니다.
     const usertypeNumber = {
       personal: 1, // 개인
-      // business: 2, // 기업
-      // organization: 3, // 단체
     };
 
     const serverUsertype = usertypeNumber[clientUsertype];
