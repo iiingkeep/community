@@ -64,7 +64,16 @@ function RegisterPersonal() {
   //-----------------------------------------------------------------------
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
-    if (!NICKcheck.test(username)) {
+    if (!username) {
+      alert("닉네임을 입력하세요.");
+      return;
+    } else if (username.match(spacebar)) {
+      alert("닉네임에 공백을 포함할 수 없습니다.");
+      return;
+    } else if (username.match(special)) {
+      alert("닉네임에 특수문자를 포함할 수 없습니다.");
+      return;
+    } else if (!NICKcheck.test(username)) {
       alert("닉네임 형식이 올바르지 않습니다.");
       return;
     } else {
@@ -86,7 +95,16 @@ function RegisterPersonal() {
 
   // 휴대폰 번호 중복 검사
   const handlePhonenumberCheck = () => {
-    if (!tel.test(phonenumber)) {
+    if (!phonenumber) {
+      alert("휴대폰 번호를 입력하세요.");
+      return;
+    } else if (phonenumber.match(spacebar)) {
+      alert("휴대폰 번호에 공백을 포함할 수 없습니다.");
+      return;
+    } else if (phonenumber.match(special)) {
+      alert("휴대폰 번호에 특수문자를 포함할 수 없습니다.");
+      return;
+    } else if (!tel.test(phonenumber)) {
       alert("휴대폰 번호 형식이 올바르지 않습니다.");
       return;
     } else {
@@ -234,7 +252,7 @@ function RegisterPersonal() {
         <br />
         <input
           type="text"
-          placeholder="휴대폰 번호를 입력하세요."
+          placeholder="휴대폰 번호(하이픈 제외) ex) 01012345678"
           value={phonenumber}
           onChange={(e) => setphonenumber(e.target.value)}
         />
