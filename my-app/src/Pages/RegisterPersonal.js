@@ -157,7 +157,7 @@ function RegisterPersonal() {
       !address ||
       !detailedaddress
     ) {
-      alert("정보를 모두 입력해주세요");
+      alert("정보를 모두 입력하세요.");
       return;
     } else {
       // 클라이언트에서 서버로 회원가입 요청
