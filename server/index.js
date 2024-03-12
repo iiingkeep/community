@@ -277,11 +277,23 @@ async function generateUserid(usertype) {
   }[usertype];
 
   let randomDigits;
+  let strRandomDigits;
   let userid;
 
   do {
-    randomDigits = Math.floor(10000 + Math.random() * 90000);
-    userid = `${prefix}${randomDigits}`;
+    randomDigits = Math.floor(Math.random() * 99999) + 1;
+    strRandomDigits = String(randomDigits);
+    if (strRandomDigits.length == 5) {
+      userid = `${prefix}${randomDigits}`;
+    } else if (strRandomDigits.length == 4) {
+      userid = `${prefix}0${randomDigits}`;
+    } else if (strRandomDigits.length == 3) {
+      userid = `${prefix}00${randomDigits}`;
+    } else if (strRandomDigits.length == 2) {
+      userid = `${prefix}000${randomDigits}`;
+    } else if (strRandomDigits.length == 1) {
+      userid = `${prefix}0000${randomDigits}`;
+    }
   } while (usedUserNumbers.has(userid)); // 중복된 userid가 있다면 다시 생성
   usedUserNumbers.add(userid); // Set에 추가
 
@@ -396,7 +408,7 @@ app.post("/register", async (req, res) => {
   const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype } = req.body;
 
   try {
-    
+
     // 비밀번호를 해시화합니다.
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -489,10 +501,10 @@ app.get('/Community', async (req, res) => {
     const categoryId = req.query.categoryId || 1;
     const page = req.query.page || 1;
     // 페이지당 표시할 게시물 수
-    const itemsPerPage = 4; 
+    const itemsPerPage = 4;
     // 페이지별 첫번째 게시물의 인덱스
     const offset = (page - 1) * itemsPerPage;
-  
+
     const searchQuery = req.query.searchQuery || '';
     const searchType = req.query.searchType || 'title';
 
@@ -528,32 +540,32 @@ app.get('/Community', async (req, res) => {
       // 제목 또는 본문으로 검색하는 경우와 제목+본문으로 검색하는 경우 전달해 줘야 하는 파라미터의 갯수가 다르기 때문에 나누어 작성
       // 제목+본문으로 검색할 시
       if (searchType === 'titleAndContent') {
-      query += 'GROUP BY cp.postid ORDER BY cp.createdat DESC LIMIT ?, ?';
-      const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
-      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
+        query += 'GROUP BY cp.postid ORDER BY cp.createdat DESC LIMIT ?, ?';
+        const [rows] = await poolPromise.query(query, [categoryId, searchParam, searchParam, offset, itemsPerPage]);
+        const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam, searchParam]);
 
-      const totalItems = countRows[0].total;
+        const totalItems = countRows[0].total;
 
-      res.json({ posts: rows, totalItems });
-    } else {  // 제목 또는 본문으로 검색할 시,
-      query += 'GROUP BY cp.postid ORDER BY cp.createdat DESC LIMIT ?, ?';
-      const [rows] = await poolPromise.query(query, [categoryId, searchParam, offset, itemsPerPage]);
+        res.json({ posts: rows, totalItems });
+      } else {  // 제목 또는 본문으로 검색할 시,
+        query += 'GROUP BY cp.postid ORDER BY cp.createdat DESC LIMIT ?, ?';
+        const [rows] = await poolPromise.query(query, [categoryId, searchParam, offset, itemsPerPage]);
 
-      const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
+        const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
+        const totalItems = countRows[0].total;
+
+        res.json({ posts: rows, totalItems });
+      }
+    } else {
+      // 검색 기능을 이용하지 않은 모든 게시물 출력
+      query += ' GROUP BY cp.postid ORDER BY createdat DESC LIMIT ?, ?';
+      const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
+
+      const [countRows] = await poolPromise.query(countQuery, [categoryId]);
       const totalItems = countRows[0].total;
 
       res.json({ posts: rows, totalItems });
     }
-    } else {
-            // 검색 기능을 이용하지 않은 모든 게시물 출력
-            query += ' GROUP BY cp.postid ORDER BY createdat DESC LIMIT ?, ?';
-            const [rows] = await poolPromise.query(query, [categoryId, offset, itemsPerPage]);
-      
-            const [countRows] = await poolPromise.query(countQuery, [categoryId]);
-            const totalItems = countRows[0].total;
-      
-            res.json({ posts: rows, totalItems });
-          }
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -585,11 +597,11 @@ app.post("/Community/Write", async (req, res) => {
 
 
 
-  // 게시글 상세 페이지 접속 시 db에서 해당 게시물과 작성자 조회, 클라이언트에 정보 반환 
-  app.get('/Community/Read/:id', async (req, res) => {
-    const postId = req.params.id;
-    try {
-      const query = `
+// 게시글 상세 페이지 접속 시 db에서 해당 게시물과 작성자 조회, 클라이언트에 정보 반환 
+app.get('/Community/Read/:id', async (req, res) => {
+  const postId = req.params.id;
+  try {
+    const query = `
         SELECT 
           cp.*,
           u.username
@@ -600,193 +612,193 @@ app.post("/Community/Write", async (req, res) => {
         WHERE 
           cp.postid = ?
       `;
-      const [rows] = await poolPromise.query(query, [postId]);
-  
-      if (rows.length === 0) {
-        console.log(`Post with id ${postId} not found`);
-        res.status(404).json({ error: 'Post not found' });
-      } else {
-        console.log(`Post details sent for post id: ${postId}`);
-        res.json(rows[0]);
-      }
-    } catch (error) {
-      console.error('Error occurred while retrieving the post:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    const [rows] = await poolPromise.query(query, [postId]);
+
+    if (rows.length === 0) {
+      console.log(`Post with id ${postId} not found`);
+      res.status(404).json({ error: 'Post not found' });
+    } else {
+      console.log(`Post details sent for post id: ${postId}`);
+      res.json(rows[0]);
     }
-  });
+  } catch (error) {
+    console.error('Error occurred while retrieving the post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
-  // 게시물 상세페이지 접속 시 해당 게시물의 조회수 증가를 db에 업데이트
-  app.put('/Community/Read/:id/IncrementViews', async (req, res) => {
-    const postId = req.params.id;
-    try {
-      // 해당 게시글의 조회수 증가
-      const query = `
+// 게시물 상세페이지 접속 시 해당 게시물의 조회수 증가를 db에 업데이트
+app.put('/Community/Read/:id/IncrementViews', async (req, res) => {
+  const postId = req.params.id;
+  try {
+    // 해당 게시글의 조회수 증가
+    const query = `
         UPDATE ezteam2.community_posts 
         SET view = view + 1 
         WHERE postid = ?
       `;
-      await poolPromise.query(query, [postId]);
-      res.sendStatus(200);
-    } catch (error) {
-      console.error('Error occurred while incrementing views:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    await poolPromise.query(query, [postId]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Error occurred while incrementing views:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  // 게시글에 대한 좋아요 여부를 db에 업데이트
-  app.put('/Community/Read/:id/ToggleLike', async (req, res) => {
-    const postId = req.params.id;
-    const { userid } = req.body;
-  
-    try {
-      // 해당 유저가 해당 게시글을 이미 좋아요 했는지 확인
-      const checkQuery = `
+// 게시글에 대한 좋아요 여부를 db에 업데이트
+app.put('/Community/Read/:id/ToggleLike', async (req, res) => {
+  const postId = req.params.id;
+  const { userid } = req.body;
+
+  try {
+    // 해당 유저가 해당 게시글을 이미 좋아요 했는지 확인
+    const checkQuery = `
         SELECT COUNT(*) AS count FROM is_like WHERE userid = ? AND postid = ?
       `;
-      const [checkRows] = await poolPromise.query(checkQuery, [userid, postId]);
-      
-      // 이미 좋아요를 한 경우
-      if (checkRows[0].count > 0) {
-        // 좋아요 취소
-        // 테이블에서 기존에 존재하던 유저의 좋아요 데이터를 삭제
-        const deleteQuery = `
+    const [checkRows] = await poolPromise.query(checkQuery, [userid, postId]);
+
+    // 이미 좋아요를 한 경우
+    if (checkRows[0].count > 0) {
+      // 좋아요 취소
+      // 테이블에서 기존에 존재하던 유저의 좋아요 데이터를 삭제
+      const deleteQuery = `
           DELETE FROM is_like WHERE userid = ? AND postid = ?
         `;
-        await poolPromise.query(deleteQuery, [userid, postId]);
-      } else {
-        // 아직 좋아요를 하지 않은 경우
-        // 테이블에 유저의 좋아요 데이터 삽입
-        const insertQuery = `
+      await poolPromise.query(deleteQuery, [userid, postId]);
+    } else {
+      // 아직 좋아요를 하지 않은 경우
+      // 테이블에 유저의 좋아요 데이터 삽입
+      const insertQuery = `
           INSERT INTO is_like (userid, postid, post_isLiked) VALUES (?, ?, 1)
         `;
-        await poolPromise.query(insertQuery, [userid, postId]);
-      }
-      console.log(`Post like toggled for post id: ${postId}`);
+      await poolPromise.query(insertQuery, [userid, postId]);
+    }
+    console.log(`Post like toggled for post id: ${postId}`);
 
-      // 업데이트된 좋아요 수를 조회
-      const likeCountQuery = `
+    // 업데이트된 좋아요 수를 조회
+    const likeCountQuery = `
       SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
       `;
-      const [likeCountRows] = await poolPromise.query(likeCountQuery, [postId]);
-      const likeCount = likeCountRows[0].likeCount;
+    const [likeCountRows] = await poolPromise.query(likeCountQuery, [postId]);
+    const likeCount = likeCountRows[0].likeCount;
 
-      res.status(200).json({ likeCount });
-    } catch (error) {
-      console.error('Error occurred while toggling post like:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    res.status(200).json({ likeCount });
+  } catch (error) {
+    console.error('Error occurred while toggling post like:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  
 
-  // 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인하여 클라이언트에 정보 반환
-  app.get('/Community/Read/:id/CheckLiked', async (req, res) => {
-    const postId = req.params.id;
-    const userid = req.query.userid;
-  
-    try {
-      const query = `
+
+// 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인하여 클라이언트에 정보 반환
+app.get('/Community/Read/:id/CheckLiked', async (req, res) => {
+  const postId = req.params.id;
+  const userid = req.query.userid;
+
+  try {
+    const query = `
         SELECT COUNT(*) AS count FROM ezteam2.is_like
         WHERE (userid = ? AND postid = ? AND post_isLiked = 1)
       `;
-      const [rows] = await poolPromise.query(query, [userid, postId]);
-      // 쿼리에 의해 조희되는 데이터가 있다면 이미 좋아요를 누른 것
-      const isLiked = rows[0].count > 0;
-      res.status(200).json({ isLiked });
-    } catch (error) {
-      console.error('Error occurred while checking post like:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    const [rows] = await poolPromise.query(query, [userid, postId]);
+    // 쿼리에 의해 조희되는 데이터가 있다면 이미 좋아요를 누른 것
+    const isLiked = rows[0].count > 0;
+    res.status(200).json({ isLiked });
+  } catch (error) {
+    console.error('Error occurred while checking post like:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  // db에서 게시글의 좋아요 갯수를 반환
-  app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
-    const postId = req.params.id;
-    
-    try {
-      const query = `
+// db에서 게시글의 좋아요 갯수를 반환
+app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const query = `
         SELECT COUNT(*) AS likeCount FROM is_like WHERE postid = ? AND post_isLiked = 1
       `;
-      const [rows] = await poolPromise.query(query, [postId]);
-      const likeCount = rows[0].likeCount;
-      res.status(200).json({ likeCount });
-    } catch (error) {
-      console.error('좋아요 수를 가져오는 중 에러 발생:', error);
-      res.status(500).json({ error: '내부 서버 오류' });
+    const [rows] = await poolPromise.query(query, [postId]);
+    const likeCount = rows[0].likeCount;
+    res.status(200).json({ likeCount });
+  } catch (error) {
+    console.error('좋아요 수를 가져오는 중 에러 발생:', error);
+    res.status(500).json({ error: '내부 서버 오류' });
+  }
+});
+
+
+
+// 유저가 이전에 작성한 게시글의 정보 가져옴
+app.get('/Community/Edit/:id', async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    // URL에서 추출한 id와 같은 id를 가지는 게시글의 데이터를 가져와 [rows]에 할당
+    const [rows] = await poolPromise.query('SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
+    if (rows.length === 0) {
+      console.log(`Unable to find a post with ID ${postId}`);
+      res.status(404).json({ error: 'Post not found' });
+    } else {
+      console.log(`Post details sent for post id: ${postId}`);
+      res.json(rows[0]);
     }
-  });
+  } catch (error) {
+    console.error('Error occurred while retrieving the post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
-  // 유저가 이전에 작성한 게시글의 정보 가져옴
-  app.get('/Community/Edit/:id', async (req, res) => {
-    const postId = req.params.id;
-  
-    try {
-      // URL에서 추출한 id와 같은 id를 가지는 게시글의 데이터를 가져와 [rows]에 할당
-      const [rows] = await poolPromise.query('SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
-      if (rows.length === 0) {
-        console.log(`Unable to find a post with ID ${postId}`);
-        res.status(404).json({ error: 'Post not found' });
-      } else {
-        console.log(`Post details sent for post id: ${postId}`);
-        res.json(rows[0]);
-      }
-    } catch (error) {
-      console.error('Error occurred while retrieving the post:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+// 수정한 글의 데이터를 db에 업데이트
+app.put('/Community/Edit/:id', async (req, res) => {
+  const postId = req.params.id;
+  const { userid, categoryid, title, content } = req.body;
+
+  try {
+    await poolPromise.query(
+      'UPDATE ezteam2.community_posts SET userid = ?, categoryid = ?, title = ?, content = ? WHERE postid = ?',
+      [userid, categoryid, title, content, postId]
+    );
+    res.status(200).json({ message: 'Post updated successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+// 게시글의 정보를 db에서 삭제
+app.delete('/Community/Read/:id', async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    // URL에서 추출한 id와 같은 id를 가지는 게시글 삭제
+    const [result] = await poolPromise.query('DELETE FROM ezteam2.community_posts WHERE postid = ?', [postId]);
+
+    // 해당 id의 게시글이 존재하지 않아 삭제된 행이 없을 시 서버에 기록, 클라이언트에 404상태 반환 및 메세지 응답
+    // affectedRows: 영향을 받는 행 수
+    if (result.affectedRows === 0) {
+      console.log(`Unable to find a post with ID ${postId}`);
+      res.status(404).json({ error: 'Post not found' });
+      // 게시글 삭제 성공 시 서버 기록, 클라이언트에 204상태 반환 
+    } else {
+      console.log(`Post with ID ${postId} has been successfully deleted`);
+      res.status(204).send();
     }
-  });
-
-
-
-  // 수정한 글의 데이터를 db에 업데이트
-  app.put('/Community/Edit/:id', async (req, res) => {
-    const postId = req.params.id;
-    const { userid, categoryid, title, content } = req.body;
-  
-    try {
-      await poolPromise.query(
-        'UPDATE ezteam2.community_posts SET userid = ?, categoryid = ?, title = ?, content = ? WHERE postid = ?',
-        [userid, categoryid, title, content, postId]
-      );
-      res.status(200).json({ message: 'Post updated successfully' });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  });
-
-
-
-  // 게시글의 정보를 db에서 삭제
-  app.delete('/Community/Read/:id', async (req, res) => {
-    const postId = req.params.id;
-  
-    try {
-      // URL에서 추출한 id와 같은 id를 가지는 게시글 삭제
-      const [result] = await poolPromise.query('DELETE FROM ezteam2.community_posts WHERE postid = ?', [postId]);
-      
-      // 해당 id의 게시글이 존재하지 않아 삭제된 행이 없을 시 서버에 기록, 클라이언트에 404상태 반환 및 메세지 응답
-      // affectedRows: 영향을 받는 행 수
-      if (result.affectedRows === 0) {
-        console.log(`Unable to find a post with ID ${postId}`);
-        res.status(404).json({ error: 'Post not found' });
-        // 게시글 삭제 성공 시 서버 기록, 클라이언트에 204상태 반환 
-      } else {
-        console.log(`Post with ID ${postId} has been successfully deleted`);
-        res.status(204).send();
-      }
-    } catch (error) {
-      console.error('Error occurred while deleting the post:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+  } catch (error) {
+    console.error('Error occurred while deleting the post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // //-------------------------------------
 // //************댓글 로직**************//
@@ -819,7 +831,7 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
       // 일치하는 id가 있어 게시글이 조회될 경우, 서버 콘솔에 기록, 클라이언트에 응답 
       console.log(`Comment details sent for post id: ${postId}`);
       res.json(rows);
-      console.log(rows)
+      console.log(rows);
     }
   } catch (error) {
     // 에러 발생 시 서버 기록, 클라이언트에 500상태코드와 메세지 응답
@@ -830,32 +842,32 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
 
 
 
-app.post('/Community/Read/:id/SaveComment', async(req, res) => {
+app.post('/Community/Read/:id/SaveComment', async (req, res) => {
   // 요청 객체에서 content 추출
   // url에서 postId 추출
   const { userid, content, responseTo } = req.body;
   const postId = req.params.id;
   console.log(responseTo);
-  console.log(content)
+  console.log(content);
   try {
     // 유저정보 입력
-  // 게시물 존재 여부 확인
-  const [rows] = await poolPromise.query(
-    'SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
+    // 게시물 존재 여부 확인
+    const [rows] = await poolPromise.query(
+      'SELECT * FROM ezteam2.community_posts WHERE postid = ?', [postId]);
     console.log(rows.length);
-  if (rows.length === 0) {
-    return res.status(404).json({ error: 'Could not find the post.' });
-  }
-  
-  // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
-  const [results] = await poolPromise.query(
-    'INSERT INTO ezteam2.community_comments (userid, postid, content, createdAt, responseTo) VALUES (?,?,?, NOW(),?)',
-    [userid, postId, content, responseTo],
-  );
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Could not find the post.' });
+    }
 
-  // 새로운 댓글의 ID를 사용하여 해당 댓글의 모든 정보를 데이터베이스에서 조회
-  const newCommentId = results.insertId;
-  const [newComment] = await poolPromise.query(`
+    // 클라이언트에서 받은 content, postId데이터와 현재시간 데이터를 comments 테이블에 삽입
+    const [results] = await poolPromise.query(
+      'INSERT INTO ezteam2.community_comments (userid, postid, content, createdAt, responseTo) VALUES (?,?,?, NOW(),?)',
+      [userid, postId, content, responseTo],
+    );
+
+    // 새로운 댓글의 ID를 사용하여 해당 댓글의 모든 정보를 데이터베이스에서 조회
+    const newCommentId = results.insertId;
+    const [newComment] = await poolPromise.query(`
   SELECT 
     community_comments.*, 
     user.username 
@@ -866,14 +878,14 @@ app.post('/Community/Read/:id/SaveComment', async(req, res) => {
   ON 
     community_comments.userid = user.userid
   WHERE 
-    community_comments.commentid = ?`, 
-[newCommentId]);
-  // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
-  res.status(201).json({ message: 'Comment created successfully', result:newComment });
+    community_comments.commentid = ?`,
+      [newCommentId]);
+    // 성공 시 HTTP상태 코드 201 반환, 클라이언트에 JSON형식의 성공메세지 전달
+    res.status(201).json({ message: 'Comment created successfully', result: newComment });
   } catch (error) {
-  // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
-  console.error('Error:', error);
-  res.status(500).json({ message: 'Internal Server Error' });
+    // 에러 발생 시 콘솔에 기록, HTTP 상태 코드 500 반환, 클라이언트에 에러 메세지 응답
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -975,7 +987,7 @@ app.get('/my/:formType/:userid', (req, res) => {
              LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
              WHERE community_posts.userid = ?`;
 
-  // islike 폼 쿼리문
+    // islike 폼 쿼리문
   } else if (formType === 'islike') {
     if (!userId) {
       res.status(400).json({ message: 'Invalid ID' });
@@ -986,7 +998,7 @@ app.get('/my/:formType/:userid', (req, res) => {
              LEFT JOIN is_like B ON A.postid = B.postid
              WHERE B.post_isLiked = 1`;
 
-  // 나머지 선택된 폼의 쿼리문
+    // 나머지 선택된 폼의 쿼리문
   } else {
     query = `SELECT * FROM ${table} WHERE userid = ?`;
   }
@@ -1024,18 +1036,18 @@ app.put('/my/edit/update/:userid', (req, res) => {
   // 클라이언트에서 전달된 프로필 데이터
   // userId를 values 배열에 추가
   const { username, phonenumber, address, detailedaddress, email } = profileData;
-  const values = [username, phonenumber, address, detailedaddress, email, userId]; 
+  const values = [username, phonenumber, address, detailedaddress, email, userId];
 
   // 데이터베이스 쿼리 실행
   connection.query(updateQuery, values, (error, results) => {
-      if (error) {
-          console.error('Error updating user profile:', error);
-          res.status(500).json({ error: 'Failed update profile' });
-          return;
-      }
-      // 업데이트된 사용자 정보 반환
-      console.log(results)
-      res.json(results);
+    if (error) {
+      console.error('Error updating user profile:', error);
+      res.status(500).json({ error: 'Failed update profile' });
+      return;
+    }
+    // 업데이트된 사용자 정보 반환
+    console.log(results);
+    res.json(results);
   });
 });
 
@@ -1047,30 +1059,30 @@ app.post('/pw-valid/:userid', async (req, res) => {
   const Id = req.params.userid;
 
   try {
-      const connection = await poolPromise.getConnection(async conn => conn);
-      try {
-          // 기존 비밀번호를 가져온다
-          const [rows] = await connection.query('SELECT password FROM user WHERE userid = ?', [Id]);
-          const hashedPasswordFromDB = rows[0].password;
+    const connection = await poolPromise.getConnection(async conn => conn);
+    try {
+      // 기존 비밀번호를 가져온다
+      const [rows] = await connection.query('SELECT password FROM user WHERE userid = ?', [Id]);
+      const hashedPasswordFromDB = rows[0].password;
 
-          // 클라이언트에서 제공한 비밀번호를 해싱
-          const isPasswordValid = await bcrypt.compare(password, hashedPasswordFromDB);
+      // 클라이언트에서 제공한 비밀번호를 해싱
+      const isPasswordValid = await bcrypt.compare(password, hashedPasswordFromDB);
 
-          // 비밀번호 비교
-          if (isPasswordValid) {
-              res.json({ isValid: true });
-          } else {
-              res.json({ isValid: false });
-          }
-      } catch (error) {
-          console.error('Error executing query:', error);
-          res.status(500).json({ error: 'Internal server error' });
-      } finally {
-          connection.release();
+      // 비밀번호 비교
+      if (isPasswordValid) {
+        res.json({ isValid: true });
+      } else {
+        res.json({ isValid: false });
       }
-  } catch (error) {
-      console.error('Error connecting to database:', error);
+    } catch (error) {
+      console.error('Error executing query:', error);
       res.status(500).json({ error: 'Internal server error' });
+    } finally {
+      connection.release();
+    }
+  } catch (error) {
+    console.error('Error connecting to database:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -1124,11 +1136,11 @@ app.post('/pw-valid/:userid', async (req, res) => {
 // userid를 넣어서 파일이름 생성 *수정됨
 const storage = multer.diskStorage({
   destination: (req, file, cb) => { // 어디
-    cb(null, 'server/public/userimg') // 파일저장경로
+    cb(null, 'server/public/userimg'); // 파일저장경로
   },
-  filename: (req, file, cb) => { 
+  filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const userId = req.params.userid || 'default'
+    const userId = req.params.userid || 'default';
     // console.log('사용자id:',userId)
     cb(null, 'profile_' + userId + path.extname(file.originalname));
   },
@@ -1139,22 +1151,22 @@ const imgup = multer({ storage: storage });
 
 app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   const userId = req.params.userid;
-  console.log("파일경로",req.file.path);
+  console.log("파일경로", req.file.path);
   if (!req.file) {
     return res.status(400).send('No files were uploaded.');
   }
   // 파일 업로드 경로
   const filePath = req.file.filename;
   // 이미지 URL 생성 (예: /uploads/파일명)
-  console.log('파일객체log',req.file)
+  console.log('파일객체log', req.file);
   const imageUrl = filePath;
 
-// 중복키가 존재하면 이미 존재하는 img_url을 업데이트 *수정됨
+  // 중복키가 존재하면 이미 존재하는 img_url을 업데이트 *수정됨
   const sql = `
   INSERT INTO user_img (userid, img_url) VALUES (?, ?) 
   ON DUPLICATE KEY UPDATE img_url = VALUES(img_url)
   `;
-  
+
   connection.query(sql, [userId, imageUrl], (err, results, fields) => {
     if (err) {
       console.error('Error: img into MySQL:', err);
@@ -1211,7 +1223,7 @@ app.get('/imgsave/:userid', (req, res) => {
 //       return res.status(500).send('Error deleting image');
 //     }
 //     console.log('Image deleted successfully:', filename);
-    
+
 //     // MySQL에서 레코드 삭제
 //     const sql = 'DELETE FROM user_img WHERE img_url = ?';
 //     connection.query(sql, [filename], (err, results, fields) => {
@@ -1228,7 +1240,7 @@ app.get('/imgsave/:userid', (req, res) => {
 // app.delete('/my/profile/img/:filename', (req, res) => {
 //   const filename = req.params.filename;
 //   const filePath = `server/public/userimg/${filename}`; // 파일 경로
-  
+
 //   // 파일이 존재하는지 확인 후 삭제
 //   fs.unlink(filePath, (err) => {
 //     if (err) {
@@ -1236,7 +1248,7 @@ app.get('/imgsave/:userid', (req, res) => {
 //       return res.status(500).send('image 삭제에러');
 //     }
 //     console.log('Image 삭제성공:', filename);
-    
+
 //     // MySQL에서도 삭제
 //     const sql = 'DELETE FROM imgup WHERE imgurl = ?';
 //     connection.query(sql, [filename], (err, results, fields) => {
