@@ -148,6 +148,9 @@ function RegisterPersonal() {
     } else if (!phonenumberDuplication) {
       alert("휴대폰 번호 중복 확인을 해주세요.");
       return;
+    } else if (!address) {
+      alert("주소를 입력하세요.");
+      return;
     } else if (
       !email ||
       !username ||
