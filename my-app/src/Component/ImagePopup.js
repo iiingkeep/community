@@ -4,10 +4,13 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import '../Styles/ImagePopup.css';
 import Draggable from "./Draggable";
+import { useImage } from "./ImageContext"; // context추가
 
-const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
+const ImagePopup = ({ userId, onClose }) => {
   // 이미지 URL 상태
-  const [imageUrl, setImageUrl] = useState(""); 
+  const { imageUrl, setImageUrl } = useImage(); // 수정후*
+  // const [imageUrl, setImageUrl] = useState(""); // 수정전*
+
   // file input 요소접근
   const fileInputRef = useRef(null); 
 
@@ -26,7 +29,7 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
       // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
       const imageUrl = `http://localhost:8000/public/userimg/${result.data}`;
       setImageUrl(imageUrl);
-      handleProfileImg(imageUrl);
+      // handleProfileImg(imageUrl);
       // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정 - *오류코드
       // const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
       
