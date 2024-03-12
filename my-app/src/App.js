@@ -70,7 +70,7 @@ function App() {
         // menu={
         //   <div className="HeaderMenu">
         //     <button onClick={() => navigate("/NetZero")}>탄소중립이란? </button>
-        //     <button onClick={() => navigate("/news")}>환경이슈 </button>
+        //     <button onClick={() => navigate("/News")}>환경이슈 </button>
         //     <button onClick={() => navigate("/Community")}>커뮤니티 </button>
         //   </div>
         // }
@@ -112,7 +112,7 @@ function App() {
           element={<CommunityRead loggedIn={loggedIn} userid={userid} />}
         />
         {/* 뉴스 추가 */}
-        <Route path="/news" element={<News />} />
+        <Route path="/News" element={<News />} />
         <Route path="/MyPage" element={<MyPage />} />
       </Routes>
       

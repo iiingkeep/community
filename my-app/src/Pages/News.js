@@ -286,8 +286,7 @@ const News = () => {
               </div>
               <div className="news-list__datetime">
                 <p>
-                  {formattedDateAndTime(item.pubDate, "date")}
-                  {formattedDateAndTime(item.pubDate, "time")}
+                  {formattedDateAndTime(item.pubDate, "date")} {formattedDateAndTime(item.pubDate, "time")}
                 </p>
               </div>
             </li>
