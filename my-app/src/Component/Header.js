@@ -5,25 +5,16 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ loggedIn, handleLogout }) => {
   const navigate = useNavigate();
 
-  const handleMain = () => {
-    navigate("/");
+  const handleNavigation = (path) => {
+    navigate(path);
     window.scrollTo(0, 0);
   };
 
-  const handleNetZero = () => {
-    navigate("/NetZero");
-    window.scrollTo(0, 0);
-  };
-
-  const handleLogin = () => {
-    navigate("/Login");
-    window.scrollTo(0, 0);
-  };
-
-  const handleRegister = () => {
-    navigate("/RegisterPersonal");
-    window.scrollTo(0, 0);
-  };
+  const handleMain = () => handleNavigation("/");
+  const handleNetZero = () => handleNavigation("/NetZero");
+  const handleLogin = () => handleNavigation("/Login");
+  const handleRegister = () => handleNavigation("/RegisterPersonal");
+  const handleMyPage = () => handleNavigation("/MyPage");
 
   return (
     <div className="header">
@@ -54,7 +45,7 @@ const Header = ({ loggedIn, handleLogout }) => {
           <div>
             <button
               className="header__button--button button"
-              onClick={() => navigate("/MyPage")}
+              onClick={handleMyPage}
             >
               마이페이지
             </button>
