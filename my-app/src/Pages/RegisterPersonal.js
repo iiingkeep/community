@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { handlePostcode } from "./Postcodehandle";
 import axios from "axios";
 import "../Styles/RegisterPersonal.css";
 
 function RegisterPersonal() {
-  const [username, setUsername] = useState(""); // 이름
   const [email, setEmail] = useState(""); // 아이디
+  const [username, setUsername] = useState(""); // 이름
   const [password, setPassword] = useState(""); // 비밀번호
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [phonenumber, setphonenumber] = useState(""); // 휴대폰 번호
@@ -29,6 +29,35 @@ function RegisterPersonal() {
   const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
   const PWcheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,16}$/; // PW 정규표현식
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
+
+  // 이전에 username과 phonenumber 상태를 저장할 변수
+  const prevEmail = useRef(email);
+  const prevUsername = useRef(username);
+  const prevPhonenumber = useRef(phonenumber);
+
+  useEffect(() => {
+    // email 상태가 변경될 때만 실행
+    if (prevEmail.current !== email) {
+      setEmailDuplication(false); // setEmailDuplication을 false로 설정
+      prevEmail.current = email; // 이전 email 상태를 갱신
+    }
+  }, [email]); // email 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+
+  useEffect(() => {
+    // username 상태가 변경될 때만 실행
+    if (prevUsername.current !== username) {
+      setUsernameDuplication(false); // setUsernameDuplication을 false로 설정
+      prevUsername.current = username; // 이전 username 상태를 갱신
+    }
+  }, [username]); // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+
+  useEffect(() => {
+    // phonenumber 상태가 변경될 때만 실행
+    if (prevPhonenumber.current !== phonenumber) {
+      setPhonenumberDuplication(false); // setPhonenumberDuplication을 false로 설정
+      prevPhonenumber.current = phonenumber; // 이전 phonenumber 상태를 갱신
+    }
+  }, [phonenumber]); // phonenumber 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
 
   // 아이디 유효성 검사
   const handleEmailCheck = () => {
@@ -128,25 +157,12 @@ function RegisterPersonal() {
   //-----------------------------------------------------------------------
 
   const handleRegisterClick = () => {
-    if (
-      !emailDuplication ||
-      !email ||
-      email.match(spacebar) ||
-      email.match(special) ||
-      !IDcheck.test(email)
-    ) {
+    if (!emailDuplication) {
       alert("아이디 중복 확인을 해주세요.");
-      setEmailDuplication(false);
       return;
     } else if (
-      !usernameDuplication ||
-      !username ||
-      username.match(spacebar) ||
-      username.match(special) ||
-      !NICKcheck.test(username)
-    ) {
+      !usernameDuplication) {
       alert("닉네임 중복 확인을 해주세요.");
-      setUsernameDuplication(false);
       return;
     } else if (!password) {
       alert("비밀번호를 입력하세요.");
@@ -164,15 +180,8 @@ function RegisterPersonal() {
       alert("비밀번호가 일치하지 않습니다.");
       setPasswordMatch(false);
       return;
-    } else if (
-      !phonenumberDuplication ||
-      !phonenumber ||
-      phonenumber.match(spacebar) ||
-      phonenumber.match(special) ||
-      !tel.test(phonenumber)
-    ) {
+    } else if (!phonenumberDuplication) {
       alert("휴대폰 번호 중복 확인을 해주세요.");
-      setPhonenumberDuplication(false);
       return;
     } else if (!address) {
       alert("주소를 입력하세요.");
@@ -188,52 +197,6 @@ function RegisterPersonal() {
     ) {
       alert("정보를 모두 입력하세요.");
       return;
-    } else if (
-      email ||
-      username ||
-      password ||
-      confirmPassword ||
-      phonenumber ||
-      address ||
-      detailedaddress
-    ) {
-      axios
-        .post("http://localhost:8000/checkEmailDuplication", { email })
-        .then((response) => {
-          console.log("서버 응답:", response.data);
-          setEmailDuplication(response.data.success);
-          alert(response.data.message);
-        })
-        .catch((error) => {
-          console.error("아이디 중복 확인 중 오류:", error);
-          alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
-        });
-
-      axios
-        .post("http://localhost:8000/checkUsernameDuplication", { username })
-        .then((response) => {
-          console.log("서버 응답:", response.data);
-          setUsernameDuplication(response.data.success);
-          alert(response.data.message);
-        })
-        .catch((error) => {
-          console.error("닉네임 중복 확인 중 오류:", error);
-          alert("client :: 닉네임 중복 확인 중 오류가 발생했습니다.");
-        });
-
-      axios
-        .post("http://localhost:8000/checkPhonenumberDuplication", {
-          phonenumber,
-        })
-        .then((response) => {
-          console.log("서버 응답:", response.data);
-          setPhonenumberDuplication(response.data.success);
-          alert(response.data.message);
-        })
-        .catch((error) => {
-          console.error("휴대폰 번호 중복 확인 중 오류:", error);
-          alert("client :: 휴대폰 번호 중복 확인 중 오류가 발생했습니다.");
-        });
     } else {
       // 클라이언트에서 서버로 회원가입 요청
       axios
