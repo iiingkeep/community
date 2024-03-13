@@ -11,6 +11,7 @@ import "../Styles/MyPage.css";
 const MyPage = () => {
   const [activeForm, setActiveForm] = useState('profile');
   const [formData, setFormData] = useState({});
+  const [selectedButton, setSelectedButton] = useState('profile');
 
    const storedUserData = sessionStorage.getItem("userData");
    const userData = JSON.parse(storedUserData);
@@ -41,24 +42,32 @@ const MyPage = () => {
   // 폼 선택 핸들러
   const handleFormChange = (formType) => {
     setActiveForm(formType);
+    setSelectedButton(formType);
   };
 
   return (
-    <div className="MyForm">
-      <h1>My Page</h1>
-      <div className="MyBtn">
-        <button onClick={() => handleFormChange('profile')}>프로필</button>
-        <button onClick={() => handleFormChange('edit')}>정보수정</button>
-        <button onClick={() => handleFormChange('activity')}>나의활동</button>
-        <button onClick={() => handleFormChange('order')}>주문내역</button>
-        <button onClick={() => handleFormChange('islike')}>좋아요</button>
-      </div>
+    <div className="my-page inner">
+      <h1 className="my-header">마이페이지</h1>
+      <div className="my-page__wrapper">
+        <div className="my-page__btn">
+          <ul>
+          <li><button className={`my-btn__button ${selectedButton === 'profile' ? 'active' : ''}`} onClick={() => handleFormChange('profile')}>프로필</button></li>
+          <li><button className={`my-btn__button ${selectedButton === 'edit' ? 'active' : ''}`} onClick={() => handleFormChange('edit')}>정보수정</button></li>
+          <li><button className={`my-btn__button ${selectedButton === 'activity' ? 'active' : ''}`} onClick={() => handleFormChange('activity')}>나의활동</button></li>
+          {/* <button className={`my-btn__button ${selectedButton === 'order' ? 'active' : ''}`} onClick={() => handleFormChange('order')}>주문내역</button> */}
+          <li><button className={`my-btn__button ${selectedButton === 'islike' ? 'active' : ''}`} onClick={() => handleFormChange('islike')}>좋아요</button></li>
+          </ul>
+        </div>
       {/* Form 조건부 렌더링 */}
-      {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'islike' && <IsLikeForm formData={formData} />}
+        {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
+        {/* {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />} */}
+        {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'islike' && <IsLikeForm formData={formData} />}
+      </div>
+      <div>
+      </div>
     </div>
   );
 };

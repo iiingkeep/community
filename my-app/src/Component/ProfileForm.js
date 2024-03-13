@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ImagePopup from "./ImagePopup";
-import "../Styles/ProfileForm.css"
+import "../Styles/MyPage.css";
 import { useImage } from "./ImageContext"; // context추가
 
 const ProfileForm = ({userId}) => {
@@ -51,26 +51,57 @@ const ProfileForm = ({userId}) => {
     }, [userId, setImageUrl]); // 오류 해결을 위해 setImageUrl 추가
 
     return (
-        <div className="profile-form" >
-            <h2>Profile Form</h2>
-            {/* 업로드 된 이미지가 없다면 user_img폴더의 이미지를 표시 */}
-            <div className="profileImg">
-            {imageUrl ? ( <img src={imageUrl} alt="Profile" /> ) : ( <img src="/user_img/basic.png" alt="DefaultIMG" /> )}
+        <div className="profile-form inner" >
+            <div className="my-form__title">
+                <p className="my-form__text">나의 프로필</p>
             </div>
-            <br />
+
+            <div className="my-form__wrapper">
+                <div className="profile-form__img">
+            {/* 업로드 된 이미지가 없다면 user_img폴더의 이미지를 표시 */}
+            {imageUrl ? ( <img src={imageUrl} alt="userimg" /> ) : ( <img className="profile-form__img" src="/user_img/basic.png" alt="IMG" /> )}
+            <button className="profile__btn" onClick={handleImgPopup}>사진 변경</button>
+            </div>
+
+            <div className="profile-content">
             {/* 이미지 팝업 */}
-            <button onClick={handleImgPopup}>사진 변경</button>
             {/* ImagePopup에 userId 전달 */}
             {showPopup && <ImagePopup userId={userId} onClose={() => setShowPopup(false)} handleProfileImg={handleProfileImg}/>}
-            {/* 프로필 정보 */}
+            
+            <div className="profile-content-wrapper">
             {/* id식별 조건부 렌더링 */}
             {profileData.usertype === '2' || profileData.usertype === '3'  
-                ? ( <p>사업자번호: {profileData.businessnumber}</p> ) : null}
-            <p>회원이름: {profileData.username}</p>
-            <p>핸드폰번호: {profileData.phonenumber}</p>
-            <p>주소: {profileData.address}</p>
-            <p>상세주소: {profileData.detailedaddress}</p>
-            <p>이메일: {profileData.email}</p>
+            ? ( <p>사업자번호 {profileData.businessnumber}</p> ) : null}
+            
+            <div className="profile-name-wrapper">
+            <span className="profile__name">{profileData.username}</span>
+            <span> 님</span>
+            </div>
+            <table class="profile-content__detail">
+    <tr>
+        <td>이메일</td>
+        <td>{profileData.email}</td>
+    </tr>
+    <tr>
+        <td>핸드폰번호</td>
+        <td>{profileData.phonenumber}</td>
+    </tr>
+    <tr>
+        <td>주소</td>
+        <td>{profileData.address}</td>
+    </tr>
+    <tr>
+        <td>상세주소</td>
+        <td>{profileData.detailedaddress}</td>
+    </tr>
+</table>
+
+
+            </div>
+
+            </div>
+            
+        </div>
         </div>
     );
 };
