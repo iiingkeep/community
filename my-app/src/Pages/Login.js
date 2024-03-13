@@ -58,7 +58,7 @@ function Login() {
           <input
             id="id"
             type="text"
-            placeholder="아이디를 입력해주세요."
+            placeholder="ID"
             value={email}
             onChange={(e) => setemail(e.target.value)}
           />
@@ -66,7 +66,7 @@ function Login() {
           {/* <p>비밀번호</p> */}
           <input
             type="password"
-            placeholder="비밀번호를 입력해주세요."
+            placeholder="PW"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -85,8 +85,8 @@ function Login() {
           <div className="login-page__to-register">
             <Link to="/RegisterPersonal">회원이 아니신가요?</Link>
           </div>
-          {loginStatus && <div>{loginStatus}</div>}
         </form>
+        {loginStatus && <div>{loginStatus}</div>}
       </div>
     </div>
   );
