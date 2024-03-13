@@ -112,7 +112,9 @@ function RegisterPersonal() {
     }
 
     axios
-      .post("http://localhost:8000/checkPhonenumberDuplication", { phonenumber })
+      .post("http://localhost:8000/checkPhonenumberDuplication", {
+        phonenumber,
+      })
       .then((response) => {
         console.log("서버 응답:", response.data);
         setPhonenumberDuplication(response.data.success);
@@ -126,27 +128,51 @@ function RegisterPersonal() {
   //-----------------------------------------------------------------------
 
   const handleRegisterClick = () => {
-    if (!emailDuplication) {
+    if (
+      !emailDuplication ||
+      !email ||
+      email.match(spacebar) ||
+      email.match(special) ||
+      !IDcheck.test(email)
+    ) {
       alert("아이디 중복 확인을 해주세요.");
+      setEmailDuplication(false);
       return;
-    } else if (!usernameDuplication) {
+    } else if (
+      !usernameDuplication ||
+      !username ||
+      username.match(spacebar) ||
+      username.match(special) ||
+      !NICKcheck.test(username)
+    ) {
       alert("닉네임 중복 확인을 해주세요.");
+      setUsernameDuplication(false);
       return;
     } else if (!password) {
       alert("비밀번호를 입력하세요.");
+      setPasswordMatch(false);
       return;
-    }else if (password.match(spacebar)) {
+    } else if (password.match(spacebar)) {
       alert("비밀번호에 공백을 포함할 수 없습니다.");
+      setPasswordMatch(false);
       return;
     } else if (!PWcheck.test(password)) {
       alert("비밀번호 형식이 올바르지 않습니다.");
+      setPasswordMatch(false);
       return;
     } else if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
       setPasswordMatch(false);
       return;
-    } else if (!phonenumberDuplication) {
+    } else if (
+      !phonenumberDuplication ||
+      !phonenumber ||
+      phonenumber.match(spacebar) ||
+      phonenumber.match(special) ||
+      !tel.test(phonenumber)
+    ) {
       alert("휴대폰 번호 중복 확인을 해주세요.");
+      setPhonenumberDuplication(false);
       return;
     } else if (!address) {
       alert("주소를 입력하세요.");
@@ -162,6 +188,52 @@ function RegisterPersonal() {
     ) {
       alert("정보를 모두 입력하세요.");
       return;
+    } else if (
+      email ||
+      username ||
+      password ||
+      confirmPassword ||
+      phonenumber ||
+      address ||
+      detailedaddress
+    ) {
+      axios
+        .post("http://localhost:8000/checkEmailDuplication", { email })
+        .then((response) => {
+          console.log("서버 응답:", response.data);
+          setEmailDuplication(response.data.success);
+          alert(response.data.message);
+        })
+        .catch((error) => {
+          console.error("아이디 중복 확인 중 오류:", error);
+          alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
+        });
+
+      axios
+        .post("http://localhost:8000/checkUsernameDuplication", { username })
+        .then((response) => {
+          console.log("서버 응답:", response.data);
+          setUsernameDuplication(response.data.success);
+          alert(response.data.message);
+        })
+        .catch((error) => {
+          console.error("닉네임 중복 확인 중 오류:", error);
+          alert("client :: 닉네임 중복 확인 중 오류가 발생했습니다.");
+        });
+
+      axios
+        .post("http://localhost:8000/checkPhonenumberDuplication", {
+          phonenumber,
+        })
+        .then((response) => {
+          console.log("서버 응답:", response.data);
+          setPhonenumberDuplication(response.data.success);
+          alert(response.data.message);
+        })
+        .catch((error) => {
+          console.error("휴대폰 번호 중복 확인 중 오류:", error);
+          alert("client :: 휴대폰 번호 중복 확인 중 오류가 발생했습니다.");
+        });
     } else {
       // 클라이언트에서 서버로 회원가입 요청
       axios
@@ -208,15 +280,12 @@ function RegisterPersonal() {
         <h2>회원가입</h2>
         <input
           type="text"
-          placeholder="ID : 영문·숫자로만 5~20 자리"
+          placeholder="ID : 영문·숫자 섞어서 5~20 자리"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         {/* 아이디 유효성 검사 */}
-        <button
-          className="regi-dupl__button"
-          onClick={handleEmailCheck}
-        >
+        <button className="regi-dupl__button" onClick={handleEmailCheck}>
           아이디 중복 확인
         </button>
         <br />
@@ -227,10 +296,7 @@ function RegisterPersonal() {
           onChange={(e) => setUsername(e.target.value)}
         />
         {/* 닉네임 유효성 검사 */}
-        <button
-          className="regi-dupl__button"
-          onClick={handleUsernameCheck}
-        >
+        <button className="regi-dupl__button" onClick={handleUsernameCheck}>
           닉네임 중복 확인
         </button>
         <br />
@@ -266,10 +332,7 @@ function RegisterPersonal() {
           onChange={(e) => setphonenumber(e.target.value)}
         />
         {/* 휴대폰 번호 유효성 검사 */}
-        <button
-          className="regi-dupl__button"
-          onClick={handlePhonenumberCheck}
-        >
+        <button className="regi-dupl__button" onClick={handlePhonenumberCheck}>
           휴대폰 번호 중복 확인
         </button>
         <br />
