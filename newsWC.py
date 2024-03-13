@@ -72,7 +72,7 @@ def color_func(word, font_size, position, random_state=None, **kwargs):
         return "hsl(210, 100%, {}%)".format(np.random.randint(40, 70))  # 파란색 계열 (채도 100%)
 
 # 워드클라우드 객체 선언 및 출력
-wc =  WordCloud(font_path='malgun', width=400, height=400, background_color='white', mask=mask, color_func=color_func)
+wc =  WordCloud(font_path='malgun', width=400, height=400, background_color='RGB(238, 244, 253)', mask=mask, color_func=color_func)
 result = wc.generate_from_frequencies(word_list_count)
 plt.imshow(result)
 wc.to_file("./my-app/public/wc_image/result.png") # png 파일로 저장

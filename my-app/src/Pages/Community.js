@@ -6,6 +6,7 @@ import './Community.css';
 import DOMPurify from 'dompurify';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
+import { getPostThumbnail } from "../Util/utils";
 // import CommunityItems from './CommunityItems';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
@@ -64,18 +65,7 @@ const Community = ({loggedIn}) => {
     }
   };
 
-  // 게시글 콘텐츠에서 이미지 URL을 추출하여 썸네일 생성
-const getPostThumbnail = (content) => {
-  // 정규 표현식을 사용하여 이미지 URL 추출
-  const regex = /<img\s+src\s*=\s*\"([^\"]+)\"/g;
-  const matches = content.match(regex);
-  console.log(matches)
-
-  // 게시글에 이미지가 있는 경우 첫 번째 이미지 URL 반환, 없는 경우 null 반환
-  const url = matches ? matches[0].replace('<img src="', '').replace('"', '') : null;
-  console.log(url)
-  return matches ? matches[0].replace('<img src="', '').replace('"', '') : '/background_img/thumb4.png';
-};
+  
 
 
 // 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
@@ -108,7 +98,10 @@ const getPostContentWithoutImages = (content) => {
   return (
     <div className="community-page inner">
       {/* 커뮤니티 헤더 */}
-      <div className='commu-header'><h1 className='commu-header-title'>커뮤니티</h1></div>
+      <div className='com-header'><h1 className='com-header__title'>커뮤니티<p className='com-header__title--detail'>다른 사람들은 탄소중립을 어떻게 실천하고 있을까요?<br />
+            팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !</p></h1>
+        <img className="com-header__img" src='background_img/thumb1.png' />
+      </div>
       {/* 게시글 카테고리 탭 */}
       <div className='commu-category-box'>
         <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>

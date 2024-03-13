@@ -1320,9 +1320,35 @@ app.get('/imgsave/:userid', (req, res) => {
 
 
 //--------------------------------------------------------------------------//
-//---------------------------------김민규----------------------------//
+//---------------------------------메인----------------------------//
 
+// 당일 올라온 게시물 중 좋아요를 많이 받은 상위 4개 게시물 정보 반환
+app.get('/Main', async (req, res) => {
+  try {
+    const topFourPostsQuery = `
+      SELECT 
+        cp.*,
+        u.username,
+        (SELECT COUNT(*) FROM ezteam2.community_comments cc WHERE cc.postid = cp.postid) AS commentCount,
+        (SELECT COUNT(*) FROM ezteam2.is_like il WHERE il.postid = cp.postid) AS totalLikes
+      FROM 
+        ezteam2.community_posts cp
+      INNER JOIN 
+        ezteam2.user u ON cp.userid = u.userid
+      WHERE 
+        DATE(cp.createdAt) = CURDATE()
+      ORDER BY totalLikes DESC
+      LIMIT 4
+    `;
 
+    const [rows] = await poolPromise.query(topFourPostsQuery);
+
+    res.json({ posts: rows });
+  } catch (error) {
+    console.error('Error fetching top four community posts:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 

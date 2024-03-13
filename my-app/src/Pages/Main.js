@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Icon} from '@iconify/react';
 import "./Main.css";
+import { getPostThumbnail } from "../Util/utils";
 
 const Main = () => {
   //------------------------로그인로그인----------------
@@ -12,7 +13,10 @@ const Main = () => {
   const [password, setPassword] = useState("");
   const [loginStatus, setloginStatus] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+
   const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const storedLoggedIn = sessionStorage.getItem("loggedIn");
@@ -178,6 +182,26 @@ const Main = () => {
     }
   };
   //------------------------워드클라우드 끝----------------
+  //------------------------커뮤니티-----------------------
+  const [topFourPosts, setTopFourPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/Main")
+      .then((response) => {
+        setTopFourPosts(response.data.posts);
+      })
+      .catch((error) => {
+        console.error("Error fetching top four community posts:", error);
+      });
+  }, []);
+
+  const goCommunityRead = (postId) => {
+    // 상세 페이지로 이동
+    navigate(`/Community/Read/${postId}`);
+  };
+
+  //-----------------------커뮤니티 끝----------------------
+
 
   return (
     <div className="MainBody">
@@ -232,33 +256,17 @@ const Main = () => {
           </div>
           </div>
         </div>
-        <div className="section s3">
+        <div className="section s3 main-inner">
           <p className="main-header main-issue__header">오늘의 핫 이슈에요🔥</p>
-            {/* 로그인 구역 */}
-            {/* <div className="main-login-form">
-              {renderContent()}
-            </div> */}
-            {/* 로그인 구역 끝 */}
-            <div className="main-issue-box">
-            <div className="main-issue-inner">
-            <div className="main-issue__phrase">
-            <p className="main-issue__phrase--title">환경이슈</p>
-            <p className="main-issue__phrase--content">
-              최신 환경뉴스와 핫 토픽
-            </p>
-            <p className="main-issue__phrase--content--detail">
-            아침에 일어나서 한 번, 저녁 식사 후 한 번<br />
-            업데이트 되는 환경 뉴스를 통해 최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요<br />
-            지난 12시간동안 가장 핫했던 키워드가 무엇인지 바로 알 수 있는 클라우드 이미지도 제공하고 있답니다
-            </p>
-            </div>
+            <div className="main-issue">
+            
             <div className="main-issue__wordcloud-and-news-box">
             <div className="main-issue__wordcloud-box">
               <p className="main-issue__name">지구촌 이슈</p>
               <img
                 className="main-issue__wordcloud"
                 src="./wc_image/result.png"
-                alt="wordcloud_img"
+                alt="지구촌 이슈 워드 클라우드 이미지"
               />
               <button
                 className="main-issue__wordcloud__button"
@@ -268,7 +276,7 @@ const Main = () => {
               </button>
             </div>
             <div className="main-issue__news-box">
-            <p className="main-issue__name">뉴스 미리보기</p>
+            <p className="main-issue__name">최신뉴스 TOP4</p>
               <ul>
                 {topFiveNews.map((item) => (
                   <li key={item.newsid}>
@@ -278,6 +286,7 @@ const Main = () => {
                       onClick={() => handleClick(item)}
                     />
                     <a
+                      className="main-issue__title-box"
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -289,25 +298,22 @@ const Main = () => {
                 ))}
               </ul>
             </div>
-            </div>
-        <div className="main-issue__phrase main-issue__phrase--community">
-            <p className="main-issue__phrase--title">커뮤니티</p>
-            <p className="main-issue__phrase--content">
-              탄소중립 실천 경험 나누기 
-            </p>
-            <p className="main-issue__phrase--content--detail">
-            다른 사람들은 탄소중립을 어떻게 실천하고 있을까요?<br />
-            팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !<br />
-            </p>
-            </div>
-
             <div className="main-issue__news-box main-issue__community-box">
-            
+            <p className="main-issue__name">인기글 TOP4</p>
+        <ul>
+          {topFourPosts.map((post) => (
+            <li key={post.postid}>
+              <img src={getPostThumbnail(post.content)} alt="게시물 썸네일" onClick={() => goCommunityRead(post.postid)} />
+              <p className="main-issue__title-box main-issue__title-box--community" onClick={() => goCommunityRead(post.postid)}><span>{post.title}</span></p>
+              <Icon icon="icon-park-outline:like" className='commu-post-list__icon'/>
+              {post.totalLikes}
+            </li>
+          ))}
+        </ul>
             </div>
-
+            </div>
             </div>
         </div>
-          </div>
         </div>
       </div>
   );

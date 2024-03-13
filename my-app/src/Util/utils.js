@@ -28,3 +28,16 @@ export const formattedDateAndTime = (createdAt, format) => {
       return formattedDateTime; // 날짜와 시간 반환
   }
 };
+
+// 게시글 콘텐츠에서 이미지 URL을 추출하여 썸네일 생성
+export const getPostThumbnail = (content) => {
+  // 정규 표현식을 사용하여 이미지 URL 추출
+  const regex = /<img\s+src\s*=\s*\"([^\"]+)\"/g;
+  const matches = content.match(regex);
+  console.log(matches)
+
+  // 게시글에 이미지가 있는 경우 첫 번째 이미지 URL 반환, 없는 경우 null 반환
+  const url = matches ? matches[0].replace('<img src="', '').replace('"', '') : null;
+  console.log(url)
+  return matches ? matches[0].replace('<img src="', '').replace('"', '') : '/background_img/thumb4.png';
+};

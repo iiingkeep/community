@@ -18,6 +18,7 @@
 .commu-comment__form {
   display: flex;
   height: 50px;
+  margin-bottom: 10px;
 }
 
 /* 답글이 아닌 댓글 작성 폼 */

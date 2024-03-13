@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import ImageResize from "quill-image-resize-module-react";
-import {ImageDrop} from 'quill-image-drop-module'
 
 // 등록된 게시글 수정 컴포넌트
 const CommunityEdit = ({userid}) => {
@@ -192,7 +191,8 @@ const CommunityEdit = ({userid}) => {
   return (
     <div className='commu-edit-page inner'>
       {/* 커뮤니티 헤더 */}
-      <h1 className='commu-header'>커뮤니티</h1>
+      <div className='com-header'><h1 className='com-header__title'>커뮤니티<p className='com-header__title--detail'>다른 사람들은 탄소중립을 어떻게 실천하고 있을까요?<br />
+            팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !</p></h1></div>
       {/* 게시글 카테고리 탭 */}
       <div className='commu-category-box commu-write__category-box'>
         <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>

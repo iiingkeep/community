@@ -219,9 +219,9 @@ const News = () => {
   return (
     <div className="news-page inner">
       <Link to="/news">
-        <h1 className="news-header" onClick={handleLogoClick}>
-          환경이슈
-        </h1>
+      <div className='com-header'><h1 className='com-header__title' onClick={handleLogoClick}>환경이슈 <p className='com-header__title--detail'>아침에 일어나서 한 번, 저녁 식사 후 한 번<br />
+            최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요</p></h1>
+            <img className="com-header__img" src='background_img/news8.png' /></div>
       </Link>
       {/* 검색 */}
       <div className="news-search-and-sort-box">
