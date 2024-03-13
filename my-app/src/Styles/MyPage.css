@@ -1,4 +1,4 @@
-/* mypage */
+/* 마이페이지 -------------------------------- */
 .my-header {
   width: 1500px;
   height: 200px;
@@ -18,13 +18,23 @@
 }
 
 .my-form__title {
-  font-size: 20px;
+  padding-bottom: 30px;
+}
+
+.my-form__text {
+  font-size: 23px;
+  font-weight: 50%;
+  text-align: left;
+  border-bottom: 5px solid rgb(83, 212, 92);
+  padding-bottom: 15px;
+  width: 130px;
 }
 
 .my-btn {
     margin-bottom: 20px;
-    display: flex;
-    justify-content: center; /* 버튼 그룹을 수평으로 중앙 정렬 */
+    /* display: flex; */
+    /* justify-content: center; */
+     /* 버튼 그룹을 수평으로 중앙 정렬 */
   }
 
 .my-btn__button {
@@ -53,11 +63,18 @@
   }
    */
 
-/* profile form -------------------------------- */
-.profile-form__img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+.my-page__wrapper {
+  /* width: 130px; */
+  display: flex;
+  padding-bottom: 250px;
+}
+.my-page__btn >ul{
+  width: 200px;
+}
+.my-form__wrapper {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 30px;
 }
 
 .my-page-forms {
@@ -65,31 +82,60 @@
   height: 150px;
 }
 
-/* edit form -------------------------------- */
-.edit-form__input {
+
+/* 프로필 -------------------------------- */
+
+.profile-form__img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+  margin-bottom: 27px;
+}
+
+.profile__btn {
+  background-color: rgb(95, 95, 95);
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color: white;
+}
+
+.profile-content {
+  align-items: end;
+  padding-left: 30px;
+}
+
+.profile-content__detail {
+  width: 350px;
+  height: 250px;
+  padding: auto;
+  line-height: 30px;
+  border-top: solid 3px rgb(0, 0, 0);
+  border-bottom: solid 3px rgb(0, 0, 0);
+}
+
+.profile-name-wrapper {
+  line-height: 60px;
+  text-align: right;
+
+}
+.profile__name {
+  font-size: 30px;
+  font-weight: 500px;
+  color: rgb(83, 212, 92);
+}
+
+/* 정보수정 -------------------------------- */
+.edit-form__content {
   display: flex;
   justify-content: center;
   height: 100vh; /* 원하는 높이로 설정하세요 */
 }
 
-.edit-form__input 
-[name="username"],[name="email"]
-{
-font-family: "Roboto", sans-serif;
-outline: 0;
-background: transparent; /* 배경색 투명으로 변경 */
-border: none; /* 테두리 없애기 */
-border-bottom: 1px solid #ccc; /* 하단 실선 적용 */
-margin: 0; /* 기존에 있던 margin 삭제 */
-padding: 15px; /* 기존 padding 값을 유지 */
-box-sizing: border-box;
-font-size: 14px;
-border-radius: 0; /* 기존에 있던 border-radius 삭제 */
-width: 190px; /* 너비 조정은 유지 */
-}
 
-.edit-form__input 
-[name="phonenumber"],[name="address"],[name="detailedaddress"]
+
+.edit-form__input
 {
 font-family: "Roboto", sans-serif;
 background: #f2f2f2;
@@ -102,7 +148,10 @@ font-size: 14px;
 border-radius: 10px;
 }
 
-.edit-form_input label {
+.edit-form__label {
+  padding-bottom: 15px;
+}
+.edit-form_content label {
   text-align: left; /* 라벨 텍스트를 좌측으로 정렬 */
   display: block; /* 라벨을 블록 레벨 요소로 변경하여 한 줄에 하나씩 표시 */
   margin-bottom: 5px; /* 라벨 간격 조정 */
@@ -123,29 +172,87 @@ width: 190px;
   margin: 15px 0;
 }
 
-/* activity form -------------------------------- */
-.acti-post, .acti-comm {
+.edit-form__label {
+  display: flex;
+  align-items: center;
+}
+
+.edit-form__text {
+  margin-right: 30px; /* 텍스트와 입력 필드 사이의 간격 */
+  text-align: right;
+}
+
+
+/* 나의활동 -------------------------------- */
+
+/* 폼 테이블 (acti/like) ---------------------- */
+.forms-post, .acti-comm {
   width: 100%;
   height: 350px;
 }
 
-.acti-table thead {
+.forms-table {
+  width: 80%;
+  height: 350px;
+}
+
+.forms-table thead {
   width: 100%;
   height: 30px;
   background-color: #f2f5f2;;
   flex-direction: column;
 }
 
-.acti-table th {
+.forms-table th {
   padding: 12px 15px;
 }
 
-.acti-table td {
+.forms-table td {
   padding: 13px 15px 12px 15px;
+  text-align: center;
   /* font-size: 13px; */
   /* line-height: 1.5em; */
 }
 
-.acti-table tr {
+.forms-table tr {
   border-bottom: solid 1px #e6e8eb;
+}
+
+.forms-table__title {
+  text-align: center;
+  margin-right: 100px;
+}
+
+.forms-table__date {
+  text-align: center;
+}
+
+
+/* 비밀번호 검사 -------------------------------- */
+.pass-input {
+  width: 300px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.pass__btn {
+  width: 300px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #6dc970;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 15px 0;
 }

@@ -25,14 +25,17 @@ const ActivityForm = ({userId}) => {
   return (
   <div className='acti-form inner'>
     <div className='acti-post'>
+      <div className="my-form__title">
+      <p className="my-form__text">나의 활동</p>
+      </div>
       <div className='acti-post__list'>
         <h2>게시물</h2>
-        <table className='acti-table'>
+        <table className='forms-table'>
           <thead>
             <tr>
-              <th>No.</th>
-              <th>내용</th>
-              <th>날짜</th>
+              <th className='forms-table__num'>No.</th>
+              <th className='forms-table__title'>내용</th>
+              <th className='forms-table__date'>날짜</th>
             </tr>
           </thead>
           <tbody>
@@ -54,13 +57,13 @@ const ActivityForm = ({userId}) => {
 
     <div className='acti-comm'>
       <div className='acti-comm__list'>
-        <h2>댓글</h2>
-        <table className='acti-table'>
+        <h2>댓글 알림</h2>
+        <table className='forms-table'>
           <thead>
             <tr>
-              <th>No.</th>
-              <th>내용</th>
-              <th>날짜</th>
+              <th className='forms-table__num'>No.</th>
+              <th className='forms-table__title'>내용</th>
+              <th className='forms-table__date'>날짜</th>
             </tr>
           </thead>
           <tbody>
