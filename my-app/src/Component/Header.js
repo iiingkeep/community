@@ -69,13 +69,13 @@ const Header = ({ loggedIn, handleLogout }) => {
           <div>
             <button
               className="header__button--button button"
-              onClick={() => navigate("/Login")}
+              onClick={handleLogin}
             >
               로그인
             </button>
             <button
               className="header__button--button button"
-              onClick={() => navigate("/RegisterPersonal")}
+              onClick={handleRegister}
             >
               회원가입
             </button>
