@@ -10,10 +10,20 @@ const Header = ({ loggedIn, handleLogout }) => {
     window.scrollTo(0, 0);
   };
 
-    const handleNetZero = () => {
-      navigate("/NetZero");
-      window.scrollTo(0, 0);
-    };
+  const handleNetZero = () => {
+    navigate("/NetZero");
+    window.scrollTo(0, 0);
+  };
+
+  const handleLogin = () => {
+    navigate("/Login");
+    window.scrollTo(0, 0);
+  };
+
+  const handleRegister = () => {
+    navigate("/RegisterPersonal");
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="header">
