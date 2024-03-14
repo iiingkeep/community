@@ -44,6 +44,11 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     e.preventDefault();
     if (loggedIn) {
       try{
+        if (!commentValue) {
+          alert('내용을 입력해주세요.');
+          document.querySelector('.commu-comment__content').focus();
+          return;
+        }
         // 서버의 다음 엔드포인트로 답글 정보(게시글id, 작성한 답글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
         const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {
             userid: userid,
@@ -81,11 +86,17 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
 
     
     }
-  
+
+    // 댓글 수정 후 등록버튼 클릭 시 호출되는 핸들러 함수
     const onUpdateComment = async (e) => {
       const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");
       if (editComfirmed) {
       try {
+        if (!commentValue) { // 댓글에 내용이 없을 시 입력 요청
+          alert('내용을 입력해주세요.');
+          document.querySelector('.commu-single-comment__content--editing').focus();
+          return;
+        }
         const response = await axios.put(`http://localhost:8000/Community/Read/${id}/UpdateComment`, {
           commentid: comment.commentid,
           content: commentValue,
@@ -175,9 +186,8 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
           )}
         </div>
         {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
-        <div className="commu-single-comment__reply-comment-box--write">
           {openReply && (
-            <form onSubmit={onReplySubmit} className="commu-comment__form commu-comment__form--origin">
+            <form onSubmit={onReplySubmit} className="commu-comment__form">
               <textarea
                 className="commu-comment__content"
                 onChange={onHandleChange}
@@ -189,7 +199,6 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
               </button>
             </form>
           )}
-        </div>
       </div>
     );
 }

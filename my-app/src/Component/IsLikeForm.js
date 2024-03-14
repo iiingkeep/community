@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "../Styles/MyPage.css";
+
 
 const IsLikeForm = ({ userId }) => {
   const [isLike, setIsLike] = useState([]); // 게시물 목록 상태
@@ -22,11 +24,16 @@ const IsLikeForm = ({ userId }) => {
 
   return (
     <div className="like-form">
-      <h3 className="my-form__title">좋아요 한 목록</h3>
-      <table>
+      <div className="my-form__title">
+        <p className="my-form__text">뉴스</p>
+      </div>
+      <div className="like-post__list">
+      <table className='forms-table'>
         <thead>
           <tr>
-            <th>제목</th>
+            {/* <th className='forms-table__num'>No.</th> */}
+            <th className='forms-table__title'>내용</th>
+            <th className='forms-table__date'>날짜</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +48,7 @@ const IsLikeForm = ({ userId }) => {
           ))}
         </tbody>
       </table>
+      </div>
       {/* 뉴스Link to 추가 */}
     </div>
   );

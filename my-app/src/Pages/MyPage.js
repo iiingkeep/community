@@ -47,21 +47,31 @@ const MyPage = () => {
 
   return (
     <div className="my-page inner">
-      <h1 className="my-header">마이페이지</h1>
-      <div className="my-btn">
-        <button className={`my-btn__button ${selectedButton === 'profile' ? 'active' : ''}`} onClick={() => handleFormChange('profile')}>프로필</button>
-        <button className={`my-btn__button ${selectedButton === 'edit' ? 'active' : ''}`} onClick={() => handleFormChange('edit')}>정보수정</button>
-        <button className={`my-btn__button ${selectedButton === 'activity' ? 'active' : ''}`} onClick={() => handleFormChange('activity')}>나의활동</button>
-        <button className={`my-btn__button ${selectedButton === 'order' ? 'active' : ''}`} onClick={() => handleFormChange('order')}>주문내역</button>
-        <button className={`my-btn__button ${selectedButton === 'islike' ? 'active' : ''}`} onClick={() => handleFormChange('islike')}>좋아요</button>
+      <div className='com-header'><h1 className='com-header__title'>마이페이지<p className='com-header__title--detail'>내가 남긴 발자국은 어떤 모양일까?<br />
+      나의 탄소중립 활동으로 확인해요. 발자국이 많을 수록 탄소중립에 한 발 더 가까이!</p></h1>
+        <img className="com-header__img" src='background_img/thumb1.png' />
       </div>
+      <div className="my-page__wrapper">
+        <div className="my-page__btn">
+          <ul>
+          <li><button className={`my-btn__button ${selectedButton === 'profile' ? 'active' : ''}`} onClick={() => handleFormChange('profile')}>프로필</button></li>
+          <li><button className={`my-btn__button ${selectedButton === 'edit' ? 'active' : ''}`} onClick={() => handleFormChange('edit')}>정보수정</button></li>
+          <li><button className={`my-btn__button ${selectedButton === 'activity' ? 'active' : ''}`} onClick={() => handleFormChange('activity')}>나의활동</button></li>
+          {/* <button className={`my-btn__button ${selectedButton === 'order' ? 'active' : ''}`} onClick={() => handleFormChange('order')}>주문내역</button> */}
+          <li><button className={`my-btn__button ${selectedButton === 'islike' ? 'active' : ''}`} onClick={() => handleFormChange('islike')}>좋아요</button></li>
+          </ul>
+        </div>
       {/* Form 조건부 렌더링 */}
+        <div className="my-page__right">
+        {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
+        {/* {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />} */}
+        {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'islike' && <IsLikeForm formData={formData} />}
+        </div>
+      </div>
       <div>
-      {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
-      {activeForm === 'islike' && <IsLikeForm formData={formData} />}
       </div>
     </div>
   );

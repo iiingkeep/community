@@ -17,32 +17,57 @@
   position:relative;
 }
 /* 헤더 */
-.commu-header {
+
+.com-header {
   width: 1500px;
-  height: 200px;
-  display: flex;
+  height: 300px;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
   font-weight: 700;
-  color:rgb(255, 255, 255);
-  /* background-color: rgb(76, 134, 188); */
-  background-image:  url('../../public/background_img/back3.jpg');
-  background-size: 1502px  ;
+  /* background-color: rgb(255, 233, 192); */
+  background-image:  
+  url('../../public/background_img/backimg2.png'),
+  url('../../public/background_img/backimg3.png'),
+   url('../../public/background_img/back3.jpg');
+  background-size: 50px 50px , 70px 70px, 1502px 300px;
   background-repeat:no-repeat;
-  background-position: 20% 210%;
+  background-position: 30% 23% ,90% 80%, 20% 170%;
   position: relative;
   transform: translateX(-16%);
   z-index: 2;
-  border-radius: 40px;
-  /* border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px; */
+  /* border-radius: 40px; */
+  border-bottom-left-radius: 80px;
+  border-bottom-right-radius: 80px;
 }
+.com-header img{
+  /* width: 270px;
+  height: 270px; */
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 11%;
+  left: 60%;
+}
+
 /* .commu-header-title {
   position: absolute;
   top: 60%;
   left: 19%;
 } */
+.com-header__title {
+  color: rgb(112, 112, 112);
+  font-size: 50px;
+  position: absolute;
+  top: 120px;
+  left: 240px;
+
+}
+.com-header__title--detail {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 27px;
+  color: rgb(112, 112, 112);
+}
 
 
 /* 카테고리 */
@@ -53,6 +78,7 @@
 }
 
 .commu-category__button {
+  width:33%;
   border:none;
   /* border-bottom: 3px solid rgba(0,0,0,0.2); */
   background-color: transparent;
