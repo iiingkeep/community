@@ -47,7 +47,10 @@ const MyPage = () => {
 
   return (
     <div className="my-page inner">
-      <h1 className="my-header">마이페이지</h1>
+      <div className='com-header'><h1 className='com-header__title'>마이페이지<p className='com-header__title--detail'>내가 남긴 발자국은 어떤 모양일까?<br />
+      나의 탄소중립 활동으로 확인해요. 발자국이 많을 수록 탄소중립에 한 발 더 가까이!</p></h1>
+        <img className="com-header__img" src='background_img/thumb1.png' />
+      </div>
       <div className="my-page__wrapper">
         <div className="my-page__btn">
           <ul>
