@@ -67,7 +67,7 @@ function App() {
       <Header loggedIn={loggedIn} handleLogout={handleLogout}/>
 
       <Routes>
-        <Route path="/" element={<Main loggedIn={loggedIn} handleLogout={handleLogout}/>} />
+        <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
         <Route path="/FindInformation" element={<FindInformation />} />
