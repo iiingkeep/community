@@ -13,7 +13,6 @@
   font-size: 40px;
   font-weight: 700;
   color:rgb(255, 255, 255);
-  /* background-color: rgb(76, 134, 188); */
   background-image: url('../../public/background_img/back3.jpg');
   background-size: 1502px;
   background-repeat:no-repeat;
@@ -22,8 +21,6 @@
   transform: translateX(-16%);
   z-index: 2;
   border-radius: 40px;
-  /* border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px; */
 }
 
 .news-page a:link {
