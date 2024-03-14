@@ -155,7 +155,7 @@ const ProfileForm = ({userId}) => {
     }, [userId]); // userId가 변경될 때마다 호출
 
     return (
-        <div className="profile-form inner" >
+        <div className="profile-form" >
             <div className="my-form__title">
                 <p className="my-form__text">나의 프로필</p>
             </div>
@@ -165,9 +165,9 @@ const ProfileForm = ({userId}) => {
                     {/* 업로드 된 이미지가 없다면 user_img폴더의 이미지를 표시 */}
                     {imageUrl ? (<img src={imageUrl} alt="userimg" />) 
                     : (<img className="profile-form__img" src="/user_img/basic.png" alt="IMG" />)}
-                    </div>
+                    
                     <div className="profile-wrapper__btn">
-                    <button className="profile__btn" onClick={handleImgPopup}>사진 변경</button>
+                    <button className="profile__btn" onClick={handleImgPopup}>사진 변경</button></div>
                 </div>
 
                 <div className="profile-content">
