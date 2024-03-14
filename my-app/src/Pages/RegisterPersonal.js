@@ -27,7 +27,8 @@ function RegisterPersonal() {
   const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g; // 특수문자 정규표현식
   const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/; // ID 정규표현식
   const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
-  const PWcheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,16}$/; // PW 정규표현식
+  const PWcheck =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
 
   // 이전에 username과 phonenumber 상태를 저장할 변수
@@ -236,7 +237,6 @@ function RegisterPersonal() {
     }
   };
 
-  const passwordNotMatch = !PWcheck.test(password) || password.match(spacebar);
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
   return (
@@ -275,7 +275,10 @@ function RegisterPersonal() {
           사용 가능한 특수문자 : @#$%^&+=!
         </p>
         <br />
-        {password && passwordNotMatch && (
+        {password && password.match(spacebar) && (
+          <p style={{ color: "red" }}>비밀번호에 공백을 포함할 수 없습니다.</p>
+        )}
+        {password && !PWcheck.test(password) && (
           <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
         )}
         {password && passwordMatch && (
