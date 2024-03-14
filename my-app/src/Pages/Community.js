@@ -7,7 +7,6 @@ import DOMPurify from 'dompurify';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 import { getPostThumbnail } from "../Util/utils";
-// import CommunityItems from './CommunityItems';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
 const Community = ({loggedIn}) => {
@@ -18,9 +17,6 @@ const Community = ({loggedIn}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
   const [selectedCategory, setSelectedCategory] = useState(1);
-  // const [imageUrl, setImageUrl] = useState("");
-  
-  
 
   const navigate = useNavigate();
   // 검색어 업데이트
@@ -37,22 +33,15 @@ const Community = ({loggedIn}) => {
     fetchPosts();
   };
 
+  //카테고리 선택 버튼
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setCurrentPage(1);
   };
 
-
   useEffect(() => {
     fetchPosts();
   }, [currentPage,selectedCategory]);
-
-  // useEffect(() => {
-  // const savedImageUrl = localStorage.getItem('storageImg');
-  // if (savedImageUrl) {
-  //     setImageUrl(savedImageUrl);
-  //   }
-  // },[posts])
 
   // 서버의 다음 엔드포인트에 게시글 목록과 게시글의 총 갯수 GET요청
   const fetchPosts = async () => {
@@ -65,14 +54,10 @@ const Community = ({loggedIn}) => {
     }
   };
 
-  
-
-
 // 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
 const getPostContentWithoutImages = (content) => {
   return content.replace(/<img\s+[^>]*src="[^"]*"[^>]*>/g, '');
 };
-
 
   // 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
@@ -86,10 +71,6 @@ const getPostContentWithoutImages = (content) => {
     }
   }
 };
-
-// const userImage = localStorage.getItem('storageImg');
-// console.log('프로필:',userImage);
-
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -102,13 +83,16 @@ const getPostContentWithoutImages = (content) => {
             팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !</p></h1>
         <img className="com-header__img" src='background_img/thumb1.png' />
       </div>
+
       {/* 게시글 카테고리 탭 */}
       <div className='commu-category-box'>
         <button className={'commu-category__button' + (selectedCategory === 1 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(1)}>실천기록</button>
         <button className={'commu-category__button' + (selectedCategory === 2 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(2)}>자유게시판</button>
         <button className={'commu-category__button' + (selectedCategory === 3 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(3)}>고민과질문</button>
       </div>
+
       <div className='commu-search-and-go-write-box'>
+
         {/* 검색창 */}
       <div className='commu-search-box'>
         <div className='commu-search-box--except-button'>
@@ -121,10 +105,12 @@ const getPostContentWithoutImages = (content) => {
         </div>
         <button className='commu-search-box__button button' onClick={handleSearchButtonClick}>검색</button>
       </div>
+
       {/* 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동 */}
       <div className='commu-go-write-box'>
         <button className='commu-go-write-box__button button' onClick={goCommunityWrite}>글쓰기</button>
       </div>
+
       </div>
 
       {/* 게시글 목록 출력 */}
@@ -136,26 +122,28 @@ const getPostContentWithoutImages = (content) => {
             <div className="commu-post-list__thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             </Link>
             <div className='commu-post-list__info-box'>
+
             <div className='commu-post-list__title-and-content-and-datetime'>
+
             <div className='commu-post-list__title-and-content'>
             <Link to={`/Community/Read/${post.postid}`}>
               <p className='commu-post-list__title'>{post.title}</p>
               <div className='commu-post-list__content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getPostContentWithoutImages(post.content)) }}></div>
             </Link>
             </div>
+
             <div className='commu-post-list__datetime'>
             <p className='commu-post-list__datetime--date'>{formattedDateAndTime(post.createdAt, 'date')}</p>
             <p className='commu-post-list__datetime--time'>{formattedDateAndTime(post.createdAt, 'time')}</p>
             </div>
+
             </div>
             <div className='commu-post-list__detail'>
+
               <div className='commu_post-list__detail--userinfo'>
-                {/* 유저 프로필사진 추가 */}
-                {/* <div className='commu-post-list__detail--userinfo__img-box'>
-                {imageUrl ? ( <img className='commu-post-list__detail--userinfo__img' src={imageUrl} alt="Profile" /> ) : ( <img className='commu-post-list__detail--userinfo__img' src="/user_img/basic.png" alt="DefaultIMG" /> )}
-                </div> */}
                 <p>{post.username}</p>
               </div>
+
               <div className='commu_post-list__detail--attention'>
             <span className='commu-post-list__view'>
             <Icon icon="fluent-mdl2:view" className='commu-post-list__icon'/>
@@ -167,10 +155,9 @@ const getPostContentWithoutImages = (content) => {
             <Icon icon="f7:ellipses-bubble" className='commu-post-list__icon'/>
             {post.commentCount}</span>
             </div>
+
             </div>
             </div>
-            
-            
           </li>
         ))}
       </ul>

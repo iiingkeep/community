@@ -60,7 +60,17 @@ table {
   font-style: normal;
   margin-top: 10vh;
 }
-
+* {
+  box-sizing: border-box;
+}
+.wrap {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.inner {
+  width: 1000px;
+  margin: 60px auto 100px;
+}
 button:hover {
   cursor:pointer
 }

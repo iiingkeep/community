@@ -27,10 +27,11 @@ function RegisterPersonal() {
   const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g; // 특수문자 정규표현식
   const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/; // ID 정규표현식
   const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
-  const PWcheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,16}$/; // PW 정규표현식
+  const PWcheck =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
 
-  // 이전에 username과 phonenumber 상태를 저장할 변수
+  // 이전 username과 phonenumber 상태를 저장할 변수
   const prevEmail = useRef(email);
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
@@ -90,7 +91,7 @@ function RegisterPersonal() {
         alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
       });
   };
-  //-----------------------------------------------------------------------
+
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
     if (!username) {
@@ -154,14 +155,13 @@ function RegisterPersonal() {
         alert("client :: 휴대폰 번호 중복 확인 중 오류가 발생했습니다.");
       });
   };
-  //-----------------------------------------------------------------------
 
+  // 가입 완료 버튼
   const handleRegisterClick = () => {
     if (!emailDuplication) {
       alert("아이디 중복 확인을 해주세요.");
       return;
-    } else if (
-      !usernameDuplication) {
+    } else if (!usernameDuplication) {
       alert("닉네임 중복 확인을 해주세요.");
       return;
     } else if (!password) {
@@ -215,7 +215,7 @@ function RegisterPersonal() {
           if (response.data.userType === 1) {
             // 개인 사용자 처리
           }
-          window.location.href = "/Login"; // 홈 페이지 또는 다른 페이지로 리디렉션
+          window.location.href = "/Login"; // 로그인 페이지로 리디렉션
         })
         .catch((error) => {
           if (error.response) {
@@ -236,6 +236,8 @@ function RegisterPersonal() {
         });
     }
   };
+  // 비밀번호 유효성 검사 만족하는 상태
+  const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
   return (
     <div className="regi-page">
@@ -273,6 +275,18 @@ function RegisterPersonal() {
           사용 가능한 특수문자 : @#$%^&+=!
         </p>
         <br />
+        {password && password.match(spacebar) && (
+          <p style={{ color: "red" }}>비밀번호에 공백을 포함할 수 없습니다.</p>
+        )}
+        {password && !PWcheck.test(password) && (
+          <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
+        )}
+        {password && passwordMatch && (
+          <p style={{ color: "rgb(83, 212, 92)" }}>
+            사용 가능한 비밀번호 입니다.
+          </p>
+        )}
+        <br />
         <input
           type="password"
           placeholder="PW 재입력"
@@ -280,8 +294,12 @@ function RegisterPersonal() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         {/* 비밀번호 일치 여부 확인 */}
-        {password && confirmPassword && (
-          <p>
+        {passwordMatch && confirmPassword && (
+          <p
+            style={{
+              color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
+            }}
+          >
             {password === confirmPassword
               ? "비밀번호가 일치합니다."
               : "비밀번호가 일치하지 않습니다."}
