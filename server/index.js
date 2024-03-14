@@ -981,16 +981,17 @@ app.get('/my/:formType/:userid', (req, res) => {
       return;
   }
 
-  // activity 폼 쿼리문
-  if (formType === 'activity') {
-    query = `SELECT * FROM community_posts
-             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-             WHERE community_posts.userid = ?`;
+  // activity - 댓글
 
-    // islike 폼 쿼리문
-  } else if (formType === 'islike') {
+  // activity -게시글
+  if (formType === 'acti-post') {
+    query = `SELECT * FROM community_posts
+             WHERE community_posts.userid = ?`;
+  }
+  // islike 폼 
+  else if (formType === 'islike') {
     if (!userId) {
-      res.status(400).json({ message: 'Invalid ID' });
+      res.status(400).json({ message: 'Invalid ID: islike' });
       return;
     }
     // 모든 컬럼 가져오기 " * "
