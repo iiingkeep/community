@@ -160,8 +160,7 @@ function RegisterPersonal() {
     if (!emailDuplication) {
       alert("아이디 중복 확인을 해주세요.");
       return;
-    } else if (
-      !usernameDuplication) {
+    } else if (!usernameDuplication) {
       alert("닉네임 중복 확인을 해주세요.");
       return;
     } else if (!password) {
@@ -237,6 +236,9 @@ function RegisterPersonal() {
     }
   };
 
+  const passwordNotMatch = !PWcheck.test(password) || password.match(spacebar);
+  const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
+
   return (
     <div className="regi-page">
       <div className="regi-form">
@@ -273,6 +275,15 @@ function RegisterPersonal() {
           사용 가능한 특수문자 : @#$%^&+=!
         </p>
         <br />
+        {password && passwordNotMatch && (
+          <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
+        )}
+        {password && passwordMatch && (
+          <p style={{ color: "rgb(83, 212, 92)" }}>
+            사용 가능한 비밀번호 입니다.
+          </p>
+        )}
+        <br />
         <input
           type="password"
           placeholder="PW 재입력"
@@ -280,8 +291,12 @@ function RegisterPersonal() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         {/* 비밀번호 일치 여부 확인 */}
-        {password && confirmPassword && (
-          <p>
+        {passwordMatch && confirmPassword && (
+          <p
+            style={{
+              color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
+            }}
+          >
             {password === confirmPassword
               ? "비밀번호가 일치합니다."
               : "비밀번호가 일치하지 않습니다."}
