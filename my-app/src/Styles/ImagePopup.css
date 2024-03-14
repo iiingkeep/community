@@ -1,37 +1,32 @@
 /* ImagePopup.css */
 
-.Modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
+.img-modal {
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    /* position: fixed; */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .ModalContent {
-    position: relative;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
     /* 그림자 효과 추가 */
     /* box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);  */
   }
   
-  
-  
-  .ModalContent img {
+  .img-modal__content {
     display: block;
     max-width: 50%;
     max-height: 50%;
-    border-radius: 50%; /* 이미지를 원형으로 만듭니다. */
     margin: 0 auto; /* 이미지를 수평으로 중앙에 정렬합니다. */
   }
+
+  .img-modal__close {
+    border: none;
+    background: none;
+  }
   
-  /* .UploadBtn {
+  /* .img-modal__btn {
     position: absolute;
     top: 180px;
     left: 50%;

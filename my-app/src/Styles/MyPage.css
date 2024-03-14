@@ -18,39 +18,33 @@
 }
 
 .my-form__title {
-  padding-bottom: 30px;
+  padding-bottom: 50px;
+  width: 300px;
+  margin: auto;
 }
 
 .my-form__text {
-  font-size: 23px;
-  font-weight: 50%;
-  text-align: left;
+  font-size: 30px;
+  font-weight: 1000;
+  text-align: center;
   border-bottom: 5px solid rgb(83, 212, 92);
-  padding-bottom: 15px;
-  width: 130px;
+  padding-bottom: 10px;
 }
-
-.my-btn {
-    margin-bottom: 20px;
-    /* display: flex; */
-    /* justify-content: center; */
-     /* 버튼 그룹을 수평으로 중앙 정렬 */
-  }
 
 .my-btn__button {
   border:none;
   /* border-bottom: 3px solid rgba(0,0,0,0.2); */
   background-color: transparent;
-  padding: 20px;
-  font-family: "IBM Plex Sans KR", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+  /* padding: 10px; */
+  /* margin-bottom: 20px; */
+  font-size: 20px;
+  font-weight: 700;
   font-style: normal;
   color: rgb(40, 40, 40);
 }
 
 .my-btn__button.active {
-  border-bottom: 3px solid rgb(83, 212, 92);
+  border-bottom: 5px solid rgb(83, 212, 92);
 }
 
   /* .my-btn:focus {
@@ -63,19 +57,16 @@
   }
    */
 
-.my-page__wrapper {
-  /* width: 130px; */
-  display: flex;
-  padding-bottom: 250px;
-}
+.my-page__wrapper { display: flex; margin-top: 80px;}
+
 .my-page__btn >ul{
   width: 200px;
-}
-.my-form__wrapper {
+  height: 300px;
   display: flex;
-  padding-top: 10px;
-  padding-left: 30px;
+  flex-direction: column;
+  justify-content: space-between;
 }
+.my-page__btn >ul>li{width: 200px; height: 33.5px;}
 
 .my-page-forms {
   width: 300px;
@@ -84,13 +75,21 @@
 
 
 /* 프로필 -------------------------------- */
+.profile-form{width: 100%;}
 
-.profile-form__img {
-  width: 150px;
-  height: 150px;
-  border-radius: 10%;
-  margin-bottom: 27px;
+.profile-form__wrapper {
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 세로 중앙 정렬 */
+  /* justify-content: center; */
+   /* 가로 중앙 정렬 */
+  /* flex-direction: column;  */
+  /* 아이템들을 세로 방향으로 정렬 */
 }
+
+.profile-form__img { display: flex; flex-direction: column;   padding: 30px 30px;}
+.profile-form__img > img{  width: 150px; height: 200px; border-radius: 10%; margin-bottom: 27px; object-fit: cover;}
+
+.profile-wrapper__btn{display: flex; justify-content: flex-end;}
 
 .profile__btn {
   background-color: rgb(95, 95, 95);
@@ -103,64 +102,83 @@
 
 .profile-content {
   align-items: end;
-  padding-left: 30px;
+  padding: 30px 30px;
+  flex-grow: 1;
 }
 
 .profile-content__detail {
-  width: 350px;
+  width: 100%;
   height: 250px;
-  padding: auto;
   line-height: 30px;
   border-top: solid 3px rgb(0, 0, 0);
-  border-bottom: solid 3px rgb(0, 0, 0);
+  border-bottom: solid 1px rgb(196, 196, 196);
+}
+
+.profile-content__detail td {
+  padding: 13px 15px 12px 15px;
+}
+
+.profile-content__detail tr {
+  border-bottom: dotted 1px rgb(196, 196, 196);
 }
 
 .profile-name-wrapper {
   line-height: 60px;
-  text-align: right;
-
 }
+
+.profile-content__detail td:first-child {
+  width: 120px;
+}
+
 .profile__name {
   font-size: 30px;
-  font-weight: 500px;
+  font-weight: 1000;
   color: rgb(83, 212, 92);
 }
 
 /* 정보수정 -------------------------------- */
-.edit-form__content {
-  display: flex;
-  justify-content: center;
-  height: 100vh; /* 원하는 높이로 설정하세요 */
+.edit-form{width: 100%; display: flex; justify-content: center;}
+.edit-form > table{width: 150px; justify-content: center;}
+
+
+.edit-form__content td {
+  padding: 13px 15px 12px 15px;
 }
 
+.edit-form__content tr {
+  border-bottom: solid 1px rgb(196, 196, 196);
+}
 
-
-.edit-form__input
-{
-font-family: "Roboto", sans-serif;
-background: #f2f2f2;
+.edit-form__input {
 width: 330px;
-border: 0;
-margin: 0;
+outline: none; /* 선택 상태에서의 기본 테두리 제거 */
+border: none; /* 선택 상태에서의 테두리 제거 */
 padding: 15px;
 box-sizing: border-box;
-font-size: 14px;
-border-radius: 10px;
+color: rgb(0, 0, 0);
 }
 
-.edit-form__label {
-  padding-bottom: 15px;
+.edit-form label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
 }
+
+.edit-form_content {
+  width: 500px;
+}
+
 .edit-form_content label {
-  text-align: left; /* 라벨 텍스트를 좌측으로 정렬 */
-  display: block; /* 라벨을 블록 레벨 요소로 변경하여 한 줄에 하나씩 표시 */
-  margin-bottom: 5px; /* 라벨 간격 조정 */
+  text-align: left; 
+  /* 라벨 텍스트를 좌측으로 정렬 */
+  display: block; 
+  /* 라벨을 블록 레벨 요소로 변경하여 한 줄에 하나씩 표시 */
+  margin-bottom: 5px;
+  /* 5px; 라벨 간격 조정 */
 }
 
 .edit-form__btn {
-width: 190px;
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
+  width: 110px;
   outline: 0;
   background: #6dc970;
   border: 0;
@@ -172,25 +190,27 @@ width: 190px;
   margin: 15px 0;
 }
 
-.edit-form__label {
-  display: flex;
-  align-items: center;
-}
-
 .edit-form__text {
-  margin-right: 30px; /* 텍스트와 입력 필드 사이의 간격 */
-  text-align: right;
+  margin-right: 15px; /* 텍스트와 입력 필드 사이의 간격 */
+  width: 100px;
 }
 
 
 /* 나의활동 -------------------------------- */
+.acti-post__list{display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 50px;}
+.acti-post-list__title{display: flex; justify-content: start; width: 80%;}
+.acti-post-list__title >h2{padding: 10px; font-weight: 1000;}
 
-/* 폼 테이블 (acti/like) ---------------------- */
+.acti-comm__list{display: flex; flex-direction: column; align-items: center; width: 100%;}
+.acti-comm-list__title{display: flex; justify-content: start; width: 80%;}
+.acti-comm-list__title >h2{padding: 10px; font-weight: 1000;}
+
+
+/* 폼 테이블 (활동/좋아요) ---------------------- */
 .forms-post, .acti-comm {
   width: 100%;
-  height: 350px;
 }
-
+.like-post__list{display: flex; justify-content: center;}
 .forms-table {
   width: 80%;
   height: 350px;
@@ -199,8 +219,11 @@ width: 190px;
 .forms-table thead {
   width: 100%;
   height: 30px;
-  background-color: #f2f5f2;;
+  /* background-color: #dbdbdb; */
   flex-direction: column;
+  border-top: solid 3px black;
+  border-bottom: solid 1px rgb(210, 210, 210);
+
 }
 
 .forms-table th {
@@ -210,9 +233,13 @@ width: 190px;
 .forms-table td {
   padding: 13px 15px 12px 15px;
   text-align: center;
-  /* font-size: 13px; */
-  /* line-height: 1.5em; */
+  font-size: 17px;
+  line-height: 2em;
 }
+
+/* .forms-table tr :hover {
+  background-color: #d5d5d5;
+} */
 
 .forms-table tr {
   border-bottom: solid 1px #e6e8eb;
@@ -231,21 +258,21 @@ width: 190px;
 /* 비밀번호 검사 -------------------------------- */
 .pass-input {
   width: 300px;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   outline: 0;
   background: #f2f2f2;
   border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
+  /* margin: 0 0 15px; */
+  /* box-sizing: border-box; */
+  padding: 20px;
+  font-size: 17px;
   border-radius: 10px;
 }
 
 .pass__btn {
-  width: 300px;
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
+  width: 200px;
+  /* font-family: "Roboto", sans-serif; */
+  /* text-transform: uppercase; */
   outline: 0;
   background: #6dc970;
   border: 0;
@@ -254,5 +281,14 @@ width: 190px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 10px;
-  margin: 15px 0;
 }
+
+.pass-form {
+  font-size: 20px;
+  line-height: 25px;
+
+}
+.pass-form > form {display: flex; flex-direction: column; align-items: center;}
+
+.my-page__right{flex-grow: 1;}
+/* .like-form{justify-content: center;} */

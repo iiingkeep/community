@@ -69,106 +69,109 @@ const EditForm = ({ userId }) => {
     };
 
     return (
-        <table className="edit-form inner">
-            <thead>
-                <tr>
-                    <th className="my-form__title">
-                        <p className="my-form__text">정보수정</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {!showEditForm ? (
+        <div className="edit-form">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <PasswordValid onPasswordValid={handlePasswordValid} />
-                        </td>
+                        <th className="my-form__title">
+                            <p className="my-form__text">정보수정</p>
+                        </th>
                     </tr>
-                ) : (
-                    <tr>
-                        <td className="edit-form__content">
-                            <form onSubmit={handleEditSubmit}>
-                                <tr>
-                                    <td>
-                                        <label className="edit-form__label">
-                                            <span className="edit-form__text">회원이름</span>
-                                            <input className="edit-form__input"
-                                                type="text"
-                                                name="username"
-                                                value={profileData.username}
-                                                placeholder={profileData.username}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label className="edit-form__label">
-                                            <span className="edit-form__text">이메일</span>
-                                            <input className="edit-form__input"
-                                                type="text"
-                                                name="email"
-                                                value={profileData.email}
-                                                placeholder={profileData.email}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label className="edit-form__label">
-                                            <span className="edit-form__text">핸드폰번호</span>
-                                            <input className="edit-form__input"
-                                                type="text"
-                                                name="phonenumber"
-                                                value={profileData.phonenumber}
-                                                placeholder={profileData.phonenumber}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label className="edit-form__label">
-                                            <span className="edit-form__text">주소</span>
-                                            <input className="edit-form__input"
-                                                type="text"
-                                                name="address"
-                                                value={profileData.address}
-                                                placeholder={profileData.address}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label className="edit-form__label">
-                                            <span className="edit-form__text">상세주소</span>
-                                            <input className="edit-form__input"
-                                                type="text"
-                                                name="detailedaddress"
-                                                value={profileData.detailedaddress}
-                                                placeholder={profileData.detailedaddress}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button className="edit-form__btn" type="submit">수정완료</button>
-                                    </td>
-                                </tr>
-                            </form>
-                        </td>
-                    </tr>
-                )}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {!showEditForm ? (
+                        <tr>
+                            <td>
+                                <PasswordValid onPasswordValid={handlePasswordValid} />
+                            </td>
+                        </tr>
+                    ) : (
+                        <tr>
+                            <td className="edit-form__content">
+                                {/* <td className="edit-form__content"> */}
+                                <form onSubmit={handleEditSubmit}>
+                                    <tr>
+                                        <td>
+                                            <label className="edit-form">
+                                                <span className="edit-form__text">회원이름</span>
+                                                <input className="edit-form__input"
+                                                    type="text"
+                                                    name="username"
+                                                    value={profileData.username}
+                                                    placeholder={profileData.username}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label className="edit-form__label">
+                                                <span className="edit-form__text">이메일</span>
+                                                <input className="edit-form__input"
+                                                    type="text"
+                                                    name="email"
+                                                    value={profileData.email}
+                                                    placeholder={profileData.email}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label className="edit-form__label">
+                                                <span className="edit-form__text">핸드폰번호</span>
+                                                <input className="edit-form__input"
+                                                    type="text"
+                                                    name="phonenumber"
+                                                    value={profileData.phonenumber}
+                                                    placeholder={profileData.phonenumber}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label className="edit-form__label">
+                                                <span className="edit-form__text">주소</span>
+                                                <input className="edit-form__input"
+                                                    type="text"
+                                                    name="address"
+                                                    value={profileData.address}
+                                                    placeholder={profileData.address}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label className="edit-form__label">
+                                                <span className="edit-form__text">상세주소</span>
+                                                <input className="edit-form__input"
+                                                    type="text"
+                                                    name="detailedaddress"
+                                                    value={profileData.detailedaddress}
+                                                    placeholder={profileData.detailedaddress}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <div className="edit-form-wrapper__btn">
+                    <button className="edit-form__btn" type="submit">수정완료</button>
+                </div>
+                                </form>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+                
+            </table>
+        </div>
+
     );
     
 };
