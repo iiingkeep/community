@@ -25,9 +25,10 @@ const IsLikeForm = ({ userId }) => {
   return (
     <div className="like-form">
       <div className="my-form__title">
-        <p className="my-form__text">뉴스</p>
+        <p className="my-form__text">좋아요 한 목록</p>
       </div>
       <div className="like-post__list">
+      <h2>뉴스</h2>
       <table className='forms-table'>
         <thead>
           <tr>

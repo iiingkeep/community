@@ -8,23 +8,66 @@ import "../Styles/MyPage.css";
 
 const ActivityForm = ({ userId }) => {
   const [actiData, setActiData] = useState([]);
+  // const [actiData, setActiData] = useState({ posts: [], comments: [] });
 
-    useEffect(() => {
-      const fetchActi = async () => {
-        try {
-            // const response = await axios.get(`http://localhost:8000/my/acti-comment/${userId}`);
-            // const userData = response.data;
-            // setActiData(userData);
-            const responsePost = await axios.get(`http://localhost:8000/my/acti-post/${userId}`);
-                const responseComm = await axios.get(`http://localhost:8000/my/acti-comment/${userId}`);
-                const postData = responsePost.data;
-                const commData = responseComm.data;
-                setActiData({ posts: postData, comments: commData });
-        } catch (error) {
-            console.log('Error fetching data:', error);
-        }
+  useEffect(() => {
+    const fetchActi = async () => {
+      try {
+        const [postResponse, commentResponse] = await Promise.all([
+          axios.get(`http://localhost:8000/my/acti-post/${userId}`),
+          // axios.get(`http://localhost:8000/my/acti-post/${userId}`),
+          // axios.get(`http://localhost:8000/my/acti-comment/${userId}`)
+        ]);
+        const postData = postResponse.data;
+        const commData = commentResponse.data;
+
+        setActiData(prevData => [...prevData, ...postData, ...commData]);
+        // setActiData(prevData => ({
+        //   posts: [...prevData.posts, ...postData],
+        //   comments: [...prevData.comments, ...commData]
+        // }));
+      } catch (error) {
+        console.log('Error fetching data:', error);
+      }
     };
     fetchActi();
+
+    // 오류코드* -1
+    //   const fetchActi = async () => {
+    //     try {
+    //       const responsePost = await axios.get(`http://localhost:8000/my/acti-post/${userId}`);
+    //       const postData = responsePost.data;
+    //           setActiData({ posts: postData });
+    //   } catch (error) {
+    //       console.log('Error fetching data:', error);
+    //   }
+    //     try {
+    //         const responseComm = await axios.get(`http://localhost:8000/my/acti-comment/${userId}`);
+    //         // const postData = responsePost.data;
+    //         const commData = responseComm.data;
+    //             setActiData({ comments: commData });
+    //     } catch (error) {
+    //         console.log('Error fetching data:', error);
+    //     }
+    // };
+    // fetchActi();
+
+    // 오류코드* -2
+    //   const fetchActi = async () => {
+    //     try {
+    //         // const response = await axios.get(`http://localhost:8000/my/acti-comment/${userId}`);
+    //         // const userData = response.data;
+    //         // setActiData(userData);
+    //         const responsePost = await axios.get(`http://localhost:8000/my/acti-post/${userId}`);
+    //         const responseComm = await axios.get(`http://localhost:8000/my/acti-comment/${userId}`);
+    //         const postData = responsePost.data;
+    //         const commData = responseComm.data;
+    //             setActiData({ posts: postData, comments: commData });
+    //     } catch (error) {
+    //         console.log('Error fetching data:', error);
+    //     }
+    // };
+    // fetchActi();
   }, [userId]);
 
   return (
@@ -105,7 +148,7 @@ const ActivityForm = ({ userId }) => {
         </div>
       </div>
 
-    <div className='acti-comm'>
+    {/* <div className='acti-comm'>
       <div className='acti-comm__list'>
         <h2>내 글에 달린 댓글</h2>
         <table className='forms-table'>
@@ -131,7 +174,8 @@ const ActivityForm = ({ userId }) => {
           </tbody>
         </table>
       </div>
-    </div>
+    </div> */}
+
   </div>
 );
 
@@ -139,6 +183,7 @@ const ActivityForm = ({ userId }) => {
 
 export default ActivityForm;
 
+// 오류코드*
 // ActivityForm.js
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
