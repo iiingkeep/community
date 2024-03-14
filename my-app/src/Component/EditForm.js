@@ -59,8 +59,17 @@ const EditForm = ({ userId }) => {
     };
     
     // 수정된 정보를 서버에 전송
-    const handleEditSubmit = async () => {
+    const handleEditSubmit = async (event) => {
+        event.preventDefault();
         try {
+            //변경된 정보만 추출
+            const updatedData = {
+                username: profileData.username,
+                email: profileData.email,
+                phonenumber: profileData. phonenumber,
+                address: profileData. address,
+                detailedaddress: profileData. detailedaddress
+            };
             await axios.put(`http://localhost:8000/my/edit/update/${userId}`, profileData);
             alert('성공적으로 수정되었습니다.');
         } catch (error) {
