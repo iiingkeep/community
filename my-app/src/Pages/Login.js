@@ -7,8 +7,8 @@ import "../Styles/Login.css";
 function Login() {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [loginStatus, setloginStatus] = useState("");
+  const navigate = useNavigate();
 
   const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/; // ID 정규표현식
 

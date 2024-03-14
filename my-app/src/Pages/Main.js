@@ -1,34 +1,20 @@
 import React, { useState, useEffect } from "react";
-// 로그인 추가
-import { Link, useNavigate } from "react-router-dom";
-// 로그인 추가 끝
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { getPostThumbnail } from "../Util/utils";
 import {Icon} from '@iconify/react';
 import "./Main.css";
-import { getPostThumbnail } from "../Util/utils";
 
-const Main = () => {
+const Main = ( {loggedIn, handleLogout} ) => {
   //------------------------로그인로그인----------------
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setloginStatus] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
-
-
-  useEffect(() => {
-    const storedLoggedIn = sessionStorage.getItem("loggedIn");
-    if (storedLoggedIn) {
-      setLoggedIn(true);
-    }
-  }, [setLoggedIn]);
-
-  const LoginPageJs = () => {
-    console.log("LoginPageJs 함수 호출됨"); //스크립트 동작시 콘솔에 출력
-
-    // 로그인 요청 구현
+  // 로그인 버튼 클릭 시 호출
+  const handleLogin = () => {
     axios
       .post("http://localhost:8000/Login", {
         email: email,
@@ -37,17 +23,15 @@ const Main = () => {
       .then((response) => {
         console.log("서버 응답:", response);
         if (response.data.success) {
-          const { userid, username } = response.data.data[0]; //0213 김민호 익스플로우세션
+          const { userid, username } = response.data.data[0];
           const userData = {
             userid: userid,
             username: username,
           };
           sessionStorage.setItem("loggedIn", true);
-          sessionStorage.setItem("userData", JSON.stringify(userData)); // 0210 상호형 추가 세션에 userNumber,username추가
-          //Application에 세션스토리지 안에서 정보를 출력한다
-
+          sessionStorage.setItem("userData", JSON.stringify(userData));
           navigate("/");
-          window.location.reload(); //0210 상호형 추가 페이지를강제로 리로드
+          window.location.reload();
         } else {
           // 로그인 실패 시 처리
           console.log("로그인 실패:", response.data);
@@ -56,60 +40,53 @@ const Main = () => {
         }
       });
   };
-  // 로그아웃
-  const handleLogout = () => {
-    sessionStorage.removeItem("userData");
-    sessionStorage.removeItem("loggedIn");
-    setLoggedIn(false);
-    navigate("/");
-    window.location.reload();
-  };
 
-  const renderContent = () => {
-    if (!loggedIn) {
-      // 로그인이 안되어 있는 경우
-      return (
-        <>
-          {/* 로그인 아이디, 비밀번호 입력 폼 */}
-          <div className="main-login-form--input-and-button">
-          <input
-            id="id"
-            className="main-login__form--id"
-            type="text"
-            placeholder="아이디"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-          />
-          <input
-            type="password"
-            className="main-login__form--password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="main-login__form--button-box">
-            {/* 로그인 버튼 */}
-            <button className="main-login__form--button--login" onClick={LoginPageJs}>로그인</button>
-            {/* 회원가입 링크 */}
-            <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
-          </div>
-          </div>
-          {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
-        </>
-      );
-    } else {
-      // 로그인이 되어 있는 경우
-      return (
-        <>
-          <p>마이페이지</p>
-          {/* 로그아웃 버튼 */}
-          <button className="Btn" onClick={handleLogout}>
-            로그아웃
-          </button>
-        </>
-      );
-    }
-  };
+  // 
+  // const renderContent = () => {
+  //   if (!loggedIn) {
+  //     // 로그인이 안되어 있는 경우
+  //     return (
+  //       <>
+  //         {/* 로그인 아이디, 비밀번호 입력 폼 */}
+  //         <div className="main-login-form--input-and-button">
+  //         <input
+  //           id="id"
+  //           className="main-login__form--id"
+  //           type="text"
+  //           placeholder="아이디"
+  //           value={email}
+  //           onChange={(e) => setemail(e.target.value)}
+  //         />
+  //         <input
+  //           type="password"
+  //           className="main-login__form--password"
+  //           placeholder="비밀번호"
+  //           value={password}
+  //           onChange={(e) => setPassword(e.target.value)}
+  //         />
+  //         <div className="main-login__form--button-box">
+  //           {/* 로그인 버튼 */}
+  //           <button className="main-login__form--button--login" onClick={handleLogin}>로그인</button>
+  //           {/* 회원가입 링크 */}
+  //           <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
+  //         </div>
+  //         </div>
+  //         {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
+  //       </>
+  //     );
+  //   } else {
+  //     // 로그인이 되어 있는 경우
+  //     return (
+  //       <>
+  //         <p>마이페이지</p>
+  //         {/* 로그아웃 버튼 */}
+  //         <button className="Btn" onClick={handleLogout}>
+  //           로그아웃
+  //         </button>
+  //       </>
+  //     );
+  //   }
+  // };
   //------------------------로그인 끝----------------
 
   //------------------------뉴스뉴스뉴스----------------
@@ -152,7 +129,7 @@ const Main = () => {
     window.open(item.url, "_blank");
   };
 
-  const topFiveNews = news.slice(0, 4);
+  const topFiveNews = news.slice(0, 5);
   //------------------------뉴스뉴스뉴스 끝----------------
   //------------------------워드클라우드----------------
   // 워드클라우드 이미지 다운로드
@@ -183,138 +160,183 @@ const Main = () => {
   };
   //------------------------워드클라우드 끝----------------
   //------------------------커뮤니티-----------------------
-  const [topFourPosts, setTopFourPosts] = useState([]);
+  const [topFivePosts, setTopFivePosts] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:8000/Main")
       .then((response) => {
-        setTopFourPosts(response.data.posts);
+        setTopFivePosts(response.data.posts);
       })
       .catch((error) => {
         console.error("Error fetching top four community posts:", error);
       });
   }, []);
-
-  const goCommunityRead = (postId) => {
-    // 상세 페이지로 이동
-    navigate(`/Community/Read/${postId}`);
-  };
-
   //-----------------------커뮤니티 끝----------------------
 
-
   return (
-    <div className="MainBody">
+    <div className="main-page">
       <div className="wrap">
-        <div className="section s1">
-          <div className="slogan_box">
-            <p className="slogan__title">Bring Back A Natural, Green environment</p>
-            <div className="slogan__content">
-            <p>지속 가능한 미래를 위한</p>
-            <p>탄소중립 실천</p>
-            <p>빵끗과 함께 해요</p>
+      {/* section-1__빵끗 의미 소개 */}
+        <div className="main-section main-section-1">
+          <div className="main-section-1-slogan-box">
+            <p className="main-section-1-slogan__title">Bring Back A Natural, Green environment</p>
+            <div>
+            지속 가능한 미래를 위한<br/>
+            탄소중립 실천<br/>
+            빵끗과 함께 해요<br/>
             </div>
           </div>
           <div className="main-login-form">
-              {renderContent()}
+          {loggedIn ? (
+            <>
+              <button className="button">마이페이지</button>
+              {/* 로그아웃 버튼 */}
+              <button className="button" onClick={handleLogout}>
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              {/* 로그인 아이디, 비밀번호 입력 폼 */}
+              <div className="main-login-form--input-and-button">
+                <input
+                  id="id"
+                  className="main-login__form--id"
+                  type="text"
+                  placeholder="아이디"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  className="main-login__form--password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div className="main-login__form--button-box">
+                  {/* 로그인 버튼 */}
+                  <button className="main-login__form--button--login" onClick={handleLogin}>로그인</button>
+                  {/* 회원가입 링크 */}
+                  <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
+                </div>
+              </div>
+              {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
+            </>
+          )}
             </div>
           <img
             src="/background_img/earth1.png"
-            className="earth"
+            className="main-section-1__img--earth"
             alt="지구 이미지"
           />
         </div>
-        <div className="section s2 ">
-          <div className="main-inner main-intro-box1">
+        {/* section-2__빵끗 제공 서비스 소개 */}
+        <div className="main-section main-section-2 ">
+        <div className="main-inner">
           <p className="main-header">탄소중립, 함께 실천해요</p>
-          <div className="main-intro-box2">
-            <div className="main-intro main-intro__net-zero">
+          <div className="main-section-2-intro-box">
+            <div className="main-section-2-intro main-intro__net-zero">
               <img src="/background_img/netzero1.png"
-              className="main-intro__img" />
+                   className="main-intro__img"
+                   alt="CARBON NATURAL문구가 써진 탄소중립 이미지" />
               <p className="main-intro__title">탄소중립이란?</p>
-              <p className="main-intro__content">탄소중립이 무엇인지,
-             </p>
-             <p className="main-intro__content main-intro__content--line2">어떻게 실천해야 하는지 알아봐요</p>
-             <p className="main-intro__content main-intro__link" onClick={() => navigate("/NetZero")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+              <div className="main-intro__content">탄소중립이 무엇인지, <br />
+              어떻게 실천해야 하는지 알아봐요</div>
+              <p className="main-intro__content main-intro__link" 
+                 onClick={() => navigate("/NetZero")}>
+                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
             </div>
-            <div className="main-intro main-intro__news">
-            <img src="/background_img/news7.png"
-              className="main-intro__img" />
+            <div className="main-section-2-intro main-intro__news">
+              <img src="/background_img/news7.png"
+                   className="main-intro__img" 
+                   alt="신문 이미지"/>
               <p className="main-intro__title">환경이슈</p>
-              <p className="main-intro__content">하루 두 번, 오전 6시와 오후 6시</p>
-              <p className="main-intro__content main-intro__content--line2">최신 환경 이슈들을 만나 봐요</p>
-              <p className="main-intro__content main-intro__link" onClick={() => navigate("/News")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+              <div className="main-intro__content">하루 두 번, 오전 6시와 오후 6시
+                <br />최신 환경 이슈들을 만나 봐요</div>
+              <p className="main-intro__content main-intro__link"
+                 onClick={() => navigate("/News")}>
+                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
             </div>
-            <div className="main-intro main-intro__community">
-            <img src="/background_img/community3.png"
-              className="main-intro__img" />
+            <div className="main-section-2-intro main-intro__community">
+              <img src="/background_img/community3.png"
+                   className="main-intro__img"
+                   alt="지구촌 곳곳의 사람들이 서로 이야기하는 이미지"/>
               <p className="main-intro__title">커뮤니티</p>
-              <p className="main-intro__content">자유롭게 소통해요</p>
-              <p className="main-intro__content main-intro__content--line2">탄소중립 실천 기록도 남기고, 고민도 나눠요</p>
-              <p className="main-intro__content main-intro__link" onClick={() => navigate("/Community")}><Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+              <div className="main-intro__content">자유롭게 소통해요<br/>
+              탄소중립 실천 기록도 남기고, 고민도 나눠요</div>
+              <p className="main-intro__content main-intro__link"
+                 onClick={() => navigate("/Community")}>
+                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
             </div>
-          </div>
           </div>
         </div>
-        <div className="section s3 main-inner">
+        </div>
+        {/* section-3__빵끗 핫이슈 */}
+        <div className="main-section main-section-3">
+        <div className="main-inner">
           <p className="main-header main-issue__header">오늘의 핫 이슈에요🔥</p>
             <div className="main-issue">
-            
-            <div className="main-issue__wordcloud-and-news-box">
-            <div className="main-issue__wordcloud-box">
-              <p className="main-issue__name">지구촌 이슈</p>
+            <div className="main-issue-box">
+              <p className="main-issue__name">지구촌 환경이슈</p>
               <img
                 className="main-issue__wordcloud"
                 src="./wc_image/result.png"
-                alt="지구촌 이슈 워드 클라우드 이미지"
+                alt="지구촌 환경이슈 워드 클라우드 이미지"
               />
               <button
-                className="main-issue__wordcloud__button"
-                onClick={handleDownload}
-              >
+                className="main-issue__wordcloud__button button"
+                onClick={handleDownload}>
                 이미지 다운로드
               </button>
             </div>
-            <div className="main-issue__news-box">
-            <p className="main-issue__name">최신뉴스 TOP4</p>
-              <ul>
+            <div className="main-issue-box">
+              <p className="main-issue__name">최신뉴스 TOP5</p>
+              <ul className="main-issue__list-box">
                 {topFiveNews.map((item) => (
-                  <li key={item.newsid}>
-                    <img
-                      src={item.image_url}
-                      alt="뉴스 썸네일"
-                      onClick={() => handleClick(item)}
-                    />
+                  <li key={item.newsid} className="main-issue__list">
                     <a
-                      className="main-issue__title-box"
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleClick(item)}
-                    >
-                      {item.title}
+                    className="main-issue__thumbnail-and-title-box"
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleClick(item)}>
+                    <img
+                    className="main-issue__thumbnail"
+                    src={item.image_url}
+                    alt="뉴스 썸네일"
+                    onClick={() => handleClick(item)}/>
+                    <span className="main-issue__title">{item.title}</span>
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="main-issue__news-box main-issue__community-box">
-            <p className="main-issue__name">인기글 TOP4</p>
-        <ul>
-          {topFourPosts.map((post) => (
-            <li key={post.postid}>
-              <img src={getPostThumbnail(post.content)} alt="게시물 썸네일" onClick={() => goCommunityRead(post.postid)} />
-              <p className="main-issue__title-box main-issue__title-box--community" onClick={() => goCommunityRead(post.postid)}><span>{post.title}</span></p>
-              <Icon icon="icon-park-outline:like" className='commu-post-list__icon'/>
-              {post.totalLikes}
-            </li>
-          ))}
-        </ul>
-            </div>
+            <div className="main-issue-box">
+              <p className="main-issue__name">인기글 TOP5</p>
+              <ul className="main-issue__list-box">
+                {topFivePosts.map((post) => (
+                  <li key={post.postid} className="main-issue__list">
+                    <a 
+                    className="main-issue__thumbnail-and-title-box main-issue__thumbnail-and-title-box--community"
+                    href={`/Community/Read/${post.postid}`}
+                    target="_self">
+                    <img src={getPostThumbnail(post.content)}
+                    className="main-issue__thumbnail main-issue__thumbnail--community" alt="게시물 썸네일"  />
+                    <span className="main-issue__title main-issue__title--community">{post.title}</span>
+                    </a>
+                    <p className="main-issue__like">
+                    <Icon icon="icon-park-outline:like" className='commu-post-list__icon'/>
+                    {post.totalLikes}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
             </div>
         </div>
         </div>
+      </div>
       </div>
   );
 };

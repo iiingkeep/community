@@ -1,40 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
+/* 공통 */
 
-* {
-  box-sizing: border-box;
-
-}
-
-.MainBody {
-  height:100%;
-}
-
-.inner {
-  width: 1000px;
-  margin: 60px auto 100px;
-}
-
-.wrap {
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.section {
+.main-section {
   width: 100vw;
-  height: 100%;
+}
+.main-inner {
+  width: 80%;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+.main-header {
+  width: 900px;
+  margin: 0 auto 200px;
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.s1 {
-  /* background-color: rgb(34, 56, 117); */
+/* section-1__빵끗 의미 소개  */
+.main-section-1 {
   background-image: url('../../public/background_img/back.jpg');
   position: relative;
   display: flex;
   align-items:end;
-  height: 900px;
+  height: 90vh;
 }
-
-.s1 .slogan_box {
+.main-section-1-slogan-box {
   font-size:90px;
   font-weight: 700;
   line-height: 1.2em;
@@ -44,180 +36,29 @@
   top: 0%;
   z-index: 1;
 }
-
-.slogan__title {
+.main-section-1-slogan__title {
   font-size: 30px;
 }
-.slogan__content {
-  width: 100%;
-}
-
-.s1 .earth {
+.main-section-1__img--earth {
   width: 30%;
   height:70%;
   margin-bottom: 50px;
-  position: sticky;
+  position: absolute;
   left: 60%;
   z-index:0;
 }
 
-.s2 {
-  height: 100%;
-  background-color: rgb(200, 224, 238);
-}
-
-.main-inner {
-  width: 80%;
-  margin: 0 auto;
-  padding: 100px 0;
-}
-
-.main-header {
-  width: 900px;
-  margin: 0 auto 200px;
-  font-size: 70px;
-  font-weight: bold;
-  text-align: center;
-}
-
-
-.main-intro-box2 {
-  display: flex;
-  justify-content: space-between;
-  
-}
-
-.main-intro {
-  width: 32%;
-  height: 300px;
-  border: none;
-  border-radius: 30px;
-  background-color: white;
-  position: relative;
-}
-
-.main-intro__img {
-  width: 160px;
-  height: 160px;
-  position: absolute;
-  top: -27%;
-  left: 33%;
-}
-
-.main-intro__title {
-  font-size: 25px;
-  font-weight: bold;
-  position: absolute;
-  top: 30%;
-  left: 10%;
-}
-
-.main-intro__content {
-  font-size: 20px;
-  font-weight: bold;
-  color: rgb(112, 112, 112);
-  position:absolute;
-  top: 50%;
-  left: 10%;
-}
-
-.main-intro__content--line2 {
- top: 60%; 
-}
-
-.main-intro__link {
-  display: flex;
-  align-items: center;
-  top: 80%;
-  color: rgb(64, 64, 64);
-  cursor:pointer;
-}
-
-.main-intro__icon {
-  font-size: 28px;
-  margin-right: 5px;
-}
-
-.s3 {
-  background-color: rgb(255, 255, 255);
-  /* background-image: url('../../../server/public/backgroundimg/planet.png');
-  background-repeat: no-repeat;
-  background-size: 400px 400px;
-  background-position: ; */
-}
-
-.main-issue__header {
-  padding-top: 100px;
-  margin-bottom: 100px;
-}
-
-
-.main-issue {
-  width: 100%;
-  height: 600px;
-  background-color: rgb(255, 255, 255);
-  /* background-image: url('https://www.c-action.kr/img/web/main/main_section01_bg.png'); */
-  display:flex;
-  justify-content: center;
-}
-
-
-.main-issue__phrase {
-  font-weight: bold;
-  margin: 50px 0;
-}
-.main-issue__phrase--title {
-  font-size: 25px;
-  line-height: 50px;
-  color:rgb(48, 48, 48)
-}
-.main-issue__phrase--content {
-  font-size: 20px;
-  margin: 10px 0;
-  color:#737373;
-}
-.main-issue__phrase--content--detail {
-  line-height: 20px;
-  color:rgb(129, 128, 128);
-  font-weight: lighter;
-}
-.Main .LeftSection .login_box {
-  height: 30%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
-
-.Main .RightSection .CommunityBox {
-  width: 50%;
-  height: 140px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
-}
-
-.Main2 img {
-  position: fixed;
-  top: 10vh;
-  right: 0;
-  width: 60%;
-  height: 90vh;
-}
-
-/* 로그인 */
 .main-login-form {
   position: absolute;
   bottom: 10%;
   left:10%;
-  
 }
-
 .main-login-form--input-and-button {
   display: flex;
 }
-
 .main-login__form--id {
   margin-right: 5px;
 }
-
 .main-login-form button {
   background-color: rgb(83, 212, 92);
   border-radius: 20px;
@@ -227,11 +68,9 @@
   padding: 10px;
   height:40px;
 }
-
 .main-login__form--button--login {
   margin: 0 5px 0 10px;
 }
-
 .main-login-form input {
   border: 2px solid #c4c4c4;
   box-sizing: border-box;
@@ -246,7 +85,6 @@
   width: 150px;
   height: 40px;
 }
-
 .main-login-form input:hover,
 .main-login-form input:focus {
   border: 2px solid rgb(83, 212, 92);
@@ -254,130 +92,163 @@
   border-radius: 20px;
   outline: 3px solid #ffffff;
 }
-
 .main-login-form__button {
   display: flex;
   justify-content: center;
 }
-
 .main-login__form--message {
   color:rgb(138, 136, 136);
 }
 
+/* section-2__빵끗 제공 서비스 소개  */
+.main-section-2 {
+  height: 100%;
+  background-color: rgb(200, 224, 238);
+}
+.main-section-2-intro-box {
+  display: flex;
+  justify-content: space-between;
+}
+.main-section-2-intro {
+  width: 32%;
+  height: 300px;
+  border: none;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+}
+.main-intro__img {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: -27%;
+  left: 33%;
+}
+.main-intro__title {
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  top: 30%;
+  left: 10%;
+}
+.main-intro__content {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+  color: rgb(112, 112, 112);
+  position:absolute;
+  top: 50%;
+  left: 10%;
+}
+.main-intro__link {
+  display: flex;
+  align-items: center;
+  top: 80%;
+  color: rgb(64, 64, 64);
+  cursor:pointer;
+}
+.main-intro__icon {
+  font-size: 28px;
+  margin-right: 5px;
+}
 
-
-.main-issue__wordcloud-and-news-box {
+/* section-3__빵끗 핫이슈  */
+.main-section-3 {
+  background-color: rgb(255, 255, 255);
+  background-image:
+  url('../../public/background_img/backimg4.png'),
+  url('../../public/background_img/backimg9.png'),
+  url('../../public/background_img/backimg6.png'),
+  url('../../public/background_img/backimg7.png'),
+  url('../../public/background_img/backimg8.png');
+  background-repeat: no-repeat;
+  background-size:  100px 100px, 130px 130px, 100px 100px, 80px 80px, 70px 70px;
+  background-position:  90% 20%, 45% 95%, 15% 0%, 97% 80%, 5% 70%;
+}
+.main-issue__header {
+  margin-bottom: 100px;
+}
+.main-issue {
   background-color: transparent;
-  height: 500px;
+  height: 600px;
   width: 100%;
   display: flex;
   align-items: center;
   border-radius: 50px;
+  margin-bottom: 100px;
 }
-
-.main-issue__wordcloud-box {
+.main-issue-box {
   width: 33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 450px;
+  height: 600px;
+  font-size: 14px;
+  margin-left: 10px;
   border-radius: 40px;
-  padding:30px 20px 20px;
-  /* background-color: white; */
+  padding: 40px 20px 20px;
   background-image: url('https://www.c-action.kr/img/web/main/main_section01_bg.png');
+  text-align: center;
 }
-
 .main-issue__name {
   font-size: 25px;
   font-weight: 700;
 }
 
+/* section-3__워드클라우드 */
 .main-issue__wordcloud {
-  width: 280px;
-  height: 280px;
-  margin: 40px auto 20px;
+  width: 330px;
+  height: 330px;
+  margin: 40px auto 60px;
 }
 
-/* 워드클라우드 이미지 다운로드 버튼 */
-.main-issue__wordcloud__button {
-  width: 130px;
-  background-color: rgb(83, 212, 92);
-  border-radius: 20px;
-  border: none;
-  font-size: 12px;
-  color: white;
-  padding: 10px;
-}
-
-/* --------------뉴스-------------- */
-.main-issue__news-box {
-  width: 33%;
-  height: 450px;
-  font-size: 14px;
-  line-height: 20px;
-  margin-left: 10px;
-  border-radius: 40px;
-  padding: 30px 20px 20px;
-  /* background-color: rgb(255, 255, 255); */
-  background-image: url('https://www.c-action.kr/img/web/main/main_section01_bg.png');
-  text-align: center;
-}
-
-.main-issue__news-box ul {
-  margin: 0 auto;
+/* section-3__뉴스 & 커뮤니티 공통 */
+.main-issue__list-box {
   padding: 40px 20px 20px;
-  height: 100%;
+  height: 500px;
 }
-
-.main-issue__news-box li {
+.main-issue__list {
   margin-bottom: 5px;
   display: flex;
-  align-items: center;
   text-align: left;
-  width:100%;
-  height: 23%;
+  height: 20%;
 }
-
-.main-issue__news-box li img {
-  cursor: pointer;
+.main-issue__thumbnail-and-title-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: RGB(112, 112, 112);
+  text-decoration-line: none;
+}
+.main-issue__thumbnail {
   margin-right: 10px;
   width: 25%;
   height:100%;
   border-radius: 20px;
 }
-
-
-.main-issue__title-box {
-  width: 75%;
-  font-size: 15px;
-  font-weight: bold;
-  color: RGB(112, 112, 112);
-  text-decoration-line: none;
+.main-issue__title {
+  width:75%;
   display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.main-issue__title-box:visited {
+.main-issue__thumbnail-and-title-box:visited {
   color: rgb(190, 190, 190);
 }
-.main-issue__title-box:hover {
+.main-issue__thumbnail-and-title-box:hover {
   font-weight: bolder;
   color: black;
-  cursor: pointer;
 }
 
-/* --------------뉴스 끝-------------- */
-
-
-/* --------------커뮤니티-------------- */
-.main-issue__phrase--community {
-  text-align: right;
-}
-.main-issue__community-box {
-  float: right;
-  width: 33%;
-}
-.main-issue__title-box--community {
-  width: 65%;
+/* section-3__커뮤니티 */
+.main-issue__thumbnail-and-title-box--community {
   margin-right: 10px;
+}
+.main-issue__thumbnail--community {
+  width: 30%;
+}
+.main-issue__like {
+  display: flex;
+  align-items: center;
 }
