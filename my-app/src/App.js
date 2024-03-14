@@ -64,32 +64,10 @@ function App() {
     // ImageContext 추가
     <ImageProvider>
     <div className="App">
-      <Header loggedIn={loggedIn} handleLogout={handleLogout}
-        // leftChild={<button onClick={() => navigate("/")}>빵끗😊</button>}
-        // menu={
-        //   <div className="HeaderMenu">
-        //     <button onClick={() => navigate("/NetZero")}>탄소중립이란? </button>
-        //     <button onClick={() => navigate("/news")}>환경이슈 </button>
-        //     <button onClick={() => navigate("/Community")}>커뮤니티 </button>
-        //   </div>
-        // }
-        // rightChild={
-        //   loggedIn ? (
-        //     <div>
-        //       <button onClick={() => navigate("/MyPage")}>마이페이지</button>
-        //       <button onClick={handleLogout}>로그아웃</button>
-        //     </div>
-        //   ) : (
-        //     <div>
-        //       <button onClick={() => navigate("/Login")}>로그인</button>
-        //       <button onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
-        //     </div>
-        //   )
-        // }
-      />
+      <Header loggedIn={loggedIn} handleLogout={handleLogout}/>
 
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main loggedIn={loggedIn} handleLogout={handleLogout}/>} />
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
         <Route path="/FindInformation" element={<FindInformation />} />

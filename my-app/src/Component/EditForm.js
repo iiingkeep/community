@@ -69,7 +69,7 @@ const EditForm = ({ userId }) => {
     };
 
     return (
-        <div className="edit-form inner">
+        <div className="edit-form">
             <table>
                 <thead>
                     <tr>

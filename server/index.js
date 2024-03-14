@@ -981,16 +981,17 @@ app.get('/my/:formType/:userid', (req, res) => {
       return;
   }
 
-  // activity 폼 쿼리문
-  if (formType === 'activity') {
-    query = `SELECT * FROM community_posts
-             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-             WHERE community_posts.userid = ?`;
+  // activity - 댓글
 
-    // islike 폼 쿼리문
-  } else if (formType === 'islike') {
+  // activity -게시글
+  if (formType === 'acti-post') {
+    query = `SELECT * FROM community_posts
+             WHERE community_posts.userid = ?`;
+  }
+  // islike 폼 
+  else if (formType === 'islike') {
     if (!userId) {
-      res.status(400).json({ message: 'Invalid ID' });
+      res.status(400).json({ message: 'Invalid ID: islike' });
       return;
     }
     // 모든 컬럼 가져오기 " * "
@@ -1329,27 +1330,22 @@ app.get('/imgsave/:userid', (req, res) => {
 //--------------------------------------------------------------------------//
 //---------------------------------메인----------------------------//
 
-// 당일 올라온 게시물 중 좋아요를 많이 받은 상위 4개 게시물 정보 반환
+// 당일 올라온 게시물 중 좋아요를 많이 받은 상위 5개 게시물 정보 반환
 app.get('/Main', async (req, res) => {
   try {
-    const topFourPostsQuery = `
+    const topFivePostsQuery = `
       SELECT 
         cp.*,
-        u.username,
-        (SELECT COUNT(*) FROM ezteam2.community_comments cc WHERE cc.postid = cp.postid) AS commentCount,
         (SELECT COUNT(*) FROM ezteam2.is_like il WHERE il.postid = cp.postid) AS totalLikes
       FROM 
         ezteam2.community_posts cp
-      INNER JOIN 
-        ezteam2.user u ON cp.userid = u.userid
       WHERE 
         DATE(cp.createdAt) = CURDATE()
       ORDER BY totalLikes DESC
-      LIMIT 4
+      LIMIT 5
     `;
 
-    const [rows] = await poolPromise.query(topFourPostsQuery);
-
+    const [rows] = await poolPromise.query(topFivePostsQuery);
     res.json({ posts: rows });
   } catch (error) {
     console.error('Error fetching top four community posts:', error);
