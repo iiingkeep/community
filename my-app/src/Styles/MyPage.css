@@ -83,7 +83,7 @@
 
 
 /* 프로필 -------------------------------- */
-.profile-form{width: 100%; padding: 30px;}
+.profile-form{width: 100%; padding-left: 30px;}
 
 .profile-form__wrapper {
   display: flex; /* Flexbox 사용 */
@@ -132,17 +132,22 @@
 
 .profile-name-wrapper {
   line-height: 60px;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .profile-content__detail td:first-child {
   width: 120px;
+  font-weight: 700;
 }
 
-.profile__name {
-  font-size: 30px;
+.profile__username {
+  font-size: 40px;
   font-weight: 1000;
-  color: rgb(83, 212, 92);
+  color: rgb(86, 186, 93);
 }
+
+.profile__sir {font-weight: 600; font-size: 24px; padding-left: 10px;}
 
 /* 정보수정 -------------------------------- */
 .edit-form{width: 100%; display: flex; justify-content: center;}
@@ -150,7 +155,8 @@
 
 
 .edit-form__content td {
-  padding: 13px 15px 12px 15px;
+  padding: 8px;
+  /* padding: 13px 15px 12px 15px; */
 }
 
 .edit-form__content tr {
@@ -158,6 +164,7 @@
 }
 
 .edit-form__input {
+font-size: 19px;
 width: 330px;
 outline: none; /* 선택 상태에서의 기본 테두리 제거 */
 border: none; /* 선택 상태에서의 테두리 제거 */
@@ -201,8 +208,8 @@ color: rgb(0, 0, 0);
 .edit-form__text {
   margin-right: 15px; /* 텍스트와 입력 필드 사이의 간격 */
   width: 100px;
+  font-size: 20px;
 }
-
 
 /* 나의활동 -------------------------------- */
 .acti-content__list{display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 60px;}

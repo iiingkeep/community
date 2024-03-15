@@ -115,7 +115,7 @@ const EditForm = ({ userId }) => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label className="edit-form__label">
+                                            <label className="edit-form">
                                                 <span className="edit-form__text">아이디</span>
                                                 <input className="edit-form__input"
                                                     type="text"
