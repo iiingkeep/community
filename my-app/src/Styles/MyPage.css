@@ -7,7 +7,7 @@
   justify-content: center;
   font-size: 40px;
   font-weight: 700;
-  background-image: url('../../public/background_img/back3.jpg');
+  background-image: url("../../public/background_img/back3.jpg");
   background-size: 1502px;
   background-repeat: no-repeat;
   background-position: 20% 210%;
@@ -47,7 +47,7 @@
   font-weight: 1000;
 }
 
-  /* .my-btn:focus {
+/* .my-btn:focus {
     outline: none;
   }
   
@@ -81,15 +81,14 @@
   height: 150px;
 }
 
-
 /* 프로필 -------------------------------- */
-.profile-form{width: 100%; padding: 30px;}
+.profile-form{width: 100%; padding-left: 30px;}
 
 .profile-form__wrapper {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 세로 중앙 정렬 */
   /* justify-content: center; */
-   /* 가로 중앙 정렬 */
+  /* 가로 중앙 정렬 */
   /* flex-direction: column;  */
   /* 아이템들을 세로 방향으로 정렬 */
 }
@@ -132,25 +131,37 @@
 
 .profile-name-wrapper {
   line-height: 60px;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .profile-content__detail td:first-child {
   width: 120px;
+  font-weight: 700;
 }
 
-.profile__name {
-  font-size: 30px;
+.profile__username {
+  font-size: 40px;
   font-weight: 1000;
-  color: rgb(83, 212, 92);
+  color: rgb(86, 186, 93);
 }
+
+.profile__sir {font-weight: 600; font-size: 24px; padding-left: 10px;}
 
 /* 정보수정 -------------------------------- */
-.edit-form{width: 100%; display: flex; justify-content: center;}
-.edit-form > table{width: 150px; justify-content: center;}
-
+.edit-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.edit-form > table {
+  width: 150px;
+  justify-content: center;
+}
 
 .edit-form__content td {
-  padding: 13px 15px 12px 15px;
+  padding: 8px;
+  /* padding: 13px 15px 12px 15px; */
 }
 
 .edit-form__content tr {
@@ -158,6 +169,7 @@
 }
 
 .edit-form__input {
+font-size: 19px;
 width: 330px;
 outline: none; /* 선택 상태에서의 기본 테두리 제거 */
 border: none; /* 선택 상태에서의 테두리 제거 */
@@ -177,9 +189,9 @@ color: rgb(0, 0, 0);
 }
 
 .edit-form_content label {
-  text-align: left; 
+  text-align: left;
   /* 라벨 텍스트를 좌측으로 정렬 */
-  display: block; 
+  display: block;
   /* 라벨을 블록 레벨 요소로 변경하여 한 줄에 하나씩 표시 */
   margin-bottom: 5px;
   /* 5px; 라벨 간격 조정 */
@@ -191,18 +203,26 @@ color: rgb(0, 0, 0);
   background: #6dc970;
   border: 0;
   padding: 15px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   cursor: pointer;
   border-radius: 10px;
   margin: 15px 0;
 }
 
+/* 유효성 안내 문구 */
+.edit-form-match__text {
+  color: gray;
+  font-size: small;
+  margin-top: 5px;
+  /* text-align: right; */
+}
+
 .edit-form__text {
   margin-right: 15px; /* 텍스트와 입력 필드 사이의 간격 */
   width: 100px;
+  font-size: 20px;
 }
-
 
 /* 나의활동 -------------------------------- */
 .acti-content__list{display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 60px;}
@@ -219,7 +239,8 @@ color: rgb(0, 0, 0);
 .acti-content { width: 100%; }
 
 /* 폼 테이블 (활동/좋아요) ---------------------- */
-.forms-post, .acti-comm {
+.forms-post,
+.acti-comm {
   width: 100%;
 }
 .like-post__list{
@@ -326,7 +347,7 @@ tbody a:hover {
   background: #6dc970;
   border: 0;
   padding: 15px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   cursor: pointer;
   border-radius: 10px;
@@ -335,9 +356,14 @@ tbody a:hover {
 .pass-form {
   font-size: 20px;
   line-height: 25px;
-
 }
-.pass-form > form {display: flex; flex-direction: column; align-items: center;}
+.pass-form > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.my-page__right{flex-grow: 1;}
+.my-page__right {
+  flex-grow: 1;
+}
 /* .like-form{justify-content: center;} */

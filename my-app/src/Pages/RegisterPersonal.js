@@ -9,7 +9,7 @@ function RegisterPersonal() {
   const [username, setUsername] = useState(""); // 이름
   const [password, setPassword] = useState(""); // 비밀번호
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
-  const [phonenumber, setphonenumber] = useState(""); // 휴대폰 번호
+  const [phonenumber, setPhonenumber] = useState(""); // 휴대폰 번호
   const [openPostcode, setOpenPostcode] = useState(false); // 주소
   const [address, setAddress] = useState(""); // 주소
   const [detailedaddress, setdetailedaddress] = useState(""); // 상세 주소
@@ -31,7 +31,7 @@ function RegisterPersonal() {
     /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
 
-  // 이전 username과 phonenumber 상태를 저장할 변수
+  // 이전 email, username, phonenumber 상태를 저장할 변수
   const prevEmail = useRef(email);
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
@@ -310,7 +310,7 @@ function RegisterPersonal() {
           type="text"
           placeholder="휴대폰 번호(하이픈 제외) ex) 01012345678"
           value={phonenumber}
-          onChange={(e) => setphonenumber(e.target.value)}
+          onChange={(e) => setPhonenumber(e.target.value)}
         />
         {/* 휴대폰 번호 유효성 검사 */}
         <button className="regi-dupl__button" onClick={handlePhonenumberCheck}>

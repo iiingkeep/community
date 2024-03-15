@@ -992,21 +992,21 @@ app.get('/my/:formType/:userid', (req, res) => {
   //   query = `SELECT * FROM community_posts
   //            WHERE community_posts.userid = ?`;
   // }
-  
+
   // islike 폼 
-// if (formType === 'islike') {
-//     if (!userId) {
-//       res.status(400).json({ message: 'Invalid ID: islike' });
-//       return;
-//     }
-//     // 모든 컬럼 가져오기 " * "
-//     query = `SELECT * FROM community_posts A
-//              LEFT JOIN is_like B ON A.postid = B.postid
-//              WHERE B.post_isLiked = 1 AND B.userid = ?`;
+  // if (formType === 'islike') {
+  //     if (!userId) {
+  //       res.status(400).json({ message: 'Invalid ID: islike' });
+  //       return;
+  //     }
+  //     // 모든 컬럼 가져오기 " * "
+  //     query = `SELECT * FROM community_posts A
+  //              LEFT JOIN is_like B ON A.postid = B.postid
+  //              WHERE B.post_isLiked = 1 AND B.userid = ?`;
 
   // 나머지 선택된 폼의 쿼리문
   // } else {
-    query = `SELECT * FROM ${table} WHERE userid = ?`;
+  query = `SELECT * FROM ${table} WHERE userid = ?`;
   // }
 
   // 데이터베이스 쿼리 실행
@@ -1063,7 +1063,7 @@ app.get('/acti-post&comment/:userid', (req, res) => {
         return;
       }
 
-      const userData = {comment : results2, post : results}; // 두 결과를 합침
+      const userData = { comment: results2, post: results }; // 두 결과를 합침
       res.json(userData);
       console.log(userData);
     });
@@ -1135,8 +1135,8 @@ app.get('/is-like/posts/:userid', (req, res) => {
       return;
     }
     res.json(results);
-  })
-})
+  });
+});
 
 // 유저가 좋아요를 누른 뉴스 정보 클라이언트에 반환
 app.get('/is-like/news/:userid', (req, res) => {
@@ -1162,9 +1162,9 @@ app.get('/is-like/news/:userid', (req, res) => {
       res.status(404).json({ message: 'Data not found' });
       return;
     }
-    res.json(results)
-    })
-  })
+    res.json(results);
+  });
+});
 
 
 
@@ -1174,31 +1174,38 @@ app.get('/is-like/news/:userid', (req, res) => {
 
 //  정보수정 -----------------------------------
 
-app.put('/my/edit/update/:userid', (req, res) => {
+app.put('/my/edit/update/:userid', async (req, res) => {
   const userId = req.params.userid;
   const profileData = req.body;
 
   // 사용자 정보 업데이트 쿼리
   const updateQuery = `
-      UPDATE user SET username = ?, phonenumber = ?, address = ?, detailedaddress = ?, email = ?
+      UPDATE user SET username = ?, password = ?, phonenumber = ?, address = ?, detailedaddress = ?
       WHERE userid = ? `;
 
-  // 클라이언트에서 전달된 프로필 데이터
-  // userId를 values 배열에 추가
-  const { username, phonenumber, address, detailedaddress, email } = profileData;
-  const values = [username, phonenumber, address, detailedaddress, email, userId];
+  try {
+    // 클라이언트에서 전달된 프로필 데이터
+    // userId를 values 배열에 추가
+    const { username, password, phonenumber, address, detailedaddress } = profileData;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  // 데이터베이스 쿼리 실행
-  connection.query(updateQuery, values, (error, results) => {
-    if (error) {
-      console.error('Error updating user profile:', error);
-      res.status(500).json({ error: 'Failed update profile' });
-      return;
-    }
-    // 업데이트된 사용자 정보 반환
-    console.log(results);
-    res.json(results);
-  });
+    const values = [username, hashedPassword, phonenumber, address, detailedaddress, userId];
+
+    // 데이터베이스 쿼리 실행
+    connection.query(updateQuery, values, (error, results) => {
+      if (error) {
+        console.error('Error updating user profile:', error);
+        res.status(500).json({ error: 'Failed update profile' });
+        return;
+      }
+      // 업데이트된 사용자 정보 반환
+      console.log(results);
+      res.json(results);
+    });
+  } catch (error) {
+    console.error('Error hashing password:', error);
+    res.status(500).json({ error: 'Failed to hash password' });
+  }
 });
 
 
