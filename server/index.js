@@ -973,9 +973,9 @@ app.get('/my/:formType/:userid', (req, res) => {
     case 'order':
       table = 'orders';
       break;
-    case 'islike':
-      table = 'is_like';
-      break;
+    // case 'islike':
+    //   table = 'is_like';
+    //   break;
     default:
       res.status(400).json({ message: '유효하지않은 form type' });
       return;
@@ -1027,9 +1027,9 @@ app.get('/my/:formType/:userid', (req, res) => {
 });
 
 
-//  게시글+댓글(나의활동) -----------------------------------
+//  나의활동(게시글+댓글) -----------------------------------
 
-app.get('/acti-post-comment/:userid', (req, res) => {
+app.get('/acti-post&comment/:userid', (req, res) => {
   const userId = req.params.userid;
 
   const query = `
@@ -1038,7 +1038,7 @@ app.get('/acti-post-comment/:userid', (req, res) => {
   const query2 = `
   SELECT * FROM community_posts
   LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-  WHERE community_posts.userid = ?`;
+  WHERE community_comments.userid = ?`;
 
   // 데이터베이스 쿼리 실행
   connection.query(query, [userId], (err, results) => {
@@ -1063,81 +1063,21 @@ app.get('/acti-post-comment/:userid', (req, res) => {
         return;
       }
 
-      const userData = results.concat(results2); // 두 결과를 합침
+      const userData = {comment : results2, post : results}; // 두 결과를 합침
       res.json(userData);
       console.log(userData);
     });
   });
 });
 
+// //  나의활동(게시글) -----------------------------------
 
-
-
-//  나의활동(게시글) -----------------------------------
-
-app.get('/acti-post/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  // 사용자 정보 업데이트 쿼리
-  const query = `
-  SELECT * FROM community_posts WHERE userid = ? `;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
-  });
-});
-
-//  나의활동(댓글) -----------------------------------
-
-app.get('/acti-comment/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  // 사용자 정보 업데이트 쿼리
-  const query = `
-  SELECT * FROM community_posts
-             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-             WHERE community_posts.userid = ?`;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
-  });
-});
-
-//  댓글 -----------------------------------
-
-// app.get('/my/acti-comment/:userid', (req, res) => {
+// app.get('/acti-post/:userid', (req, res) => {
 //   const userId = req.params.userid;
-//   const profileData = req.body;
 
 //   // 사용자 정보 업데이트 쿼리
 //   const query = `
-//   SELECT * FROM community_posts
-//   LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-//   WHERE community_posts.userid = ? `;
+//   SELECT * FROM community_posts WHERE userid = ? `;
 
 //   // 데이터베이스 쿼리 실행
 //   connection.query(query, [userId], (err, results) => {
@@ -1155,6 +1095,7 @@ app.get('/acti-comment/:userid', (req, res) => {
 //     console.log(results);
 //   });
 // });
+
 
 //  좋아요 폼 -----------------------------------
 
