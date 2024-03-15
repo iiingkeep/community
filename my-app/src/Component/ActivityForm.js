@@ -24,13 +24,16 @@ const ActivityForm = ({userId}) => {
   }, [userId]);
 
   return (
-  <div className='acti-form inner'>
-    <div className='acti-post'>
+  <div className='acti-form'>
+    <div className='acti-content'>
+
       <div className="my-form__title">
       <p className="my-form__text">나의 활동</p>
       </div>
-      <div className='acti-post__list'>
-        <h2>게시물</h2>
+
+      <div className='form-table-wrapper'>
+      <div className='acti-content__list'>
+        <p>내가 쓴 글</p>
         <table className='forms-table'>
           <thead>
             <tr>
@@ -44,8 +47,8 @@ const ActivityForm = ({userId}) => {
               <tr key={activity.postid}>
                 {/* <td>{activity.postid}</td> */}
                 <td>
-                  <Link to={`/Community/Read/${activity.postid}`}>
-                    <span>{activity.title}</span>
+                  <Link className='content__link' to={`/Community/Read/${activity.postid}`}>
+                  <span>{activity.title.length > 25 ? activity.title.substring(0, 25) + '...' : activity.title}</span>
                   </Link>
                 </td>
                 <td>{moment(activity.createdAt).format('MM월 DD일')}</td>
@@ -54,11 +57,8 @@ const ActivityForm = ({userId}) => {
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div className='acti-comm'>
-      <div className='acti-comm__list'>
-        <h2>댓글 알림</h2>
+      <div className='acti-content__list'>
+        <p>내가 남긴 댓글</p>
         <table className='forms-table'>
           <thead>
             <tr>
@@ -72,8 +72,10 @@ const ActivityForm = ({userId}) => {
               <tr key={activity.postid}>
                 {/* <td>{activity.postid}</td> */}
                 <td>
-                  <Link to={`/Community/Read/${activity.postid}`}>
-                    <span>{activity.content}</span>
+                  <Link className='content__link' to={`/Community/Read/${activity.postid}`}>
+                    {/* <span>{activity.content}</span> */}
+                  <span>{activity.content.length > 25 ? activity.content.substring(0, 25) + '...' : activity.content}</span>
+
                   </Link>
                 </td>
                 <td>{moment(activity.createdAt).format('MM월 DD일')}</td>
@@ -82,7 +84,11 @@ const ActivityForm = ({userId}) => {
           </tbody>
         </table>
       </div>
+      </div>
+
     </div>
+
+   
   </div>
 );
 
