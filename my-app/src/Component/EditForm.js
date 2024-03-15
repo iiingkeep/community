@@ -220,7 +220,7 @@ const EditForm = ({ userId }) => {
         };
         await axios.put(
           `http://localhost:8000/my/edit/update/${userId}`,
-          profileData
+          updatedData
         );
         alert("성공적으로 수정되었습니다.");
       }
@@ -228,6 +228,9 @@ const EditForm = ({ userId }) => {
       console.error("Error updating profile:", error);
     }
   };
+
+  // 비밀번호 유효성 검사 만족하는 상태
+  const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
   return (
     <div className="edit-form">
@@ -253,7 +256,7 @@ const EditForm = ({ userId }) => {
                 <tr>
                   <td>
                     <label className="edit-form__label">
-                      <span className="edit-form__text">아이디</span>
+                      <span className="edit-form__text">ID</span>
                       <input
                         className="edit-form__input"
                         type="text"
@@ -289,14 +292,26 @@ const EditForm = ({ userId }) => {
                 <tr>
                   <td>
                     <label className="edit-form__label">
-                      <span className="edit-form__text">수정할 비밀번호</span>
+                      <span className="edit-form__text">변경할 PW</span>
                       <input
                         className="edit-form__input"
                         type="password"
                         name="password"
                         value={password}
+                        placeholder="사용 가능한 특수문자 : @#$%^&+=!"
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      {password && password.match(spacebar) && (
+                        <p style={{ color: "red" }}>비밀번호에 공백을 포함할 수 없습니다.</p>
+                      )}
+                      {password && !PWcheck.test(password) && (
+                        <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
+                      )}
+                      {password && passwordMatch && (
+                        <p style={{ color: "rgb(83, 212, 92)" }}>
+                          사용 가능한 비밀번호 입니다.
+                        </p>
+                      )}
                     </label>
                   </td>
                 </tr>
@@ -304,7 +319,7 @@ const EditForm = ({ userId }) => {
                   <td>
                     <label className="edit-form__label">
                       <span className="edit-form__text">
-                        수정할 비밀번호 재입력
+                        PW 재입력
                       </span>
                       <input
                         className="edit-form__input"
@@ -313,6 +328,17 @@ const EditForm = ({ userId }) => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
+                      {passwordMatch && confirmPassword && (
+                        <p
+                          style={{
+                            color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
+                          }}
+                        >
+                          {password === confirmPassword
+                            ? "비밀번호가 일치합니다."
+                            : "비밀번호가 일치하지 않습니다."}
+                        </p>
+                      )}
                     </label>
                   </td>
                 </tr>

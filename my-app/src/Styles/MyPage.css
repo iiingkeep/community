@@ -32,12 +32,7 @@
 }
 
 .my-btn__button {
-<<<<<<< HEAD
-  border: none;
-  /* border-bottom: 3px solid rgba(0,0,0,0.2); */
-=======
   border:none;
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
   background-color: transparent;
   /* padding: 10px; */
   /* margin-bottom: 20px; */
@@ -62,15 +57,6 @@
   }
    */
 
-<<<<<<< HEAD
-.my-page__wrapper {
-  display: flex;
-  margin-top: 80px;
-}
-
-.my-page__btn > ul {
-  width: 200px;
-=======
 .my-page__wrapper { 
   display: flex; 
   margin-top: 80px;
@@ -79,22 +65,15 @@
 
 .my-page__btn >ul{
   width: 150px;
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
   height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-<<<<<<< HEAD
-.my-page__btn > ul > li {
-  width: 200px;
-  height: 33.5px;
-=======
 .my-page__btn >ul>li{
   width: 130px; 
   height: 33.5px; 
   /* border-bottom: solid 1px rgb(181, 181, 181); */
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 }
 
 .my-page-forms {
@@ -103,13 +82,7 @@
 }
 
 /* 프로필 -------------------------------- */
-<<<<<<< HEAD
-.profile-form {
-  width: 100%;
-}
-=======
 .profile-form{width: 100%; padding-left: 30px;}
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 
 .profile-form__wrapper {
   display: flex; /* Flexbox 사용 */
@@ -120,30 +93,10 @@
   /* 아이템들을 세로 방향으로 정렬 */
 }
 
-<<<<<<< HEAD
-.profile-form__img {
-  display: flex;
-  flex-direction: column;
-  padding: 30px 30px;
-}
-.profile-form__img > img {
-  width: 150px;
-  height: 200px;
-  border-radius: 10%;
-  margin-bottom: 27px;
-  object-fit: cover;
-}
-
-.profile-wrapper__btn {
-  display: flex;
-  justify-content: flex-end;
-}
-=======
 .profile-form__img { display: flex; flex-direction: column;   padding: 30px 30px;}
 .profile-form__img > img{  width: 150px; height: 200px; border-radius: 10%; margin-bottom: 17px; object-fit: cover;}
 
 .profile-wrapper__btn{display: flex; justify-content: center;}
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 
 .profile__btn {
   background-color: rgb(95, 95, 95);
@@ -207,13 +160,8 @@
 }
 
 .edit-form__content td {
-<<<<<<< HEAD
-  padding: 13px 15px 12px 15px;
-  width: 600px;
-=======
   padding: 8px;
   /* padding: 13px 15px 12px 15px; */
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 }
 
 .edit-form__content tr {
@@ -221,18 +169,6 @@
 }
 
 .edit-form__input {
-<<<<<<< HEAD
-  width: 330px;
-  outline: none; /* 선택 상태에서의 기본 테두리 제거 */
-  border: none; /* 선택 상태에서의 테두리 제거 */
-  padding: 15px;
-  box-sizing: border-box;
-  color: rgb(0, 0, 0);
-}
-
-.edit-form__input:disabled {
-  background-color: rgb(222, 222, 222);
-=======
 font-size: 19px;
 width: 330px;
 outline: none; /* 선택 상태에서의 기본 테두리 제거 */
@@ -240,7 +176,6 @@ border: none; /* 선택 상태에서의 테두리 제거 */
 padding: 15px;
 box-sizing: border-box;
 color: rgb(0, 0, 0);
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 }
 
 .edit-form label {
@@ -290,42 +225,6 @@ color: rgb(0, 0, 0);
 }
 
 /* 나의활동 -------------------------------- */
-<<<<<<< HEAD
-.acti-post__list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 50px;
-}
-.acti-post-list__title {
-  display: flex-start;
-  width: 80%;
-}
-.acti-post-list__title > h2 {
-  padding: 10px;
-  font-weight: 1000;
-}
-
-.acti-comm__list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-.acti-comm-list__title {
-  display: flex-start;
-  width: 80%;
-}
-.acti-comm-list__title > h2 {
-  padding: 10px;
-  font-weight: 1000;
-}
-
-/* {display: flex; justify-content: start; width: 80%;} */
-/* 호환이슈수정* : (justify-content: start; => justify-content: flex-start;) */
-
-=======
 .acti-content__list{display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 60px;}
 .acti-content__title{display: flex-start; width: 80%;}
 .acti-content__title >h2{padding: 10px; font-weight: 1000;}
@@ -339,17 +238,11 @@ color: rgb(0, 0, 0);
 
 .acti-content { width: 100%; }
 
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 /* 폼 테이블 (활동/좋아요) ---------------------- */
 .forms-post,
 .acti-comm {
   width: 100%;
 }
-<<<<<<< HEAD
-.like-post__list {
-  display: flex;
-  justify-content: center;
-=======
 .like-post__list{
   display: flex;
   flex-direction: column;
@@ -358,7 +251,6 @@ color: rgb(0, 0, 0);
 .my-like__title {
   font-size: 20px;
   text-align: left;
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 }
 .forms-table {
   width: 80%;
@@ -370,14 +262,9 @@ color: rgb(0, 0, 0);
   height: 30px;
   /* background-color: #dbdbdb; */
   flex-direction: column;
-<<<<<<< HEAD
-  border-top: solid 3px black;
-  border-bottom: solid 1px rgb(210, 210, 210);
-=======
   border-top: solid 2px rgb(210, 210, 210);
   border-bottom: solid 2px rgb(210, 210, 210);
 
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 }
 .forms-table tbody {
   
@@ -418,8 +305,6 @@ color: rgb(0, 0, 0);
   text-align: center;
 }
 
-<<<<<<< HEAD
-=======
 .my-like-news-list__img {
   width: 150px;
   height: 110px;
@@ -432,7 +317,6 @@ color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
->>>>>>> 3ac10f3629e1fcc4d1d962ac01baacdc8eb9cfca
 /* 비밀번호 검사 -------------------------------- */
 .pass-input {
   width: 300px;
