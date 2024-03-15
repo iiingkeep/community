@@ -1026,11 +1026,56 @@ app.get('/my/:formType/:userid', (req, res) => {
   });
 });
 
-//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//  게시글+댓글(나의활동) -----------------------------------
+
+app.get('/acti-post-comment/:userid', (req, res) => {
+  const userId = req.params.userid;
+
+  const query = `
+  SELECT * FROM community_posts WHERE userid = ?`;
+
+  const query2 = `
+  SELECT * FROM community_posts
+  LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+  WHERE community_posts.userid = ?`;
+
+  // 데이터베이스 쿼리 실행
+  connection.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+
+    connection.query(query2, [userId], (err, results2) => {
+      if (err) {
+        console.error('(Error) data from database:', err);
+        res.status(500).json({ message: 'Internal server error' });
+        return;
+      }
+      if (results2.length === 0) {
+        res.status(404).json({ message: 'Data not found' });
+        return;
+      }
+
+      const userData = results.concat(results2); // 두 결과를 합침
+      res.json(userData);
+      console.log(userData);
+    });
+  });
+});
+
+
+
 
 //  나의활동(게시글) -----------------------------------
 
-app.get('/my/acti-post/:userid', (req, res) => {
+app.get('/acti-post/:userid', (req, res) => {
   const userId = req.params.userid;
 
   // 사용자 정보 업데이트 쿼리
@@ -1056,7 +1101,7 @@ app.get('/my/acti-post/:userid', (req, res) => {
 
 //  나의활동(댓글) -----------------------------------
 
-app.get('/my/acti-comment/:userid', (req, res) => {
+app.get('/acti-comment/:userid', (req, res) => {
   const userId = req.params.userid;
 
   // 사용자 정보 업데이트 쿼리
@@ -1064,35 +1109,6 @@ app.get('/my/acti-comment/:userid', (req, res) => {
   SELECT * FROM community_posts
              LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
              WHERE community_posts.userid = ?`;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
-  });
-});
-
-
-//  좋아요 폼 -----------------------------------
-
-app.get('/my/islike/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  // 사용자 정보 업데이트 쿼리
-  const query = `
-  SELECT * FROM community_posts A
-             LEFT JOIN is_like B ON A.postid = B.postid
-             WHERE B.post_isLiked = 1 AND B.userid = ?`;
 
   // 데이터베이스 쿼리 실행
   connection.query(query, [userId], (err, results) => {
@@ -1140,7 +1156,59 @@ app.get('/my/islike/:userid', (req, res) => {
 //   });
 // });
 
-//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//  좋아요 폼 -----------------------------------
+
+app.get('/is-like/:userid', (req, res) => {
+  const userId = req.params.userid;
+
+  const query = `SELECT title
+  FROM community_posts A
+  LEFT JOIN is_like B
+  ON A.postid = B.postid
+  WHERE B.post_isLiked = 1`;
+
+  const query2 = `
+  SELECT title, url
+  FROM news A
+  LEFT JOIN is_like B
+  ON A.newsid = B.newsid
+  WHERE B.news_isLiked = 1 AND A.userid = ?`;
+
+  // 데이터베이스 쿼리 실행
+  connection.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+
+    connection.query(query2, [userId], (err, results2) => {
+      if (err) {
+        console.error('(Error) data from database:', err);
+        res.status(500).json({ message: 'Internal server error' });
+        return;
+      }
+      if (results2.length === 0) {
+        res.status(404).json({ message: 'Data not found' });
+        return;
+      }
+
+      const userData = results.concat(results2); // 두 결과를 합침
+      res.json(userData);
+      console.log(userData);
+    });
+  });
+});
+
+
+
+
+
+
 
 
 //  정보수정 -----------------------------------
