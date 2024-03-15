@@ -184,6 +184,9 @@
   padding: 40px 20px 20px;
   background-image: url('https://www.c-action.kr/img/web/main/main_section01_bg.png');
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .main-issue__name {
   font-size: 25px;
@@ -195,6 +198,9 @@
   width: 330px;
   height: 330px;
   margin: 40px auto 60px;
+}
+.main-issue__wordcloud__button {
+  width: 200px;
 }
 
 /* section-3__뉴스 & 커뮤니티 공통 */
