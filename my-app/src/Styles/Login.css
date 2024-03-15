@@ -4,10 +4,11 @@
     width: 400px;
     height: 400px;
     margin:auto;
-    margin-top: 20%;
+    margin-top: 25%;
+    margin-bottom: 5.4%; /* 푸터위치 수정용 */
     position: relative;
     /* top: 50%; */
-    left: 10.5%;
+    left: 7.5%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     display: flex;

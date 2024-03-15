@@ -181,12 +181,12 @@ const ProfileForm = ({userId}) => {
                             ? (<p>사업자번호 {profileData.businessnumber}</p>) : null}
 
                         <div className="profile-name-wrapper">
-                            <span className="profile__name">{profileData.username}</span>
-                            <span> 님</span>
+                            <span className="profile__username">{profileData.username}</span>
+                            <span className="profile__sir">님</span>
                         </div>
                         <table class="profile-content__detail">
                             <tr>
-                                <td>이메일</td>
+                                <td className="">아이디</td>
                                 <td>{profileData.email}</td>
                             </tr>
                             <tr>

@@ -973,9 +973,9 @@ app.get('/my/:formType/:userid', (req, res) => {
     case 'order':
       table = 'orders';
       break;
-    case 'islike':
-      table = 'is_like';
-      break;
+    // case 'islike':
+    //   table = 'is_like';
+    //   break;
     default:
       res.status(400).json({ message: '유효하지않은 form type' });
       return;
@@ -1026,44 +1026,19 @@ app.get('/my/:formType/:userid', (req, res) => {
   });
 });
 
-//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-//  나의활동(게시글) -----------------------------------
+//  나의활동(게시글+댓글) -----------------------------------
 
-app.get('/my/acti-post/:userid', (req, res) => {
+app.get('/acti-post&comment/:userid', (req, res) => {
   const userId = req.params.userid;
 
-  // 사용자 정보 업데이트 쿼리
   const query = `
-  SELECT * FROM community_posts WHERE userid = ? `;
+  SELECT * FROM community_posts WHERE userid = ?`;
 
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
-  });
-});
-
-//  나의활동(댓글) -----------------------------------
-
-app.get('/my/acti-comment/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  // 사용자 정보 업데이트 쿼리
-  const query = `
+  const query2 = `
   SELECT * FROM community_posts
-             LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-             WHERE community_posts.userid = ?`;
+  LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+  WHERE community_comments.userid = ?`;
 
   // 데이터베이스 쿼리 실행
   connection.query(query, [userId], (err, results) => {
@@ -1076,52 +1051,33 @@ app.get('/my/acti-comment/:userid', (req, res) => {
       res.status(404).json({ message: 'Data not found' });
       return;
     }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
+
+    connection.query(query2, [userId], (err, results2) => {
+      if (err) {
+        console.error('(Error) data from database:', err);
+        res.status(500).json({ message: 'Internal server error' });
+        return;
+      }
+      if (results2.length === 0) {
+        res.status(404).json({ message: 'Data not found' });
+        return;
+      }
+
+      const userData = {comment : results2, post : results}; // 두 결과를 합침
+      res.json(userData);
+      console.log(userData);
+    });
   });
 });
 
+// //  나의활동(게시글) -----------------------------------
 
-//  좋아요 폼 -----------------------------------
-
-app.get('/my/islike/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  // 사용자 정보 업데이트 쿼리
-  const query = `
-  SELECT * FROM community_posts A
-             LEFT JOIN is_like B ON A.postid = B.postid
-             WHERE B.post_isLiked = 1 AND B.userid = ?`;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-    const userData = results;
-    res.json(userData);
-    console.log(results);
-  });
-});
-
-//  댓글 -----------------------------------
-
-// app.get('/my/acti-comment/:userid', (req, res) => {
+// app.get('/acti-post/:userid', (req, res) => {
 //   const userId = req.params.userid;
-//   const profileData = req.body;
 
 //   // 사용자 정보 업데이트 쿼리
 //   const query = `
-//   SELECT * FROM community_posts
-//   LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-//   WHERE community_posts.userid = ? `;
+//   SELECT * FROM community_posts WHERE userid = ? `;
 
 //   // 데이터베이스 쿼리 실행
 //   connection.query(query, [userId], (err, results) => {
@@ -1140,7 +1096,80 @@ app.get('/my/islike/:userid', (req, res) => {
 //   });
 // });
 
-//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+
+
+
+
+//  좋아요 폼 -----------------------------------
+
+// 유저가 좋아요를 누른 게시물 정보 클라이언트에 반환
+app.get('/is-like/posts/:userid', (req, res) => {
+  const userId = req.params.userid;
+
+  const postQuery = `
+    SELECT 
+      cp.postid, cp.title, u.username
+    FROM 
+     ezteam2.community_posts cp
+    INNER JOIN 
+      ezteam2.is_like il ON cp.postid = il.postid
+    INNER JOIN 
+      ezteam2.user u ON cp.userid = u.userid
+    WHERE 
+      il.userid = ? AND il.post_isLiked = 1
+  `;
+  connection.query(postQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+    res.json(results);
+  })
+})
+
+// 유저가 좋아요를 누른 뉴스 정보 클라이언트에 반환
+app.get('/is-like/news/:userid', (req, res) => {
+  const userId = req.params.userid;
+  const newsQuery = `
+    SELECT 
+      n.*
+    FROM 
+      ezteam2.news n
+    INNER JOIN 
+      ezteam2.is_like il ON n.newsid = il.newsid
+    WHERE
+      il.userId = ? AND il.news_isLiked = 1
+  `;
+
+  connection.query(newsQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+    res.json(results)
+    })
+  })
+
+
+
+
+
 
 
 //  정보수정 -----------------------------------

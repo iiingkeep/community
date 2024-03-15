@@ -218,17 +218,10 @@ const EditForm = ({ userId }) => {
           address: address,
           detailedaddress: detailedaddress,
         };
-        try {await axios.put(
-        `http://localhost:8000/my/edit/update/${userId}`,
-        profileData
-            , (res, result) => {
-            console.log(updatedData);
-        });
-           
-          }
-        catch (error) {
-            console.error('clinet error',error)
-        }
+        await axios.put(
+          `http://localhost:8000/my/edit/update/${userId}`,
+          profileData
+        );
         alert("성공적으로 수정되었습니다.");
       }
     } catch (error) {
