@@ -68,7 +68,7 @@ const MyPage = () => {
         {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
         {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
         {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
-        {activeForm === 'islike' && <IsLikeForm formData={formData} />}
+        {activeForm === 'islike' && <IsLikeForm formData={formData} userId={userData.userid} />}
         </div>
       </div>
       <div>
