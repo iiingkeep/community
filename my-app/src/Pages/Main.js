@@ -153,7 +153,6 @@ const Main = ({loggedIn}) => {
               {/* 로그인 아이디, 비밀번호 입력 폼 */}
               <div className="main-login__form--input-and-button">
                 <input
-                  id="id"
                   className="main-login__form--id"
                   type="text"
                   placeholder="아이디"
