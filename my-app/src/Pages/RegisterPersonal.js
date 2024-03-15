@@ -31,7 +31,7 @@ function RegisterPersonal() {
     /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
   const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
 
-  // 이전에 username과 phonenumber 상태를 저장할 변수
+  // 이전 username과 phonenumber 상태를 저장할 변수
   const prevEmail = useRef(email);
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
@@ -91,7 +91,7 @@ function RegisterPersonal() {
         alert("client :: 아이디 중복 확인 중 오류가 발생했습니다.");
       });
   };
-  //-----------------------------------------------------------------------
+
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
     if (!username) {
@@ -155,8 +155,8 @@ function RegisterPersonal() {
         alert("client :: 휴대폰 번호 중복 확인 중 오류가 발생했습니다.");
       });
   };
-  //-----------------------------------------------------------------------
 
+  // 가입 완료 버튼
   const handleRegisterClick = () => {
     if (!emailDuplication) {
       alert("아이디 중복 확인을 해주세요.");
@@ -215,7 +215,7 @@ function RegisterPersonal() {
           if (response.data.userType === 1) {
             // 개인 사용자 처리
           }
-          window.location.href = "/Login"; // 홈 페이지 또는 다른 페이지로 리디렉션
+          window.location.href = "/Login"; // 로그인 페이지로 리디렉션
         })
         .catch((error) => {
           if (error.response) {
@@ -236,7 +236,7 @@ function RegisterPersonal() {
         });
     }
   };
-
+  // 비밀번호 유효성 검사 만족하는 상태
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
   return (

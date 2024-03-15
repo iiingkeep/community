@@ -7,24 +7,18 @@ import "./News.css";
 import { formattedDateAndTime } from "../Util/utils";
 
 const News = () => {
-  // news : DB 데이터(뉴스 기사 데이터) / useState는 DB 데이터를 저장하기 위해 사용
-  const [news, setNews] = useState([]);
-  // page : 현재 페이지
-  const [page, setPage] = useState(1);
-  // currenPosts : 현재 페이지에 보이는 기사들
-  const [currenPosts, setCurrenPosts] = useState([]);
+  const [news, setNews] = useState([]); // news : DB에 있는 뉴스 데이터
+  const [page, setPage] = useState(1); // page : 현재 페이지
+  const [currenPosts, setCurrenPosts] = useState([]); // currenPosts : 현재 페이지에 보이는 기사들
   const [sortBy, setSortBy] = useState("latest"); // 정렬(sortBy에 기본값으로 'latest' 설정)
   const [searchTerm, setSearchTerm] = useState(""); // 검색
   const [searchButtonClicked, setSearchButtonClicked] = useState(false); // 검색 버튼
   const [likedArticles, setLikedArticles] = useState([]); // 좋아요
-
   const [loggedIn, setLoggedIn] = useState([]); // 로그인 상태
   const [userid, setUserid] = useState([]); // userid 데이터
 
   useEffect(() => {
     if (JSON.parse(sessionStorage.getItem("loggedIn")) === true) {
-      // let loggedIn = JSON.parse(sessionStorage.getItem("loggedIn"));
-      // let userid = JSON.parse(sessionStorage.getItem("userData")).userid;
       setLoggedIn(JSON.parse(sessionStorage.getItem("loggedIn")));
       setUserid(JSON.parse(sessionStorage.getItem("userData")).userid);
     }
@@ -77,7 +71,6 @@ const News = () => {
   // 정렬
   useEffect(() => {
     let sortedNews = [...news];
-
     // 최신순
     if (sortBy === "latest") {
       sortedNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
@@ -88,7 +81,6 @@ const News = () => {
     } else if (sortBy === "viewsHigh") {
       sortedNews.sort((a, b) => b.views - a.views);
     }
-
     setNews(sortedNews);
   }, [sortBy]);
 
@@ -124,7 +116,7 @@ const News = () => {
   const handleChangePage = (page) => {
     setPage(page);
 
-    // 페이지 이동 후 스크롤을 위로 이동 / top: 0, behavior: 'smooth' 부드럽게 맨 위로
+    // 페이지 이동 후 스크롤을 맨 위로 이동
     window.scrollTo({ top: 0 });
   };
 
@@ -185,14 +177,18 @@ const News = () => {
   const handleLikeClick = (newsid, loggedIn, userid) => {
     console.log(loggedIn, userid);
     if (loggedIn !== true) {
-      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      if (
+        window.confirm(
+          "로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"
+        )
+      ) {
         navigate("/Login");
       } else {
         navigate("/News");
       }
       return;
     } else {
-      // 좋아요 상태 토글
+      // 좋아요 상태 변경 토글
       const updatedLikedArticles = {
         ...likedArticles,
         [newsid]: !likedArticles[newsid],
@@ -218,9 +214,16 @@ const News = () => {
   return (
     <div className="news-page inner">
       <Link to="/news">
-      <div className='com-header'><h1 className='com-header__title' onClick={handleLogoClick}>환경이슈 <p className='com-header__title--detail'>아침에 일어나서 한 번, 저녁 식사 후 한 번<br />
-            최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요</p></h1>
-            <img className="com-header__img" src='background_img/news8.png' /></div>
+        <div className="com-header">
+          <h1 className="com-header__title" onClick={handleLogoClick}>
+            환경이슈{" "}
+            <p className="com-header__title--detail">
+              아침에 일어나서 한 번, 저녁 식사 후 한 번<br />
+              최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요
+            </p>
+          </h1>
+          <img className="com-header__img" src="background_img/news8.png" />
+        </div>
       </Link>
       {/* 검색 */}
       <div className="news-search-and-sort-box">
@@ -285,7 +288,8 @@ const News = () => {
               </div>
               <div className="news-list__datetime">
                 <p>
-                  {formattedDateAndTime(item.pubDate, "date")} {formattedDateAndTime(item.pubDate, "time")}
+                  {formattedDateAndTime(item.pubDate, "date")}{" "}
+                  {formattedDateAndTime(item.pubDate, "time")}
                 </p>
               </div>
             </li>
