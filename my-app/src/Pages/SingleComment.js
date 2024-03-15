@@ -13,35 +13,38 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
 
   const navigate = useNavigate();
 
-  // 댓글 수정 버튼 클릭 시 호출되는 함수
+  // 댓글 수정 중 수정 버튼 클릭 시 호출되는 함수
   const handleEdit = () => {
-    setCommentValue(comment.content); // 댓글 내용을 폼에 채우기 위해 상태 업데이트
+    // 이전의 댓글 내용을 폼에 가져오기 위한 상태 업데이트
+    setCommentValue(comment.content); 
     setIsEditing(true); // 수정 상태로 변경
   };
 
-  // 댓글 취소 버튼 클릭 시 호출되는 함수
+  // 댓글 수정 중 취소 버튼 클릭 시 호출되는 함수
   const handleCancel = () => {
     setIsEditing(false); // 수정 상태 취소
     setCommentValue(''); // 폼 초기화
   };
 
-  // 댓글 내용 변경 시 호출되는 함수
+  // 댓글 수정 중 내용 변경 시 호출되는 함수
   const onHandleCommentChange = (e) => {
     setCommentValue(e.target.value);
   };
 
+  //---------------------답글------------------------
   // 댓글에 답글을 다는 폼을 열고 닫는 함수
   // '답글 달기' 클릭 시 아래에 폼 제공
   const onClickReplyOpen = () => {
     setOpenReply(!openReply)
   }
   // 답글 내용(commentValue) 업데이트 
-  const onHandleChange = (e) => {
+  const onHandleReplyChange = (e) => {
     setCommentValue(e.target.value);
   }
   // 답글 등록 버튼 클릭 시 호출되는 핸들러 함수
   const onReplySubmit = async (e) => {
     e.preventDefault();
+    // 로그인 상태일 경우
     if (loggedIn) {
       try{
         if (!commentValue) {
@@ -56,7 +59,6 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
             content: commentValue,
             responseTo: comment.commentid,
           });
-          console.log(response.status);
           console.log(response.data);
       
           // 답글 등록 성공 시 알림, 답글 창 초기화 및 닫힘
@@ -81,14 +83,12 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
         if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
           navigate('/Login');
         }
-        
     }
-
-    
-    }
+  }
 
     // 댓글 수정 후 등록버튼 클릭 시 호출되는 핸들러 함수
     const onUpdateComment = async (e) => {
+      // 사용자에게 수정 여부 확인 후 수정 진행
       const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");
       if (editComfirmed) {
       try {
@@ -117,10 +117,10 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     }
     };
     
+    // 댓글 삭제버튼 클릭 시 호출되는 핸들러 함수
     const onDeleteComment = async () => {
+      // 사용자에게 삭제 여부 확인 후 삭제 진행
       const userConfirmed = window.confirm('정말로 댓글을 삭제하시겠습니까?');
-
-      // 사용자가 확인을 선택한 경우에만 삭제 진행
       if (userConfirmed) {
       try {
         const response = await axios.delete(`http://localhost:8000/Community/Read/${id}/DeleteComment/${comment.commentid}`);
@@ -136,7 +136,7 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
         console.error('에러 발생:', error);
         alert('댓글 삭제에 실패했습니다. 다시 한 번 시도해주세요.');
       }
-    }
+      }
     };
     
     return (
@@ -145,7 +145,8 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
           {/* 댓글 수정버튼 클릭 했을 때와 클릭하지 않았을 때(기본)
           출력상태 지정 */}
           {isEditing ? ( // 댓글 수정 상태일 때 폼 출력
-            <form className="commu-single-comment__form" onSubmit={onUpdateComment}>
+            <form className="commu-single-comment__form" 
+            onSubmit={onUpdateComment}>
               <span className='commu-single-comment__name-box--editing'>{comment.username}</span>
               <textarea
                 className="commu-single-comment__content--editing"
@@ -159,38 +160,39 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
                 </button>
               </div>
             </form>
-          ) : ( // 댓글을 수정하지 않는 기본 상태
+          ) : ( // 댓글을 수정하지 않는 상태의 기본 댓글 출력
             <div className="commu-single-comment-box--basic">
-              <div className="commu-single-comment__detail-box">
-                <div className="commu-single-comment__name-date-box">
+            <div className="commu-single-comment__detail-box">
+              <div className="commu-single-comment__name-date-box">
                   {comment.username}
                   <p className="commu-single-comment__date-box">
                     {formattedDateAndTime(comment.createdAt)}
                   </p>
-                </div>
-                <div className="commu-single-comment__content-box">{comment.content}</div>
-                <span className="commu-single-comment__reply-button--write" onClick={onClickReplyOpen}>
-                  {" "}
-                  답글 달기
-                </span>
               </div>
-              <div className="commu-single-comment__button--edit-and-delete">
-                {userid === comment.userid && (
-                  <>
-                    <button onClick={handleEdit}>수정</button>
-                    <button onClick={onDeleteComment}>삭제</button>
-                  </>
-                )}
-              </div>
+              <div className="commu-single-comment__content-box">
+                {comment.content}</div>
+              <span className="commu-single-comment__reply-button--write" onClick={onClickReplyOpen}>
+                {" "}
+                답글 달기
+              </span>
+            </div>
+            <div className="commu-single-comment__button--edit-and-delete-box">
+              {userid === comment.userid && (
+              <>
+                <button onClick={handleEdit}>수정</button>
+                <button onClick={onDeleteComment}>삭제</button>
+              </>
+              )}
+            </div>
             </div>
           )}
         </div>
-        {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성, 등록 폼 제공 */}
+        {/* 답글 달기 버튼을 클릭하여 openReply=true가 되면 답글 작성 폼 제공 */}
           {openReply && (
             <form onSubmit={onReplySubmit} className="commu-comment__form">
               <textarea
                 className="commu-comment__content"
-                onChange={onHandleChange}
+                onChange={onHandleReplyChange}
                 value={commentValue}
                 placeholder="답글을 작성해 보세요."
               />

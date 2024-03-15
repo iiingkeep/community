@@ -5,21 +5,23 @@ import { getPostThumbnail } from "../Util/utils";
 import {Icon} from '@iconify/react';
 import "./Main.css";
 
-const Main = ( {loggedIn, handleLogout} ) => {
-  //------------------------로그인로그인----------------
+const Main = ({loggedIn}) => {
+  const navigate = useNavigate();
+
+
+
+  //------------------------로그인------------------------
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setloginStatus] = useState("");
 
-  const navigate = useNavigate();
-
-  // 로그인 버튼 클릭 시 호출
+  // 로그인 버튼 클릭 시 /Login 엔드포인트에서 데이터를 가져오는 함수
   const handleLogin = () => {
     axios
       .post("http://localhost:8000/Login", {
         email: email,
         password: password,
-      }) //회원 정보 email, password의 정보를 가져옴
+      }) //회원 정보 email, password의 정보 가져오기
       .then((response) => {
         console.log("서버 응답:", response);
         if (response.data.success) {
@@ -41,60 +43,14 @@ const Main = ( {loggedIn, handleLogout} ) => {
       });
   };
 
-  // 
-  // const renderContent = () => {
-  //   if (!loggedIn) {
-  //     // 로그인이 안되어 있는 경우
-  //     return (
-  //       <>
-  //         {/* 로그인 아이디, 비밀번호 입력 폼 */}
-  //         <div className="main-login-form--input-and-button">
-  //         <input
-  //           id="id"
-  //           className="main-login__form--id"
-  //           type="text"
-  //           placeholder="아이디"
-  //           value={email}
-  //           onChange={(e) => setemail(e.target.value)}
-  //         />
-  //         <input
-  //           type="password"
-  //           className="main-login__form--password"
-  //           placeholder="비밀번호"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //         />
-  //         <div className="main-login__form--button-box">
-  //           {/* 로그인 버튼 */}
-  //           <button className="main-login__form--button--login" onClick={handleLogin}>로그인</button>
-  //           {/* 회원가입 링크 */}
-  //           <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
-  //         </div>
-  //         </div>
-  //         {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
-  //       </>
-  //     );
-  //   } else {
-  //     // 로그인이 되어 있는 경우
-  //     return (
-  //       <>
-  //         <p>마이페이지</p>
-  //         {/* 로그아웃 버튼 */}
-  //         <button className="Btn" onClick={handleLogout}>
-  //           로그아웃
-  //         </button>
-  //       </>
-  //     );
-  //   }
-  // };
-  //------------------------로그인 끝----------------
+  
 
-  //------------------------뉴스뉴스뉴스----------------
+  //------------------------뉴스---------------------------
   const [news, setNews] = useState([]);
 
   // 뉴스 정보 가져오기
   useEffect(() => {
-    // /news 엔드포인트에서 데이터를 가져오는 함수 호출
+    // /news 엔드포인트에서 데이터를 가져오는 함수
     axios
       .get("http://localhost:8000/news")
       .then((response) => {
@@ -130,11 +86,12 @@ const Main = ( {loggedIn, handleLogout} ) => {
   };
 
   const topFiveNews = news.slice(0, 5);
-  //------------------------뉴스뉴스뉴스 끝----------------
-  //------------------------워드클라우드----------------
+
+
+
+  //------------------------워드클라우드----------------------
   // 워드클라우드 이미지 다운로드
   const imageUrl = "http://localhost:3000/wc_image/result.png";
-
   const handleDownload = async () => {
     try {
       // 이미지 가져오기
@@ -158,10 +115,13 @@ const Main = ( {loggedIn, handleLogout} ) => {
       console.error("파일을 다운로드하는 동안 오류가 발생했습니다.", error);
     }
   };
-  //------------------------워드클라우드 끝----------------
+
+
+
   //------------------------커뮤니티-----------------------
   const [topFivePosts, setTopFivePosts] = useState([]);
 
+  // 당일 올라온 게시물 중 좋아요를 많이 받은 상위 5개 게시물 가져오기
   useEffect(() => {
     axios.get("http://localhost:8000/Main")
       .then((response) => {
@@ -171,7 +131,8 @@ const Main = ( {loggedIn, handleLogout} ) => {
         console.error("Error fetching top four community posts:", error);
       });
   }, []);
-  //-----------------------커뮤니티 끝----------------------
+
+
 
   return (
     <div className="main-page">
@@ -186,19 +147,11 @@ const Main = ( {loggedIn, handleLogout} ) => {
             빵끗과 함께 해요<br/>
             </div>
           </div>
-          <div className="main-login-form">
-          {loggedIn ? (
-            <>
-              <button className="button">마이페이지</button>
-              {/* 로그아웃 버튼 */}
-              <button className="button" onClick={handleLogout}>
-                로그아웃
-              </button>
-            </>
-          ) : (
+          <div className="main-login__form">
+          {!loggedIn &&
             <>
               {/* 로그인 아이디, 비밀번호 입력 폼 */}
-              <div className="main-login-form--input-and-button">
+              <div className="main-login__form--input-and-button">
                 <input
                   id="id"
                   className="main-login__form--id"
@@ -214,17 +167,17 @@ const Main = ( {loggedIn, handleLogout} ) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <div className="main-login__form--button-box">
+                <div>
                   {/* 로그인 버튼 */}
-                  <button className="main-login__form--button--login" onClick={handleLogin}>로그인</button>
+                  <button className="main-login__form--button--login button"
+                  onClick={handleLogin}>로그인</button>
                   {/* 회원가입 링크 */}
-                  <button className="main-login__form--button--register" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
+                  <button className="main-login__form--button--register button" onClick={() => navigate("/RegisterPersonal")}>회원가입</button>
                 </div>
               </div>
-              {/* {loginStatus && <div className="main-login__form--message">{loginStatus}</div>} */}
             </>
-          )}
-            </div>
+          }
+          </div>
           <img
             src="/background_img/earth1.png"
             className="main-section-1__img--earth"
@@ -241,11 +194,15 @@ const Main = ( {loggedIn, handleLogout} ) => {
                    className="main-intro__img"
                    alt="CARBON NATURAL문구가 써진 탄소중립 이미지" />
               <p className="main-intro__title">탄소중립이란?</p>
-              <div className="main-intro__content">탄소중립이 무엇인지, <br />
-              어떻게 실천해야 하는지 알아봐요</div>
+              <div className="main-intro__content">탄소중립이 무엇인지,
+              <br />어떻게 실천해야 하는지 알아봐요
+              </div>
               <p className="main-intro__content main-intro__link" 
                  onClick={() => navigate("/NetZero")}>
-                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+                <Icon icon="ci:arrow-right-lg" 
+                className="main-intro__icon" />
+                이동하기
+              </p>
             </div>
             <div className="main-section-2-intro main-intro__news">
               <img src="/background_img/news7.png"
@@ -253,21 +210,25 @@ const Main = ( {loggedIn, handleLogout} ) => {
                    alt="신문 이미지"/>
               <p className="main-intro__title">환경이슈</p>
               <div className="main-intro__content">하루 두 번, 오전 6시와 오후 6시
-                <br />최신 환경 이슈들을 만나 봐요</div>
+              <br />최신 환경 이슈들을 만나 봐요
+              </div>
               <p className="main-intro__content main-intro__link"
                  onClick={() => navigate("/News")}>
-                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기
+              </p>
             </div>
             <div className="main-section-2-intro main-intro__community">
               <img src="/background_img/community3.png"
                    className="main-intro__img"
                    alt="지구촌 곳곳의 사람들이 서로 이야기하는 이미지"/>
               <p className="main-intro__title">커뮤니티</p>
-              <div className="main-intro__content">자유롭게 소통해요<br/>
-              탄소중립 실천 기록도 남기고, 고민도 나눠요</div>
+              <div className="main-intro__content">자유롭게 소통해요
+              <br/>탄소중립 실천 기록도 남기고, 고민도 나눠요
+              </div>
               <p className="main-intro__content main-intro__link"
                  onClick={() => navigate("/Community")}>
-                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기</p>
+                <Icon icon="ci:arrow-right-lg" className="main-intro__icon" />이동하기
+              </p>
             </div>
           </div>
         </div>

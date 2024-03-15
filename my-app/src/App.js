@@ -38,25 +38,24 @@ function App() {
     }
   }, [setLoggedIn]);
 
+  // 세션 스토리지에서 유저 정보 가져오기
   useEffect(() => {
-    // 세션 스토리지에서 userid 가져오기
     const storedUserData = sessionStorage.getItem('userData');
     if (storedUserData) {
         const userData = JSON.parse(storedUserData);
         setUserid(userData.userid);
         setUsername(userData.username);
     }
-}, []);
+  }, []);
 
-    // 로그아웃 시 세션 스토리지에서 로그인 상태 제거
-    const handleLogout = () => {
-      sessionStorage.removeItem("usertype"); 
-      sessionStorage.removeItem("userData"); 
-      sessionStorage.removeItem("loggedIn");
-      setLoggedIn(false);
-      navigate("/"); 
-    };
-
+  // 로그아웃 시 세션 스토리지에서 로그인 상태, 유저 정보 제거
+  const handleLogout = () => {
+    sessionStorage.removeItem("usertype"); 
+    sessionStorage.removeItem("userData"); 
+    sessionStorage.removeItem("loggedIn");
+    setLoggedIn(false);
+    navigate("/"); 
+  };
 
 
 
@@ -67,28 +66,27 @@ function App() {
       <Header loggedIn={loggedIn} handleLogout={handleLogout}/>
 
       <Routes>
-        <Route path="/" element={<Main loggedIn={loggedIn} handleLogout={handleLogout}/>} />
+        <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
         <Route path="/FindInformation" element={<FindInformation />} />
+        <Route path="/MyPage" element={<MyPage />} />
         <Route path="/NetZero" element={<NetZero />} />
+        <Route path="/News" element={<News />} />
         <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
-        <Route
-          path="/Community/Edit/:id"
-          element={<CommunityEdit userid={userid} />}
-        />
         <Route
           path="/Community/Write"
           element={<CommunityWrite userid={userid} />}
         />
-        <Route path="/uploads/" element={<CommunityWrite />} />
         <Route
           path="/Community/Read/:id"
           element={<CommunityRead loggedIn={loggedIn} userid={userid} />}
         />
-        {/* 뉴스 추가 */}
-        <Route path="/News" element={<News />} />
-        <Route path="/MyPage" element={<MyPage />} />
+        <Route
+          path="/Community/Edit/:id"
+          element={<CommunityEdit userid={userid} />}
+        />
+        <Route path="/uploads/" element={<CommunityWrite />} />
       </Routes>
       
       <Footer/>

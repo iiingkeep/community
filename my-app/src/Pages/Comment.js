@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import {Icon} from '@iconify/react';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
-import {Icon} from '@iconify/react';
 import './Comment.css'
 
 
@@ -23,7 +23,7 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
   const onSubmit = async(e) => {
     e.preventDefault();
     if (loggedIn) {
-      // 서버의 다음 엔드포인트로 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
+      // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
     try{
       if (!comment) {
         alert('내용을 입력해주세요.');
@@ -40,13 +40,9 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
         // 댓글 등록 성공 시 알림 + 댓글창 비우기
         // refreshFunction으로 새로 등록한 댓글 즉시 렌더링
         if (response&&response.status===201) {
-          console.log('댓글이 등록되었습니다.');
           alert('댓글이 등록되었습니다.');
-          refreshFunction(response.data.result)
-        //   const newComment = response.data.result;
-        // setComments(prevComments => prevComments ? [...prevComments, newComment] : [newComment]);
+          refreshFunction(response.data.result);
           setComment('');
-  
         } // 댓글 등록 실패 시 알림
         else {
           console.error('예상치 못한 응답:', response);
@@ -91,7 +87,6 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
           onChange={onCommentHandle}
           value={comment}
           placeholder='댓글을 작성해 보세요.'/>
-        <br />
         <button className='commu-comment__button--submit' onClick={onSubmit}>댓글 등록</button>
       </form>
     </div>

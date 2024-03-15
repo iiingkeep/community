@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;700&family=Nanum+Gothic+Coding:wght@400;700&display=swap');
 
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* 모든 스타일 리셋
+	 http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -31,8 +32,6 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	/* height:100%;
-    overflow-y: hidden; */
 	line-height: 1;
 }
 ol, ul {
@@ -63,6 +62,8 @@ table {
 * {
   box-sizing: border-box;
 }
+
+/* 레이아웃 */
 .wrap {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -70,6 +71,60 @@ table {
 .inner {
   width: 1000px;
   margin: 60px auto 100px;
+}
+
+/* 헤더 */
+.com-header {
+  width: 1500px;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background-image:  
+   url('../public/background_img/backimg2.png'),
+   url('../public/background_img/backimg3.png'),
+   url('../public/background_img/back3.jpg');
+  background-size: 50px 50px , 70px 70px, 1502px 300px;
+  background-repeat:no-repeat;
+  background-position: 30% 23% ,90% 80%, 20% 170%;
+  border-bottom-left-radius: 80px;
+  border-bottom-right-radius: 80px;
+  position: relative;
+  transform: translateX(-16%);
+  z-index: 2;
+}
+.com-header img{
+  /* width: 270px;
+  height: 270px; */
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 11%;
+  left: 60%;
+}
+.com-header__title {
+  color: rgb(112, 112, 112);
+  font-size: 50px;
+  position: absolute;
+  top: 120px;
+  left: 240px;
+}
+.com-header__title--detail {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 27px;
+  color: rgb(112, 112, 112);
+}
+
+/* 버튼 */
+.button {
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgb(83, 212, 92);
+  font-size:14px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  color:white;
 }
 button:hover {
   cursor:pointer

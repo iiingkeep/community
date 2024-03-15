@@ -9,9 +9,13 @@
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
-
 .commu-comment__count {
   margin-left: 5px;
+}
+
+/* 답글이 아닌 댓글 작성 폼 */
+.commu-comment__form--origin {
+  margin-top: 30px;
 }
 
 /* 댓글+답글 작성 폼 */
@@ -20,12 +24,6 @@
   height: 50px;
   margin-bottom: 10px;
 }
-
-/* 답글이 아닌 댓글 작성 폼 */
-.commu-comment__form--origin {
-  margin-top: 30px;
-}
-
 .commu-comment__content {
   width: 83%;
   resize: none;
@@ -35,11 +33,9 @@
   outline: none;
   margin-right: 10px;
 }
-
 .commu-comment__content::placeholder {
   color: rgba(0,0,0,0.3);
 }
-
 .commu-comment__button--submit {
   width: 15%;
   height: 50px;
@@ -49,8 +45,4 @@
   border: none;
   padding: 10px;
   color:white;
-}
-
-.commu-single-comment-box {
-  position: relative;
 }
