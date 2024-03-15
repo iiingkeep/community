@@ -57,7 +57,11 @@
   }
    */
 
-.my-page__wrapper { display: flex; margin-top: 80px;}
+.my-page__wrapper { 
+  display: flex; 
+  margin-top: 80px;
+  margin-bottom: 190px; /* 푸터위치 수정용 */
+}
 
 .my-page__btn >ul{
   width: 200px;
