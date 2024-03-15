@@ -225,9 +225,23 @@ color: rgb(0, 0, 0);
 
 .acti-content { width: 100%; }
 
-.like-post__list{display: flex; justify-content: center;}
+/* 폼 테이블 (활동/좋아요) ---------------------- */
+.forms-post, .acti-comm {
+  width: 100%;
+}
+.like-post__list{
+  display: flex;
+  flex-direction: column;
 
-.forms-table { width: 80%;  /* height: 350px; */ }
+}
+.my-like__title {
+  font-size: 20px;
+  text-align: left;
+}
+.forms-table {
+  width: 80%;
+  height: 350px;
+}
 
 .forms-table thead {
   width: 100%;
@@ -237,6 +251,9 @@ color: rgb(0, 0, 0);
   border-top: solid 2px rgb(210, 210, 210);
   border-bottom: solid 2px rgb(210, 210, 210);
 
+}
+.forms-table tbody {
+  
 }
 
 .forms-table th {
@@ -258,6 +275,11 @@ color: rgb(0, 0, 0);
 
 .forms-table tr {
   border-bottom: solid 1px #e6e8eb;
+
+}
+.my-like-news-list__body tr{
+  height: 135px;
+
 }
 
 .forms-table__title {
@@ -267,6 +289,12 @@ color: rgb(0, 0, 0);
 
 .forms-table__date {
   text-align: center;
+}
+
+.my-like-news-list__img {
+  width: 150px;
+  height: 110px;
+  object-position: center;
 }
 
 .forms-table__title, .forms-table__date {color: gray;}
