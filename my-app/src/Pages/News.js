@@ -255,11 +255,13 @@ const News = () => {
           <div className="news-list-box">
             <li key={item.newsid}>
               {/* 썸네일 */}
+              <div className="news-list__img-box">
               <img
                 src={item.image_url}
                 alt="뉴스 썸네일"
                 onClick={() => handleClick(item)}
               />
+              </div>
               {/* 제목 */}
               <a
                 href={item.url}

@@ -1,7 +1,8 @@
 // IsLikeForm.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Pagination from "react-js-pagination";
 import "../Styles/MyPage.css";
 
 
@@ -11,6 +12,7 @@ const IsLikeForm = ({ userId }) => {
   const [likedPosts, setLikedPosts] = useState([]); // 좋아요를 누른 포스트 목록 상태
   const [likedNews, setLikedNews] = useState([]); // 좋아요를 누른 뉴스 목록 상태
 
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchLikedItems = async () => {
       try {
@@ -41,26 +43,30 @@ const IsLikeForm = ({ userId }) => {
       <h2 className="my-like__title">뉴스</h2>
       <table className='forms-table my-forms__table'>
         <thead>
-          <tr>
+          <tr className='forms-table'>
             {/* <th className='forms-table__num'>No.</th> */}
+            <th className='forms-table__title'>제목</th>
             <th className='forms-table__title'>이미지</th>
-            <th className='forms-table__date'>제목</th>
           </tr>
         </thead>
         <tbody className="my-like-news-list__body">
           {likedNews.map(News => (
             <tr key={News.newsid}>
-              <td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
+                <Link to={News.url}>
+                  <span>{News.title}</span>
+                </Link>
+                </div>
+              </td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
                 <Link to={News.url}>
                   <img src={News.image_url}
                   className="my-like-news-list__img"
                   alt="뉴스 이미지" />
                 </Link>
-              </td>
-              <td>
-                <Link to={News.url}>
-                  <span>{News.title}</span>
-                </Link>
+                </div>
               </td>
             </tr>
           ))}
@@ -71,20 +77,24 @@ const IsLikeForm = ({ userId }) => {
         <thead>
           <tr>
             {/* <th className='forms-table__num'>No.</th> */}
+            <th className='forms-table__title'>제목</th>
             <th className='forms-table__title'>작성자</th>
-            <th className='forms-table__date'>제목</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="my-like-news-list__body">
           {likedPosts.map(likedPost => (
             <tr key={likedPost.postid}>
-              <td>
-                  <span>{likedPost.username}</span>
-              </td>
-              <td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
                 <Link to={`/Community/Read/${likedPost.postid}`}>
                   <span>{likedPost.title}</span>
                 </Link>
+                </div>
+              </td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
+                  <span>{likedPost.username}</span>
+                </div>
               </td>
             </tr>
           ))}
