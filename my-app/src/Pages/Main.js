@@ -21,7 +21,7 @@ const Main = ({loggedIn}) => {
       .post("http://localhost:8000/Login", {
         email: email,
         password: password,
-      }) //회원 정보 email, password의 정보를 가져옴
+      }) //회원 정보 email, password의 정보 가져오기
       .then((response) => {
         console.log("서버 응답:", response);
         if (response.data.success) {

@@ -1,15 +1,15 @@
 import React from "react";
-import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import "./Header.css";
 
 const Header = ({ loggedIn, handleLogout }) => {
   const navigate = useNavigate();
 
+  // 헤더에서 메뉴 클릭 시 해당 페이지로 이동 후 스크롤을 맨 위로 초기화
   const handleNavigation = (path) => {
     navigate(path);
     window.scrollTo(0, 0);
   };
-
   const handleMain = () => handleNavigation("/");
   const handleNetZero = () => handleNavigation("/NetZero");
   const handleLogin = () => handleNavigation("/Login");
@@ -18,41 +18,39 @@ const Header = ({ loggedIn, handleLogout }) => {
 
   return (
     <div className="header">
+      {/* 왼쪽 로고 */}
       <div className="header__logo">
         <button className="header__logo--button" onClick={handleMain}>
           빵끗😊
         </button>
       </div>
+      {/* 가운데 메뉴 */}
       <div className="header__menu">
         <button className="header__menu--button" onClick={handleNetZero}>
           탄소중립이란?{" "}
         </button>
-        <button
-          className="header__menu--button"
-          onClick={() => navigate("/news")}
-        >
+        <button className="header__menu--button"
+        onClick={() => navigate("/news")}>
           환경이슈{" "}
         </button>
         <button
           className="header__menu--button"
-          onClick={() => navigate("/Community")}
-        >
+          onClick={() => navigate("/Community")}>
           커뮤니티{" "}
         </button>
       </div>
+      {/* 오른쪽 버튼 */}
       <div className="header__button">
         {loggedIn ? (
           <div>
             <button
               className="header__button--button button"
-              onClick={handleMyPage}
-            >
+              onClick={handleMyPage}>
               마이페이지
             </button>
             <button
               className="header__button--button button"
-              onClick={handleLogout}
-            >
+              onClick={handleLogout}>
               로그아웃
             </button>
           </div>
@@ -60,14 +58,12 @@ const Header = ({ loggedIn, handleLogout }) => {
           <div>
             <button
               className="header__button--button button"
-              onClick={handleLogin}
-            >
+              onClick={handleLogin}>
               로그인
             </button>
             <button
               className="header__button--button button"
-              onClick={handleRegister}
-            >
+              onClick={handleRegister}>
               회원가입
             </button>
           </div>

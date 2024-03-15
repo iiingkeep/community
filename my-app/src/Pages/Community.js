@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import PaginatedItems from '../Util/PaginatedItems';
-import './Community.css';
 import DOMPurify from 'dompurify';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 import { getPostThumbnail } from "../Util/utils";
+import './Community.css';
 
 // 게시물 목록을 페이지별로 출력하는 컴포넌트
 const Community = ({loggedIn}) => {
@@ -54,23 +54,24 @@ const Community = ({loggedIn}) => {
     }
   };
 
-// 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
-const getPostContentWithoutImages = (content) => {
-  return content.replace(/<img\s+[^>]*src="[^"]*"[^>]*>/g, '');
-};
+  // 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
+  const getPostContentWithoutImages = (content) => {
+    return content.replace(/<img\s+[^>]*src="[^"]*"[^>]*>/g, '');
+  };
 
-  // 게시글 작성 페이지로 이동하는 함수
+  // 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동하는 함수
   const goCommunityWrite = () => {
-  if (loggedIn) {
+    if (loggedIn) {
     // 로그인 상태일 경우 글쓰기 페이지로 이동
     navigate('/Community/Write', { state: { selectedCategory } });
-  } else {
+    } else {
     // 로그인 상태가 아닐 경우 로그인 페이지로 이동
-    if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
       navigate('/Login');
+      }
     }
-  }
-};
+  };
+  
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);

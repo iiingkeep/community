@@ -12,6 +12,7 @@
   z-index: 10;
 }
 
+/* 헤더 왼쪽 로고 */
 .header__logo--button{
   font-size: 25px;
   font-weight: 700;
@@ -20,6 +21,7 @@
   border: none;
 }
 
+/* 헤더 가운데 메뉴 */
 .header__menu--button {
   color: rgb(43, 43, 43);
   background-color: white;
@@ -30,8 +32,8 @@
   font-weight: 600;
 }
 
-
+/* 헤더 오른쪽 버튼 */
 .header__button--button{
   margin-left: 10px;
-  padding: 11px 0;
+  padding: 11px;
 }
