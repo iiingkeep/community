@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 /* 공통 */
+
 .main-section {
   width: 100vw;
 }
@@ -23,7 +24,7 @@
   position: relative;
   display: flex;
   align-items:end;
-  height: 800px;
+  height: 90vh;
 }
 .main-section-1-slogan-box {
   font-size:90px;
@@ -40,29 +41,37 @@
 }
 .main-section-1__img--earth {
   width: 30%;
-  height:75%;
+  height:70%;
   margin-bottom: 50px;
   position: absolute;
   left: 60%;
   z-index:0;
 }
 
-.main-login__form {
+.main-login-form {
   position: absolute;
   bottom: 10%;
   left:10%;
 }
-.main-login__form--input-and-button {
+.main-login-form--input-and-button {
   display: flex;
 }
 .main-login__form--id {
   margin-right: 5px;
 }
-.main-login__form--button--login,
-.main-login__form--button--mypage {
+.main-login-form button {
+  background-color: rgb(83, 212, 92);
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  color: white;
+  padding: 10px;
+  height:40px;
+}
+.main-login__form--button--login {
   margin: 0 5px 0 10px;
 }
-.main-login__form input {
+.main-login-form input {
   border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
@@ -73,11 +82,11 @@
   font-size: 14px;
   line-height: 16px;
   margin-bottom: 10px;
-  width: 180px;
+  width: 150px;
   height: 40px;
 }
-.main-login__form input:hover,
-.main-login__form input:focus {
+.main-login-form input:hover,
+.main-login-form input:focus {
   border: 2px solid rgb(83, 212, 92);
   box-sizing: border-box;
   border-radius: 20px;
@@ -131,7 +140,6 @@
   top: 50%;
   left: 10%;
 }
-
 /* 이동하기 */
 .main-intro__link {
   display: flex;
