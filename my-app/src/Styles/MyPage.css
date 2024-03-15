@@ -89,7 +89,7 @@
 .profile-form__img { display: flex; flex-direction: column;   padding: 30px 30px;}
 .profile-form__img > img{  width: 150px; height: 200px; border-radius: 10%; margin-bottom: 27px; object-fit: cover;}
 
-.profile-wrapper__btn{display: flex; justify-content: flex-end;}
+.profile-wrapper__btn{display: flex; justify-content: center;}
 
 .profile__btn {
   background-color: rgb(95, 95, 95);
