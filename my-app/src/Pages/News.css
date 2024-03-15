@@ -113,6 +113,11 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.news-list-box {
+  margin: 0 auto;
+  height: 130px;
+}
+
 .news-list-box li {
   margin-bottom: 30px;
   display: flex;
@@ -121,12 +126,6 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.news-list-box {
-  margin: 0 auto;
-  height: 130px;
-  
 }
 
 /* 뉴스 썸네일 */
