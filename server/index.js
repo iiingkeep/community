@@ -1156,26 +1156,123 @@ app.get('/acti-comment/:userid', (req, res) => {
 //   });
 // });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //  좋아요 폼 -----------------------------------
 
-app.get('/is-like/:userid', (req, res) => {
+// 유저가 좋아요를 누른 게시물 정보 클라이언트에 반환
+app.get('/is-like/posts/:userid', (req, res) => {
   const userId = req.params.userid;
 
-  const query = `SELECT title
-  FROM community_posts A
-  LEFT JOIN is_like B
-  ON A.postid = B.postid
-  WHERE B.post_isLiked = 1`;
-
-  const query2 = `
-  SELECT title, url
-  FROM news A
-  LEFT JOIN is_like B
-  ON A.newsid = B.newsid
-  WHERE B.news_isLiked = 1 AND A.userid = ?`;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
+  const postQuery = `
+    SELECT 
+      cp.postid, cp.title, u.username
+    FROM 
+     ezteam2.community_posts cp
+    INNER JOIN 
+      ezteam2.is_like il ON cp.postid = il.postid
+    INNER JOIN 
+      ezteam2.user u ON cp.userid = u.userid
+    WHERE 
+      il.userid = ? AND il.post_isLiked = 1
+  `;
+  connection.query(postQuery, [userId], (err, results) => {
     if (err) {
       console.error('(Error) data from database:', err);
       res.status(500).json({ message: 'Internal server error' });
@@ -1185,25 +1282,37 @@ app.get('/is-like/:userid', (req, res) => {
       res.status(404).json({ message: 'Data not found' });
       return;
     }
+    res.json(results);
+  })
+})
 
-    connection.query(query2, [userId], (err, results2) => {
-      if (err) {
-        console.error('(Error) data from database:', err);
-        res.status(500).json({ message: 'Internal server error' });
-        return;
-      }
-      if (results2.length === 0) {
-        res.status(404).json({ message: 'Data not found' });
-        return;
-      }
+// 유저가 좋아요를 누른 뉴스 정보 클라이언트에 반환
+app.get('/is-like/news/:userid', (req, res) => {
+  const userId = req.params.userid;
+  const newsQuery = `
+    SELECT 
+      n.*
+    FROM 
+      ezteam2.news n
+    INNER JOIN 
+      ezteam2.is_like il ON n.newsid = il.newsid
+    WHERE
+      il.userId = ? AND il.news_isLiked = 1
+  `;
 
-      const userData = results.concat(results2); // 두 결과를 합침
-      res.json(userData);
-      console.log(userData);
-    });
-  });
-});
-
+  connection.query(newsQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+    res.json(results)
+    })
+  })
 
 
 

@@ -217,7 +217,15 @@ color: rgb(0, 0, 0);
 .forms-post, .acti-comm {
   width: 100%;
 }
-.like-post__list{display: flex; justify-content: center;}
+.like-post__list{
+  display: flex;
+  flex-direction: column;
+
+}
+.my-like__title {
+  font-size: 20px;
+  text-align: left;
+}
 .forms-table {
   width: 80%;
   height: 350px;
@@ -232,6 +240,9 @@ color: rgb(0, 0, 0);
   border-bottom: solid 1px rgb(210, 210, 210);
 
 }
+.forms-table tbody {
+  
+}
 
 .forms-table th {
   padding: 12px 15px;
@@ -241,7 +252,10 @@ color: rgb(0, 0, 0);
   padding: 13px 15px 12px 15px;
   text-align: center;
   font-size: 17px;
-  line-height: 2em;
+  line-height: 2em; 
+  /* display: flex;
+  align-items: center; */
+
 }
 
 /* .forms-table tr :hover {
@@ -250,6 +264,11 @@ color: rgb(0, 0, 0);
 
 .forms-table tr {
   border-bottom: solid 1px #e6e8eb;
+
+}
+.my-like-news-list__body tr{
+  height: 135px;
+
 }
 
 .forms-table__title {
@@ -259,6 +278,12 @@ color: rgb(0, 0, 0);
 
 .forms-table__date {
   text-align: center;
+}
+
+.my-like-news-list__img {
+  width: 150px;
+  height: 110px;
+  object-position: center;
 }
 
 
