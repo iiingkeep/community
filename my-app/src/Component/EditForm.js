@@ -89,7 +89,7 @@ const EditForm = ({ userId, onFormChange }) => {
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
         setdetailedaddress(userData.detailedaddress);
-        console.log('프로필데이타', userData);
+        console.log('프로필 데이터', userData);
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
@@ -246,8 +246,6 @@ const EditForm = ({ userId, onFormChange }) => {
 
   // 비밀번호 유효성 검사 만족하는 상태
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
-
-  console.log(username);
 
   return (
     <div className="edit-form">
