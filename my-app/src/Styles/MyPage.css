@@ -282,14 +282,14 @@ color: rgb(0, 0, 0);
   text-align: center;
   font-size: 17px;
 }
-tr>td:first-of-type>div {
+tr>td:first-of-type>.my-table__td-box {
   width:640px;
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
-tr>td:nth-of-type(2)>div {
+tr>td:nth-of-type(2)>.my-table__td-box {
   width:150px;
   overflow: hidden;
   display: -webkit-box;
@@ -299,7 +299,6 @@ tr>td:nth-of-type(2)>div {
 
 .forms-table tr {
   border-bottom: solid 1px #e6e8eb;
-
 }
 
 
@@ -308,7 +307,6 @@ tr>td:nth-of-type(2)>div {
 }
 tbody a {
   color: black;
-  
 }
 tbody a:hover {
   font-weight: bolder;

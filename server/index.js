@@ -347,6 +347,7 @@ app.post("/checkUsernameDuplication", async (req, res) => {
 
     if (rows.length > 0) {
       // 이미 등록된 아이디인 경우
+      
       return res.status(200).json({
         success: false,
         message: "이미 등록된 닉네임입니다.",
@@ -1173,6 +1174,11 @@ app.get('/is-like/news/:userid', (req, res) => {
 
 
 //  정보수정 -----------------------------------
+
+
+
+
+
 
 app.put('/my/edit/update/:userid', async (req, res) => {
   const userId = req.params.userid;

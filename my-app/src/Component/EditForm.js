@@ -20,6 +20,8 @@ const EditForm = ({ userId }) => {
 
   const [usernameDuplication, setUsernameDuplication] = useState(false); // 닉네임 유효성
   const [phonenumberDuplication, setPhonenumberDuplication] = useState(false); // 휴대폰 번호 유효성
+  const [usernameChanged, setUsernameChanged] = useState(false);
+  const [phonenumberChanged, setPhonenumberChanged] = useState(false);
 
   const handle = handlePostcode(openPostcode, setOpenPostcode, setAddress);
 
@@ -38,21 +40,23 @@ const EditForm = ({ userId }) => {
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
 
+  // 유저가 닉네임을 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
   useEffect(() => {
-    // username 상태가 변경될 때만 실행
-    if (prevUsername.current !== username) {
-      setUsernameDuplication(false); // setUsernameDuplication을 false로 설정
-      prevUsername.current = username; // 이전 username 상태를 갱신
+    if (profileData.username !== username) {
+      setUsernameChanged(true);
+    } else {
+      setUsernameChanged(false);
     }
-  }, [username]); // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+  }, [profileData.username, username]);
 
+  // 유저가 핸드폰 번호를 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
   useEffect(() => {
-    // phonenumber 상태가 변경될 때만 실행
-    if (prevPhonenumber.current !== phonenumber) {
-      setPhonenumberDuplication(false); // setPhonenumberDuplication을 false로 설정
-      prevPhonenumber.current = phonenumber; // 이전 phonenumber 상태를 갱신
+    if (profileData.phonenumber !== phonenumber) {
+      setPhonenumberChanged(true);
+    } else {
+      setPhonenumberChanged(false);
     }
-  }, [phonenumber]); // phonenumber 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+  }, [profileData.phonenumber, phonenumber]);
 
   // 컴포넌트가 마운트될 때와 userId가 변경될 때마다 실행
   // axios를 사용하여 서버에서 해당 userId에 해당하는 사용자 프로필 데이터를 가져옵니다.
@@ -65,18 +69,21 @@ const EditForm = ({ userId }) => {
         );
         const userData = response.data[0];
         setProfileData(userData);
-        // console.log(userData)
+        setUsername(userData.username);
+        setPhonenumber(userData.phonenumber);
+        setAddress(userData.address);
+        setdetailedaddress(userData.detailedaddress)
+        console.log('프로필데이타',userData)
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
     };
     fetchProfile();
-  }, [userId]);
+  }, []);
 
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
     if (!username) {
-      setUsername(profileData.username)
       setUsernameDuplication(true);
       // return;
     } else if (username.match(spacebar)) {
@@ -164,13 +171,11 @@ const EditForm = ({ userId }) => {
   const handleEditSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (!usernameDuplication) {
+      if (usernameChanged && !usernameDuplication) {
         alert("닉네임 중복 확인을 해주세요.");
         return;
       } else if (!password) {
-        setPassword(profileData.password)
-        setConfirmPassword(profileData.confirmPassword)
-        setPasswordMatch(true);
+        alert("비밀번호를 입력하세요.");
         return;
       } else if (password.match(spacebar)) {
         alert("비밀번호에 공백을 포함할 수 없습니다.");
@@ -184,7 +189,7 @@ const EditForm = ({ userId }) => {
         alert("비밀번호가 일치하지 않습니다.");
         setPasswordMatch(false);
         return;
-      } else if (!phonenumberDuplication) {
+      } else if (phonenumberChanged && !phonenumberDuplication) {
         alert("휴대폰 번호 중복 확인을 해주세요.");
         return;
       } else if (!address) {
@@ -213,6 +218,8 @@ const EditForm = ({ userId }) => {
 
   // 비밀번호 유효성 검사 만족하는 상태
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
+
+  console.log(username)
 
   return (
     <div className="edit-form">
@@ -244,7 +251,6 @@ const EditForm = ({ userId }) => {
                         type="text"
                         name="email"
                         value={profileData.email}
-                        placeholder={profileData.email}
                         disabled
                       />
                     </label>
@@ -259,7 +265,7 @@ const EditForm = ({ userId }) => {
                         type="text"
                         name="username"
                         value={username}
-                        placeholder={profileData.username}
+                        placeholder='닉네임을 입력해 주세요'
                         onChange={(e) => setUsername(e.target.value)}
                       />
                       <button
@@ -281,7 +287,7 @@ const EditForm = ({ userId }) => {
                         type="password"
                         name="password"
                         value={password}
-                        placeholder="사용 가능한 특수문자 : @#$%^&+=!"
+                        placeholder="변경할 비밀번호를 입력해 주세요"
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       {password && password.match(spacebar) && (
@@ -292,12 +298,13 @@ const EditForm = ({ userId }) => {
                       )}
                       {password && passwordMatch && (
                         <p style={{ color: "rgb(83, 212, 92)" }}>
-                          사용 가능한 비밀번호 입니다.
+                          사용 가능한 비밀번호입니다.
                         </p>
                       )}
                     </label>
                   </td>
                 </tr>
+                <p className="edit-form-match__text">비밀번호 : 영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                 <tr>
                   <td>
                     <label className="edit-form__label">
@@ -335,7 +342,6 @@ const EditForm = ({ userId }) => {
                         type="text"
                         name="phonenumber"
                         value={phonenumber}
-                        placeholder={profileData.phonenumber}
                         onChange={(e) => setPhonenumber(e.target.value)}
                       />
                       <button
@@ -357,7 +363,6 @@ const EditForm = ({ userId }) => {
                         type="text"
                         name="address"
                         value={address}
-                        placeholder={profileData.address}
                         onChange={(e) => setAddress(e.target.value)}
                       />
                       <button
