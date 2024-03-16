@@ -24,38 +24,31 @@
 }
 
 .my-form__text {
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 1000;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: 5px solid rgb(83, 212, 92);
+  border-bottom: 5px solid  rgb(83, 212, 92);
 }
 
 .my-btn__button {
   border:none;
   background-color: transparent;
-  /* padding: 10px; */
-  /* margin-bottom: 20px; */
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 100;
-  font-style: normal;
   color: rgb(48, 48, 48);
+  padding: 10px;
+  width: 130px;
+  /* border-bottom: solid 2px rgb(203, 203, 203); */
 }
 
 .my-btn__button.active {
   /* border-bottom: 5px solid rgb(83, 212, 92); */
   font-weight: 1000;
+  background-color: rgb(221, 243, 230);
+  border-radius: 5em;
+  color: #40a243;
 }
-
-/* .my-btn:focus {
-    outline: none;
-  }
-  
-  .my-btn.active {
-    background-color: #333;
-    color: #fff;
-  }
-   */
 
 .my-page__wrapper { 
   display: flex; 
@@ -65,13 +58,18 @@
 
 .my-page__btn >ul{
   width: 150px;
-  height: 300px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* border-top: solid 3px rgb(174, 174, 174);
+  border-bottom: solid 3px rgb(174, 174, 174);
+  padding: 20px; */
 }
 .my-page__btn >ul>li{
-  width: 130px; 
+  /* border-bottom: solid 1.5px rgb(198, 198, 198); */
+  /* padding-bottom: 20px; */
+  width: 150px; 
   height: 33.5px; 
   /* border-bottom: solid 1px rgb(181, 181, 181); */
 }
@@ -162,10 +160,10 @@
   padding-bottom: 5px;
 }
 
-.profile-content__detail td:first-child {
+/* .profile-content__detail td:first-child {
   width: 120px;
   font-weight: 700;
-}
+} */
 
 .profile__username {
   font-size: 40px;
@@ -178,7 +176,7 @@
 /* 정보수정 -------------------------------- */
 .edit-form {
   width: 100%;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
 }
 .edit-form > table {
@@ -186,10 +184,11 @@
   justify-content: center;
 }
 
-.edit-form__content td {
+/* .edit-form__content td {
+  height: 80px;
   padding: 8px;
-  /* padding: 13px 15px 12px 15px; */
-}
+  padding: 13px 15px 12px 15px;
+} */
 
 .edit-form__content tr {
   border-bottom: solid 1px rgb(196, 196, 196);
@@ -198,13 +197,19 @@
 .edit-form__input {
 font-size: 19px;
 width: 330px;
+height: 85px;
 outline: none; /* 선택 상태에서의 기본 테두리 제거 */
 border: none; /* 선택 상태에서의 테두리 제거 */
-padding: 15px;
-box-sizing: border-box;
+/* padding: 15px; */
+/* box-sizing: border-box; */
 color: rgb(0, 0, 0);
 }
 
+.edit-form__wrapper {
+  align-items: center;
+  display: flex; flex-direction: column; 
+  
+}
 .edit-form label {
   display: flex;
   align-items: center;
@@ -224,17 +229,38 @@ color: rgb(0, 0, 0);
   /* 5px; 라벨 간격 조정 */
 }
 
-.edit-form__btn {
-  width: 110px;
+.edit-wrapper__btn {
+  text-align: center;
+  /* display: flex;
+  justify-content: flex-end;  */
+}
+
+.edit__sub__btn {
+  background-color: rgb(255, 255, 255);
+  border: solid 2px rgb(199, 199, 199);
+  border-radius: 5px;
+  width: 90px;
+  height: 45px;
+  /* font-size: 15px; */
+  color: rgb(71, 71, 71);
+  font-weight: 600;
+}
+
+.edit__btn {
+  width: 130px;
   outline: 0;
   background: #6dc970;
   border: 0;
   padding: 15px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 17px;
   cursor: pointer;
   border-radius: 10px;
   margin: 15px 0;
+}
+
+.edit-form__input[disabled] {
+  background-color: transparent;
 }
 
 /* 유효성 안내 문구 */
@@ -242,6 +268,7 @@ color: rgb(0, 0, 0);
   color: gray;
   font-size: small;
   margin-top: 5px;
+  margin-bottom: -5px;
   /* text-align: right; */
 }
 
@@ -252,10 +279,13 @@ color: rgb(0, 0, 0);
 }
 
 /* 나의활동 -------------------------------- */
-.acti-content__list{display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 60px;}
-.acti-content__title{display: flex-start; width: 80%;}
-.acti-content__title >h2{padding: 10px; font-weight: 1000;}
-.acti-content__list p { font-size: 20px; margin-bottom: 15px;}
+.my-content__list{
+  display: flex; flex-direction: column; 
+  align-items: center; width: 100%; margin-bottom: 70px;
+}
+.my-content__title{display: flex-start; width: 80%;}
+.my-content__title >h2{padding: 10px; font-weight: 1000;}
+.my-content__list p { font-size: 20px; margin-bottom: 15px;}
 /* {display: flex; justify-content: start; width: 80%;} */
 /* 호환이슈수정* : (justify-content: start; => justify-content: flex-start;) */
 
@@ -275,10 +305,15 @@ color: rgb(0, 0, 0);
   flex-direction: column;
 
 }
-.my-like__title {
-  font-size: 20px;
-  text-align: left;
-}
+
+/* .form-table__title {
+  text-align: center;
+  width: 150px;
+  padding: 10px;
+  border-top: solid 1px rgb(196, 196, 196);
+  border-bottom: solid 1px rgb(196, 196, 196);
+} */
+
 .forms-table {
   width: 80%;
   height: 350px;
@@ -293,21 +328,22 @@ color: rgb(0, 0, 0);
   border-bottom: solid 2px rgb(210, 210, 210);
 
 }
-.forms-table tbody {
-  
-}
 
 .forms-table th {
   padding: 12px 15px;
   background-color: rgb(239, 239, 239);
 }
 
+tr th:first-child { width: 150px; }
+
 .forms-table td {
+  vertical-align: middle;
   padding: 13px 15px 12px 15px;
   text-align: center;
   font-size: 17px;
   line-height: 2em;
-  width: 80%;
+  height: 63px;
+  /* width: 100px; */
 }
 
 /* .forms-table tr :hover {
@@ -333,9 +369,11 @@ color: rgb(0, 0, 0);
 }
 
 .my-like-news-list__img {
-  width: 150px;
-  height: 110px;
-  object-position: center;
+  width: 70px;
+  height: 80px;
+  /* display: block; */
+  /* margin: 0 auto; */
+  /* object-position: center; */
 }
 
 .forms-table__title, .forms-table__date {color: gray;}
@@ -346,7 +384,7 @@ color: rgb(0, 0, 0);
 
 /* 비밀번호 검사 -------------------------------- */
 .pass-input {
-  width: 300px;
+  width: 350px;
   /* font-family: "Roboto", sans-serif; */
   outline: 0;
   background: #f2f2f2;
@@ -359,15 +397,13 @@ color: rgb(0, 0, 0);
 }
 
 .pass__btn {
-  width: 200px;
-  /* font-family: "Roboto", sans-serif; */
-  /* text-transform: uppercase; */
+  width: 130px;
   outline: 0;
   background: #6dc970;
   border: 0;
   padding: 15px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 17px;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -375,6 +411,10 @@ color: rgb(0, 0, 0);
 .pass-form {
   font-size: 20px;
   line-height: 25px;
+}
+
+.pass-form p {
+  margin-bottom: 19px;
 }
 .pass-form > form {
   display: flex;

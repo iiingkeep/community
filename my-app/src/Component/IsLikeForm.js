@@ -35,15 +35,15 @@ const IsLikeForm = ({ userId }) => {
   return (
     <div className="like-form">
       <div className="my-form__title">
-        <p className="my-form__text">좋아요 한 목록</p>
+        <p className="my-form__text">좋아요 목록</p>
       </div>
-      <div className="like-post__list">
-      <h2 className="my-like__title">뉴스</h2>
+      <div className='my-content__list'>
+      <p className="form-table__title">뉴스</p>
       <table className='forms-table my-forms__table'>
         <thead>
           <tr>
             {/* <th className='forms-table__num'>No.</th> */}
-            <th className='forms-table__title'>이미지</th>
+            <th className='forms-table__title'>썸네일</th>
             <th className='forms-table__date'>제목</th>
           </tr>
         </thead>
@@ -66,7 +66,10 @@ const IsLikeForm = ({ userId }) => {
           ))}
         </tbody>
       </table>
-      <h2 className="my-like__title">게시글</h2>
+      </div>
+
+      <div className='my-content__list'>
+      <p className="form-table__title">게시글</p>
       <table className='forms-table my-forms__table'>
         <thead>
           <tr>
