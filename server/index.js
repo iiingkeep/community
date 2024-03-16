@@ -1,5 +1,4 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
@@ -14,14 +13,11 @@ import { fileURLToPath } from "url";
 import util from "util";
 import { exec } from "child_process";
 import schedule from "node-schedule";
-//--------------------곽별이 추가
 import fs from "fs";
 
 // 현재 모듈의 디렉토리 경로를 가져옵니다.
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-
-// dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 app.use(cors());
@@ -75,8 +71,7 @@ const connection = mysql2.createConnection({
   }
 })();
 
-app.get("/", (req, res) => res.send(`Hell'o World!`));
-//------------------------이주호 추가
+//-------------------------------------뉴스------------------------------------------
 const execPromise = util.promisify(exec); // exec함수를 Promise(비동기) 방식으로 변환
 
 // 스케줄 함수 정의
@@ -198,11 +193,8 @@ app.post("/news/likes", (req, res) => {
     }
   );
 });
-//------------------------이주호 추가
+//-------------------------------------익스프레스 세션------------------------------------------
 
-//-------------------------------로그인-----------------------------------------------
-
-//-------------------------------익스플로스 세션------------------------------------
 const sessionStore = new MySQLStore(
   {
     expiration: 3600000, // 세션의 유효시간 (1시간)
@@ -231,7 +223,7 @@ app.use(
     },
   })
 );
-//-------------------------------로그인------------------------------------
+//-------------------------------------로그인------------------------------------------
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -265,8 +257,10 @@ app.post("/login", async (req, res) => {
     res.status(500).send({ success: false, message: "서버 에러 발생" });
   }
 });
-//-------------------------------회원가입----------------------------------------------
-//---------------------------------- 회원번호---------------------------------------------
+//-------------------------------------회원가입------------------------------------------
+
+//-------------------------------------회원번호 생성------------------------------------------
+
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
 async function generateUserid(usertype) {
@@ -403,7 +397,8 @@ app.post("/checkPhonenumberDuplication", async (req, res) => {
   }
 });
 
-//---------------------------회원가입----------------------------------------------
+//-------------------------------------회원가입------------------------------------------
+
 app.post("/register", async (req, res) => {
   // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
   const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype } = req.body;
@@ -944,11 +939,7 @@ app.delete('/Community/Read/:id/DeleteComment/:commentId', async (req, res) => {
 });
 
 
-
-//--------------------------------------------------------------------------//
-//---------------------------------곽별이----------------------------//
-
-//  마이페이지 -----------------------------------
+//-------------------------------------마이페이지------------------------------------------
 
 // 사용자 ID에 따라 프로필 데이터를 반환하는 엔드포인트
 app.get('/my/:formType/:userid', (req, res) => {
@@ -1027,8 +1018,7 @@ app.get('/my/:formType/:userid', (req, res) => {
   });
 });
 
-
-//  나의활동(게시글+댓글) -----------------------------------
+//-------------------------------------나의활동(게시글+댓글)------------------------------------------
 
 app.get('/acti-post&comment/:userid', (req, res) => {
   const userId = req.params.userid;
@@ -1098,16 +1088,7 @@ app.get('/acti-post&comment/:userid', (req, res) => {
 // });
 
 
-
-
-
-
-
-
-
-
-
-//  좋아요 폼 -----------------------------------
+//-------------------------------------좋아요 폼------------------------------------------
 
 // 유저가 좋아요를 누른 게시물 정보 클라이언트에 반환
 app.get('/is-like/posts/:userid', (req, res) => {
@@ -1167,13 +1148,7 @@ app.get('/is-like/news/:userid', (req, res) => {
   });
 });
 
-
-
-
-
-
-
-//  정보수정 -----------------------------------
+//-------------------------------------정보수정------------------------------------------
 
 
 
@@ -1214,8 +1189,7 @@ app.put('/my/edit/update/:userid', async (req, res) => {
   }
 });
 
-
-//  정보수정 비밀번호 유효성 검사 -----------------------------------
+//-------------------------------------정보수정 비밀번호 확인------------------------------------------
 
 app.post('/pw-valid/:userid', async (req, res) => {
   const { userId, password } = req.body;
@@ -1293,8 +1267,7 @@ app.post('/pw-valid/:userid', async (req, res) => {
 //   });
 // });
 
-
-//  프로필 이미지 저장(DB) -----------------------------------
+//-------------------------------------프로필 이미지 저장(DB)------------------------------------------
 
 // userid를 넣어서 파일이름 생성 *수정됨
 const storage = multer.diskStorage({
@@ -1350,7 +1323,7 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
 //   });
 // });
 
-//  프로필 이미지 get요청 -----------------------------------
+//-------------------------------------프로필 이미지 get요청------------------------------------------
 
 // app.use("/public", express.static(path.join(__dirname, "public"))); ---경로설정
 app.get('/imgsave/:userid', (req, res) => {

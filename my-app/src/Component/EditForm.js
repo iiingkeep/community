@@ -325,11 +325,11 @@ const EditForm = ({ userId }) => {
                             color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
                           }}
                         >
-                          {password === confirmPassword
-                            ? "비밀번호가 일치합니다."
-                            : "비밀번호가 일치하지 않습니다."}
-                        </p>
-                      )}
+                            {password === confirmPassword
+                              ? "비밀번호가 일치합니다."
+                              : "비밀번호가 일치하지 않습니다."}
+                          </p>
+                        )}
                     </label>
                   </td>
                 </tr>

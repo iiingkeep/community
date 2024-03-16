@@ -3,7 +3,7 @@ import "./NetZero.css";
 
 const NetZero = () => {
     return (
-      <div className="carbon-page inner">
+      <div className="netzero-page inner">
         {/* 탄소중립이란? 헤더 */}
         <div className='com-header '>
           <h1 className='com-header__title'>탄소중립이란?
@@ -12,7 +12,7 @@ const NetZero = () => {
           </h1>
           <img className="com-header__img" src='background_img/netzero2.png' />
         </div>
-        <img className="carbon-img" src="./carbon.png" alt="탄소중립 설명 이미지"></img>
+        <img className="NetZero-img" src="./NetZero.png" alt="탄소중립 설명 이미지"></img>
       </div>
     );
 };
