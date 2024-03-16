@@ -1,4 +1,3 @@
-// EditForm.js
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import DaumPostcode from "react-daum-postcode";
@@ -77,8 +76,9 @@ const EditForm = ({ userId }) => {
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
     if (!username) {
-      alert("닉네임을 입력하세요.");
-      return;
+      setUsername(profileData.username)
+      setUsernameDuplication(true);
+      // return;
     } else if (username.match(spacebar)) {
       alert("닉네임에 공백을 포함할 수 없습니다.");
       return;
@@ -108,7 +108,8 @@ const EditForm = ({ userId }) => {
   // 휴대폰 번호 중복 검사
   const handlePhonenumberCheck = () => {
     if (!phonenumber) {
-      alert("휴대폰 번호를 입력하세요.");
+      setPhonenumber(profileData.phonenumber)
+      setPhonenumberDuplication(true);
       return;
     } else if (phonenumber.match(spacebar)) {
       alert("휴대폰 번호에 공백을 포함할 수 없습니다.");
@@ -158,16 +159,6 @@ const EditForm = ({ userId }) => {
     }
   };
 
-  // input 필드의 값을 상태에 반영
-  // input 요소의 변경 이벤트를 처리
-  // name과 value를 추출하여 profileData 상태를 업데이트
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData({
-      ...profileData,
-      [name]: value,
-    });
-  };
 
   // 수정된 정보를 서버에 전송
   const handleEditSubmit = async (event) => {
@@ -177,8 +168,9 @@ const EditForm = ({ userId }) => {
         alert("닉네임 중복 확인을 해주세요.");
         return;
       } else if (!password) {
-        alert("비밀번호를 입력하세요.");
-        setPasswordMatch(false);
+        setPassword(profileData.password)
+        setConfirmPassword(profileData.confirmPassword)
+        setPasswordMatch(true);
         return;
       } else if (password.match(spacebar)) {
         alert("비밀번호에 공백을 포함할 수 없습니다.");
@@ -197,16 +189,6 @@ const EditForm = ({ userId }) => {
         return;
       } else if (!address) {
         alert("주소를 입력하세요.");
-        return;
-      } else if (
-        !username ||
-        !password ||
-        !confirmPassword ||
-        !phonenumber ||
-        !address ||
-        !detailedaddress
-      ) {
-        alert("정보를 모두 입력하세요.");
         return;
       } else {
         //변경된 정보만 추출
