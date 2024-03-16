@@ -5,7 +5,7 @@ import { handlePostcode } from "../Pages/Postcodehandle";
 import PasswordValid from "./PasswordValid";
 import "../Styles/MyPage.css";
 
-const EditForm = ({ userId }) => {
+const EditForm = ({ userId, onFormChange }) => {
   const [profileData, setProfileData] = useState({});
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -40,6 +40,22 @@ const EditForm = ({ userId }) => {
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
 
+  useEffect(() => {
+    // username 상태가 변경될 때만 실행
+    if (prevUsername.current !== username) {
+      setUsernameDuplication(false); // setUsernameDuplication을 false로 설정
+      prevUsername.current = username; // 이전 username 상태를 갱신
+    }
+  }, [username]); // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+
+  useEffect(() => {
+    // phonenumber 상태가 변경될 때만 실행
+    if (prevPhonenumber.current !== phonenumber) {
+      setPhonenumberDuplication(false); // setPhonenumberDuplication을 false로 설정
+      prevPhonenumber.current = phonenumber; // 이전 phonenumber 상태를 갱신
+    }
+  }, [phonenumber]);
+
   // 유저가 닉네임을 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
   useEffect(() => {
     if (profileData.username !== username) {
@@ -72,14 +88,34 @@ const EditForm = ({ userId }) => {
         setUsername(userData.username);
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
-        setdetailedaddress(userData.detailedaddress)
-        console.log('프로필데이타',userData)
+        setdetailedaddress(userData.detailedaddress);
+        console.log('프로필데이타', userData);
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
     };
     fetchProfile();
   }, []);
+
+  // 비밀번호 유효성 검사
+  const handlePasswordValid = async (password) => {
+    try {
+      // 비밀번호 검사 요청을 서버에 보냅니다.
+      const response = await axios.post(
+        `http://localhost:8000/pw-valid/${userId}`,
+        {
+          userId: userId,
+          password: password,
+        }
+      );
+      // 검증이 성공하면 수정 양식을 표시합니다.
+      setShowEditForm(response.data.isValid);
+      const res = response.data.isValid;
+      console.log(res);
+    } catch (error) {
+      console.error("Error validating password:", error);
+    }
+  };
 
   // 닉네임 중복 검사
   const handleUsernameCheck = () => {
@@ -115,7 +151,7 @@ const EditForm = ({ userId }) => {
   // 휴대폰 번호 중복 검사
   const handlePhonenumberCheck = () => {
     if (!phonenumber) {
-      setPhonenumber(profileData.phonenumber)
+      setPhonenumber(profileData.phonenumber);
       setPhonenumberDuplication(true);
       return;
     } else if (phonenumber.match(spacebar)) {
@@ -146,24 +182,10 @@ const EditForm = ({ userId }) => {
       });
   };
 
-  // 비밀번호 유효성 검사
-  const handlePasswordValid = async (password) => {
-    try {
-      // 비밀번호 검사 요청을 서버에 보냅니다.
-      const response = await axios.post(
-        `http://localhost:8000/pw-valid/${userId}`,
-        {
-          userId: userId,
-          password: password,
-        }
-      );
-      // 검증이 성공하면 수정 양식을 표시합니다.
-      setShowEditForm(response.data.isValid);
-      const res = response.data.isValid;
-      console.log(res);
-    } catch (error) {
-      console.error("Error validating password:", error);
-    }
+  const handleCancel = () => {
+    // MyPage 컴포넌트의 handleFormChange 함수 호출
+    onFormChange('profile');
+    window.scrollTo(0, 300);
   };
 
 
@@ -174,43 +196,49 @@ const EditForm = ({ userId }) => {
       if (usernameChanged && !usernameDuplication) {
         alert("닉네임 중복 확인을 해주세요.");
         return;
-      } else if (!password) {
+      }
+      if (!password) {
         alert("비밀번호를 입력하세요.");
         return;
-      } else if (password.match(spacebar)) {
+      }
+      if (password.match(spacebar)) {
         alert("비밀번호에 공백을 포함할 수 없습니다.");
         setPasswordMatch(false);
         return;
-      } else if (!PWcheck.test(password)) {
+      }
+      if (!PWcheck.test(password)) {
         alert("비밀번호 형식이 올바르지 않습니다.");
         setPasswordMatch(false);
         return;
-      } else if (password !== confirmPassword) {
+      }
+      if (password !== confirmPassword) {
         alert("비밀번호가 일치하지 않습니다.");
         setPasswordMatch(false);
         return;
-      } else if (phonenumberChanged && !phonenumberDuplication) {
+      }
+      if (phonenumberChanged && !phonenumberDuplication) {
         alert("휴대폰 번호 중복 확인을 해주세요.");
         return;
-      } else if (!address) {
+      }
+      if (!address) {
         alert("주소를 입력하세요.");
         return;
-      } else {
-        //변경된 정보만 추출
-        const updatedData = {
-          username: username,
-          password: password,
-          confirmPassword: confirmPassword,
-          phonenumber: phonenumber,
-          address: address,
-          detailedaddress: detailedaddress,
-        };
-        await axios.put(
-          `http://localhost:8000/my/edit/update/${userId}`,
-          updatedData
-        );
-        alert("성공적으로 수정되었습니다.");
       }
+      //변경된 정보만 추출
+      const updatedData = {
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword,
+        phonenumber: phonenumber,
+        address: address,
+        detailedaddress: detailedaddress,
+      };
+      await axios.put(
+        `http://localhost:8000/my/edit/update/${userId}`,
+        updatedData
+      );
+      alert("성공적으로 수정되었습니다.");
+      handleCancel();
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -219,7 +247,7 @@ const EditForm = ({ userId }) => {
   // 비밀번호 유효성 검사 만족하는 상태
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
-  console.log(username)
+  console.log(username);
 
   return (
     <div className="edit-form">
@@ -325,11 +353,11 @@ const EditForm = ({ userId }) => {
                             color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
                           }}
                         >
-                            {password === confirmPassword
-                              ? "비밀번호가 일치합니다."
-                              : "비밀번호가 일치하지 않습니다."}
-                          </p>
-                        )}
+                          {password === confirmPassword
+                            ? "비밀번호가 일치합니다."
+                            : "비밀번호가 일치하지 않습니다."}
+                        </p>
+                      )}
                     </label>
                   </td>
                 </tr>
@@ -401,9 +429,11 @@ const EditForm = ({ userId }) => {
                   <button
                     className="edit-form__btn"
                     onClick={handleEditSubmit}
-                    onSubmit={handleEditSubmit}
                   >
                     수정완료
+                  </button>
+                  <button className="edit-form__btn" onClick={handleCancel}>
+                    취소
                   </button>
                 </div>
               </td>

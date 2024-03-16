@@ -52,6 +52,7 @@ function App() {
     sessionStorage.removeItem("loggedIn");
     setLoggedIn(false);
     navigate("/"); 
+    window.scrollTo(0, 0);
   };
 
 
