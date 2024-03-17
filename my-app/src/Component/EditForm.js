@@ -281,7 +281,6 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">한글·영문·숫자로만 4~10자리</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -305,6 +304,7 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
+                  <p className="edit-form-match__text">한글·영문·숫자로만 4~10자리</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -335,12 +335,10 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
                         <span className="edit-form__text">
-                          
                           PW 재입력
                         </span>
                         <input
@@ -368,7 +366,7 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">'-' 하이픈 제외 e.g. 01012345678</p>
+                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -392,6 +390,7 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
+                  <p className="edit-form-match__text">하이픈 '-' 제외 e.g. 01012345678</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
