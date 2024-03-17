@@ -68,6 +68,7 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
       localStorage.setItem('storageImg', imageUrl);
       alert('이미지가 저장되었습니다.');
       onClose();
+      window.location.reload();
     } else {
       alert('이미지를 선택해 주세요.');
     }
@@ -88,7 +89,7 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
     if (savedImageUrl) {
       setImageUrl(savedImageUrl);
     }
-  }, []);
+  }, [imageUrl]);
 
   return (
     <div className="img-modal">
@@ -129,8 +130,9 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
 
 export default ImagePopup;
 
-// ImagePopup.js
+// useContext------------------------------------------------------
 
+// ImagePopup.js
 // import { useState, useRef, useEffect } from "react";
 // import axios from "axios";
 // import '../Styles/ImagePopup.css';
