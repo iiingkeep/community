@@ -16,10 +16,10 @@ const ProfileForm = ({ userId }) => {
 
 
 
-    // // 이미지 업데이트 핸들러
-    const handleProfileImg = (url) => {
-        setImageUrl(url);
-    };
+    // 이미지 업데이트 핸들러
+    // const handleProfileImg = (url) => {
+    //     setImageUrl(url);
+    // };
     // 이미지팝업창 클릭이벤트
     const handleImgPopup = () => {
         setShowPopup(true);
@@ -64,7 +64,7 @@ const ProfileForm = ({ userId }) => {
             </div>
 
             {/* 이미지 팝업 */} {/* ImagePopup에 userId 전달 */}
-            {showPopup && <ImagePopup userId={userId} onClose={() => setShowPopup(false)} handleProfileImg={handleProfileImg} />}
+            {showPopup && <ImagePopup userId={userId} onClose={() => setShowPopup(false)} />}
 
             {/* id식별 조건부 렌더링 */}
             {profileData.usertype === '2' || profileData.usertype === '3'
@@ -99,6 +99,8 @@ const ProfileForm = ({ userId }) => {
     );
 };
 export default ProfileForm;
+
+// useContext------------------------------------------------------
 
 // // ProfileForm.js
 // import axios from "axios";
