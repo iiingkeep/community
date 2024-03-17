@@ -48,10 +48,17 @@ const ActivityForm = ({userId}) => {
                 {/* <td>{activity.postid}</td> */}
                 <td>{moment(activity.createdAt).format('MM월 DD일')}</td>
                 <td>
+                <div className="my-table__td-box">
                   <Link className='content__link' to={`/Community/Read/${activity.postid}`}>
                   <span>{activity.title.length > 25 ? activity.title.substring(0, 25) + '...' : activity.title}</span>
                   </Link>
+                  </div>
                 </td>
+                <td>
+                <div className="my-table__td-box">
+                  {moment(activity.createdAt).format('MM월 DD일')}
+                  </div>
+                  </td>
               </tr>
             ))}
           </tbody>
@@ -64,8 +71,8 @@ const ActivityForm = ({userId}) => {
           <thead>
             <tr>
               {/* <th className='forms-table__num'>No.</th> */}
-              <th className='forms-table__date'>날짜</th>
               <th className='forms-table__title'>내용</th>
+              <th className='forms-table__title'>날짜</th>
             </tr>
           </thead>
           <tbody>
@@ -74,12 +81,17 @@ const ActivityForm = ({userId}) => {
                 {/* <td>{activity.postid}</td> */}
                 <td>{moment(activity.createdAt).format('MM월 DD일')}</td>
                 <td>
+                <div className="my-table__td-box">
                   <Link className='content__link' to={`/Community/Read/${activity.postid}`}>
                     {/* <span>{activity.content}</span> */}
                   <span>{activity.content.length > 25 ? activity.content.substring(0, 25) + '...' : activity.content}</span>
-
                   </Link>
+                  </div>
                 </td>
+                <td>
+                <div className="my-table__td-box">
+                  {moment(activity.createdAt).format('MM월 DD일')}
+                  </div></td>
               </tr>
             ))}
           </tbody>

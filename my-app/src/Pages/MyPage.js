@@ -65,7 +65,7 @@ const MyPage = () => {
         <div className="my-page__right">
         {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
         {/* {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />} */}
-        {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} onFormChange={handleFormChange} />}
         {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
         {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
         {activeForm === 'islike' && <IsLikeForm formData={formData} userId={userData.userid} />}

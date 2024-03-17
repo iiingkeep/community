@@ -309,6 +309,13 @@ color: rgb(0, 0, 0);
 .like-post__list{
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.my-like__title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin: 20px 0;
 
 }
 
@@ -321,8 +328,10 @@ color: rgb(0, 0, 0);
 } */
 
 .forms-table {
-  width: 80%;
-  height: 350px;
+  width: 800px
+}
+.my-forms__table {
+  margin-bottom: 50px;
 }
 
 .forms-table thead {
@@ -347,39 +356,40 @@ tr th:first-child { width: 150px; }
   padding: 13px 15px 12px 15px;
   text-align: center;
   font-size: 17px;
-  line-height: 2em;
-  height: 63px;
-  /* width: 100px; */
 }
-
-/* .forms-table tr :hover {
-  background-color: #d5d5d5;
-} */
+tr>td:first-of-type>.my-table__td-box {
+  width:640px;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+tr>td:nth-of-type(2)>.my-table__td-box {
+  width:150px;
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 
 .forms-table tr {
   border-bottom: solid 1px #e6e8eb;
-
 }
-.my-like-news-list__body tr{
-  height: 135px;
 
-}
 
 .forms-table__title {
   text-align: center;
-  margin-right: 100px;
 }
-
-.forms-table__date {
-  text-align: center;
+tbody a {
+  color: black;
+}
+tbody a:hover {
+  font-weight: bolder;
 }
 
 .my-like-news-list__img {
-  width: 70px;
-  height: 80px;
-  /* display: block; */
-  /* margin: 0 auto; */
-  /* object-position: center; */
+  width: 100px;
+  height: 70px;
 }
 
 .forms-table__title, .forms-table__date {color: gray;}
