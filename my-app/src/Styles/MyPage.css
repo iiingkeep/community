@@ -349,7 +349,9 @@ color: rgb(0, 0, 0);
   background-color: rgb(239, 239, 239);
 }
 
-tr th:first-child { width: 150px; }
+tr th:first-child { width: 200px; }
+/* tr > td:nth-child(2) */
+
 
 .forms-table td {
   vertical-align: middle;
@@ -358,14 +360,14 @@ tr th:first-child { width: 150px; }
   font-size: 17px;
 }
 tr>td:first-of-type>.my-table__td-box {
-  width:640px;
+  /* width:640px; */
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 tr>td:nth-of-type(2)>.my-table__td-box {
-  width:150px;
+  /* width:150px; */
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;

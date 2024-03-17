@@ -54,11 +54,11 @@ const ActivityForm = ({userId}) => {
                   </Link>
                   </div>
                 </td>
-                <td>
+                {/* <td>
                 <div className="my-table__td-box">
                   {moment(activity.createdAt).format('MM월 DD일')}
                   </div>
-                  </td>
+                  </td> */}
               </tr>
             ))}
           </tbody>
@@ -88,10 +88,10 @@ const ActivityForm = ({userId}) => {
                   </Link>
                   </div>
                 </td>
-                <td>
+                {/* <td>
                 <div className="my-table__td-box">
                   {moment(activity.createdAt).format('MM월 DD일')}
-                  </div></td>
+                  </div></td> */}
               </tr>
             ))}
           </tbody>

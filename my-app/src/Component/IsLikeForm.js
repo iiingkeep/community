@@ -45,20 +45,13 @@ const IsLikeForm = ({ userId }) => {
         <thead>
           <tr className='forms-table'>
             {/* <th className='forms-table__num'>No.</th> */}
-            <th className='forms-table__title'>제목</th>
             <th className='forms-table__title'>이미지</th>
+            <th className='forms-table__title'>제목</th>
           </tr>
         </thead>
         <tbody className="my-like-news-list__body">
           {likedNews.map(News => (
             <tr key={News.newsid}>
-              <td className="my-table__td">
-                <div className="my-table__td-box">
-                <Link to={News.url}>
-                  <span>{News.title}</span>
-                </Link>
-                </div>
-              </td>
               <td className="my-table__td">
                 <div className="my-table__td-box">
                 <Link to={News.url}>
@@ -68,6 +61,14 @@ const IsLikeForm = ({ userId }) => {
                 </Link>
                 </div>
               </td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
+                <Link to={News.url}>
+                  <span>{News.title}</span>
+                </Link>
+                </div>
+              </td>
+              
             </tr>
           ))}
         </tbody>
@@ -80,8 +81,8 @@ const IsLikeForm = ({ userId }) => {
         <thead>
           <tr>
             {/* <th className='forms-table__num'>No.</th> */}
-            <th className='forms-table__title'>제목</th>
             <th className='forms-table__title'>작성자</th>
+            <th className='forms-table__title'>제목</th>
           </tr>
         </thead>
         <tbody className="my-like-news-list__body">
@@ -89,16 +90,17 @@ const IsLikeForm = ({ userId }) => {
             <tr key={likedPost.postid}>
               <td className="my-table__td">
                 <div className="my-table__td-box">
+                  <span>{likedPost.username}</span>
+                </div>
+              </td>
+              <td className="my-table__td">
+                <div className="my-table__td-box">
                 <Link to={`/Community/Read/${likedPost.postid}`}>
                   <span>{likedPost.title}</span>
                 </Link>
                 </div>
               </td>
-              <td className="my-table__td">
-                <div className="my-table__td-box">
-                  <span>{likedPost.username}</span>
-                </div>
-              </td>
+
             </tr>
           ))}
         </tbody>
