@@ -241,6 +241,25 @@ color: rgb(0, 0, 0);
   justify-content: flex-end;  */
 }
 
+/* .edit-form__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.edit-form__btn {
+  width: 110px;
+  outline: 0;
+  background: #6dc970;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: larger;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 30px 3px 10px 10px;
+}
+
 .edit__sub__btn {
   background-color: rgb(255, 255, 255);
   border: solid 2px rgb(199, 199, 199);

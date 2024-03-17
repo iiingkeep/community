@@ -906,7 +906,7 @@ const EditForm = ({ userId, onFormChange }) => {
                           onChange={(e) => setPhonenumber(e.target.value)}
                         />
                         <button
-                          className="edit-form__btn"
+                          className="edit__sub__btn"
                           onClick={handlePhonenumberCheck}
                         >
                           중복 확인
@@ -928,7 +928,7 @@ const EditForm = ({ userId, onFormChange }) => {
                         />
                         <button
                           type="button"
-                          className="edit-form__btn"
+                          className="edit__sub__btn"
                           onClick={handle.clickButton}
                         >
                           주소 선택
