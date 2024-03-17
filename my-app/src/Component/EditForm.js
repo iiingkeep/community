@@ -86,6 +86,7 @@ const EditForm = ({ userId, onFormChange }) => {
         const userData = response.data[0];
         setProfileData(userData);
         setUsername(userData.username);
+        setPassword(userData.password)
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
         setdetailedaddress(userData.detailedaddress);
