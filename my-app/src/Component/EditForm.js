@@ -313,7 +313,7 @@ const EditForm = ({ userId, onFormChange }) => {
                           type="password"
                           name="password"
                           value={password}
-                          placeholder="사용 가능한 특수문자 : @#$%^&+=!"
+                          placeholder="비밀번호를 입력하세요."
                           onChange={(e) => setPassword(e.target.value)}
                         />
                         <div className="edit__addspace">
@@ -334,6 +334,7 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
+                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -365,7 +366,6 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
