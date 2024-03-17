@@ -213,6 +213,7 @@
 
 /* section-3__뉴스 & 커뮤니티 공통 */
 .main-issue__list-box {
+  width: 100%;
   padding: 40px 20px 20px;
   height: 500px;
 }

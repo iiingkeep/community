@@ -86,7 +86,7 @@ const EditForm = ({ userId, onFormChange }) => {
         const userData = response.data[0];
         setProfileData(userData);
         setUsername(userData.username);
-        setPassword(userData.password)
+        setPassword('')
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
         setdetailedaddress(userData.detailedaddress);
@@ -197,17 +197,13 @@ const EditForm = ({ userId, onFormChange }) => {
       if (usernameChanged && !usernameDuplication) {
         alert("닉네임 중복 확인을 해주세요.");
         return;
-      }
-      if (!password) {
-        alert("비밀번호를 입력하세요.");
-        return;
-      }
-      if (password.match(spacebar)) {
+      } // 비밀번호를 입력한 경우에만 유효성 검사
+      if (password && (password.match(spacebar))) {
         alert("비밀번호에 공백을 포함할 수 없습니다.");
         setPasswordMatch(false);
-        return;
-      }
-      if (!PWcheck.test(password)) {
+        return; 
+      } // 비밀번호를 입력한 경우에만 유효성 검사
+      if (password && (!PWcheck.test(password))) {
         alert("비밀번호 형식이 올바르지 않습니다.");
         setPasswordMatch(false);
         return;
@@ -228,7 +224,8 @@ const EditForm = ({ userId, onFormChange }) => {
       //변경된 정보만 추출
       const updatedData = {
         username: username,
-        password: password,
+        // 비밀번호를 입력했다면 입력된 비밀번호를 반환, 그렇지 않으면 아무것도 반환하지 않음(서버에 전송X)
+        ...(password && { password: password }), 
         confirmPassword: confirmPassword,
         phonenumber: phonenumber,
         address: address,

@@ -1149,31 +1149,26 @@ app.get('/is-like/news/:userid', (req, res) => {
 });
 
 //-------------------------------------정보수정------------------------------------------
-
-
-
-
-
-
 app.put('/my/edit/update/:userid', async (req, res) => {
   const userId = req.params.userid;
   const profileData = req.body;
 
   // 사용자 정보 업데이트 쿼리
-  const updateQuery = `
-      UPDATE user SET username = ?, password = ?, phonenumber = ?, address = ?, detailedaddress = ?
-      WHERE userid = ? `;
+  let updateQuery = `UPDATE user SET username = ?, phonenumber = ?, address = ?, detailedaddress = ? WHERE userid = ?`;
+  // 클라이언트에서 전달된 프로필 데이터
+  // userId를 values 배열에 추가
+  const updateValues = [profileData.username, profileData.phonenumber, profileData.address, profileData.detailedaddress, userId];
+
+  // 비밀번호 입력이 있는 경우에만 비밀번호 업데이트 쿼리와 값을 추가
+  if (profileData.password) {
+    updateQuery = `UPDATE user SET username = ?, password = ?, phonenumber = ?, address = ?, detailedaddress = ? WHERE userid = ?`;
+    const hashedPassword = await bcrypt.hash(profileData.password, 10);
+    updateValues.splice(1, 0, hashedPassword); // 두 번째 위치에 비밀번호 값 추가
+  }
 
   try {
-    // 클라이언트에서 전달된 프로필 데이터
-    // userId를 values 배열에 추가
-    const { username, password, phonenumber, address, detailedaddress } = profileData;
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const values = [username, hashedPassword, phonenumber, address, detailedaddress, userId];
-
     // 데이터베이스 쿼리 실행
-    connection.query(updateQuery, values, (error, results) => {
+    connection.query(updateQuery, updateValues, (error, results) => {
       if (error) {
         console.error('Error updating user profile:', error);
         res.status(500).json({ error: 'Failed update profile' });
@@ -1184,8 +1179,8 @@ app.put('/my/edit/update/:userid', async (req, res) => {
       res.json(results);
     });
   } catch (error) {
-    console.error('Error hashing password:', error);
-    res.status(500).json({ error: 'Failed to hash password' });
+    console.error('Error updating user profile:', error);
+    res.status(500).json({ error: 'Failed update profile' });
   }
 });
 
