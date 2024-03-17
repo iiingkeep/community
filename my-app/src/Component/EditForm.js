@@ -264,7 +264,6 @@ const EditForm = ({ userId, onFormChange }) => {
             ) : (
               <tr>
                 <td className="edit-form__content">
-                  {/* <td className="edit-form__content"> */}
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -358,8 +357,8 @@ const EditForm = ({ userId, onFormChange }) => {
                             }}
                           >
                             {password === confirmPassword
-                              ? "비밀번호가 일치합니다."
-                              : "비밀번호가 일치하지 않습니다."}
+                              ? <p>비밀번호가<br/>일치합니다.</p>
+                              : <p>비밀번호가<br/>일치하지 않습니다.</p>}
                           </p>
                         )}
                         </div>
