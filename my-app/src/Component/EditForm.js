@@ -277,13 +277,14 @@ const EditForm = ({ userId, onFormChange }) => {
                           placeholder={profileData.email}
                           disabled
                         />
+                        <div className="edit__addspace"></div>
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">닉네임 유효성</p>
+                  <p className="edit-form-match__text">한글·영문·숫자로만 4~10자리</p>
                   <tr>
                     <td>
-                      <label className="edit-form">
+                      <label className="edit-form__label">
                         <span className="edit-form__text">닉네임</span>
                         <input
                           className="edit-form__input"
@@ -293,12 +294,14 @@ const EditForm = ({ userId, onFormChange }) => {
                           placeholder={profileData.username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
+                        <div className="edit__addspace">
                         <button
                           className="edit__sub__btn"
                           onClick={handleUsernameCheck}
                         >
                           중복 확인
                         </button>
+                        </div>
                       </label>
                     </td>
                   </tr>
@@ -314,25 +317,30 @@ const EditForm = ({ userId, onFormChange }) => {
                           placeholder="사용 가능한 특수문자 : @#$%^&+=!"
                           onChange={(e) => setPassword(e.target.value)}
                         />
+                        <div className="edit__addspace">
                         {password && password.match(spacebar) && (
-                          <p style={{ color: "red" }}>비밀번호에 공백을 포함할 수 없습니다.</p>
+                          <p style={{ color: "red", textAlign: "center", lineHeight: "1.5" }}>
+                            비밀번호에 공백을<p>포함할 수 없습니다.</p></p>
                         )}
                         {password && !PWcheck.test(password) && (
-                          <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
+                          <p style={{ color: "red", textAlign: "center", lineHeight: "1.5" }}>
+                            비밀번호 형식이<p>올바르지 않습니다.</p></p>
                         )}
                         {password && passwordMatch && (
-                          <p style={{ color: "rgb(83, 212, 92)" }}>
-                            사용 가능한 비밀번호 입니다.
+                          <p style={{ color: "rgb(83, 212, 92)", textAlign: "center", lineHeight: "1.5" }}>
+                            사용 가능한 <p>비밀번호 입니다.</p>
                           </p>
                         )}
+                        </div>
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">비밀번호 : 영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
+                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
                         <span className="edit-form__text">
+                          
                           PW 재입력
                         </span>
                         <input
@@ -341,11 +349,14 @@ const EditForm = ({ userId, onFormChange }) => {
                           name="confirmPassword"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
+                          disabled={!password} // password가 비어 있으면 confirmPassword를 비활성화
                         />
+                        <div className="edit__addspace">
                         {passwordMatch && confirmPassword && (
                           <p
                             style={{
-                              color: password === confirmPassword ? "rgb(83, 212, 92)" : "red",
+                              color: password === confirmPassword ? "rgb(83, 212, 92)" : "red", 
+                              textAlign: "center", lineHeight: "1.5",
                             }}
                           >
                             {password === confirmPassword
@@ -353,11 +364,11 @@ const EditForm = ({ userId, onFormChange }) => {
                               : "비밀번호가 일치하지 않습니다."}
                           </p>
                         )}
+                        </div>
                       </label>
                     </td>
                   </tr>
-                  {/* <p className="edit-form-match__text">휴대폰 번호 유효성</p> */}
-                  <p className="edit-form-match__text">휴대폰 번호 : 하이픈 제외 e.g. 01012345678</p>
+                  <p className="edit-form-match__text">'-' 하이픈 제외 e.g. 01012345678</p>
                   <tr>
                     <td>
                       <label className="edit-form__label">
@@ -370,12 +381,14 @@ const EditForm = ({ userId, onFormChange }) => {
                           placeholder={profileData.phonenumber}
                           onChange={(e) => setPhonenumber(e.target.value)}
                         />
+                        <div className="edit__addspace">
                         <button
                           className="edit__sub__btn"
                           onClick={handlePhonenumberCheck}
                         >
                           중복 확인
                         </button>
+                        </div>
                       </label>
                     </td>
                   </tr>
@@ -391,6 +404,7 @@ const EditForm = ({ userId, onFormChange }) => {
                           placeholder={profileData.address}
                           onChange={(e) => setAddress(e.target.value)}
                         />
+                        <div className="edit__addspace">
                         <button
                           type="button"
                           className="edit__sub__btn"
@@ -398,6 +412,7 @@ const EditForm = ({ userId, onFormChange }) => {
                         >
                           주소 선택
                         </button>
+                        </div>
                       </label>
                       {openPostcode && (
                         <DaumPostcode
@@ -405,14 +420,6 @@ const EditForm = ({ userId, onFormChange }) => {
                           autoClose={false}
                           defaultQuery=""
                         />
-                      )}
-                      {password && !PWcheck.test(password) && (
-                        <p style={{ color: "red" }}>비밀번호 형식이 올바르지 않습니다.</p>
-                      )}
-                      {password && passwordMatch && (
-                        <p style={{ color: "rgb(83, 212, 92)" }}>
-                          사용 가능한 비밀번호입니다.
-                        </p>
                       )}
                     </td>
                   </tr>
@@ -515,7 +522,7 @@ const EditForm = ({ userId, onFormChange }) => {
                       className="edit-form__btn"
                       onClick={handleEditSubmit}
                     >
-                      수정완료
+                      수정하기
                     </button>
                     <button className="edit-form__btn" onClick={handleCancel}>
                       취소

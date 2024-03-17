@@ -182,13 +182,14 @@
 /* 정보수정 -------------------------------- */
 .edit-form {
   width: 100%;
-  /* display: flex; */
+  display: flex;
   justify-content: center;
 }
-.edit-form > table {
+
+/* .edit-form > table {
   width: 150px;
   justify-content: center;
-}
+} */
 
 /* .edit-form__content td {
   height: 80px;
@@ -206,7 +207,6 @@ width: 330px;
 height: 85px;
 outline: none; /* 선택 상태에서의 기본 테두리 제거 */
 border: none; /* 선택 상태에서의 테두리 제거 */
-/* padding: 15px; */
 /* box-sizing: border-box; */
 color: rgb(0, 0, 0);
 }
@@ -220,10 +220,6 @@ color: rgb(0, 0, 0);
   display: flex;
   align-items: center;
   font-weight: 600;
-}
-
-.edit-form_content {
-  width: 500px;
 }
 
 .edit-form_content label {
@@ -241,49 +237,44 @@ color: rgb(0, 0, 0);
   justify-content: flex-end;  */
 }
 
-/* .edit-form__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 .edit-form__btn {
-  width: 110px;
+  width: 120px;
   outline: 0;
-  background: #6dc970;
-  border: 0;
+  background: #ffffff;
   padding: 15px;
-  color: #ffffff;
-  font-size: larger;
+  color: #4e4e4e;
+  font-size: 19px;
+  font-weight: bolder;
   cursor: pointer;
   border-radius: 10px;
+  border: solid 2px rgb(160, 160, 160) ;
   margin: 30px 3px 10px 10px;
 }
 
-.edit__sub__btn {
-  background-color: rgb(255, 255, 255);
-  border: solid 2px rgb(199, 199, 199);
-  border-radius: 5px;
-  width: 90px;
-  height: 45px;
-  /* font-size: 15px; */
-  color: rgb(71, 71, 71);
-  font-weight: 600;
+.edit__addspace {
+  width: 150px;
+  /* height: 85px; */
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
 }
 
-.edit__btn {
-  width: 130px;
+.edit__sub__btn {
+  width: 100px;
   outline: 0;
   background: #6dc970;
   border: 0;
   padding: 15px;
   color: #ffffff;
-  font-size: 17px;
+  font-size: 16px;
+  font-weight: bolder;
   cursor: pointer;
   border-radius: 10px;
   margin: 15px 0;
 }
 
+
+
+/* ID input 스타일 숨김 */
 .edit-form__input[disabled] {
   background-color: transparent;
 }
@@ -293,7 +284,8 @@ color: rgb(0, 0, 0);
   color: gray;
   font-size: small;
   margin-top: 5px;
-  margin-bottom: -5px;
+  max-width: 100%;
+  /* margin-bottom: -5px; */
   /* text-align: right; */
 }
 

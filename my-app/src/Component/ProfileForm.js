@@ -190,7 +190,8 @@ const ProfileForm = ({ userId }) => {
                     </tr>
                     <tr>
                         <td>휴대전화</td>
-                        <td>{profileData.phonenumber}</td>
+                        <td>{profileData.phonenumber && 
+                            profileData.phonenumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')}</td>
                     </tr>
                     <tr>
                         <td>주소</td>
