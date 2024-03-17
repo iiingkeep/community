@@ -185,7 +185,7 @@ const ProfileForm = ({ userId }) => {
             <div class="profile-content__detail">
                 <table>
                     <tr>
-                        <td className="">아이디</td>
+                        <td>아이디</td>
                         <td>{profileData.email}</td>
                     </tr>
                     <tr>

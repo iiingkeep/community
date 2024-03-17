@@ -150,6 +150,12 @@
 .profile-content__detail td {
   padding: 13px 15px 12px 15px;
 }
+
+.profile-content__detail table td:first-child {
+  font-size: medium;
+  font-weight: 1000;
+}
+
 .profile-content__detail tr {
   border-bottom: dotted 1px rgb(196, 196, 196);
 }

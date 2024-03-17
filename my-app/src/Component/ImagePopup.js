@@ -56,6 +56,8 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
     setImageUrl("");
     // 로컬스토리지에서 이미지url 제거
     localStorage.removeItem('storageImg');
+    // 페이지 새로고침
+    // window.location.reload();
   };
 
   // 이미지url을 저장하는 함수
@@ -95,7 +97,9 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
           <button className="img-modal__close" onClick={onClose}>X</button>
           <br />
           {/* 업로드 버튼 참조 */}
-          <button className="img-modal__btn" onClick={handleUploadBtnRef}>이미지 업로드</button>
+          <div className="img-btn__wrapper">
+          <button className="img-modal__btn__select" onClick={handleUploadBtnRef}>파일선택</button>
+          </div>
           {/* 파일 업로드 버튼 */}
           <input
             type="file"
@@ -106,11 +110,17 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
             style={{ display: "none" }} // input 요소 숨김
           /> 
           <br />
-          {imageUrl && ( // 이미지 URL이 존재할 경우 이미지 표시
+          <div className="img-space">
+          {imageUrl ? ( // 이미지 URL이 존재할 경우 이미지 표시
               <img className="img-modal__content" src={imageUrl} alt="이미지" />
-          )}
+              ) : ( // 이미지 URL이 없을 경우 "선택된 파일이 없습니다." 표시
+                <p>선택된 파일이 없습니다.</p>
+              )}
+          </div>
+          <div className="img-btn__wrapper">
           <button className="img-modal__btn" onClick={handleSaveImage}>저장</button>
           <button className="img-modal__btn" onClick={handleImageDelete}>삭제</button>
+          </div>
         </div>
       </Draggable>
     </div>

@@ -218,7 +218,7 @@ const EditForm = ({ userId }) => {
     <div className="edit-form">
       <div className="edit-form__wrapper">
         <div className="my-form__title">
-          <p className="my-form__text">정보수정</p>
+          <p className="my-form__text">나의 정보 수정</p>
         </div>
         <table>
           <tbody>

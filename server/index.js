@@ -1218,86 +1218,41 @@ app.post('/pw-valid/:userid', async (req, res) => {
 });
 
 
-//  프로필 이미지 저장(수정전) -----------------------------------
+//-------------------------------------프로필 이미지 저장(storage)------------------------------------------
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => { // 어디
-//     cb(null, 'server/public/userimg') // 파일저장경로
-//   },
-//   filename: (req, file, cb) => { 
-//     const ext = path.extname(file.originalname);
-//     // const filename = file.originalname;
-//     cb(null, `${Date.now()}${ext}`) // 파일명 설정
-//   },
-// });
-
-// // 파일이 업로드될 때마다 해당 파일을 '~'/ 디렉토리에
-// // 현재 시간을 기반으로 한 고유한 파일명으로 저장
-
-// const imgup = multer({ storage: storage });
-
-// app.post('/my/profile/img', imgup.single('img'), (req, res) => {
-//   console.log(req.file.path)
-//   console.log(req.file.destination)
-//   if (!req.file) {
-//     return res.status(400).send('No files were uploaded.');
-//   }
-//   // 파일 업로드 경로
-//   const filePath = req.file.filename;
-//   // 이미지 URL 생성 (예: /uploads/파일명)
-//   console.log('파일객체log',req.file)
-//   const imageUrl = filePath;
-//   // const imageUrl = `http://localhost:8000/public/userimg/${filePath}`;
-//   // const imageUrl = `http://localhost:3000/${filePath}`;
-//   // const imageUrl = "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg";
-
-//   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
-//   connection.query(sql, [imageUrl], (err, results, fields) => {
-//     if (err) {
-//       console.error('Error: img into MySQL:', err);
-//     }
-//     console.log('success: img into MySQL');
-//     res.send(imageUrl);
-//   });
-// });
-
-//-------------------------------------프로필 이미지 저장(DB)------------------------------------------
-
-// userid를 넣어서 파일이름 생성 *수정됨
 const storage = multer.diskStorage({
   destination: (req, file, cb) => { // 어디
-    cb(null, 'server/public/userimg'); // 파일저장경로
+    cb(null, 'server/public/userimg') // 파일저장경로
   },
-  filename: (req, file, cb) => {
+  filename: (req, file, cb) => { 
     const ext = path.extname(file.originalname);
-    const userId = req.params.userid || 'default';
-    // console.log('사용자id:',userId)
-    cb(null, 'profile_' + userId + path.extname(file.originalname));
+    // const filename = file.originalname;
+    cb(null, `${Date.now()}${ext}`) // 파일명 설정
   },
 });
 
-// 파일이 업로드될 때마다 해당 파일을 지정 디렉토리에 저장
+// 파일이 업로드될 때마다 해당 파일을 '~'/ 디렉토리에
+// 현재 시간을 기반으로 한 고유한 파일명으로 저장
+
 const imgup = multer({ storage: storage });
 
 app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
-  const userId = req.params.userid;
-  console.log("파일경로", req.file.path);
+  console.log(req.file.path)
+  console.log(req.file.destination)
   if (!req.file) {
     return res.status(400).send('No files were uploaded.');
   }
   // 파일 업로드 경로
   const filePath = req.file.filename;
   // 이미지 URL 생성 (예: /uploads/파일명)
-  console.log('파일객체log', req.file);
+  console.log('파일객체log',req.file)
   const imageUrl = filePath;
+  // const imageUrl = `http://localhost:8000/public/userimg/${filePath}`;
+  // const imageUrl = `http://localhost:3000/${filePath}`;
+  // const imageUrl = "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg";
 
-  // 중복키가 존재하면 이미 존재하는 img_url을 업데이트 *수정됨
-  const sql = `
-  INSERT INTO user_img (userid, img_url) VALUES (?, ?) 
-  ON DUPLICATE KEY UPDATE img_url = VALUES(img_url)
-  `;
-
-  connection.query(sql, [userId, imageUrl], (err, results, fields) => {
+  const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
+  connection.query(sql, [imageUrl], (err, results, fields) => {
     if (err) {
       console.error('Error: img into MySQL:', err);
     }
@@ -1306,9 +1261,43 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   });
 });
 
-// 이미지 저장 DB테이블 *수정전
-//   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
-//   connection.query(sql, [imageUrl], (err, results, fields) => {
+//-------------------------------------프로필 이미지 저장(DB)------------------------------------------
+
+// // userid를 넣어서 파일이름 생성 *수정됨
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => { // 어디
+//     cb(null, 'server/public/userimg'); // 파일저장경로
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     const userId = req.params.userid || 'default';
+//     // console.log('사용자id:',userId)
+//     cb(null, 'profile_' + userId + path.extname(file.originalname));
+//   },
+// });
+
+// // 파일이 업로드될 때마다 해당 파일을 지정 디렉토리에 저장
+// const imgup = multer({ storage: storage });
+
+// app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
+//   const userId = req.params.userid;
+//   console.log("파일경로", req.file.path);
+//   if (!req.file) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
+//   // 파일 업로드 경로
+//   const filePath = req.file.filename;
+//   // 이미지 URL 생성 (예: /uploads/파일명)
+//   console.log('파일객체log', req.file);
+//   const imageUrl = filePath;
+
+//   // 중복키가 존재하면 이미 존재하는 img_url을 업데이트 *수정됨
+//   const sql = `
+//   INSERT INTO user_img (userid, img_url) VALUES (?, ?) 
+//   ON DUPLICATE KEY UPDATE img_url = VALUES(img_url)
+//   `;
+
+//   connection.query(sql, [userId, imageUrl], (err, results, fields) => {
 //     if (err) {
 //       console.error('Error: img into MySQL:', err);
 //     }
@@ -1316,6 +1305,17 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
 //     res.send(imageUrl);
 //   });
 // });
+
+// // 이미지 저장 DB테이블 *수정전 ----------------------------------
+// //   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
+// //   connection.query(sql, [imageUrl], (err, results, fields) => {
+// //     if (err) {
+// //       console.error('Error: img into MySQL:', err);
+// //     }
+// //     console.log('success: img into MySQL');
+// //     res.send(imageUrl);
+// //   });
+// // });
 
 //-------------------------------------프로필 이미지 get요청------------------------------------------
 
