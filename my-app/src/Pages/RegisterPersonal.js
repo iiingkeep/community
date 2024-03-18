@@ -243,9 +243,10 @@ function RegisterPersonal() {
     <div className="regi-page">
       <div className="regi-form">
         <h2>회원가입</h2>
+        <label>ID</label>
         <input
           type="text"
-          placeholder="ID : 영문·숫자 섞어서 5~20 자리"
+          placeholder="영문·숫자 섞어서 5~20 자리"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -254,9 +255,10 @@ function RegisterPersonal() {
           아이디 중복 확인
         </button>
         <br />
+        <label>Nickname</label>
         <input
           type="text"
-          placeholder="NICKNAME : 한글·영문·숫자로만 4~10 자리"
+          placeholder="한글·영문·숫자로만 4~10 자리"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -265,16 +267,16 @@ function RegisterPersonal() {
           닉네임 중복 확인
         </button>
         <br />
+        <label>PW</label>
         <input
           type="password"
-          placeholder="PW : 영문·숫자·특수문자 섞어서 8~16 자리"
+          placeholder="영문·숫자·특수문자 섞어서 8~16 자리"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <p style={{ fontSize: 12, color: "gray" }}>
           사용 가능한 특수문자 : @#$%^&+=!
         </p>
-        <br />
         {password && password.match(spacebar) && (
           <p style={{ color: "red" }}>비밀번호에 공백을 포함할 수 없습니다.</p>
         )}
@@ -286,7 +288,6 @@ function RegisterPersonal() {
             사용 가능한 비밀번호 입니다.
           </p>
         )}
-        <br />
         <input
           type="password"
           placeholder="PW 재입력"
@@ -306,9 +307,10 @@ function RegisterPersonal() {
           </p>
         )}
         <br />
+        <label>Mobile</label>
         <input
           type="text"
-          placeholder="휴대폰 번호(하이픈 제외) ex) 01012345678"
+          placeholder="휴대폰 번호 '-' 제외 ex) 01012345678"
           value={phonenumber}
           onChange={(e) => setPhonenumber(e.target.value)}
         />
@@ -317,6 +319,7 @@ function RegisterPersonal() {
           휴대폰 번호 중복 확인
         </button>
         <br />
+        <label>Address</label>
         <input
           type="text"
           placeholder="주소를 입력하세요."
@@ -338,7 +341,6 @@ function RegisterPersonal() {
             defaultQuery=""
           />
         )}
-        <br />
         <input
           type="text"
           placeholder="상세 주소를 입력하세요."
