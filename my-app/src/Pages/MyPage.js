@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import ProfileForm from "../Component/ProfileForm";
 import EditForm from '../Component/EditForm';
 import ActivityForm from '../Component/ActivityForm';
-import OrderForm from "../Component/OrderForm";
 import IsLikeForm from "../Component/IsLikeForm";
 import axios from "axios";
 import "../Styles/MyPage.css";
@@ -57,7 +56,6 @@ const MyPage = () => {
           <li><button className={`my-btn__button ${selectedButton === 'profile' ? 'active' : ''}`} onClick={() => handleFormChange('profile')}>프로필</button></li>
           <li><button className={`my-btn__button ${selectedButton === 'edit' ? 'active' : ''}`} onClick={() => handleFormChange('edit')}>정보수정</button></li>
           <li><button className={`my-btn__button ${selectedButton === 'activity' ? 'active' : ''}`} onClick={() => handleFormChange('activity')}>나의활동</button></li>
-          {/* <button className={`my-btn__button ${selectedButton === 'order' ? 'active' : ''}`} onClick={() => handleFormChange('order')}>주문내역</button> */}
           <li><button className={`my-btn__button ${selectedButton === 'islike' ? 'active' : ''}`} onClick={() => handleFormChange('islike')}>좋아요</button></li>
           </ul>
         </div>
@@ -67,7 +65,6 @@ const MyPage = () => {
         {/* {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />} */}
         {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} onFormChange={handleFormChange} />}
         {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
-        {activeForm === 'order' && <OrderForm formData={formData} userId={userData.userid} />}
         {activeForm === 'islike' && <IsLikeForm formData={formData} userId={userData.userid} />}
         </div>
       </div>
