@@ -10,18 +10,21 @@ const ActivityForm = ({userId}) => {
     const [commData, setCommData] = useState([]);
 
     useEffect(() => {
-      const fetchActi = async () => {
+      const fetchPost = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/acti-post&comment/${userId}`);
-            const userData = response.data;
-            setActiData(userData.post);
-            setCommData(userData.comment);
+            const posResponse = await axios.get(`http://localhost:8000/acti-post/${userId}`);
+            const posData = posResponse.data;
+            setActiData(posData);
+            const comResponse = await axios.get(`http://localhost:8000/acti-comment/${userId}`);
+            const comData = comResponse.data;
+            setCommData(comData);
         } catch (error) {
             console.log('Error fetching data:', error);
         }
     };
-    fetchActi();
+    fetchPost();
   }, [userId]);
+
 
   return (
   <div className='acti-form'>
