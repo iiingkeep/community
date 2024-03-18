@@ -138,7 +138,7 @@ padding-right: 3%;
 
 .list > ul {
     width: 172.28px;
-    margin-left: 4%;
+    margin-left: 12%;
     /* margin: 0 auto; */
     position: absolute;
     top: 5%;
@@ -196,7 +196,7 @@ padding-right: 3%;
     visibility: visible;
     overflow: visible;
     width: 172.28px;
-    height: auto;
+    height: 140px;
     /* opacity: 0.855; */
     bottom: calc(100% + 1rem);
     /* padding: 2rem; */
