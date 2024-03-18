@@ -1,123 +1,126 @@
 /* Login.css */
 
 .login-page {
-    width: 400px;
-    height: 400px;
-    margin:auto;
-    margin-top: 25%;
-    margin-bottom: 5.4%; /* 푸터위치 수정용 */
-    position: relative;
-    /* top: 50%; */
-    left: 7.5%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    display: flex;
-    align-items: center;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .login-box {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 360px;
-    margin: 0 auto;
-    top: 0;
-    left: 0;
-    padding: 35px;
-    text-align: center;
-    border-radius: 15px;
-    
-  }
-  
-  .login-box input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-    border-radius: 10px;
-  }
-  
-  .login-box input[type="password"] {
-    border-radius: 10px;
-  }
-  
-  .login-box button {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #4CAF50;
-    width: 100%;
-    height: 45px;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 15px 0;
-  }
-  
-  .login-box button:hover,.form button:active,.form button:focus {
-    background: #43A047;
-  }
-  
-  .login-box .message {
-    margin: 15px 0 0;
-    color: #b3b3b3;
-    font-size: 12px;
-  }
-  
-  .login-box .message a {
-    color: #4CAF50;
-    text-decoration: none;
-  }
-  
-  .login-box .register-form {
-    display: none;
-  }
+  /* margin-top: 25%; */
+  /* margin-bottom: 5.4%; 푸터위치 수정용 */
+  /* position: relative; */
+  /* top: 50%; */
+  /* left: 7.5%; */
+  /* transform: translate(-50%, -50%); */
+  width: 400px; /* 원하는 너비값으로 설정 */
+  height: 400px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  padding: 20px;
+  margin: 10% auto; /* 상단 및 하단 여백을 조정하여 세로 위치 조절 */
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+}
 
-  .login-page__to-register {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #4CAF50;
-    width: 100%;
-    height: 45px;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 15px 0;
-  }
+.login-form {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
-  .login-page__to-register a {
-    text-decoration-line: none;
-    color: #FFFFFF;
-  }
+.login-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  padding: 35px;
+  text-align: center;
+  border-radius: 15px;
+}
 
-  .login-page__to-register:hover {
-    background: #43A047;
-  }
-  
-  /* .container {
+.login-box input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.login-box input[type="password"] {
+  border-radius: 10px;
+}
+
+.login-box button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 100%;
+  height: 45px;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.login-box button:hover,
+.form button:active,
+.form button:focus {
+  background: #43a047;
+}
+
+.login-box .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.login-box .message a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.login-box .register-form {
+  display: none;
+}
+
+.login-page__to-register {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 100%;
+  height: 45px;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.login-page__to-register a {
+  text-decoration-line: none;
+  color: #ffffff;
+}
+
+.login-page__to-register:hover {
+  background: #43a047;
+}
+
+/* .container {
     position: relative;
     z-index: 1;
     max-width: 300px;
@@ -163,4 +166,3 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;      
   } */
-
