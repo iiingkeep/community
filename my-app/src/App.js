@@ -6,7 +6,6 @@ import Footer from './Component/Footer';
 import Main from './Pages/Main';
 import Login from './Pages/Login';
 import RegisterPersonal from "./Pages/RegisterPersonal";
-import FindInformation from './Pages/FindInformation';
 import Community from './Pages/Community';
 import CommunityEdit from './Pages/CommunityEdit';
 import CommunityWrite from './Pages/CommunityWrite';
@@ -67,7 +66,6 @@ function App() {
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
-        <Route path="/FindInformation" element={<FindInformation />} />
         <Route path="/MyPage" element={<MyPage />} />
         <Route path="/NetZero" element={<NetZero />} />
         <Route path="/News" element={<News />} />
