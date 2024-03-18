@@ -311,7 +311,7 @@ const EditForm = ({ userId, onFormChange }) => {
                           type="password"
                           name="password"
                           value={password}
-                          placeholder="비밀번호를 입력하세요."
+                          placeholder="변경할 비밀번호를 입력하세요."
                           onChange={(e) => setPassword(e.target.value)}
                         />
                         <div className="edit__addspace">

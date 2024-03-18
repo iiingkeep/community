@@ -25,7 +25,7 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
       // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
       const imageUrl = `http://localhost:8000/public/userimg/${result.data}`;
       setImageUrl(imageUrl);
-      handleProfileImg(imageUrl);
+      // handleProfileImg(imageUrl); // ----> 저장 전까지 Profile에 표시하지 않도록 주석처리
       // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정 - *오류코드
       // const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
       
@@ -66,10 +66,11 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
     // key = saveImgUrl / value = imageUrl
     if (imageUrl) {
       localStorage.setItem('storageImg', imageUrl);
-      alert('이미지 저장');
+      alert('이미지가 저장되었습니다.');
       onClose();
+      window.location.reload();
     } else {
-      alert('이미지 없음');
+      alert('이미지를 선택해 주세요.');
     }
   };
 
@@ -88,7 +89,7 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
     if (savedImageUrl) {
       setImageUrl(savedImageUrl);
     }
-  }, []);
+  }, [imageUrl]);
 
   return (
     <div className="img-modal">
@@ -129,8 +130,9 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
 
 export default ImagePopup;
 
-// ImagePopup.js
+// useContext------------------------------------------------------
 
+// ImagePopup.js
 // import { useState, useRef, useEffect } from "react";
 // import axios from "axios";
 // import '../Styles/ImagePopup.css';
