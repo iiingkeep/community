@@ -85,12 +85,12 @@ console.log('콘텐츠',content)
 
   const handlePostUpdate = async (e) => {                                               // 등록버튼 클릭 시 호출되는 핸들러 함수
     e.preventDefault();
-    if (!title||content=='<p><br></p>') {
+    if (!title||content.replace(/<[^>]*>/g, '').trim()=="") {
       if (!title) {
         alert('제목을 입력해주세요.');
         document.querySelector('.commu-write__title').focus();
           return;}
-      else if(content=='<p><br></p>') {
+      else if(content.replace(/<[^>]*>/g, '').trim()=="") {
           alert('내용을 입력해주세요.');
           document.querySelector('.ql-editor').focus();
           return;

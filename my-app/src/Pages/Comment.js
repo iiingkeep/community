@@ -25,7 +25,7 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
     if (loggedIn) {
       // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
     try{
-      if (!comment) {
+      if (!comment.trim()) {
         alert('내용을 입력해주세요.');
         document.querySelector('.commu-comment__content').focus();
         return;

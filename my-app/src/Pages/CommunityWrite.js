@@ -54,17 +54,16 @@ const CommunityWrite = ({userid}) => {                                          
     }
   });
 };
-
   const handlePostSubmit = async (e) => {                                                 // 글 작성 후 등록 버튼 클릭 시 호출되는 헨들러 함수
     e.preventDefault();
     const view = 0;
     try {                                                                                 // 제목 또는 내용이 입력되어 있지 않은 경우 유저에게 알리고 입력하도록 포커스
-      if (!title||!content) {
+      if (!title||content.replace(/<[^>]*>/g, '').trim()=="") {
       if (!title) {
         alert('제목을 입력해주세요.');
           document.querySelector('.commu-write__title').focus();
           return;}
-      else if(!content) {
+      else if(content.replace(/<[^>]*>/g, '').trim()=="") {
           alert('내용을 입력해주세요.');
           document.querySelector('.ql-editor').focus();
           return;

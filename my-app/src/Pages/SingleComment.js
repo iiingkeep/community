@@ -88,11 +88,12 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
 
     // 댓글 수정 후 등록버튼 클릭 시 호출되는 핸들러 함수
     const onUpdateComment = async (e) => {
+      e.preventDefault();
       // 사용자에게 수정 여부 확인 후 수정 진행
       const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");
       if (editComfirmed) {
       try {
-        if (!commentValue) { // 댓글에 내용이 없을 시 입력 요청
+        if (!commentValue.trim()) { // 댓글에 내용이 없을 시 입력 요청
           alert('내용을 입력해주세요.');
           document.querySelector('.commu-single-comment__content--editing').focus();
           return;
@@ -114,8 +115,10 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
         console.error('에러 발생:', error);
         alert('댓글 수정에 실패했습니다. 다시 한 번 시도해주세요.');
       }
+    } else {
+      return;
     }
-    };
+    } 
     
     // 댓글 삭제버튼 클릭 시 호출되는 핸들러 함수
     const onDeleteComment = async () => {
