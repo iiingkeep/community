@@ -42,18 +42,18 @@ const IsLikeForm = ({ userId }) => {
   console.log(likedNews);
 
   return (
-    <div className="like-form">
+    <div className="my-like-form">
       <div className="my-form__title">
         <p className="my-form__text">좋아요 목록</p>
       </div>
       <div className="my-content__list">
-        <p className="form-table__title">뉴스</p>
-        <table className="forms-table my-forms__table">
+        <p className="my-form-table__title">뉴스</p>
+        <table className="my-forms-table">
           <thead>
-            <tr className="forms-table">
+            <tr className="my-forms-table">
               {/* <th className='forms-table__num'>No.</th> */}
-              <th className="forms-table__title">이미지</th>
-              <th className="forms-table__title">제목</th>
+              <th className="my-forms-table__title">이미지</th>
+              <th className="my-forms-table__title">제목</th>
             </tr>
           </thead>
           <tbody className="my-like-news-list__body">
@@ -84,13 +84,13 @@ const IsLikeForm = ({ userId }) => {
       </div>
 
       <div className="my-content__list">
-        <p className="form-table__title">게시글</p>
-        <table className="forms-table my-forms__table">
+        <p className="my-form-table__title">게시글</p>
+        <table className="my-forms-table">
           <thead>
             <tr>
               {/* <th className='forms-table__num'>No.</th> */}
-              <th className="forms-table__title">작성자</th>
-              <th className="forms-table__title">제목</th>
+              <th className="my-forms-table__title">작성자</th>
+              <th className="my-forms-table__title">제목</th>
             </tr>
           </thead>
           <tbody className="my-like-news-list__body">
