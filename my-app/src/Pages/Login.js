@@ -50,9 +50,11 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page inner">
       <div className="login-box">
+        <div className="login-right">
         <form className="login-form">
+        <h2>로그인</h2>
           {/* 로그인 아이디 비밀번호 표시 */}
           {/* <p>아이디</p> */}
           <input
@@ -73,7 +75,7 @@ function Login() {
           <br />
           {/* 로그인 버튼 표시 */}
           <button
-            className="login-form__button"
+            className="login-btn__log"
             onClick={(e) => {
               e.preventDefault();
               console.log("버튼 클릭됨");
@@ -83,7 +85,7 @@ function Login() {
             로그인
           </button>
           <button
-            className="login-form__button"
+            className="login-btn__regi"
             onClick={(e) => {
               navigate("/RegisterPersonal");
             }}
@@ -92,6 +94,7 @@ function Login() {
           </button>
         </form>
         {loginStatus && <div>{loginStatus}</div>}
+        </div>
       </div>
     </div>
   );

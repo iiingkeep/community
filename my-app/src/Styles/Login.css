@@ -1,63 +1,61 @@
 /* Login.css */
 
 .login-page {
-  width: 400px; /* 원하는 너비값으로 설정 */
-  height: 400px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  padding: 20px;
-  margin: 9% auto; /* 상단 및 하단 여백을 조정하여 세로 위치 조절 */
-  display: flex;
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-}
-
-.login-form {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  margin-top: 150px;
 }
 
 .login-box {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
-  max-width: 360px;
-  margin: 0 auto;
-  top: 0;
-  left: 0;
-  padding: 35px;
+  width: 350px;
+  height: 400px;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  margin: 0 auto; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* 수직 가운데 정렬 */
+  /* background: url('../../public/background_img/back.jpg') no-repeat; */
+  /* background-size: auto 150%;  */
+  /* 이미지 비율은 그대로 유지하면서 너비는 자동으로 조정되도록 설정 */
+}
+
+.login-right {
+  width: 350px; /* 배경 이미지의 너비 */
+  height: 400px;
+  background-color: white;
+  display: flex;
+}
+
+.login-form {
+  width: 250px;
+  padding: 0 5 0 5.5rem;
   text-align: center;
-  border-radius: 15px;
+  margin: auto;
+}
+
+/* 상단 회원가입 문구 */
+.login-form h2 {
+  text-align: center; /* 가운데 정렬 */
+  margin-bottom: 40px; /* 아래 여백 추가 */
+  font-size: 24px; /* 텍스트 크기 조정 */
 }
 
 .login-box input {
   font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
+  background: #eeeeee;
+  width: 240px;
   border: 0;
-  margin: 0 0 15px;
+  margin: 0 0 10px;
   padding: 15px;
-  box-sizing: border-box;
   font-size: 14px;
   border-radius: 10px;
 }
 
-.login-box input[type="password"] {
-  border-radius: 10px;
-}
-
-.login-box button {
-  font-family: "Roboto", sans-serif;
+.login-btn__log {
   text-transform: uppercase;
   outline: 0;
   background: #4caf50;
-  width: 100%;
+  width: 240px;
   height: 45px;
   border: 0;
   padding: 15px;
@@ -65,13 +63,22 @@
   font-size: 14px;
   cursor: pointer;
   border-radius: 10px;
-  margin: 15px 0;
+  margin-top: 20px;
 }
 
-.login-box button:hover,
-.form button:active,
-.form button:focus {
-  background: #43a047;
+.login-btn__regi {
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 240px;
+  height: 45px;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 7px;
 }
 
 .login-box .message {
