@@ -25,6 +25,7 @@ function App() {
   // 로그인 상태에 따라 화면에 표시되는 버튼을 달리하는 '조건부렌더링' 구현
   const [loggedIn, setLoggedIn] = useState(false);
   const [userid, setUserid] = useState('');
+  const [username, setUserName] = useState('');
 
 
   // 페이지가 로드될 때 로그인 상태를 확인하고 상태를 업데이트
@@ -41,6 +42,7 @@ function App() {
     if (storedUserData) {
         const userData = JSON.parse(storedUserData);
         setUserid(userData.userid);
+        setUserName(userData.username);
     }
   }, []);
 

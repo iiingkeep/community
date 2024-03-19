@@ -81,11 +81,23 @@ const CommunityEdit = ({userid}) => {                                           
   });
 };
 
-
+console.log('콘텐츠',content)
 
   const handlePostUpdate = async (e) => {                                               // 등록버튼 클릭 시 호출되는 핸들러 함수
     e.preventDefault();
-                                                                                        // 등록버튼 클릭 시 게시글 수정 완료를 묻는 메시지창 출력
+    if (!title||content=='<p><br></p>') {
+      if (!title) {
+        alert('제목을 입력해주세요.');
+        document.querySelector('.commu-write__title').focus();
+          return;}
+      else if(content=='<p><br></p>') {
+          alert('내용을 입력해주세요.');
+          document.querySelector('.ql-editor').focus();
+          return;
+        }
+      } else {     
+    
+    // 등록버튼 클릭 시 게시글 수정 완료를 묻는 메시지창 출력
     const editComfirmed = window.confirm("게시글 수정을 완료하시겠습니까?");            // 확인 선택 시 서버의 다음 엔드포인트로 글의 제목과 내용 데이터 PUT 요청
     if (editComfirmed) {
 
@@ -109,7 +121,7 @@ const CommunityEdit = ({userid}) => {                                           
       console.error('에러 발생:', error);
       alert('글 수정에 실패했습니다. 다시 한 번 시도해주세요.');
     }
-  }
+  }}
   };
 
   const onCancelHandler = (e) => {                                                       // 취소 버튼 클릭 시 호출되는 핸들러
