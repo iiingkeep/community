@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/Login.css";
 
@@ -82,9 +82,14 @@ function Login() {
           >
             로그인
           </button>
-          <div className="login-page__to-register">
-            <Link to="/RegisterPersonal">회원이 아니신가요?</Link>
-          </div>
+          <button
+            className="login-form__button"
+            onClick={(e) => {
+              navigate("/RegisterPersonal");
+            }}
+          >
+            회원이 아니신가요?
+          </button>
         </form>
         {loginStatus && <div>{loginStatus}</div>}
       </div>
