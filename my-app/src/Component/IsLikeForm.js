@@ -1,17 +1,14 @@
 // IsLikeForm.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import Pagination from "react-js-pagination";
+import { Link } from "react-router-dom";
 import "../Styles/MyPage.css";
 
 const IsLikeForm = ({ userId }) => {
-  const [isLike, setIsLike] = useState([]); // 게시물 목록 상태
 
   const [likedPosts, setLikedPosts] = useState([]); // 좋아요를 누른 포스트 목록 상태
   const [likedNews, setLikedNews] = useState([]); // 좋아요를 누른 뉴스 목록 상태
 
-  const navigate = useNavigate();
   useEffect(() => {
     const fetchLikedPost = async () => {
       try {
