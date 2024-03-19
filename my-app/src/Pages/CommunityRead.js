@@ -152,7 +152,6 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
       <div className='commu-post-detail__view-and-like-box'>
       <p className='commu-post-detail__view-box'><Icon icon="fluent-mdl2:view" />
       <span className='commu-post-detail__view'>{post.view}</span></p>
-      <p className='commu-post-detail__like-box' onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span className='commu-post-detail__like'>{likeCount}</span></p>
       </div>
       </div>
       </div>
@@ -170,6 +169,8 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
       )}
       {/* quill editor의 HTML태그 사용을 위한 설정. 리액트는 보안 이슈로 인해 HTML태그의 직접적인 사용을 제한하기 때문에 HTML태그 사용을 선언하는대신 DOMPurify를 사용해 보안 강화*/}
       <div className='commu-post-detail__content-box' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
+
+      <div className="commu-post-detail__like-box" onClick={toggleLike}><Icon icon={isLiked ? "icon-park-solid:like" : "icon-park-outline:like"} /><span className='commu-post-detail__like'>{likeCount}</span></div>
       
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='commu-comment-box'>

@@ -158,6 +158,17 @@
   max-width: 800px;
 }
 
+.commu-post-detail__like-box {
+  width:min-content;
+  margin: 50px auto;
+  padding: 10px 20px;
+  font-size: 25px;
+  background-color: rgb(221, 243, 230);
+  color: rgb(83, 212, 92);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center
+}
 .commu-post-detail__button--go-list-box {
   height: 70px;
   margin: 20px 0px;

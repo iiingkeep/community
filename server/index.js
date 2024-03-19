@@ -570,7 +570,6 @@ app.get('/Community', async (req, res) => {
 
 
 
-
 // 게시글 등록시 게시글 정보를 DB에 저장
 app.post("/Community/Write", async (req, res) => {
   // 요청 객체에서 title과 content 추출
