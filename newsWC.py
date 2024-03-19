@@ -59,7 +59,7 @@ def color_func(word, font_size, position, random_state=None, **kwargs):
         or (290 <= x <= 365 and 268 <= y <= 291) \
         or (343 <= x <= 363 and 152 <= y <= 237) \
         or (363 <= x <= 410 and 177 <= y <= 257) \
-        or (410 <= x <= 473 and 193 <= y <= 241) \
+        or (410 <= x <= 473 and 193 <= y <= 237) \
         or (81 <= x <= 133 and 375 <= y <= 393) \
         or (68 <= x <= 140 and 393 <= y) \
         or (140 <= x <= 173 and 456 <= y) \
