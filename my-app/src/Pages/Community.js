@@ -71,6 +71,7 @@ const Community = ({loggedIn}) => {
   const goCommunityWrite = () => {
     if (loggedIn) {
     // 로그인 상태일 경우 글쓰기 페이지로 이동
+    // 글쓰기 페이지로 이동할 때 selectedCategory 상태를 함께 전달
     navigate('/Community/Write', { state: { selectedCategory } });
     } else {
     // 로그인 상태가 아닐 경우 로그인 페이지로 이동

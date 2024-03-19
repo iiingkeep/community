@@ -32,7 +32,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
     };
 
     fetchPostAndIncrementViews();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     const fetchComments = async () => {                                                         // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
