@@ -1017,57 +1017,18 @@ app.get('/my/:formType/:userid', (req, res) => {
   });
 });
 
-//-------------------------------------나의활동(게시글+댓글)------------------------------------------
+// //-------------------------------------나의활동(게시글+댓글)------------------------------------------
 
-app.get('/acti-post&comment/:userid', (req, res) => {
-  const userId = req.params.userid;
-
-  const query = `
-  SELECT * FROM community_posts WHERE userid = ?`;
-
-  const query2 = `
-  SELECT * FROM community_posts
-  LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-  WHERE community_comments.userid = ?`;
-
-  // 데이터베이스 쿼리 실행
-  connection.query(query, [userId], (err, results) => {
-    if (err) {
-      console.error('(Error) data from database:', err);
-      res.status(500).json({ message: 'Internal server error' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ message: 'Data not found' });
-      return;
-    }
-
-    connection.query(query2, [userId], (err, results2) => {
-      if (err) {
-        console.error('(Error) data from database:', err);
-        res.status(500).json({ message: 'Internal server error' });
-        return;
-      }
-      if (results2.length === 0) {
-        res.status(404).json({ message: 'Data not found' });
-        return;
-      }
-
-      const userData = { comment: results2, post: results }; // 두 결과를 합침
-      res.json(userData);
-      console.log(userData);
-    });
-  });
-});
-
-// //  나의활동(게시글) -----------------------------------
-
-// app.get('/acti-post/:userid', (req, res) => {
+// app.get('/acti-post&comment/:userid', (req, res) => {
 //   const userId = req.params.userid;
 
-//   // 사용자 정보 업데이트 쿼리
 //   const query = `
-//   SELECT * FROM community_posts WHERE userid = ? `;
+//   SELECT * FROM community_posts WHERE userid = ?`;
+
+//   const query2 = `
+//   SELECT * FROM community_posts
+//   LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+//   WHERE community_comments.userid = ?`;
 
 //   // 데이터베이스 쿼리 실행
 //   connection.query(query, [userId], (err, results) => {
@@ -1080,11 +1041,79 @@ app.get('/acti-post&comment/:userid', (req, res) => {
 //       res.status(404).json({ message: 'Data not found' });
 //       return;
 //     }
-//     const userData = results;
-//     res.json(userData);
-//     console.log(results);
+
+//     connection.query(query2, [userId], (err, results2) => {
+//       if (err) {
+//         console.error('(Error) data from database:', err);
+//         res.status(500).json({ message: 'Internal server error' });
+//         return;
+//       }
+//       if (results2.length === 0) {
+//         res.status(404).json({ message: 'Data not found' });
+//         return;
+//       }
+
+//       const userData = { comment: results2, post: results }; // 두 결과를 합침
+//       res.json(userData);
+//       console.log(userData);
+//     });
 //   });
 // });
+
+//-------------------------------------나의활동(게시글)------------------------------------------
+
+app.get('/acti-post/:userid', (req, res) => {
+  const userId = req.params.userid;
+
+  const apQuery = `
+  SELECT * FROM community_posts WHERE userid = ?`;
+
+  // 데이터베이스 쿼리 실행
+  connection.query(apQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+
+      const userData = results; // 두 결과를 합침
+      res.json(userData);
+      console.log(userData);
+  });
+});
+
+
+//-------------------------------------나의활동(덧글)------------------------------------------
+
+app.get('/acti-comment/:userid', (req, res) => {
+  const userId = req.params.userid;
+
+  const acQuery = `
+  SELECT * FROM community_posts
+  LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
+  WHERE community_comments.userid = ?`;
+
+  // 데이터베이스 쿼리 실행
+  connection.query(acQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('(Error) data from database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+      return;
+    }
+
+      const userData = results; // 두 결과를 합침
+      res.json(userData);
+      console.log(userData);
+  });
+});
 
 
 //-------------------------------------좋아요 폼------------------------------------------
