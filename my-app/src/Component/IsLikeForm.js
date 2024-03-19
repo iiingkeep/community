@@ -47,73 +47,82 @@ const IsLikeForm = ({ userId }) => {
         <p className="my-form__text">좋아요 목록</p>
       </div>
       <div className="my-form-table-wrapper">
-      <div className="my-content__list">
-        <p className="my-form-table__title">뉴스</p>
-        <table className="my-forms-table">
-          <thead>
-            <tr className="my-forms-table">
-              {/* <th className='forms-table__num'>No.</th> */}
-              <th className="my-forms-table__title">이미지</th>
-              <th className="my-forms-table__title">제목</th>
-            </tr>
-          </thead>
-          <tbody className="my-like-news-list__body">
-            {likedNews.map((News) => (
-              <tr key={News.newsid}>
-                <td className="my-table__td">
-                  <div className="my-table__td-box">
-                    <Link to={News.url}>
-                      <img
-                        src={News.image_url}
-                        className="my-like-news-list__img"
-                        alt="뉴스 이미지"
-                      />
-                    </Link>
-                  </div>
-                </td>
-                <td className="my-table__td">
-                  <div className="my-table__td-box">
-                    <Link to={News.url}>
-                      <span>{News.title}</span>
-                    </Link>
-                  </div>
-                </td>
+        <div className="my-content__list">
+          <p className="my-form-table__title">뉴스</p>
+          <table className="my-forms-table">
+            <thead>
+              <tr className="my-forms-table">
+                {/* <th className='forms-table__num'>No.</th> */}
+                <th className="my-forms-table__title">이미지</th>
+                <th className="my-forms-table__title">제목</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="my-like-news-list__body">
+              {likedNews.length === 0 ? (
+                <tr>
+                  <td colSpan="2">내가 좋아요 한 뉴스가 없습니다.</td>
+                </tr>
+              ) : (
+                likedNews.map((News) => (
+                  <tr key={News.newsid}>
+                    <td className="my-table__td">
+                      <div className="my-table__td-box">
+                        <Link to={News.url}>
+                          <img
+                            src={News.image_url}
+                            className="my-like-news-list__img"
+                            alt="뉴스 이미지"
+                          />
+                        </Link>
+                      </div>
+                    </td>
+                    <td className="my-table__td">
+                      <div className="my-table__td-box">
+                        <Link to={News.url}>
+                          <span>{News.title}</span>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                )))}
+            </tbody>
+          </table>
+        </div>
 
-      <div className="my-content__list">
-        <p className="my-form-table__title">게시글</p>
-        <table className="my-forms-table">
-          <thead>
-            <tr>
-              {/* <th className='forms-table__num'>No.</th> */}
-              <th className="my-forms-table__title">작성자</th>
-              <th className="my-forms-table__title">제목</th>
-            </tr>
-          </thead>
-          <tbody className="my-like-news-list__body">
-            {likedPosts.map((likedPost) => (
-              <tr key={likedPost.postid}>
-                <td className="my-table__td">
-                  <div className="my-table__td-box">
-                    <span>{likedPost.username}</span>
-                  </div>
-                </td>
-                <td className="my-table__td">
-                  <div className="my-table__td-box">
-                    <Link to={`/Community/Read/${likedPost.postid}`}>
-                      <span>{likedPost.title}</span>
-                    </Link>
-                  </div>
-                </td>
+        <div className="my-content__list">
+          <p className="my-form-table__title">게시글</p>
+          <table className="my-forms-table">
+            <thead>
+              <tr>
+                {/* <th className='forms-table__num'>No.</th> */}
+                <th className="my-forms-table__title">작성자</th>
+                <th className="my-forms-table__title">제목</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="my-like-news-list__body">
+              {likedPosts.length === 0 ? (
+                <tr>
+                  <td colSpan="2">내가 좋아요 한 글이 없습니다.</td>
+                </tr>
+              ) : (
+                likedPosts.map((likedPost) => (
+                  <tr key={likedPost.postid}>
+                    <td className="my-table__td">
+                      <div className="my-table__td-box">
+                        <span>{likedPost.username}</span>
+                      </div>
+                    </td>
+                    <td className="my-table__td">
+                      <div className="my-table__td-box">
+                        <Link to={`/Community/Read/${likedPost.postid}`}>
+                          <span>{likedPost.title}</span>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>)))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

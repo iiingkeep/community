@@ -60,31 +60,36 @@ const ActivityForm = ({ userId }) => {
                 </tr>
               </thead>
               <tbody>
-                {actiData.map((activity) => (
-                  <tr key={activity.postid}>
-                    {/* <td>{activity.postid}</td> */}
-                    <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
-                    <td>
-                      <div className="my-table__td-box">
-                        <Link
-                          className="my-content__link"
-                          to={`/Community/Read/${activity.postid}`}
-                        >
-                          <span>
-                            {activity.title.length > 25
-                              ? activity.title.substring(0, 25) + "..."
-                              : activity.title}
-                          </span>
-                        </Link>
-                      </div>
-                    </td>
-                    {/* <td>
+                {actiData.length === 0 ? ( // likedNews 배열의 길이가 0인 경우
+                  <tr>
+                    <td colSpan="2">내가 쓴 글이 없습니다.</td> {/* 대체 UI */}
+                  </tr>
+                ) : (
+                  actiData.map((activity) => (
+                    <tr key={activity.postid}>
+                      {/* <td>{activity.postid}</td> */}
+                      <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
+                      <td>
+                        <div className="my-table__td-box">
+                          <Link
+                            className="my-content__link"
+                            to={`/Community/Read/${activity.postid}`}
+                          >
+                            <span>
+                              {activity.title.length > 25
+                                ? activity.title.substring(0, 25) + "..."
+                                : activity.title}
+                            </span>
+                          </Link>
+                        </div>
+                      </td>
+                      {/* <td>
                 <div className="my-table__td-box">
                   {moment(activity.createdAt).format('MM월 DD일')}
                   </div>
                   </td> */}
-                  </tr>
-                ))}
+                    </tr>
+                  )))}
               </tbody>
             </table>
           </div>
@@ -100,31 +105,36 @@ const ActivityForm = ({ userId }) => {
                 </tr>
               </thead>
               <tbody>
-                {commData.map((activity) => (
-                  <tr key={activity.postid}>
-                    {/* <td>{activity.postid}</td> */}
-                    <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
-                    <td>
-                      <div className="my-table__td-box">
-                        <Link
-                          className="my-content__link"
-                          to={`/Community/Read/${activity.postid}`}
-                        >
-                          {/* <span>{activity.content}</span> */}
-                          <span>
-                            {activity.content.length > 25
-                              ? activity.content.substring(0, 25) + "..."
-                              : activity.content}
-                          </span>
-                        </Link>
-                      </div>
-                    </td>
-                    {/* <td>
+                {commData.length === 0 ? (
+                  <tr>
+                    <td colSpan="2">내가 남긴 댓글이 없습니다.</td>
+                  </tr>
+                ) : (
+                  commData.map((activity) => (
+                    <tr key={activity.postid}>
+                      {/* <td>{activity.postid}</td> */}
+                      <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
+                      <td>
+                        <div className="my-table__td-box">
+                          <Link
+                            className="my-content__link"
+                            to={`/Community/Read/${activity.postid}`}
+                          >
+                            {/* <span>{activity.content}</span> */}
+                            <span>
+                              {activity.content.length > 25
+                                ? activity.content.substring(0, 25) + "..."
+                                : activity.content}
+                            </span>
+                          </Link>
+                        </div>
+                      </td>
+                      {/* <td>
                 <div className="my-table__td-box">
                   {moment(activity.createdAt).format('MM월 DD일')}
                   </div></td> */}
-                  </tr>
-                ))}
+                    </tr>
+                  )))}
               </tbody>
             </table>
           </div>
