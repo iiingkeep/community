@@ -391,7 +391,7 @@ tbody a:hover {
 }
 
 /* 비밀번호 검사 -------------------------------- */
-.pass-input {
+.my-pass-input {
   width: 350px;
   /* font-family: "Roboto", sans-serif; */
   outline: 0;
@@ -404,7 +404,7 @@ tbody a:hover {
   border-radius: 10px;
 }
 
-.pass__btn {
+.my-pass__btn {
   width: 130px;
   outline: 0;
   background: #6dc970;
@@ -416,15 +416,15 @@ tbody a:hover {
   border-radius: 10px;
 }
 
-.pass-form {
+.my-pass-form {
   font-size: 20px;
   line-height: 25px;
 }
 
-.pass-form p {
+.my-pass-form p {
   margin-bottom: 19px;
 }
-.pass-form > form {
+.my-pass-form > form {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -12,13 +12,13 @@ const PasswordValid = ({ onPasswordValid }) => {
     };
 
     return (
-        <div className='pass-form'>
+        <div className='my-pass-form'>
             <p>본인 확인을 위해<br/>비밀번호를 다시 확인해주세요</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     {/* <h4>비밀번호 확인</h4> */}
                     <br />
-                    <input className='pass-input'
+                    <input className='my-pass-input'
                         type="password"
                         value={password}
                         placeholder='비밀번호를 입력해주세요.'
@@ -26,7 +26,7 @@ const PasswordValid = ({ onPasswordValid }) => {
                         required />
                 </label>
                 <br />
-                <button className='pass__btn' type="submit">확인</button>
+                <button className='my-pass__btn' type="submit">확인</button>
             </form>
         </div>
     );
