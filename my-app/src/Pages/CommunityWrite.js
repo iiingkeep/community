@@ -62,7 +62,7 @@ const CommunityWrite = ({userid}) => {                                          
       if (!title||!content) {
       if (!title) {
         alert('제목을 입력해주세요.');
-          document.getElementById('PostTitle').focus();
+          document.querySelector('.commu-write__title').focus();
           return;}
       else if(!content) {
           alert('내용을 입력해주세요.');

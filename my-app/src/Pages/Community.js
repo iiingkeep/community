@@ -19,6 +19,7 @@ const Community = ({loggedIn}) => {
   const [selectedCategory, setSelectedCategory] = useState(1);
 
   const navigate = useNavigate();
+  
   // 검색어 업데이트
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
