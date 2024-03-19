@@ -183,6 +183,7 @@ const News = () => {
         )
       ) {
         navigate("/Login");
+        window.scrollTo(0, 0);
       } else {
         navigate("/News");
       }
