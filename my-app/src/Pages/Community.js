@@ -19,7 +19,7 @@ const Community = ({loggedIn}) => {
   const [selectedCategory, setSelectedCategory] = useState(1);
 
   const navigate = useNavigate();
-  
+
   // 검색어 업데이트
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -76,6 +76,7 @@ const Community = ({loggedIn}) => {
   // 현재 페이지를 변경하는 함수
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    window.scrollTo({ top: 0 });
   };
 
   return (
@@ -93,9 +94,9 @@ const Community = ({loggedIn}) => {
         <button className={'commu-category__button' + (selectedCategory === 3 ? ' commu-category__button--selected' : '')} onClick={() => handleCategoryClick(3)}>고민과질문</button>
       </div>
 
-      <div className='commu-search-and-go-write-box'>
 
         {/* 검색창 */}
+      <div className='commu-search-and-go-write-box'>
       <div className='commu-search-box'>
         <div className='commu-search-box--except-button'>
         <select className='commu-search-box__option' value={searchType} onChange={handleSearchTypeChange}>
@@ -112,7 +113,6 @@ const Community = ({loggedIn}) => {
       <div className='commu-go-write-box'>
         <button className='commu-go-write-box__button button' onClick={goCommunityWrite}>글쓰기</button>
       </div>
-
       </div>
 
       {/* 게시글 목록 출력 */}
@@ -124,9 +124,7 @@ const Community = ({loggedIn}) => {
             <div className="commu-post-list__thumbnail" style={{backgroundImage: `url('${getPostThumbnail(post.content)}')`}}></div>
             </Link>
             <div className='commu-post-list__info-box'>
-
             <div className='commu-post-list__title-and-content-and-datetime'>
-
             <div className='commu-post-list__title-and-content'>
             <Link to={`/Community/Read/${post.postid}`}>
               <p className='commu-post-list__title'>{post.title}</p>
@@ -165,14 +163,12 @@ const Community = ({loggedIn}) => {
       </ul>
       
       {/* 페이지네이션 */}
-      <div className="PagingBox">
       <PaginatedItems
           totalItems={totalItems}
-          itemsPerPage={4}
+          itemsPerPage={5}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
-      </div>
     </div>
   );
 };

@@ -167,7 +167,8 @@
   color: rgb(83, 212, 92);
   border-radius: 25px;
   display: flex;
-  justify-content: center
+  justify-content: center;
+  cursor:pointer;
 }
 .commu-post-detail__button--go-list-box {
   height: 70px;

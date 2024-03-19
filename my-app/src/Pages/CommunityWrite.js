@@ -54,6 +54,8 @@ const CommunityWrite = ({userid}) => {                                          
     }
   });
 };
+
+
   const handlePostSubmit = async (e) => {                                                 // 글 작성 후 등록 버튼 클릭 시 호출되는 헨들러 함수
     e.preventDefault();
     const view = 0;
@@ -192,7 +194,7 @@ const CommunityWrite = ({userid}) => {                                          
       {/* 게시물 등록/취소 버튼 */}
       <div className='commu-write__button'>
         <button className="commu-write__button--submit button" type='submit'>등록</button>
-        <button className="commu-write__button--cancel button">취소</button>
+        <button className="commu-write__button--cancel button" onClick={() => navigate('/Community')}>취소</button>
       </div>
 
       </form>

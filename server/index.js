@@ -484,7 +484,6 @@ app.post("/img", upload.single("img"), (req, res) => {
 
   // 파일이 저장된 경로를 클라이언트에게 반환해준다.
   const IMG_URL = `http://localhost:8000/public/uploads/${req.file.filename}`;
-  console.log(IMG_URL);
   res.json({ url: IMG_URL });
 });
 
@@ -497,7 +496,7 @@ app.get('/Community', async (req, res) => {
     const categoryId = req.query.categoryId || 1;
     const page = req.query.page || 1;
     // 페이지당 표시할 게시물 수
-    const itemsPerPage = 4;
+    const itemsPerPage = 5;
     // 페이지별 첫번째 게시물의 인덱스
     const offset = (page - 1) * itemsPerPage;
 

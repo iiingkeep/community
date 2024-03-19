@@ -1,15 +1,15 @@
-.Pagination {
+.commu-pagination {
   list-style: none;
   display:flex;
   margin: 60px auto;
   width: 30%;
 }
 
-.PagingButtons {
+.commu-pagination__button-box {
   margin: 0 auto;
 }
 
-.Pagination button {
+.commu-pagination button {
   padding: 8px 10px;
   margin-right: 5px;
   border: 1px solid rgba(0,0,0,0.2);
@@ -19,12 +19,7 @@
   font-size: 16px;
 }
 
-.page-item {
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-.Pagination button.selected {
+.commu-pagination button.selected {
   background-color: #007bff;
   color: white;
 }

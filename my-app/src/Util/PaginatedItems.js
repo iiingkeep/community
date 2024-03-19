@@ -21,8 +21,8 @@ const totalPages = Math.ceil(totalItems / itemsPerPage);
   const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
   return (
-    <div className="Pagination">
-      <div className="PagingButtons">
+    <div className="commu-pagination">
+      <div className="commu-pagination__button-box">
       <button
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
