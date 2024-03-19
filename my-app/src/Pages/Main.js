@@ -45,9 +45,16 @@ const Main = ({loggedIn}) => {
     axios
       .get("http://localhost:8000/news")                                                          // /news 엔드포인트에서 데이터를 가져오는 함수
       .then((response) => {
-        const sortedNews = response.data.sort(                                                    // 최신순으로 정렬
-          (a, b) => new Date(b.pubDate) - new Date(a.pubDate)
-        );
+        const sortedNews = response.data
+          .map((item) => {
+            // 만약 image_url이 비어있다면, thumb4.png를 대신 사용
+            if (!item.image_url) {
+              return { ...item, image_url: "background_img/thumb4.png" };
+            }
+            return item;
+          })
+          .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
         setNews(sortedNews);
       })
       .catch((error) => {

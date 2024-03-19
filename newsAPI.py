@@ -37,7 +37,7 @@ cursor = db.cursor() # DB와 연결된 커서 객체 생성
 # 'items' 라는 키와 리스트 형태의 값을 가진 딕셔너리 생성
 csv_data = {'items': []}
 
-# 이미지가 없는 경우 대체 이미지 지정
+# 이미지가 없는 경우 공백 지정
 NoImage = ''
 
 idx = 1
