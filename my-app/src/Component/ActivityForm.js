@@ -42,21 +42,21 @@ const ActivityForm = ({ userId }) => {
   }, [userId]);
 
   return (
-    <div className="acti-form">
-      <div className="acti-content">
+    <div className="my-acti-form">
+      <div className="my-acti-content">
         <div className="my-form__title">
           <p className="my-form__text">나의 활동</p>
         </div>
 
-        <div className="form-table-wrapper">
+        <div className="my-form-table-wrapper">
           <div className="my-content__list">
-            <p className="form-table__title">내가 쓴 글</p>
-            <table className="forms-table">
+            <p className="my-form-table__title">내가 쓴 글</p>
+            <table className="my-forms-table">
               <thead>
                 <tr>
                   {/* <th className='forms-table__num'>No.</th> */}
-                  <th className="forms-table__date">날짜</th>
-                  <th className="forms-table__title">내용</th>
+                  <th className="my-forms-table__date">날짜</th>
+                  <th className="my-forms-table__title">내용</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,7 +67,7 @@ const ActivityForm = ({ userId }) => {
                     <td>
                       <div className="my-table__td-box">
                         <Link
-                          className="content__link"
+                          className="my-content__link"
                           to={`/Community/Read/${activity.postid}`}
                         >
                           <span>
@@ -89,14 +89,14 @@ const ActivityForm = ({ userId }) => {
             </table>
           </div>
 
-          <div className="my-content__list">
-            <p className="form-table__title">내가 남긴 댓글</p>
-            <table className="forms-table">
+          <div className="my-my-content__list">
+            <p className="my-form-table__title">내가 남긴 댓글</p>
+            <table className="my-forms-table">
               <thead>
                 <tr>
                   {/* <th className='forms-table__num'>No.</th> */}
-                  <th className="forms-table__title">날짜</th>
-                  <th className="forms-table__title">내용</th>
+                  <th className="my-forms-table__title">날짜</th>
+                  <th className="my-forms-table__title">내용</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,7 +107,7 @@ const ActivityForm = ({ userId }) => {
                     <td>
                       <div className="my-table__td-box">
                         <Link
-                          className="content__link"
+                          className="my-content__link"
                           to={`/Community/Read/${activity.postid}`}
                         >
                           {/* <span>{activity.content}</span> */}
