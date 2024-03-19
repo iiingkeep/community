@@ -10,20 +10,37 @@ const ActivityForm = ({userId}) => {
     const [commData, setCommData] = useState([]);
 
     useEffect(() => {
-      const fetchPost = async () => {
-        try {
-            const posResponse = await axios.get(`http://localhost:8000/acti-post/${userId}`);
-            const posData = posResponse.data;
-            setActiData(posData);
-            const comResponse = await axios.get(`http://localhost:8000/acti-comment/${userId}`);
-            const comData = comResponse.data;
-            setCommData(comData);
-        } catch (error) {
-            console.log('Error fetching data:', error);
-        }
-    };
-    fetchPost();
+const fetchPostData = async () => {
+  try {
+    // 활동 글 요청
+    const posResponse = await axios.get(
+      `http://localhost:8000/acti-post/${userId}`
+    );
+    const posData = posResponse.data;
+    setActiData(posData);
+  } catch (error) {
+    console.log("Error fetching post data:", error);
+  }
+};
+
+const fetchCommentData = async () => {
+  try {
+    // 활동 댓글 요청
+    const comResponse = await axios.get(
+      `http://localhost:8000/acti-comment/${userId}`
+    );
+    const comData = comResponse.data;
+    setCommData(comData);
+  } catch (error) {
+    console.log("Error fetching comment data:", error);
+  }
+};
+
+// 각각의 요청을 별도로 처리
+fetchPostData();
+fetchCommentData();
   }, [userId]);
+  
 
 
   return (
