@@ -33,12 +33,19 @@ const Community = ({loggedIn}) => {
     setCurrentPage(1);
     fetchPosts();
   };
+  // 검색어 입력 후 엔터키 누르면 검색버튼 클릭과 같은 효과
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearchButtonClick();
+    }
+  };
 
   //카테고리 선택 버튼
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setCurrentPage(1);
   };
+
 
   useEffect(() => {
     fetchPosts();
@@ -104,7 +111,7 @@ const Community = ({loggedIn}) => {
           <option value="content">본문</option>
           <option value="titleAndContent">제목+본문</option>
         </select>
-        <input className='commu-search-box__input' type="text" value={searchQuery} onChange={handleSearchInputChange} />
+        <input className='commu-search-box__input' type="text" value={searchQuery} onChange={handleSearchInputChange} onKeyDown={handleKeyDown}/>
         </div>
         <button className='commu-search-box__button button' onClick={handleSearchButtonClick}>검색</button>
       </div>
