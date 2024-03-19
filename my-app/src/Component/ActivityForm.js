@@ -89,13 +89,13 @@ const ActivityForm = ({ userId }) => {
             </table>
           </div>
 
-          <div className="my-my-content__list">
+          <div className="my-content__list">
             <p className="my-form-table__title">내가 남긴 댓글</p>
             <table className="my-forms-table">
               <thead>
                 <tr>
                   {/* <th className='forms-table__num'>No.</th> */}
-                  <th className="my-forms-table__title">날짜</th>
+                  <th className="my-forms-table__date">날짜</th>
                   <th className="my-forms-table__title">내용</th>
                 </tr>
               </thead>

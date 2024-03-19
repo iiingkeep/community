@@ -46,6 +46,7 @@ const IsLikeForm = ({ userId }) => {
       <div className="my-form__title">
         <p className="my-form__text">좋아요 목록</p>
       </div>
+      <div className="my-form-table-wrapper">
       <div className="my-content__list">
         <p className="my-form-table__title">뉴스</p>
         <table className="my-forms-table">
@@ -113,7 +114,7 @@ const IsLikeForm = ({ userId }) => {
           </tbody>
         </table>
       </div>
-      {/* 뉴스Link to 추가 */}
+      </div>
     </div>
   );
 };

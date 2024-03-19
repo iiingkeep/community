@@ -21,6 +21,7 @@
   padding-bottom: 45px;
   width: 300px;
   margin: auto;
+  align-items: center;
 }
 
 .my-form__text {
@@ -39,11 +40,9 @@
   color: rgb(48, 48, 48);
   padding: 10px;
   width: 130px;
-  /* border-bottom: solid 2px rgb(203, 203, 203); */
 }
 
 .my-btn__button.active {
-  /* border-bottom: 5px solid rgb(83, 212, 92); */
   font-weight: 1000;
   background-color: rgb(221, 243, 230);
   border-radius: 5em;
@@ -62,16 +61,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* border-top: solid 3px rgb(174, 174, 174);
-  border-bottom: solid 3px rgb(174, 174, 174);
-  padding: 20px; */
+  margin-right: 50px;
 }
 .my-page__btn >ul>li{
-  /* border-bottom: solid 1.5px rgb(198, 198, 198); */
-  /* padding-bottom: 20px; */
   width: 150px; 
   height: 33.5px; 
-  /* border-bottom: solid 1px rgb(181, 181, 181); */
 }
 
 .my-page-forms {
@@ -80,7 +74,7 @@
 }
 
 /* 프로필 -------------------------------- */
-.my-profile-form{width: 100%; padding-left: 30px;}
+.my-profile-form{width: 100%;}
 .my-profile-wrapper__btn{display: flex; justify-content: center;}
 
 .my-profile-form__wrapper {
@@ -165,17 +159,6 @@
   justify-content: center;
 }
 
-/* .edit-form > table {
-  width: 150px;
-  justify-content: center;
-} */
-
-/* .edit-form__content td {
-  height: 80px;
-  padding: 8px;
-  padding: 13px 15px 12px 15px;
-} */
-
 .my-edit-form__content tr {
   border-bottom: solid 1px rgb(196, 196, 196);
 }
@@ -212,8 +195,6 @@ color: rgb(0, 0, 0);
 
 .my-edit-wrapper__btn {
   text-align: center;
-  /* display: flex;
-  justify-content: flex-end;  */
 }
 
 .my-edit-form__btn {
@@ -251,8 +232,6 @@ color: rgb(0, 0, 0);
   margin: 15px 0;
 }
 
-
-
 /* ID input 스타일 숨김 */
 .my-edit-form__input[disabled] {
   background-color: transparent;
@@ -264,8 +243,6 @@ color: rgb(0, 0, 0);
   font-size: small;
   margin-top: 5px;
   max-width: 100%;
-  /* margin-bottom: -5px; */
-  /* text-align: right; */
 }
 
 .my-edit-form__text {
@@ -274,7 +251,7 @@ color: rgb(0, 0, 0);
   font-size: 20px;
 }
 
-/* 나의활동 -------------------------------- */
+/* 폼 테이블 (나의활동/좋아요) ---------------------- */
 .my-content__list{
   display: flex; flex-direction: column; 
   align-items: center; width: 100%; margin-bottom: 70px;
@@ -285,13 +262,9 @@ color: rgb(0, 0, 0);
 /* {display: flex; justify-content: start; width: 80%;} */
 /* 호환이슈수정* : (justify-content: start; => justify-content: flex-start;) */
 
-/* 폼 테이블 (나의활동/좋아요) ---------------------- */
-
 .my-form-table-wrapper {padding-top: 20px;}
-
 .my-acti-content { width: 100%; }
 
-/* 폼 테이블 (활동/좋아요) ---------------------- */
 .my-forms-post,
 .my-acti-comm {
   width: 100%;
@@ -309,14 +282,6 @@ color: rgb(0, 0, 0);
 
 }
 
-/* .form-table__title {
-  text-align: center;
-  width: 150px;
-  padding: 10px;
-  border-top: solid 1px rgb(196, 196, 196);
-  border-bottom: solid 1px rgb(196, 196, 196);
-} */
-
 .my-forms-table {
   width: 800px
 }
@@ -327,7 +292,6 @@ color: rgb(0, 0, 0);
 .my-forms-table thead {
   width: 100%;
   height: 30px;
-  /* background-color: #dbdbdb; */
   flex-direction: column;
   border-top: solid 2px rgb(210, 210, 210);
   border-bottom: solid 2px rgb(210, 210, 210);
@@ -340,7 +304,6 @@ color: rgb(0, 0, 0);
 }
 
 tr th:first-child { width: 200px; }
-/* tr > td:nth-child(2) */
 
 
 .my-forms-table td {
@@ -350,14 +313,12 @@ tr th:first-child { width: 200px; }
   font-size: 17px;
 }
 tr>td:first-of-type>.my-table__td-box {
-  /* width:640px; */
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 tr>td:nth-of-type(2)>.my-table__td-box {
-  /* width:150px; */
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -367,7 +328,6 @@ tr>td:nth-of-type(2)>.my-table__td-box {
 .my-forms-table tr {
   border-bottom: solid 1px #e6e8eb;
 }
-
 
 .my-forms-table__title {
   text-align: center;
@@ -384,7 +344,7 @@ tbody a:hover {
   height: 70px;
 }
 
-.my-forms-table__title, .forms-table__date {color: gray;}
+.my-forms-table__title, .my-forms-table__date {color: gray;}
 
 .my-content__link {
   text-decoration: none;
@@ -393,12 +353,9 @@ tbody a:hover {
 /* 비밀번호 검사 -------------------------------- */
 .my-pass-input {
   width: 350px;
-  /* font-family: "Roboto", sans-serif; */
   outline: 0;
   background: #f2f2f2;
   border: 0;
-  /* margin: 0 0 15px; */
-  /* box-sizing: border-box; */
   padding: 20px;
   font-size: 17px;
   border-radius: 10px;
@@ -433,4 +390,3 @@ tbody a:hover {
 .my-page__right {
   flex-grow: 1;
 }
-/* .like-form{justify-content: center;} */
