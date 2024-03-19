@@ -1,15 +1,15 @@
 import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import ImageResize from "quill-image-resize-module-react";
-import React, {useState, useRef, useMemo} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState,useEffect, useRef, useMemo} from 'react';
+import { useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
 import './CommunityWrite.css'
 
-
 const CommunityWrite = ({userid}) => {                                                    // 게시글 작성 컴포넌트
-  const navigate = useNavigate();                                                         // 게시글 제목과 내용 상태 관리
-  const [title, setTitle] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();                                                         
+  const [title, setTitle] = useState('');                                                 // 게시글 제목과 내용 상태 관리
   const [content, setContent] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(1);
   const quillRef = useRef(null);
@@ -20,6 +20,11 @@ const CommunityWrite = ({userid}) => {                                          
   const handleContentChange = (value) => {                                                // 게시글 내용(content)값 업데이트
     setContent(value);
   };
+  useEffect(() => {                                                                       // 글목록 페이지에서 선택한 카테고리 정보를 그대로 가져오기
+    if (location.state && location.state.selectedCategory) {
+      setSelectedCategory(location.state.selectedCategory);
+    }
+  }, [location.state]);
   const handleCategoryClick = (categoryId) => {                                           // 카테고리(category)값 업데이트
     setSelectedCategory(categoryId);
   };
