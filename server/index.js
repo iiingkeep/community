@@ -957,45 +957,14 @@ app.get('/my/:formType/:userid', (req, res) => {
     case 'edit':
       table = 'user';
       break;
-    // case 'activity':
-    //   table = 'community_posts';
-    //   break;
     case 'order':
       table = 'orders';
       break;
-    // case 'islike':
-    //   table = 'is_like';
-    //   break;
     default:
       res.status(400).json({ message: '유효하지않은 form type' });
       return;
   }
 
-  // // activity - 댓글
-  // if (formType === 'acti-comment') {
-  //   query = `SELECT * FROM community_posts
-  //            LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-  //            WHERE community_posts.userid = ?`;
-  // } 
-  // // activity -게시글
-  // else if (formType === 'acti-post') {
-  //   query = `SELECT * FROM community_posts
-  //            WHERE community_posts.userid = ?`;
-  // }
-
-  // islike 폼 
-  // if (formType === 'islike') {
-  //     if (!userId) {
-  //       res.status(400).json({ message: 'Invalid ID: islike' });
-  //       return;
-  //     }
-  //     // 모든 컬럼 가져오기 " * "
-  //     query = `SELECT * FROM community_posts A
-  //              LEFT JOIN is_like B ON A.postid = B.postid
-  //              WHERE B.post_isLiked = 1 AND B.userid = ?`;
-
-  // 나머지 선택된 폼의 쿼리문
-  // } else {
   query = `SELECT * FROM ${table} WHERE userid = ?`;
   // }
 
@@ -1015,49 +984,6 @@ app.get('/my/:formType/:userid', (req, res) => {
     console.log(results);
   });
 });
-
-// //-------------------------------------나의활동(게시글+댓글)------------------------------------------
-
-// app.get('/acti-post&comment/:userid', (req, res) => {
-//   const userId = req.params.userid;
-
-//   const query = `
-//   SELECT * FROM community_posts WHERE userid = ?`;
-
-//   const query2 = `
-//   SELECT * FROM community_posts
-//   LEFT JOIN community_comments ON community_posts.postid = community_comments.postid
-//   WHERE community_comments.userid = ?`;
-
-//   // 데이터베이스 쿼리 실행
-//   connection.query(query, [userId], (err, results) => {
-//     if (err) {
-//       console.error('(Error) data from database:', err);
-//       res.status(500).json({ message: 'Internal server error' });
-//       return;
-//     }
-//     if (results.length === 0) {
-//       res.status(404).json({ message: 'Data not found' });
-//       return;
-//     }
-
-//     connection.query(query2, [userId], (err, results2) => {
-//       if (err) {
-//         console.error('(Error) data from database:', err);
-//         res.status(500).json({ message: 'Internal server error' });
-//         return;
-//       }
-//       if (results2.length === 0) {
-//         res.status(404).json({ message: 'Data not found' });
-//         return;
-//       }
-
-//       const userData = { comment: results2, post: results }; // 두 결과를 합침
-//       res.json(userData);
-//       console.log(userData);
-//     });
-//   });
-// });
 
 //-------------------------------------나의활동(게시글)------------------------------------------
 
@@ -1363,63 +1289,6 @@ app.get('/imgsave/:userid', (req, res) => {
     res.sendFile(filePath);
   });
 });
-
-//  프로필 이미지 삭제 -----------------------------------
-
-// // 이미지 파일 및 MySQL 레코드 삭제 요청 처리
-// app.delete('/imgdelete', (req, res) => {
-//   const imageUrl = req.body.imageUrl; // 클라이언트에서 전달된 이미지 URL
-
-//   // 이미지 파일 삭제
-//   const filename = imageUrl.split('/').pop(); // URL에서 파일 이름 추출
-//   const filePath = `server/public/userimg/${filename}`; // 파일 경로
-
-//   // 파일이 존재하는지 확인 후 삭제
-//   fs.unlink(filePath, (err) => {
-//     if (err) {
-//       console.error('Error deleting image:', err);
-//       return res.status(500).send('Error deleting image');
-//     }
-//     console.log('Image deleted successfully:', filename);
-
-//     // MySQL에서 레코드 삭제
-//     const sql = 'DELETE FROM user_img WHERE img_url = ?';
-//     connection.query(sql, [filename], (err, results, fields) => {
-//       if (err) {
-//         console.error('Error deleting image record from MySQL:', err);
-//         return res.status(500).send('Error deleting image record from MySQL');
-//       }
-//       console.log('Image record deleted from MySQL:', filename);
-//       res.send('Image and record deleted successfully');
-//     });
-//   });
-// });
-
-// app.delete('/my/profile/img/:filename', (req, res) => {
-//   const filename = req.params.filename;
-//   const filePath = `server/public/userimg/${filename}`; // 파일 경로
-
-//   // 파일이 존재하는지 확인 후 삭제
-//   fs.unlink(filePath, (err) => {
-//     if (err) {
-//       console.error('image 삭제에러:', err);
-//       return res.status(500).send('image 삭제에러');
-//     }
-//     console.log('Image 삭제성공:', filename);
-
-//     // MySQL에서도 삭제
-//     const sql = 'DELETE FROM imgup WHERE imgurl = ?';
-//     connection.query(sql, [filename], (err, results, fields) => {
-//       if (err) {
-//         console.error('Error deleting image from MySQL:', err);
-//         return res.status(500).send('Error deleting image from MySQL');
-//       }
-//       console.log('Image record deleted from MySQL:', filename);
-//       res.send('Image deleted successfully');
-//     });
-//   });
-// });
-
 
 
 
