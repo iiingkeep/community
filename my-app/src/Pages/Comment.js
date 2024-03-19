@@ -70,11 +70,11 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
         <span className='commu-comment__count'>{commentCount}개의 댓글</span>
       </p>
       {/* 댓글 목록이 담긴 배열 commentLists를 map함수를 이용해 새로운 배열로 반환 */}
-      {commentLists && commentLists.map((comment) => (
+      {commentLists && commentLists.map((comment, index) => (
         // !comment.responseTo: 답글이 아닌 원본 댓글만 리렌더링
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
-        <React.Fragment key={comment.id}>
+        <React.Fragment key={index}>
         <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment}  comment={comment}/>
         <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
