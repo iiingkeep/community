@@ -49,17 +49,17 @@ const ProfileForm = ({ userId }) => {
     }, [userId]); // userId가 변경될 때마다 호출
 
     return (
-        <div className="profile-form" >
+        <div className="my-profile-form" >
             <div className="my-form__title">
                 <p className="my-form__text">나의 프로필</p>
             </div>
 
-            <div className="profile-form__wrapper">
-                <div className="profile-form__img">
+            <div className="my-profile-form__wrapper">
+                <div className="my-profile-form__img">
                     {/* 업로드 된 이미지가 없다면 user_img폴더의 이미지를 표시 */}
                     {imageUrl ? (<img src={imageUrl} alt="userimg" />)
-                        : (<img className="profile-form__img" src="/user_img/basic.png" alt="IMG" />)}
-                    <button className="profile__btn" onClick={handleImgPopup}><Icon className="profile__btn__icon" icon="mdi:photo-camera" /></button>
+                        : (<img className="my-profile-form__img" src="/user_img/basic.png" alt="IMG" />)}
+                    <button className="my-profile__btn" onClick={handleImgPopup}><Icon className="my-profile__btn__icon" icon="mdi:photo-camera" /></button>
                 </div>
             </div>
 
@@ -69,12 +69,12 @@ const ProfileForm = ({ userId }) => {
             {/* id식별 조건부 렌더링 */}
             {profileData.usertype === '2' || profileData.usertype === '3'
                 ? (<p>사업자번호 {profileData.businessnumber}</p>) : null}
-            <div className="profile-name-wrapper">
-                <span className="profile__username">{profileData.username}</span>
-                <span className="profile__sir">님</span>
+            <div className="my-profile-name__wrapper">
+                <span className="my-profile__username">{profileData.username}</span>
+                <span className="my-profile__sir">님</span>
             </div>
 
-            <div class="profile-content__detail">
+            <div class="my-profile-content__detail">
                 <table>
                     <tr>
                         <td>아이디</td>

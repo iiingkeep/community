@@ -80,31 +80,32 @@
 }
 
 /* 프로필 -------------------------------- */
-.profile-form{width: 100%; padding-left: 30px;}
-.profile-wrapper__btn{display: flex; justify-content: center;}
+.my-profile-form{width: 100%; padding-left: 30px;}
+.my-profile-wrapper__btn{display: flex; justify-content: center;}
 
-.profile-form__wrapper {
-  align-items: center; /* 세로 중앙 정렬 */
+.my-profile-form__wrapper {
+  align-items: center; 
+  /* 세로 중앙 정렬 */
   /* justify-content: center; */
   /* 가로 중앙 정렬 */
   /* flex-direction: column;  */
   /* 아이템들을 세로 방향으로 정렬 */
 }
 
-.profile-form__img { 
+.my-profile-form__img { 
   display: flex; 
   flex-direction: column;  
   align-items: center; 
 }
 
-.profile-form__img > img{  
+.my-profile-form__img > img{  
   width: 200px; height: 200px; 
   border-radius: 50%; 
   object-fit: cover; 
   border: solid 10px rgb(243, 243, 243);
 }
 
-.profile__btn {
+.my-profile__btn {
   background-color: rgb(95, 95, 95);
   border: none;
   color: white;
@@ -115,69 +116,47 @@
 
 }
 
-.profile__btn__icon {
+.my-profile__btn__icon {
   font-size: 35px;
   padding: 3px;
 }
 
-/* .profile-form__img :hover {
-  box-shadow: 0px 0px 10px;
-} */
-
-/* .profile-content-wrapper {
-  align-items: center;
-  width: 550px;
-  align-items: center;
-} */
-
-/* .profile-content {
-  align-items: center;
-  padding: 30px 30px;
-  width: 800px;
-  flex-grow: 1;
-} */
-
-.profile-content__detail {
+.my-profile-content__detail {
   margin: 0 auto;
   width: 500px;
   line-height: 30px;
   border-top: solid 3px rgb(0, 0, 0);
   border-bottom: solid 1px rgb(196, 196, 196);
 }
-.profile-content__detail table {
+.my-profile-content__detail table {
   width: 500px;
 }
-.profile-content__detail td {
+.my-profile-content__detail td {
   padding: 13px 15px 12px 15px;
 }
 
-.profile-content__detail table td:first-child {
+.my-profile-content__detail table td:first-child {
   font-size: medium;
   font-weight: 1000;
 }
 
-.profile-content__detail tr {
+.my-profile-content__detail tr {
   border-bottom: dotted 1px rgb(196, 196, 196);
 }
 
-.profile-name-wrapper {
+.my-profile-name__wrapper {
   line-height: 60px;
   text-align: center;
   padding-bottom: 5px;
 }
 
-/* .profile-content__detail td:first-child {
-  width: 120px;
-  font-weight: 700;
-} */
-
-.profile__username {
+.my-profile__username {
   font-size: 40px;
   font-weight: 1000;
   color: rgb(86, 186, 93);
 }
 
-.profile__sir {font-weight: 600; font-size: 24px; padding-left: 10px;}
+.my-profile__sir {font-weight: 600; font-size: 24px; padding-left: 10px;}
 
 /* 정보수정 -------------------------------- */
 .edit-form {
