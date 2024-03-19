@@ -159,7 +159,7 @@
 .my-profile__sir {font-weight: 600; font-size: 24px; padding-left: 10px;}
 
 /* 정보수정 -------------------------------- */
-.edit-form {
+.my-edit-form {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -176,11 +176,11 @@
   padding: 13px 15px 12px 15px;
 } */
 
-.edit-form__content tr {
+.my-edit-form__content tr {
   border-bottom: solid 1px rgb(196, 196, 196);
 }
 
-.edit-form__input {
+.my-edit-form__input {
 font-size: 19px;
 width: 330px;
 height: 85px;
@@ -190,18 +190,18 @@ border: none; /* 선택 상태에서의 테두리 제거 */
 color: rgb(0, 0, 0);
 }
 
-.edit-form__wrapper {
+.my-edit-form__wrapper {
   align-items: center;
   display: flex; flex-direction: column; 
   
 }
-.edit-form label {
+.my-edit-form label {
   display: flex;
   align-items: center;
   font-weight: 600;
 }
 
-.edit-form_content label {
+.my-edit-form_content label {
   text-align: left;
   /* 라벨 텍스트를 좌측으로 정렬 */
   display: block;
@@ -210,13 +210,13 @@ color: rgb(0, 0, 0);
   /* 5px; 라벨 간격 조정 */
 }
 
-.edit-wrapper__btn {
+.my-edit-wrapper__btn {
   text-align: center;
   /* display: flex;
   justify-content: flex-end;  */
 }
 
-.edit-form__btn {
+.my-edit-form__btn {
   width: 120px;
   outline: 0;
   background: #ffffff;
@@ -230,14 +230,14 @@ color: rgb(0, 0, 0);
   margin: 30px 3px 10px 10px;
 }
 
-.edit__addspace {
+.my-edit__addspace {
   width: 150px;
   /* height: 85px; */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
 }
 
-.edit__sub__btn {
+.my-edit__sub__btn {
   width: 100px;
   outline: 0;
   background: #6dc970;
@@ -254,12 +254,12 @@ color: rgb(0, 0, 0);
 
 
 /* ID input 스타일 숨김 */
-.edit-form__input[disabled] {
+.my-edit-form__input[disabled] {
   background-color: transparent;
 }
 
 /* 유효성 안내 문구 */
-.edit-form-match__text {
+.my-edit-form-match__text {
   color: gray;
   font-size: small;
   margin-top: 5px;
@@ -268,7 +268,7 @@ color: rgb(0, 0, 0);
   /* text-align: right; */
 }
 
-.edit-form__text {
+.my-edit-form__text {
   margin-right: 15px; /* 텍스트와 입력 필드 사이의 간격 */
   width: 100px;
   font-size: 20px;

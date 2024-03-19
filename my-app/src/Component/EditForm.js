@@ -246,8 +246,8 @@ const EditForm = ({ userId, onFormChange }) => {
   const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
 
   return (
-    <div className="edit-form">
-      <div className="edit-form__wrapper">
+    <div className="my-edit-form">
+      <div className="my-edit-form__wrapper">
         <div className="my-form__title">
           <p className="my-form__text">나의 정보 수정</p>
         </div>
@@ -261,38 +261,38 @@ const EditForm = ({ userId, onFormChange }) => {
               </tr>
             ) : (
               <tr>
-                <td className="edit-form__content">
+                <td className="my-edit-form__content">
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">ID</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">ID</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="text"
                           name="email"
                           value={profileData.email}
                           placeholder={profileData.email}
                           disabled
                         />
-                        <div className="edit__addspace"></div>
+                        <div className="my-edit__addspace"></div>
                       </label>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">닉네임</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">닉네임</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="text"
                           name="username"
                           value={username}
                           placeholder={profileData.username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <div className="edit__addspace">
+                        <div className="my-edit__addspace">
                         <button
-                          className="edit__sub__btn"
+                          className="my-edit__sub__btn"
                           onClick={handleUsernameCheck}
                         >
                           중복 확인
@@ -301,20 +301,20 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">한글·영문·숫자로만 4~10자리</p>
+                  <p className="my-edit-form-match__text">한글·영문·숫자로만 4~10자리</p>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">PW 변경</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">PW 변경</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="password"
                           name="password"
                           value={password}
                           placeholder="변경할 비밀번호를 입력하세요."
                           onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div className="edit__addspace">
+                        <div className="my-edit__addspace">
                         {password && password.match(spacebar) && (
                           <p style={{ color: "red", textAlign: "center", lineHeight: "1.5" }}>
                             비밀번호에 공백을<p>포함할 수 없습니다.</p></p>
@@ -332,22 +332,22 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
+                  <p className="my-edit-form-match__text">영문·숫자·특수문자 섞어서 8~16 자리(사용 가능한 특수문자 : @#$%^&+=!)</p>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">
                           PW 재입력
                         </span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="password"
                           name="confirmPassword"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           disabled={!password} // password가 비어 있으면 confirmPassword를 비활성화
                         />
-                        <div className="edit__addspace">
+                        <div className="my-edit__addspace">
                         {passwordMatch && confirmPassword && (
                           <p
                             style={{
@@ -366,19 +366,19 @@ const EditForm = ({ userId, onFormChange }) => {
                   </tr>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">휴대폰 번호</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">휴대폰 번호</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="text"
                           name="phonenumber"
                           value={phonenumber}
                           placeholder={profileData.phonenumber}
                           onChange={(e) => setPhonenumber(e.target.value)}
                         />
-                        <div className="edit__addspace">
+                        <div className="my-edit__addspace">
                         <button
-                          className="edit__sub__btn"
+                          className="my-edit__sub__btn"
                           onClick={handlePhonenumberCheck}
                         >
                           중복 확인
@@ -387,23 +387,23 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <p className="edit-form-match__text">하이픈 '-' 제외 e.g. 01012345678</p>
+                  <p className="my-edit-form-match__text">하이픈 '-' 제외 e.g. 01012345678</p>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">주소</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">주소</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="text"
                           name="address"
                           value={address}
                           placeholder={profileData.address}
                           onChange={(e) => setAddress(e.target.value)}
                         />
-                        <div className="edit__addspace">
+                        <div className="my-edit__addspace">
                         <button
                           type="button"
-                          className="edit__sub__btn"
+                          className="my-edit__sub__btn"
                           onClick={handle.clickButton}
                         >
                           주소 선택
@@ -421,10 +421,10 @@ const EditForm = ({ userId, onFormChange }) => {
                   </tr>
                   <tr>
                     <td>
-                      <label className="edit-form__label">
-                        <span className="edit-form__text">상세주소</span>
+                      <label className="my-edit-form__label">
+                        <span className="my-edit-form__text">상세주소</span>
                         <input
-                          className="edit-form__input"
+                          className="my-edit-form__input"
                           type="text"
                           name="detailedaddress"
                           value={detailedaddress}
@@ -434,14 +434,14 @@ const EditForm = ({ userId, onFormChange }) => {
                       </label>
                     </td>
                   </tr>
-                  <div className="edit-form-wrapper__btn">
+                  <div className="my-edit-form-wrapper__btn">
                     <button
-                      className="edit-form__btn"
+                      className="my-edit-form__btn"
                       onClick={handleEditSubmit}
                     >
                       수정하기
                     </button>
-                    <button className="edit-form__btn" onClick={handleCancel}>
+                    <button className="my-edit-form__btn" onClick={handleCancel}>
                       취소
                     </button>
                   </div>
