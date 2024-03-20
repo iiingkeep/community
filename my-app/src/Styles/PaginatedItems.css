@@ -20,6 +20,6 @@
 }
 
 .commu-pagination button.selected {
-  background-color: #007bff;
-  color: white;
+  background-color: RGB(221, 243, 230);
+  color: RGB(64, 162, 67);
 }

@@ -67,7 +67,7 @@ const IsLikeForm = ({ userId }) => {
                   <tr key={News.newsid}>
                     <td className="my-table__td">
                       <div className="my-table__td-box">
-                        <Link to={News.url}>
+                        <Link to={News.url} target="_blank">
                           <img
                             src={News.image_url}
                             className="my-like-news-list__img"
@@ -78,13 +78,14 @@ const IsLikeForm = ({ userId }) => {
                     </td>
                     <td className="my-table__td">
                       <div className="my-table__td-box">
-                        <Link to={News.url}>
+                        <Link to={News.url} target="_blank">
                           <span>{News.title}</span>
                         </Link>
                       </div>
                     </td>
                   </tr>
-                )))}
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -119,7 +120,9 @@ const IsLikeForm = ({ userId }) => {
                         </Link>
                       </div>
                     </td>
-                  </tr>)))}
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

@@ -14,8 +14,8 @@
   background-color: transparent;
   padding: 20px;
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   font-style: normal;
   color: rgb(40, 40, 40);
 }
@@ -36,15 +36,15 @@
 }
 .commu-search-box__button {
   width: 65px;
+  height: 40px;
 }
 .commu-search-box--except-button {
   display: flex;
-  height: 35px;
+  height: 40px;
   margin-right: 10px;
   border: 2px solid #c4c4c4;
   border-radius: 20px;
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 400;
 }
 .commu-search-box__option, .commu-search-box__input {
   box-sizing: border-box;
@@ -59,6 +59,7 @@
 }
 .commu-go-write-box__button {
   width: 64px;
+  height: 40px;
   border-radius: 0;
 }
 
@@ -116,6 +117,9 @@
   display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+.commu-post-list__title:hover {
+  font-weight: bold;
 }
 
 /* 게시글 내용 */

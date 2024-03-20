@@ -21,11 +21,10 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   useEffect(() => {
     const fetchPostAndIncrementViews = async () => {
       try {
+        await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);           // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
         const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);         // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
         console.log(response.data);
         setPost(response.data);
-
-        await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);           // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
       } catch (error) {
         console.error('게시물을 불러오는 중 에러 발생:', error);
       }

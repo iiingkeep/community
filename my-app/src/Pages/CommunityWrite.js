@@ -5,6 +5,7 @@ import React, {useState,useEffect, useRef, useMemo} from 'react';
 import { useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
 import './CommunityWrite.css'
+Quill.register("modules/imageResize", ImageResize);
 
 const CommunityWrite = ({userid}) => {                                                    // 게시글 작성 컴포넌트
   const location = useLocation();
@@ -101,7 +102,7 @@ const CommunityWrite = ({userid}) => {                                          
   };
 
 
-  Quill.register("modules/imageResize", ImageResize);                                     // quill 에디터 이용을 위한 modules와 formats 설정
+                                       // quill 에디터 이용을 위한 modules와 formats 설정
   const modules = useMemo(() => {                                                         // modules: 에디터의 여러 기능 활성화 또는 비활성화
     return {                                                                              // formats: 텍스트 스타일링과 형식 정의
     toolbar: {                                                                            // modules설정. toolbar와 imageResize 모듈 사용.

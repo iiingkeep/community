@@ -548,7 +548,6 @@ app.get('/Community', async (req, res) => {
 
         const [countRows] = await poolPromise.query(countQuery, [categoryId, searchParam]);
         const totalItems = countRows[0].total;
-
         res.json({ posts: rows, totalItems });
       }
     } else {

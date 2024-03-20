@@ -5,7 +5,7 @@ import ReactQuill, {Quill} from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import ImageResize from "quill-image-resize-module-react";
 
-
+Quill.register("modules/imageResize", ImageResize);
 const CommunityEdit = ({userid}) => {                                                        // 등록된 게시글 수정 컴포넌트
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,8 +28,9 @@ const CommunityEdit = ({userid}) => {                                           
       }
     };
     fetchPost();
-  }, [id]);
-  console.log('컨텐츠',content);
+  }, []);
+
+  
 
   const handleTitleChange = (e) => {                                           // 게시글 제목 업데이트
     setTitle(e.target.value);
@@ -40,6 +41,7 @@ const CommunityEdit = ({userid}) => {                                           
   const handleCategoryClick = (categoryId) => {                                // 카테고리 선택 활성화
     setSelectedCategory(categoryId);
   };
+  
   const imageHandler = () => {                                                 // quill-editor 사용 시 이미지가 base64 형태로 저장되어 DB에 데이터가 들어가지 않는 현상 방지를 위한 이미지 처리 핸들러
   console.log('에디터에서 이미지 버튼을 클릭하면 이 핸들러가 시작됩니다!');    // 따로 생성한 input에서 이미지를 받아 서버로 보내면 서버에서 이미지 src를 url로 변환 후 그 값을 받아와 에디터에 이미지가 나타나게끔 설정
 
@@ -65,13 +67,13 @@ const CommunityEdit = ({userid}) => {                                           
 
 
     try {
-      const result = await axios.post('http://localhost:8000/img', formData);         // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
-      console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);              // const {width, height} = result.data;
+      const response = await axios.post('http://localhost:8000/img', formData);         // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
+      console.log('성공 시, 백엔드가 보내주는 데이터', response.data.url);              
 
 
 
 
-      const IMG_URL = result.data.url;                                                 // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
+      const IMG_URL = response.data.url;                                                 // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
       const editor = quillRef.current.getEditor();                                     // 이 url을 img 태그의 src에 넣어 에디터의 커서에 삽입 시 에디터 내 이미지 출력
       const range = editor.getSelection();                                             // 에디터에 이미지 태그 넣기
       editor.insertEmbed(range.index, 'image', IMG_URL, );                             // useRef를 이용해 에디터 객체 선택
@@ -80,8 +82,7 @@ const CommunityEdit = ({userid}) => {                                           
     }
   });
 };
-
-console.log('콘텐츠',content)
+console.log('콘텐츠:', content);
 
   const handlePostUpdate = async (e) => {                                               // 등록버튼 클릭 시 호출되는 핸들러 함수
     e.preventDefault();
@@ -134,7 +135,7 @@ console.log('콘텐츠',content)
   }
                                                                                           // quill 에디터 이용을 위한 modules와 formats 설정
                                                                                           // modules: 에디터의 여러 기능 활성화 또는 비활성화
-    Quill.register("modules/imageResize", ImageResize);                                   // formats: 텍스트 스타일링과 형식 정의
+                                                                                          // formats: 텍스트 스타일링과 형식 정의
   const modules = useMemo(() => {                                                         // modules설정. toolbar와 imageResize 모듈 사용.          
     return {                                                                              //useMemo를 이용해 이전 값을 기억해 성능 최적화.     
     toolbar: {
