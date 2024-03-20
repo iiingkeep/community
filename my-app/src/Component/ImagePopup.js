@@ -53,11 +53,14 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
   
   // 이미지url을 상태에서 제거하는 함수
   const handleImageDelete = () => {
-    setImageUrl("");
-    // 로컬스토리지에서 이미지url 제거
-    localStorage.removeItem('storageImg');
-    // 페이지 새로고침
-    // window.location.reload();
+    const confirmation = window.confirm("이미지를 삭제하시겠습니까?");
+    if (confirmation) {
+      setImageUrl("");
+      // 로컬스토리지에서 이미지url 제거
+      localStorage.removeItem('storageImg');
+      // 페이지 새로고침
+      window.location.reload();
+    }
   };
 
   // 이미지url을 저장하는 함수
