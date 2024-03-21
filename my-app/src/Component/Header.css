@@ -12,13 +12,10 @@
   z-index: 10;
 }
 
-/* 헤더 왼쪽 로고 */
-.header__logo--button{
-  font-size: 25px;
-  font-weight: 700;
+.header__logo--img {
+  width: 250px;
+  height: 60px;
   cursor: pointer;
-  background-color: white;
-  border: none;
 }
 
 /* 헤더 가운데 메뉴 */

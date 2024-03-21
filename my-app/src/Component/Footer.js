@@ -73,13 +73,12 @@ function Footer() {
             <div className="FooterLayer2">
                 <div className="FooterContent">
                     <div className="leftContent">
-                        <h2>빵끗😊</h2>
-                        <p>탄소중립플랫폼</p>
+                    <img src="/background_img/logo.png" />
                         <br />
                         <p>COPYRIGHT (C) 2024 K-DIGITAL ALL RIGHTS RESERVED.</p>
                     </div>
                     <address>
-                        "상호명 및 호스팅 서비스 제공 : 빵끗"
+                        "상호명 및 호스팅 서비스 제공 : 커뮤니티 빵끗"
                         <br />
                         "관리자 : Ezteam2CommunityTeam"
                         <br />

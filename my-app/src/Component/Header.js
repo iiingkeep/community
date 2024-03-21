@@ -20,9 +20,7 @@ const Header = ({ loggedIn, handleLogout }) => {
     <div className="header">
       {/* 왼쪽 로고 */}
       <div className="header__logo">
-        <button className="header__logo--button" onClick={handleMain}>
-          빵끗😊
-        </button>
+      <img src="/background_img/logo.png" className="header__logo--img"onClick={handleMain} />
       </div>
       {/* 가운데 메뉴 */}
       <div className="header__menu">

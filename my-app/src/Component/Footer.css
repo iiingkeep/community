@@ -21,6 +21,11 @@
     flex-direction: column;
 }
 
+.leftContent img{
+    width: 170px;
+    transform: translateX(-12%);
+}
+
 
 
 .FooterLayer1 {

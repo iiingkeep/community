@@ -79,13 +79,12 @@ table {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  background-image:  
-   url('../public/background_img/backimg2.png'),
-   url('../public/background_img/backimg3.png'),
+  background-image:
+   url('../public/background_img/earth7.png'),
    url('../public/background_img/back3.jpg');
-  background-size: 50px 50px , 70px 70px, 1502px 300px;
+  background-size: 200px 200px, 1502px 300px;
   background-repeat:no-repeat;
-  background-position: 30% 23% ,90% 80%, 20% 170%;
+  background-position: 81% 80%, 20% 170%;
   border-bottom-left-radius: 80px;
   border-bottom-right-radius: 80px;
   position: relative;

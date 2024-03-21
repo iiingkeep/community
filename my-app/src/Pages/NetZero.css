@@ -1,6 +1,5 @@
 .NetZero-img {
-  width: 1317px;
+  width: 1000px;
   height: 100%;
-  margin: 50px 0;
-  transform: translateX(-11%);
+  margin: 50px auto;
 }
