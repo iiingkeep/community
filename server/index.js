@@ -39,24 +39,40 @@ app.use(function (req, res, next) {
   next();
 });
 
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
+
 // MySQL 연결 설정
+// const poolPromise = mysql.createPool({
+//   host: "1.243.246.15",
+//   user: "root",
+//   password: "1234",
+//   database: "ezteam2",
+//   port: 5005,
+// });
+
 const poolPromise = mysql.createPool({
-  host: "1.243.246.15",
-  user: "root",
-  password: "1234",
-  database: "ezteam2",
-  port: 5005,
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
+  port: DB_PORT,
 });
 
-// const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.dotenv;
+// const connection = mysql2.createConnection({
+//   host: "1.243.246.15",
+//   user: "root",
+//   password: "1234",
+//   database: "ezteam2",
+//   port: 5005,
+// });
+
 const connection = mysql2.createConnection({
-  host: "1.243.246.15",
-  user: "root",
-  password: "1234",
-  database: "ezteam2",
-  port: 5005,
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
+  port: DB_PORT,
 });
-
 
 // MySQL 연결
 (async () => {
