@@ -89,7 +89,6 @@ table {
   border-bottom-right-radius: 80px;
   position: relative;
   transform: translateX(-16%);
-  z-index: 2;
 }
 .com-header img{
   /* width: 270px;
