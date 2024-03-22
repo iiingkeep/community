@@ -6,8 +6,8 @@ import pandas as pd # CSV 파일 등의 형태로 저장된 텍스트 데이터�
 import numpy as np
 from PIL import Image # 이미지 처리를 위한 라이브러리
 
-okt = Okt()
-word_list = []
+okt = Okt() 
+word_list = []    
 
 # csv파일 읽어오기(원하는 크롤링 결과 읽어오기)
 newsList = pd.read_csv("news_data.csv", delimiter='|', encoding="utf-8-sig")
