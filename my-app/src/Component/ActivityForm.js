@@ -56,7 +56,7 @@ const ActivityForm = ({ userId }) => {
                 <tr>
                   {/* <th className='forms-table__num'>No.</th> */}
                   <th className="my-forms-table__date">날짜</th>
-                  <th className="my-forms-table__title">내용</th>
+                  <th className="my-forms-table__title">제목</th>
                 </tr>
               </thead>
               <tbody>
