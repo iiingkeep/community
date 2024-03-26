@@ -3,7 +3,6 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
 import MySQLSession from "express-mysql-session";
-const MySQLStore = MySQLSession(session);
 import mysql from "mysql2/promise";
 import mysql2 from "mysql2";
 import bodyParser from "body-parser";
@@ -15,6 +14,8 @@ import { exec } from "child_process";
 import schedule from "node-schedule";
 import fs from "fs";
 import dotenv from "dotenv";
+
+const MySQLStore = MySQLSession(session);
 
 // 현재 모듈의 디렉토리 경로를 가져옵니다.
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
