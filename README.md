@@ -57,7 +57,7 @@
   * 제목 / 본문 / 제목+본문 검색
   * 게시글 클릭하여 접속 시 조회수 1 증가
   * 페이지네이션  
-<img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />
+<img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />  
 * 커뮤니티 글 쓰기 / 수정
   * 로그인 한 유저만 글쓰기
   * Quill 에디터 사용으로 다양한 기능 이용 가능
