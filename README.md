@@ -28,7 +28,7 @@
 * 이주호 : News-Feed, Web-Crawling
 ***
 ### 기술 스택
-![기술스택](https://github.com/iiingkeep/community/assets/151604087/dea198d3-4b47-45b9-9b92-a07d2aecf4a2)
+![기술스택](https://github.com/iiingkeep/community/assets/151604087/a63e3882-a6f1-4127-a40e-ae1f6c4b6925)
 ***
 ### 주요 기능
 * 로그인
