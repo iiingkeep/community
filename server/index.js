@@ -3,7 +3,6 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
 import MySQLSession from "express-mysql-session";
-const MySQLStore = MySQLSession(session);
 import mysql from "mysql2/promise";
 import mysql2 from "mysql2";
 import bodyParser from "body-parser";
@@ -14,6 +13,9 @@ import util from "util";
 import { exec } from "child_process";
 import schedule from "node-schedule";
 import fs from "fs";
+import dotenv from "dotenv";
+
+const MySQLStore = MySQLSession(session);
 
 // 현재 모듈의 디렉토리 경로를 가져옵니다.
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -39,16 +41,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
+dotenv.config();
 
-// MySQL 연결 설정
-// const poolPromise = mysql.createPool({
-//   host: "1.243.246.15",
-//   user: "root",
-//   password: "1234",
-//   database: "ezteam2",
-//   port: 5005,
-// });
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
 
 const poolPromise = mysql.createPool({
   host: DB_HOST,
@@ -57,14 +52,6 @@ const poolPromise = mysql.createPool({
   database: DB_DATABASE,
   port: DB_PORT,
 });
-
-// const connection = mysql2.createConnection({
-//   host: "1.243.246.15",
-//   user: "root",
-//   password: "1234",
-//   database: "ezteam2",
-//   port: 5005,
-// });
 
 const connection = mysql2.createConnection({
   host: DB_HOST,
