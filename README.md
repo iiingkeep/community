@@ -14,7 +14,7 @@
 * 프로젝트 종료 : 2024.04.09  
 ***
 ### 기획 의도
-![기획의도](https://github.com/iiingkeep/community/assets/151604087/b810d482-f343-4ff9-8734-6a15cb0d8d1b)
+![기획의도](https://github.com/iiingkeep/community/assets/151604087/f7cd1bf1-4d54-4f76-a6bd-b3e01fd0b7e6)
 ***
 ### 팀원
 * 곽별이 : MyPage, WordCloud
