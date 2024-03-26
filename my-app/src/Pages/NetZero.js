@@ -10,7 +10,6 @@ const NetZero = () => {
           <p className='com-header__title--detail'>탄소중립에 대해 소개합니다<br />
           탄소중립이 무엇인지 함께 알아보고, 실천 해 봐요</p>
           </h1>
-          <img className="com-header__img" src='background_img/netzero2.png' />
         </div>
         <img className="NetZero-img" src="./NetZero.png" alt="탄소중립 설명 이미지"></img>
       </div>

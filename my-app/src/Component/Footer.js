@@ -73,7 +73,7 @@ function Footer() {
             <div className="FooterLayer2">
                 <div className="FooterContent">
                     <div className="leftContent">
-                    <img src="/background_img/logo.png" />
+                    <img src="/background_img/logo2.png" />
                         <br />
                         <p>COPYRIGHT (C) 2024 K-DIGITAL ALL RIGHTS RESERVED.</p>
                     </div>

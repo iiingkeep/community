@@ -228,7 +228,6 @@ const News = () => {
               최신 환경 동향에 대해 파악하고 생각해 보는 시간을 가질 수 있어요
             </p>
           </h1>
-          <img className="com-header__img" src="background_img/news8.png" />
         </div>
       </Link>
       {/* 검색 */}
