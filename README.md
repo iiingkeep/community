@@ -2,10 +2,8 @@
 
 
 ### 프로젝트 소개
-<div align="center">
- <img src="https://github.com/iiingkeep/community/assets/151603893/f9f4109a-1103-44e9-bf43-df8b7a343330" width="381" height="100">
-</div>
 
+![표지](https://github.com/iiingkeep/community/assets/151604087/f16f36d1-49a6-4118-8baa-ff869a10d605)
 
 ***
 ### 개발 일정
@@ -15,6 +13,7 @@
 * 발표 및 평가 : 2024.03.28  
 * 프로젝트 종료 : 2024.04.09  
 ***
+### 기획 의도
 ![기획의도](https://github.com/iiingkeep/community/assets/151604087/b810d482-f343-4ff9-8734-6a15cb0d8d1b)
 ***
 ### 팀원
@@ -27,6 +26,9 @@
 * 김연진 : Main, Community
 
 * 이주호 : News-Feed, Web-Crawling
+***
+### 기술 스택
+![기술스택](https://github.com/iiingkeep/community/assets/151604087/dea198d3-4b47-45b9-9b92-a07d2aecf4a2)
 ***
 ### 주요 기능
 * 로그인
