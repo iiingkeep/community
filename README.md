@@ -1,10 +1,12 @@
 ## 탄소중립 정보 공유 커뮤니티 플랫폼 '빵끗'
 
-***
+
 ### 프로젝트 소개
 <div align="center">
  <img src="https://github.com/iiingkeep/community/assets/151603893/f9f4109a-1103-44e9-bf43-df8b7a343330" width="381" height="100">
 </div>
+
+
 ***
 ### 개발 일정
 * 기획 및 설계 시작 : 2023.11.20  
