@@ -14,18 +14,16 @@
 * 프로젝트 종료 : 2024.04.09  
 
 ### 팀원
-* 곽별이 : 
+* 곽별이 : MyPage, WordCloud
+ 
+* 김민규 : Community
 
-* 김민규 :
+* 김민호 : Login, Membership-Register
 
-* 김민호 :
+* 김연진 : Main, Community
 
-* 김연진 :
+* 이주호 : News-Feed, Web-Crawling
 
-* 이주호 :
-
-
-### 주요 기능
 ### 주요 기능
 * 로그인
   * 등록된 정보와 일치여부 확인을 통한 유효성 검사
