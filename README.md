@@ -15,6 +15,8 @@
 * 발표 및 평가 : 2024.03.28  
 * 프로젝트 종료 : 2024.04.09  
 ***
+<img "https://github.com/iiingkeep/community/commit/ccc6040c426f9e5aedf8d964fa9e5795bd394562" width="381" height="100">
+***
 ### 팀원
 * 곽별이 : MyPage, WordCloud
  
