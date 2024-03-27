@@ -35,7 +35,8 @@
   * 등록된 정보와 일치여부 확인을 통한 유효성 검사
   * 로그인 시 MySQLStore를 통한 세션 테이블 생성하여 관리
   * 로그인 시 세션에 유저 데이터 저장하 만료시간을 지정하여 1시간 후 또는 로그아웃 시 데이터 삭제
-<center><img width="45%" align="center" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /><center/>
+<p align="center">
+ <img width="45%" align="center" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /></p>
 
 * 회원가입
   * 정규표현식과 중복 확인을 통한 유효성 검사
