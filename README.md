@@ -76,20 +76,20 @@
  
 * 커뮤니티 글 목록
   * 유저가 작성한 글을 카테고라이징하여 목록으로 표시
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />
-</p>   
+  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />
+  </p>   
    
    
   * 제목 / 본문 / 제목+본문 검색   
 
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" />
-</p>  
+  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" />
+  </p>  
    
   * 게시글 클릭하여 접속 시 조회수 1 증가
   * 페이지네이션  
    
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" />
-</p>
+  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" />
+  </p>
    
 * 커뮤니티 글 쓰기 / 수정
   * 로그인 한 유저만 글쓰기
