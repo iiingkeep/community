@@ -56,7 +56,7 @@
   * 페이지네이션
 
    
-<div display="flex">
+<div style="display:flex">
  <img width="50%"
   src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" />
  <img width="50%"
