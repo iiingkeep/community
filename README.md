@@ -65,7 +65,7 @@
 
 <p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332
-" /></p>
+" /> <링크연결> </p>
 <p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1" /></p>
 <p align="center"><img width="80%" align="center" 
