@@ -114,7 +114,7 @@
   * 내가 쓴 글 / 내가 쓴 댓글 표시 및 클릭 시 해당 페이지로 이동
 * 마이페이지 좋아요
   * 좋아요 한 뉴스 / 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동   
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/b8de723f-9972-4b9c-8604-38b8179fc4a5" />
+<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" />
 </p>
@@ -126,7 +126,7 @@
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" />
 </p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/42c25d40-2b3f-40c2-b688-3712a1274174" />
+<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" />
 </p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e3ca2bb4-cb37-447c-8dec-091603699e06" />
+<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" />
 </p>
