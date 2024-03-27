@@ -60,8 +60,8 @@
 #### 환경이슈 : 네이버 검색 API를 이용, 지정한 시간에 최신 환경 뉴스를 크롤링하여 데이터 목록 표시
 <table>
   <colgroup>
-    <col style="width: 30%;">
-    <col style="width: 70%;">
+    <col style="width: 20%;">
+    <col style="width: 80%;">
   </colgroup>
   <thead>
     <tr>
