@@ -53,6 +53,29 @@
   * 첫 번째 섹션의 로그인 기능
   * 두 번째 섹션의 각 메뉴별 소개 및 이동 기능
   * 세 번째 섹션의 최신 환경 뉴스 기재, 그에 기반한 워드 클라우드 표시 및 다운로드 기능, 커뮤니티 인기글 기재
+ 
+---
+---
+ 
+| 환경이슈 |
+|---|
+| **\* 네이버 검색 API 이용** |
+| **\* 지정한 시간에 최신 환경 뉴스를 크롤링하여 데이터 목록 표시** |
+| **\* 검색 기능** |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d) |
+| **\* 최신순 / 오래된 순 / 조회수 높은 순 정렬** |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e) |
+| **\* 목록에서 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가** |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332) |
+| ![검색기능](https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1) |
+| **\* 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시** |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf52d480-99f5-48e5-9bda-ffbea68ad4a0) |
+| **\* 페이지네이션** |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf87ba7d-ebf3-448f-9387-95bc65ce1dc7) |
+
+---
+---
+
 * 환경이슈
   * 네이버 검색 API 이용
   * 지정한 시간에 최신 환경 뉴스를 크롤링하여 데이터 목록 표시
@@ -61,20 +84,6 @@
   * 목록에서 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가
   * 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시
   * 페이지네이션
- 
-<table>
- <thead>
-  <th>환경이슈</th>
- </thead>
- <tr>네이버 검색 API 이용</tr>
- <tr>지정한 시간에 최신 환경 뉴스를 크롤링하여 데이터 목록 표시</tr>
- <tr>검색 기능</tr>
- <tr>최신순 / 오래된 순 / 조회수 높은 순 정렬</tr>
- <tr>목록에서 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가</tr>
- <tr>기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시</tr>
- <tr>페이지네이션</tr>
-</table>
-
    
 <p align="center">
  <img width="40%"
@@ -85,8 +94,7 @@
 
 
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332
-" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332" /></p>
 <p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1" /></p>
 <p align="center"><img width="80%" align="center" 
