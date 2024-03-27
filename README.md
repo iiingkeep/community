@@ -76,12 +76,9 @@
 ---
 ---
 
-<p style="background-color:#fff5b1"> 노란형광펜 </p>
-<span style="background-color: yellow;">이 텍스트의 배경색은 노란색입니다.</span>
-<span style="background-color:lavender">Lavender</span>
-<span style='background-color: #fff5b1'>환경이슈</span>
-<span style='background-color: #dcffe4'>네이버 검색 API 이용</span>
+<p>$\bf{\large{\color{#6580DD}두꺼운\ 글씨체,\ 큰글씨,\ 파란색}}$</p>
 
+! text in orange
 
 
 
