@@ -54,6 +54,7 @@
   * 목록에서 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가
   * 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시
   * 페이지네이션
+   
 <img width="50%" align="center" 
   src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" />
 <img width="50%" align="center" 
