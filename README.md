@@ -32,9 +32,11 @@
 <img src="https://github.com/iiingkeep/community/assets/143868975/7dfb7a83-41f5-4cd1-a802-ecf8b13d6088" />
 </p>
 <p align="center">
-<img src="https://github.com/iiingkeep/community/assets/143868975/0eaee95a-3b06-432d-b19f-599c7eb31fea" />
+<img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/0eaee95a-3b06-432d-b19f-599c7eb31fea"/>
 </p>
+   
 ***
+   
 ### 주요 기능
 * 로그인
   * 등록된 정보와 일치여부 확인을 통한 유효성 검사
