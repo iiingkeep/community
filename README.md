@@ -55,17 +55,18 @@
   * 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시
   * 페이지네이션
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/1581feee-4ea6-47d9-b486-bf88cc5c8f88" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" /></p>
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/9529767d-f6a1-43bf-ab40-62154a894776" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e" /></p>
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/7a4d360f-d1f0-4b87-97bf-43db82332a61" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332
+" /></p>
 <p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1" /></p>
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/29546a7e-4c70-4f6b-ad7e-51c3a85c64ad" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/cf52d480-99f5-48e5-9bda-ffbea68ad4a0" /></p>
 <p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/1f7af167-c954-4972-96c3-22bfc1ee51e1" /></p>
+  src="https://github.com/iiingkeep/community/assets/143868975/cf87ba7d-ebf3-448f-9387-95bc65ce1dc7" /></p>
  
 * 커뮤니티 글 목록
   * 유저가 등록한 글 목록으로 표시
