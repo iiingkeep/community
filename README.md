@@ -108,25 +108,29 @@
    
 * 마이페이지 프로필
   * 프로필 사진 등록 및 삭제
-* 마이페이지 나의 정보 수정
-  * 회원 정보 수정 시 비밀번호 확인 후 페이지 이동
-  * 회원 정보 수정 시 정규표현식과 중복검사를 통한 유효성 검사
-* 마이페이지 나의 활동
-  * 내가 쓴 글 / 내가 쓴 댓글 표시 및 클릭 시 해당 페이지로 이동
-* 마이페이지 좋아요
-  * 좋아요 한 뉴스 / 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동   
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" />
 </p>
+
+* 마이페이지 나의 정보 수정
+  * 회원 정보 수정 시 비밀번호 확인 후 페이지 이동
+  * 회원 정보 수정 시 정규표현식과 중복검사를 통한 유효성 검사
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/6eab012d-1da5-411b-9ed6-3361225165ae" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/d339fabc-b153-4183-88b9-10a664929820" />
-</p>
+</p>   
+
+* 마이페이지 나의 활동
+  * 내가 쓴 글 / 내가 쓴 댓글 표시 및 클릭 시 해당 페이지로 이동
+
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" />
-</p>
+</p>   
+* 마이페이지 좋아요
+  * 좋아요 한 뉴스 / 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동   
+   
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" />
