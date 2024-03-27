@@ -60,8 +60,8 @@
 환경이슈 : 네이버 검색 API를 이용, 지정한 시간에 최신 환경 뉴스를 크롤링하여 데이터 목록 표시
 | function | video |
 | :---: | :---: |
-| **\ 검색 기능** | <img width="70%" src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" /> |
-| **\ 최신순 / 오래된 순 / 조회수 높은 순 정렬** | ![검색기능](https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e) |
+| **\ 검색 기능** | <img width="100%" src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" /> |
+| **\ 최신순 / 오래된 순 / 조회수 높은 순 정렬** | <img width="90%" src="https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e" /> |
 | **\ 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가** | ![검색기능](https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332) |
 | **\ 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시** | ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf52d480-99f5-48e5-9bda-ffbea68ad4a0) |
 | **\ 페이지네이션** | ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf87ba7d-ebf3-448f-9387-95bc65ce1dc7) |
