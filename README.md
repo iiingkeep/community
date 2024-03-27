@@ -1,4 +1,4 @@
-## 🍃탄소중립 정보 공유 커뮤니티 플랫폼 '빵끗'
+## 🍃 탄소중립 정보 공유 커뮤니티 플랫폼 '빵끗'
 
 
 ### 프로젝트 소개
@@ -6,17 +6,17 @@
 ![표지](https://github.com/iiingkeep/community/assets/151604087/f16f36d1-49a6-4118-8baa-ff869a10d605)
 
 ***
-### 개발 일정
+### 📆 개발 일정
 * 기획 및 설계 시작 : 2024.02.05  
 * 개발 시작 : 2024.02.19  
 * 검증 시작 : 2024.03.18  
 * 발표 및 평가 : 2024.03.28  
 * 프로젝트 종료 : 2024.04.09  
 ***
-### 기획 의도
+### ✅ 기획 의도
 ![기획의도](https://github.com/iiingkeep/community/assets/151603893/cca4882d-52be-4f80-b01b-ad97c4f96cd6)
 ***
-### 팀원
+### 🙋 팀원
 * 곽별이 : MyPage, WordCloud
  
 * 김민규 : Community
@@ -27,7 +27,7 @@
 
 * 이주호 : News-Feed, Web-Crawling
 ***
-### 기술 스택
+### 🛠️ 기술 스택
 <p align="center">
 <img src="https://github.com/iiingkeep/community/assets/143868975/1340bbaf-d67f-4177-8bc4-157042594f80" />
 </p>
@@ -37,7 +37,7 @@
    
 ***
    
-### 주요 기능
+### 🎠 주요 기능
 <p style="background-color:yellow">로그인</p>
   * 등록된 정보와 일치여부 확인을 통한 유효성 검사
   * 로그인 시 MySQLStore를 통한 세션 테이블 생성하여 관리
