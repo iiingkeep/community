@@ -54,17 +54,17 @@
   * 목록에서 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가
   * 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시
   * 페이지네이션
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/1581feee-4ea6-47d9-b486-bf88cc5c8f88" /></p>
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/9529767d-f6a1-43bf-ab40-62154a894776" /></p>
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/7a4d360f-d1f0-4b87-97bf-43db82332a61" /></p>
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1" /></p>
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/29546a7e-4c70-4f6b-ad7e-51c3a85c64ad" /></p>
-<p align="center"><img width="45%" align="center" 
+<p align="center"><img width="80%" align="center" 
   src="https://github.com/iiingkeep/community/assets/151604087/1f7af167-c954-4972-96c3-22bfc1ee51e1" /></p>
  
 * 커뮤니티 글 목록
