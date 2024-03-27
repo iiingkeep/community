@@ -79,10 +79,20 @@
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" />
 </p>
+   
+* 커뮤니티 글 쓰기 / 수정
+  * 로그인 한 유저만 글쓰기
+  * Quill 에디터 사용으로 다양한 기능 이용 가능
+  * 사진 등록, 크기 조절 가능
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" />
 </p>
+* 커뮤니티 게시글 상세
+  * 게시글 작성자 본인만 수정/ 삭제
+  * 로그인 한 유저는 좋아요 등록 및 등록 해제 가능
+  * 로그인 한 유저는 댓글 및 답글 등록
+  * 댓글 작성자 본인만 댓글 수정 / 삭제  
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" />
@@ -93,18 +103,6 @@
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" />
 </p>
-
-
-   
-* 커뮤니티 글 쓰기 / 수정
-  * 로그인 한 유저만 글쓰기
-  * Quill 에디터 사용으로 다양한 기능 이용 가능
-  * 사진 등록, 크기 조절 가능
-* 커뮤니티 게시글 상세
-  * 게시글 작성자 본인만 수정/ 삭제
-  * 로그인 한 유저는 좋아요 등록 및 등록 해제 가능
-  * 로그인 한 유저는 댓글 및 답글 등록
-  * 댓글 작성자 본인만 댓글 수정 / 삭제
 * 마이페이지 프로필
   * 프로필 사진 등록 및 삭제
 * 마이페이지 나의 정보 수정
