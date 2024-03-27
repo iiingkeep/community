@@ -87,7 +87,7 @@
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" />
-</p>
+</p>   
 * 커뮤니티 게시글 상세
   * 게시글 작성자 본인만 수정/ 삭제
   * 로그인 한 유저는 좋아요 등록 및 등록 해제 가능
@@ -102,7 +102,7 @@
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" />
 </p>
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" />
-</p>
+</p>   
 * 마이페이지 프로필
   * 프로필 사진 등록 및 삭제
 * 마이페이지 나의 정보 수정
