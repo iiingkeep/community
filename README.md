@@ -32,7 +32,7 @@
 <img src="https://github.com/iiingkeep/community/assets/143868975/7dfb7a83-41f5-4cd1-a802-ecf8b13d6088" />
 </p>
 <p align="center">
-<img src="https://github.com/iiingkeep/community/assets/143868975/d236fdd5-495e-4cc8-a165-7bf562e33190" />
+<img src="https://github.com/iiingkeep/community/assets/143868975/0eaee95a-3b06-432d-b19f-599c7eb31fea" />
 </p>
 ***
 ### 주요 기능
