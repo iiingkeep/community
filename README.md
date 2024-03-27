@@ -78,7 +78,7 @@
   * 유저가 작성한 글을 카테고라이징하여 목록으로 표시
 <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />
 </p>   
-
+   
    
   * 제목 / 본문 / 제목+본문 검색   
 
