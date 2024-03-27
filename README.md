@@ -79,11 +79,19 @@
 <p>$\bf{\large{\color{#6580DD}두꺼운\ 글씨체,\ 큰글씨,\ 파란색}}$</p>
 
 ![환경이슈](https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge)
+
+<img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="100px"/>
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-FFE6E6?style=for-the-badge)
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-E6E6FA?style=for-the-badge)
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-C0FFFF?style=for-the-badge)
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-FFFFF0?style=for-the-badge)
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-F5F5F5?style=for-the-badge)
+
 ![환경이슈](https://img.shields.io/badge/환경이슈-DCFFE4?style=for-the-badge)
 
 
