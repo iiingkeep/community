@@ -82,7 +82,7 @@
 
 <img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="100px"/>
 
-<img src="https://img.shields.io/badge/\n\n\n\n\n\n\n\n\n환경이슈\n\n\n\n\n\n\n\n\n-FFF5B1?style=for-the-badge" width="1000px" height="40px"/>
+<img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="1000px" height="40px"/>
 
 ![환경이슈](https://img.shields.io/badge/환경이슈-FFE6E6?style=for-the-badge)
 
