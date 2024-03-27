@@ -56,11 +56,12 @@
   * 페이지네이션
 
    
-
+<p align="center">
  <img width="40%"
   src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" />
  <img width="40%"
   src="https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e" />
+</p>
 
 
 <p align="center"><img width="80%" align="center" 
