@@ -29,6 +29,7 @@
 ***
 ### 기술 스택
 ![기술스택](https://github.com/iiingkeep/community/assets/151604087/a63e3882-a6f1-4127-a40e-ae1f6c4b6925)
+<img src="https://github.com/iiingkeep/community/assets/143868975/d236fdd5-495e-4cc8-a165-7bf562e33190" />
 ***
 ### 주요 기능
 * 로그인
