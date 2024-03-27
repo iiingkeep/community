@@ -29,7 +29,7 @@
 ***
 ### 기술 스택
 <p align="center">
-<img src="https://github.com/iiingkeep/community/assets/143868975/7dfb7a83-41f5-4cd1-a802-ecf8b13d6088" />
+<img src="https://github.com/iiingkeep/community/assets/143868975/1340bbaf-d67f-4177-8bc4-157042594f80" />
 </p>
 <p align="center">
 <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/0eaee95a-3b06-432d-b19f-599c7eb31fea"/>
