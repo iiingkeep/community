@@ -42,7 +42,7 @@
 #### 로그인 : 로그인 시 세션에 유저 데이터를 저장, 만료시간을 설정하여 1시간 후 또는 로그아웃 시 데이터 삭제 
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 등록된 정보와<br> 일치여부 확인을 통한<br> <nobr>유효성 검사 후 로그인</nobr> | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
+| 등록된 정보와<br> 일치여부 확인을 통한 <nobr>유효성 검사 후 로그인</nobr> | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
 
 ---
 ---
