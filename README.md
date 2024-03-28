@@ -112,8 +112,8 @@
 #### 마이페이지 프로필 : 유저 프로필 표시 및 사진 설정
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 프로필사진 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
-| 프로필사진 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+| 프로필사진  등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
+| 프로필사진  삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
 
 ---
 ---
@@ -140,4 +140,4 @@
 | 기능 | 구현 영상 |
 | :---: | :---: |
 | 좋아요 한 뉴스 표시 및<br> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
-| 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
+| 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
