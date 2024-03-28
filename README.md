@@ -82,7 +82,7 @@
 ![환경이슈](https://img.shields.io/badge/환경이슈-F5F5F5?style=for-the-badge)
 ![환경이슈](https://img.shields.io/badge/환경이슈-DCFFE4?style=for-the-badge)
 
-<img src="https://img.shields.io/badge/환                   경                   이                   슈-FFF5B1?style=for-the-badge" width="100%" height="60px"/>   
+<img src="https://img.shields.io/badge/                             환경이슈                            -FFF5B1?style=for-the-badge" width="100%" height="60px"/>   
    
 | 검색 |
 | :---: |
