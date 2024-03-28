@@ -60,7 +60,7 @@
 | :---: | :---: |
 | 첫 번째 섹션의 <br>로그인 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/339771b2-04b4-4cad-ac47-29a387d1189b" /> |
 | 두 번째 섹션의 <br>각 메뉴별 소개 및<br> 이동 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/a05259c3-a75c-4be8-b545-129facd73248" /> |
-| 세 번째 섹션의 <br>최신 환경 뉴스 기재,<br>그에 기반한<br>워드 클라우드 표시 및<br>다운로드 기능,<nobr>커뮤니티 인기글 기재</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
+| 세 번째 섹션의 <br>최신 환경 뉴스 기재,<br>그에 기반한 워드 클라우드 표시 및 다운로드 기능,<nobr>커뮤니티 인기글 기재</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
  
 ---
 ---
@@ -140,4 +140,4 @@
 | 기능 | 구현 영상 |
 | :---: | :---: |
 | 좋아요 한 뉴스 표시 및<br> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
-| <nobr>좋아요 한 게시글 표시 및</nobr> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
+| 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
