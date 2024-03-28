@@ -76,6 +76,7 @@
 <img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="100px"/>
 
 <img src="https://img.shields.io/badge/환                   경                   이                   슈-FFF5B1?style=for-the-badge" width="100%" height="60px"/>   
+   
 | 검색 |
 | :---: |
 | ![환경이슈](https://img.shields.io/badge/환경이슈-FFE6E6?style=for-the-badge) |
