@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import PaginatedItems from '../Util/PaginatedItems';
+import PaginatedItems from '../Component/PaginatedItems';
 import DOMPurify from 'dompurify';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 import { getPostThumbnail } from "../Util/utils";
-import './Community.css';
+import '../Styles/Community.css';
 
 const Community = ({loggedIn}) => {                                                                     // 게시물 목록을 페이지별로 출력하는 컴포넌트
   const [posts, setPosts] = useState([]);                                                               // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리

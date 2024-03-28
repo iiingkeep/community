@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { handlePostcode } from "../Pages/Postcodehandle";
+import { handlePostcode } from "./Postcodehandle";
 import PasswordValid from "./PasswordValid";
 import "../Styles/MyPage.css";
 

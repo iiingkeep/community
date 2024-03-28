@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react";
 import SingleComment from "./SingleComment";
-import "./ReplyComment.css"
+import "../Styles/ReplyComment.css"
 
 
 // 댓글에 달린 답글을 출력하는 컴포넌트

@@ -4,7 +4,7 @@ import ImageResize from "quill-image-resize-module-react";
 import React, {useState,useEffect, useRef, useMemo} from 'react';
 import { useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
-import './CommunityWrite.css'
+import '../Styles/CommunityWrite.css'
 Quill.register("modules/imageResize", ImageResize);
 
 const CommunityWrite = ({userid}) => {                                                    // 게시글 작성 컴포넌트

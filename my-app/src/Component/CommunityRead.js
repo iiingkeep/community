@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
-import './CommunityRead.css'
+import '../Styles/CommunityRead.css'
 
 const CommunityRead = ({loggedIn, userid}) => {                                                // 게시글 상세와 댓글을 출력하는 컴포넌트
   const navigate = useNavigate();

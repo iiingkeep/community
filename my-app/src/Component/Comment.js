@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {Icon} from '@iconify/react';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
-import './Comment.css'
+import '../Styles/Comment.css'
 
 const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount}) =>{             // 댓글 작성, 등록 컴포넌트
 

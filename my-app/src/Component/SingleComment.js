@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formattedDateAndTime } from "../Util/utils";
-import './SingleComment.css'
+import '../Styles/SingleComment.css'
 
 // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
 const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateComment, deleteComment}) => {

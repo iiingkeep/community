@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getPostThumbnail } from "../Util/utils";
 import {Icon} from '@iconify/react';
-import "./Main.css";
+import "../Styles/Main.css";
 
 const Main = ({loggedIn}) => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Footer.css';
+import '../Styles/Footer.css';
 
 function Footer() {
     useEffect(() => {

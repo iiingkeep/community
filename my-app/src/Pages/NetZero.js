@@ -1,5 +1,5 @@
 import React from "react";
-import "./NetZero.css";
+import "../Styles/NetZero.css";
 
 const NetZero = () => {
     return (

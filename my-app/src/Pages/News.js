@@ -3,7 +3,7 @@ import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import "./News.css";
+import "../Styles/News.css";
 import { formattedDateAndTime } from "../Util/utils";
 
 const News = () => {
