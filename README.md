@@ -93,8 +93,8 @@
 #### 커뮤니티 글 작성 / 수정 : 로그인한 유저만 글쓰기 가능하며 Quill 에디터 사용으로 다양한 기능 이용 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 글 작성 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
-| 글 수정 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
+| <div width="300px">글 작성<div> | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
+| <div width="300px">글 수정<div> | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
 
 ---
 ---
