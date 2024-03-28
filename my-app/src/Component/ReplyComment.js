@@ -2,8 +2,6 @@ import React, {useState,useEffect} from "react";
 import SingleComment from "./SingleComment";
 import "../Styles/ReplyComment.css"
 
-
-
 const ReplyComment = ({                                                                     // 댓글에 달린 답글을 출력하는 컴포넌트
   loggedIn, 
   userid, 
@@ -16,15 +14,13 @@ const ReplyComment = ({                                                         
   const [childCommentNumber, setChildCommentNumber] = useState();                           // 답글 갯수, 보기(펼침/접힘) 상태 관리
   const [openReplyComments, setOpenReplyComments] = useState();
 
-
-
-
   useEffect(() => {                                                                         // 각 댓글에 달린 답글의 갯수를 계산, 업데이트
     let commentNumber = 0;                                                                  // 전체 댓글 리스트에서 comment.responseTo값과 parentCommentId가 
     commentLists.map((comment) => {                                                         // 같은 답글은 그 답글의 갯수를 1씩 증가시켜 
       if(comment.responseTo === parentCommentId) {                                          // 각각의 댓글에 몇개의 답글이 있는지 계산
         commentNumber ++
       }
+      return null;
     })
     setChildCommentNumber(commentNumber)
   }, [commentLists, parentCommentId])
