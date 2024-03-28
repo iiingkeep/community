@@ -59,7 +59,7 @@
 | 기능 | 구현 영상 |
 | :---: | :---: |
 | 첫 번째 섹션의<br> 로그인 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/339771b2-04b4-4cad-ac47-29a387d1189b" /> |
-| 두 번째 섹션의<br> 각 메뉴별 소개 및 이동 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/a05259c3-a75c-4be8-b545-129facd73248" /> |
+| 두 번째 섹션의<br> 각 메뉴별 소개 및<br> 이동 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/a05259c3-a75c-4be8-b545-129facd73248" /> |
 | 세 번째 섹션의<br> 최신 환경 뉴스 기재, <br>그에 기반한 워드 클라우드 표시 및 다운로드 기능, <br>커뮤니티 인기글 기재 | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
  
 ---
@@ -84,7 +84,7 @@
 | :---: | :---: |
 | 카테고라이징 | <img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" /> |
 | 제목 / 본문 / 제목+본문 검색 | <img src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" /> |
-| 게시글 클릭하여 접속 시 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
+| 게시글 클릭하여 접속 시<br> 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 | 페이지네이션 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 
 ---
@@ -102,8 +102,8 @@
 #### 커뮤니티 게시글 상세 : 게시글 작성자 본인만 수정/삭제 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 로그인 한 유저는 좋아요 등록 및 등록 해제 가능 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
-| 로그인 한 유저는 댓글 및 답글 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
+| 로그인 한 유저는<br>좋아요 등록 및 등록 해제 가능 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
+| 로그인 한 유저는<br> 댓글 및 답글 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
 | 작성자 본인 댓글 수정 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
 | 작성자 본인 댓글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
 | 작성자 본인 게시글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
@@ -123,8 +123,8 @@
 #### 마이페이지 나의 정보 수정 : 본인만 수정할 수 있도록 인증 과정 설정
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 회원정보 수정 시 비밀번호 확인 후 페이지 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/6eab012d-1da5-411b-9ed6-3361225165ae" /> |
-| 회원정보 수정 시 정규표현식과 중복확인을 통한 유효성 검사 | <img src="https://github.com/iiingkeep/community/assets/143868975/d339fabc-b153-4183-88b9-10a664929820" /> |
+| 회원정보 수정 시<br> 비밀번호 확인 후 페이지 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/6eab012d-1da5-411b-9ed6-3361225165ae" /> |
+| 회원정보 수정 시<br> 정규표현식과 중복확인을 통한<br> 유효성 검사 | <img src="https://github.com/iiingkeep/community/assets/143868975/d339fabc-b153-4183-88b9-10a664929820" /> |
 
 ---
 ---
@@ -132,8 +132,8 @@
 #### 마이페이지 나의 활동 : 내가 쓴 글과 댓글 목록 출력 및 이동 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 내가 쓴 글 표시 및 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" /> |
-| 내가 쓴 댓글 표시 및 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" /> |
+| 내가 쓴 글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" /> |
+| 내가 쓴 댓글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" /> |
 
 ---
 ---
@@ -141,5 +141,5 @@
 #### 마이페이지 좋아요 : 내가 좋아요 한 뉴스와 게시글 목록 출력 및 이동 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 좋아요 한 뉴스 표시 및 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
-| 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
+| 좋아요 한 뉴스 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
+| 좋아요 한 게시글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
