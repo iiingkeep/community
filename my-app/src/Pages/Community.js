@@ -82,7 +82,6 @@ const Community = ({loggedIn}) => {                                             
       {/* 커뮤니티 헤더 */}
       <div className='com-header'><h1 className='com-header__title'>커뮤니티<p className='com-header__title--detail'>다른 사람들은 탄소중립을 어떻게 실천하고 있을까요?<br />
             팁도 얻고 고민도 해결해요. 실천기록을 남기면 칭찬과 격려 속에 뿌듯함은 두 배 !</p></h1>
-        <img className="com-header__img" src='background_img/thumb1.png' />
       </div>
 
       {/* 게시글 카테고리 탭 */}

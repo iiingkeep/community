@@ -75,7 +75,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
     setCommentCount(commentCount + 1);
 }
 
-    const updateComment = (updatedComment) => {                                                  // 댓글 수정 함수
+    const updateComment = (updatedComment) => {                                                  // 댓글 수정 시 댓글목록 업데이트
       const updatedComments = comments.map(comment => {
         if (comment.commentid === updatedComment.commentid) {
           return updatedComment;                                                                 // 수정된 댓글일 경우 해당 댓글로 대체
@@ -86,7 +86,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
       setComments(updatedComments);
     }
 
-  const deleteComment = (deletedCommentId) => {                                                  // 댓글 삭제 함수
+  const deleteComment = (deletedCommentId) => {                                                  // 댓글 삭제 시 댓글목록과 댓글 수 업데이트
     const updatedComments = comments.filter(comment => comment.commentid !== deletedCommentId);  // 삭제된 댓글을 제외한 새로운 댓글 목록 생성
     setComments(updatedComments);                                                                // 댓글 목록 업데이트
     setCommentCount(commentCount - 1);

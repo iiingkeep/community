@@ -91,6 +91,7 @@ const CommunityWrite = ({userid}) => {                                          
         console.log('글이 성공적으로 등록되었습니다.');
         alert('글이 성공적으로 등록되었습니다.')
         navigate('/Community');
+        window.scrollTo({ top: 0 });
       } else {
         console.error('예상치 못한 응답:', response);
         alert('글 등록에 실패했습니다. 다시 한 번 시도해주세요.')

@@ -90,15 +90,6 @@ table {
   position: relative;
   transform: translateX(-16%);
 }
-.com-header img{
-  /* width: 270px;
-  height: 270px; */
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  top: 11%;
-  left: 60%;
-}
 .com-header__title {
   color: rgb(112, 112, 112);
   font-size: 50px;

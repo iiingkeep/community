@@ -3,7 +3,6 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
 import MySQLSession from "express-mysql-session";
-const MySQLStore = MySQLSession(session);
 import mysql from "mysql2/promise";
 import mysql2 from "mysql2";
 import bodyParser from "body-parser";
@@ -15,6 +14,8 @@ import { exec } from "child_process";
 import schedule from "node-schedule";
 import fs from "fs";
 import dotenv from "dotenv";
+
+const MySQLStore = MySQLSession(session);
 
 // 현재 모듈의 디렉토리 경로를 가져옵니다.
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -499,7 +500,7 @@ app.get('/Community', async (req, res) => {
     const page = req.query.page || 1;
     // 페이지당 표시할 게시물 수
     const itemsPerPage = 5;
-    // 페이지별 첫번째 게시물의 인덱스
+    // 페이지별 첫번째 게시물의 인덱스(0, 5, 10, 15..)
     const offset = (page - 1) * itemsPerPage;
 
     const searchQuery = req.query.searchQuery || '';
