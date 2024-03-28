@@ -114,8 +114,8 @@
 #### 마이페이지 프로필 : 유저 프로필 표시 및 사진 설정
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 프로필사진 등록 &nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
-| 프로필사진 삭제 &nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+| 프로필사진 등록 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
+| 프로필사진 삭제 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
 
 ---
 ---
