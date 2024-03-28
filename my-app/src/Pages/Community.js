@@ -8,10 +8,8 @@ import { formattedDateAndTime } from "../Util/utils";
 import { getPostThumbnail } from "../Util/utils";
 import './Community.css';
 
-// 게시물 목록을 페이지별로 출력하는 컴포넌트
-const Community = ({loggedIn}) => {
-  // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리
-  const [posts, setPosts] = useState([]);
+const Community = ({loggedIn}) => {                                                                     // 게시물 목록을 페이지별로 출력하는 컴포넌트
+  const [posts, setPosts] = useState([]);                                                               // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,28 +18,26 @@ const Community = ({loggedIn}) => {
 
   const navigate = useNavigate();
 
-  // 검색어 업데이트
-  const handleSearchInputChange = (e) => {
+  const handleSearchInputChange = (e) => {                                                              // 검색어 업데이트
     setSearchQuery(e.target.value);
   };
-  // 검색유형 업데이트
-  const handleSearchTypeChange = (e) => {
+
+  const handleSearchTypeChange = (e) => {                                                               // 검색유형 업데이트
     setSearchType(e.target.value);
   };
-  // 검색버튼 클릭 시 페이지를 1로 새로고침 후 게시글 불러오기
-  const handleSearchButtonClick = () => {
+
+  const handleSearchButtonClick = () => {                                                               // 검색버튼 클릭 시 페이지를 1로 새로고침 후 게시글 불러오기
     setCurrentPage(1);
     fetchPosts();
   };
-  // 검색어 입력 후 엔터키 누르면 검색버튼 클릭과 같은 효과
-  const handleKeyDown = (e) => {
+
+  const handleKeyDown = (e) => {                                                                        // 검색어 입력 후 엔터키 누르면 검색버튼 클릭과 같은 효과
     if (e.key === "Enter") {
       handleSearchButtonClick();
     }
   };
 
-  //카테고리 선택 버튼
-  const handleCategoryClick = (categoryId) => {
+  const handleCategoryClick = (categoryId) => {                                                         //카테고리 선택 버튼
     setSelectedCategory(categoryId);
     setCurrentPage(1);
   };
@@ -51,9 +47,9 @@ const Community = ({loggedIn}) => {
     fetchPosts();
   }, [currentPage,selectedCategory]);
 
-  // 서버의 다음 엔드포인트에 게시글 목록과 게시글의 총 갯수 GET요청
+
   const fetchPosts = async () => {
-    try {
+    try {                                                                                               // 서버의 다음 엔드포인트에 게시글 목록과 게시글의 총 갯수 GET요청
       const response = await axios.get(`http://localhost:8000/Community?categoryId=${selectedCategory}&page=${currentPage}&searchQuery=${searchQuery}&searchType=${searchType}`);
       setPosts(response.data.posts);
       setTotalItems(response.data.totalItems);
@@ -62,27 +58,21 @@ const Community = ({loggedIn}) => {
     }
   };
 
-  // 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
-  const getPostContentWithoutImages = (content) => {
+  const getPostContentWithoutImages = (content) => {                                                    // 게시글 내용에 이미지를 제외하고 표시하도록 하는 함수
     return content.replace(/<img\s+[^>]*src="[^"]*"[^>]*>/g, '');
   };
 
-  // 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동하는 함수
-  const goCommunityWrite = () => {
-    if (loggedIn) {
-    // 로그인 상태일 경우 글쓰기 페이지로 이동
-    // 글쓰기 페이지로 이동할 때 selectedCategory 상태를 함께 전달
-    navigate('/Community/Write', { state: { selectedCategory } });
+  const goCommunityWrite = () => {                                                                      // 글쓰기 버튼 클릭 시 게시글 작성 페이지로 이동하는 함수
+    if (loggedIn) {                                                                                     // 로그인 상태일 경우 글쓰기 페이지로 이동
+    navigate('/Community/Write', { state: { selectedCategory } });                                      // 글쓰기 페이지로 이동할 때 selectedCategory 상태를 함께 전달
     } else {
-    // 로그인 상태가 아닐 경우 로그인 페이지로 이동
-      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {          // 로그인 상태가 아닐 경우 로그인 페이지로 이동
       navigate('/Login');
       }
     }
   };
   
-  // 현재 페이지를 변경하는 함수
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage) => {                                                              // 현재 페이지를 변경하는 함수
     setCurrentPage(newPage);
     window.scrollTo({ top: 0 });
   };

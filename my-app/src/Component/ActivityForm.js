@@ -9,10 +9,9 @@ const ActivityForm = ({ userId }) => {
   const [actiData, setActiData] = useState([]);
   const [commData, setCommData] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => {                                                                 // 활동 글 요청
     const fetchPostData = async () => {
       try {
-        // 활동 글 요청
         const posResponse = await axios.get(
           `http://localhost:8000/acti-post/${userId}`
         );
@@ -23,9 +22,8 @@ const ActivityForm = ({ userId }) => {
       }
     };
 
-    const fetchCommentData = async () => {
+    const fetchCommentData = async () => {                                          // 활동 댓글 요청
       try {
-        // 활동 댓글 요청
         const comResponse = await axios.get(
           `http://localhost:8000/acti-comment/${userId}`
         );
@@ -35,9 +33,7 @@ const ActivityForm = ({ userId }) => {
         console.log("Error fetching comment data:", error);
       }
     };
-
-    // 각각의 요청을 별도로 처리
-    fetchPostData();
+    fetchPostData();                                                                // 각각의 요청을 별도로 처리
     fetchCommentData();
   }, [userId]);
 
@@ -54,20 +50,20 @@ const ActivityForm = ({ userId }) => {
             <table className="my-forms-table">
               <thead>
                 <tr>
-                  {/* <th className='forms-table__num'>No.</th> */}
                   <th className="my-forms-table__date">날짜</th>
                   <th className="my-forms-table__title">제목</th>
                 </tr>
               </thead>
               <tbody>
-                {actiData.length === 0 ? ( // likedNews 배열의 길이가 0인 경우
+                {actiData.length === 0 ? (                                         // likedNews 배열의 길이가 0인 경우
                   <tr>
-                    <td colSpan="2">내가 쓴 글이 없습니다.</td> {/* 대체 UI */}
+                    <td colSpan="2">
+                      내가 쓴 글이 없습니다.
+                    </td> 
                   </tr>
                 ) : (
                   actiData.map((activity) => (
                     <tr key={activity.postid}>
-                      {/* <td>{activity.postid}</td> */}
                       <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
                       <td>
                         <div className="my-table__td-box">
@@ -83,11 +79,6 @@ const ActivityForm = ({ userId }) => {
                           </Link>
                         </div>
                       </td>
-                      {/* <td>
-                <div className="my-table__td-box">
-                  {moment(activity.createdAt).format('MM월 DD일')}
-                  </div>
-                  </td> */}
                     </tr>
                   )))}
               </tbody>
@@ -99,7 +90,6 @@ const ActivityForm = ({ userId }) => {
             <table className="my-forms-table">
               <thead>
                 <tr>
-                  {/* <th className='forms-table__num'>No.</th> */}
                   <th className="my-forms-table__date">날짜</th>
                   <th className="my-forms-table__title">내용</th>
                 </tr>
@@ -112,15 +102,13 @@ const ActivityForm = ({ userId }) => {
                 ) : (
                   commData.map((activity) => (
                     <tr key={activity.postid}>
-                      {/* <td>{activity.postid}</td> */}
                       <td>{moment(activity.createdAt).format("MM월 DD일")}</td>
                       <td>
                         <div className="my-table__td-box">
                           <Link
                             className="my-content__link"
                             to={`/Community/Read/${activity.postid}`}
-                          >
-                            {/* <span>{activity.content}</span> */}
+                            >
                             <span>
                               {activity.content.length > 25
                                 ? activity.content.substring(0, 25) + "..."
@@ -129,10 +117,6 @@ const ActivityForm = ({ userId }) => {
                           </Link>
                         </div>
                       </td>
-                      {/* <td>
-                <div className="my-table__td-box">
-                  {moment(activity.createdAt).format('MM월 DD일')}
-                  </div></td> */}
                     </tr>
                   )))}
               </tbody>

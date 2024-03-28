@@ -9,17 +9,17 @@ const EditForm = ({ userId, onFormChange }) => {
   const [profileData, setProfileData] = useState({});
   const [showEditForm, setShowEditForm] = useState(false);
 
-  const [username, setUsername] = useState(""); // 이름
-  const [password, setPassword] = useState(""); // 비밀번호
-  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
-  const [phonenumber, setPhonenumber] = useState(""); // 휴대폰 번호
+  const [username, setUsername] = useState("");                                                             // 이름
+  const [password, setPassword] = useState("");                                                             // 비밀번호
+  const [confirmPassword, setConfirmPassword] = useState("");                                               // 비밀번호 확인
+  const [phonenumber, setPhonenumber] = useState("");                                                       // 휴대폰 번호
 
-  const [openPostcode, setOpenPostcode] = useState(false); // 주소
-  const [address, setAddress] = useState(""); // 주소
-  const [detailedaddress, setdetailedaddress] = useState(""); // 상세 주소
+  const [openPostcode, setOpenPostcode] = useState(false);                                                  // 주소
+  const [address, setAddress] = useState("");                                                               // 주소
+  const [detailedaddress, setdetailedaddress] = useState("");                                               // 상세 주소
 
-  const [usernameDuplication, setUsernameDuplication] = useState(false); // 닉네임 유효성
-  const [phonenumberDuplication, setPhonenumberDuplication] = useState(false); // 휴대폰 번호 유효성
+  const [usernameDuplication, setUsernameDuplication] = useState(false);                                    // 닉네임 유효성
+  const [phonenumberDuplication, setPhonenumberDuplication] = useState(false);                              // 휴대폰 번호 유효성
   const [usernameChanged, setUsernameChanged] = useState(false);
   const [phonenumberChanged, setPhonenumberChanged] = useState(false);
 
@@ -29,35 +29,32 @@ const EditForm = ({ userId, onFormChange }) => {
     // setPasswordMatch(true) 또는 setPasswordMatch(false) 등으로 사용
   };
 
-  const spacebar = /\s/g; // 공백 정규표현식
-  const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g; // 특수문자 정규표현식
+  const spacebar = /\s/g;                                                                                   // 공백 정규표현식
+  const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;                                       // 특수문자 정규표현식
   const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
   const PWcheck =
-    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
-  const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/;                                   // PW 정규표현식
+  const tel = /^010\d{8}$/;                                                                                 // 휴대폰 번호 정규표현식
 
-  // 이전 username, phonenumber 상태를 저장할 변수
+                                                                                                            // 이전 username, phonenumber 상태를 저장할 변수
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
 
-  useEffect(() => {
-    // username 상태가 변경될 때만 실행
+  useEffect(() => {                                                                                         // username 상태가 변경될 때만 실행
     if (prevUsername.current !== username) {
-      setUsernameDuplication(false); // setUsernameDuplication을 false로 설정
-      prevUsername.current = username; // 이전 username 상태를 갱신
+      setUsernameDuplication(false);                                                                        // setUsernameDuplication을 false로 설정
+      prevUsername.current = username;                                                                      // 이전 username 상태를 갱신
     }
-  }, [username]); // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+  }, [username]);                                                                                           // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
 
-  useEffect(() => {
-    // phonenumber 상태가 변경될 때만 실행
+  useEffect(() => {                                                                                         // phonenumber 상태가 변경될 때만 실행
     if (prevPhonenumber.current !== phonenumber) {
-      setPhonenumberDuplication(false); // setPhonenumberDuplication을 false로 설정
-      prevPhonenumber.current = phonenumber; // 이전 phonenumber 상태를 갱신
+      setPhonenumberDuplication(false);                                                                     // setPhonenumberDuplication을 false로 설정
+      prevPhonenumber.current = phonenumber;                                                                // 이전 phonenumber 상태를 갱신
     }
   }, [phonenumber]);
 
-  // 유저가 닉네임을 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
-  useEffect(() => {
+  useEffect(() => {                                                                                         // 유저가 닉네임을 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
     if (profileData.username !== username) {
       setUsernameChanged(true);
     } else {
@@ -65,8 +62,7 @@ const EditForm = ({ userId, onFormChange }) => {
     }
   }, [profileData.username, username]);
 
-  // 유저가 핸드폰 번호를 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
-  useEffect(() => {
+  useEffect(() => {                                                                                         // 유저가 핸드폰 번호를 바꾸기 위해 수정을 시도한 경우에만 중복 검사 진행
     if (profileData.phonenumber !== phonenumber) {
       setPhonenumberChanged(true);
     } else {
@@ -74,16 +70,13 @@ const EditForm = ({ userId, onFormChange }) => {
     }
   }, [profileData.phonenumber, phonenumber]);
 
-  // 컴포넌트가 마운트될 때와 userId가 변경될 때마다 실행
-  // axios를 사용하여 서버에서 해당 userId에 해당하는 사용자 프로필 데이터를 가져옵니다.
-  // 가져온 데이터를 profileData 상태에 설정
-  useEffect(() => {
+  useEffect(() => {                                                                                       // 컴포넌트가 마운트될 때와 userId가 변경될 때마다 실행
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(
+        const response = await axios.get(                                                                 // axios를 사용하여 서버에서 해당 userId에 해당하는 사용자 프로필 데이터를 가져옵니다.
           `http://localhost:8000/my/edit/${userId}`
         );
-        const userData = response.data[0];
+        const userData = response.data[0];                                                                // 가져온 데이터를 profileData 상태에 설정
         setProfileData(userData);
         setUsername(userData.username);
         setPassword('')
@@ -98,19 +91,16 @@ const EditForm = ({ userId, onFormChange }) => {
     fetchProfile();
   }, []);
 
-  // 비밀번호 유효성 검사
-  const handlePasswordValid = async (password) => {
+  const handlePasswordValid = async (password) => {                                                       // 비밀번호 유효성 검사
     try {
-      // 비밀번호 검사 요청을 서버에 보냅니다.
-      const response = await axios.post(
+      const response = await axios.post(                                                                  // 비밀번호 검사 요청을 서버에 보냅니다.
         `http://localhost:8000/pw-valid/${userId}`,
         {
           userId: userId,
           password: password,
         }
       );
-      // 검증이 성공하면 수정 양식을 표시합니다.
-      setShowEditForm(response.data.isValid);
+      setShowEditForm(response.data.isValid);                                                             // 검증이 성공하면 수정 양식을 표시합니다.
       const res = response.data.isValid;
       console.log(res);
     } catch (error) {
@@ -118,11 +108,9 @@ const EditForm = ({ userId, onFormChange }) => {
     }
   };
 
-  // 닉네임 중복 검사
-  const handleUsernameCheck = () => {
+  const handleUsernameCheck = () => {                                                                     // 닉네임 중복 검사
     if (!username) {
       setUsernameDuplication(true);
-      // return;
     } else if (username.match(spacebar)) {
       alert("닉네임에 공백을 포함할 수 없습니다.");
       return;
@@ -149,8 +137,7 @@ const EditForm = ({ userId, onFormChange }) => {
       });
   };
 
-  // 휴대폰 번호 중복 검사
-  const handlePhonenumberCheck = () => {
+  const handlePhonenumberCheck = () => {                                                                  // 휴대폰 번호 중복 검사
     if (!phonenumber) {
       setPhonenumber(profileData.phonenumber);
       setPhonenumberDuplication(true);
@@ -183,26 +170,23 @@ const EditForm = ({ userId, onFormChange }) => {
       });
   };
 
-  const handleCancel = () => {
-    // MyPage 컴포넌트의 handleFormChange 함수 호출
+  const handleCancel = () => {                                                                           // MyPage 컴포넌트의 handleFormChange 함수 호출
     onFormChange('profile');
     window.scrollTo(0, 300);
   };
 
-
-  // 수정된 정보를 서버에 전송
   const handleEditSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault();                                                                             // 수정된 정보를 서버에 전송
     try {
       if (usernameChanged && !usernameDuplication) {
         alert("닉네임 중복 확인을 해주세요.");
         return;
-      } // 비밀번호를 입력한 경우에만 유효성 검사
+      }                                                                                                 // 비밀번호를 입력한 경우에만 유효성 검사
       if (password && (password.match(spacebar))) {
         alert("비밀번호에 공백을 포함할 수 없습니다.");
         setPasswordMatch(false);
         return; 
-      } // 비밀번호를 입력한 경우에만 유효성 검사
+      }                                                                                                 // 비밀번호를 입력한 경우에만 유효성 검사
       if (password && (!PWcheck.test(password))) {
         alert("비밀번호 형식이 올바르지 않습니다.");
         setPasswordMatch(false);
@@ -221,11 +205,10 @@ const EditForm = ({ userId, onFormChange }) => {
         alert("주소를 입력하세요.");
         return;
       }
-      //변경된 정보만 추출
-      const updatedData = {
+
+      const updatedData = {                                                                             //변경된 정보만 추출
         username: username,
-        // 비밀번호를 입력했다면 입력된 비밀번호를 반환, 그렇지 않으면 아무것도 반환하지 않음(서버에 전송X)
-        ...(password && { password: password }), 
+        ...(password && { password: password }),                                                        // 비밀번호를 입력했다면 입력된 비밀번호를 반환, 그렇지 않으면 아무것도 반환하지 않음(서버에 전송X)
         confirmPassword: confirmPassword,
         phonenumber: phonenumber,
         address: address,
@@ -242,8 +225,7 @@ const EditForm = ({ userId, onFormChange }) => {
     }
   };
 
-  // 비밀번호 유효성 검사 만족하는 상태
-  const passwordMatch = !spacebar.test(password) && password.match(PWcheck);
+  const passwordMatch = !spacebar.test(password) && password.match(PWcheck);                            // 비밀번호 유효성 검사 만족하는 상태
 
   return (
     <div className="my-edit-form">
@@ -345,7 +327,7 @@ const EditForm = ({ userId, onFormChange }) => {
                           name="confirmPassword"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          disabled={!password} // password가 비어 있으면 confirmPassword를 비활성화
+                          disabled={!password}                                                          // password가 비어 있으면 confirmPassword를 비활성화
                         />
                         <div className="my-edit__addspace">
                         {passwordMatch && confirmPassword && (

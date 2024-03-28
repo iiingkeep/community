@@ -6,13 +6,12 @@ import "../Styles/MyPage.css";
 
 const IsLikeForm = ({ userId }) => {
 
-  const [likedPosts, setLikedPosts] = useState([]); // 좋아요를 누른 포스트 목록 상태
-  const [likedNews, setLikedNews] = useState([]); // 좋아요를 누른 뉴스 목록 상태
+  const [likedPosts, setLikedPosts] = useState([]);                                     // 좋아요를 누른 포스트 목록 상태
+  const [likedNews, setLikedNews] = useState([]);                                       // 좋아요를 누른 뉴스 목록 상태
 
   useEffect(() => {
-    const fetchLikedPost = async () => {
+    const fetchLikedPost = async () => {                                                // 서버에서 유저가 좋아요를 누른 포스트 정보를 가져옴
       try {
-        // 서버에서 유저가 좋아요를 누른 포스트 정보를 가져옴
         const postResponse = await axios.get(
           `http://localhost:8000/is-like/posts/${userId}`
         );
@@ -23,9 +22,8 @@ const IsLikeForm = ({ userId }) => {
       }
     };
 
-    const fetchLikedNews = async () => {
+    const fetchLikedNews = async () => {                                                // 서버에서 유저가 좋아요를 누른 뉴스 정보를 가져옴
       try {
-        // 서버에서 유저가 좋아요를 누른 뉴스 정보를 가져옴
         const newsResponse = await axios.get(
           `http://localhost:8000/is-like/news/${userId}`
         );
@@ -38,7 +36,6 @@ const IsLikeForm = ({ userId }) => {
     fetchLikedPost();
     fetchLikedNews();
   }, [userId]);
-
   console.log(likedNews);
 
   return (

@@ -1,24 +1,17 @@
-// 이미지 팝업창 마우스로 움직이는 컴포넌트
-
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";                                  // 이미지 팝업창 마우스로 움직이는 컴포넌트
 
 const Draggable = ({ children }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const modalRef = useRef(null);
-  
 
-  // 마운트될 때 한 번 실행되도록 설정
-  useEffect(() => {
+  useEffect(() => {                                                                   // 마운트될 때 한 번 실행되도록 설정
     const modal = modalRef.current;
-    // 화면의 중앙에 모달을 위치시키기 위한 계산
-    const centerX = window.innerWidth / 2 - modal.offsetWidth / 2;
+    const centerX = window.innerWidth / 2 - modal.offsetWidth / 2;                    // 화면의 중앙에 모달을 위치시키기 위한 계산
     const centerY = window.innerHeight / 2 - modal.offsetHeight / 2;
-    // 모달의 초기 위치를 설정
-    modal.style.left = centerX + "px";
+    modal.style.left = centerX + "px";                                                // 모달의 초기 위치를 설정  
     modal.style.top = centerY + "px";
   }, []);
-
 
   const handleMouseDown = (event) => {
     setIsDragging(true);

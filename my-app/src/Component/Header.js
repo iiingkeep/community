@@ -5,8 +5,7 @@ import "./Header.css";
 const Header = ({ loggedIn, handleLogout }) => {
   const navigate = useNavigate();
 
-  // 헤더에서 메뉴 클릭 시 해당 페이지로 이동 후 스크롤을 맨 위로 초기화
-  const handleNavigation = (path) => {
+  const handleNavigation = (path) => {                                                            // 헤더에서 메뉴 클릭 시 해당 페이지로 이동 후 스크롤을 맨 위로 초기화
     navigate(path);
     window.scrollTo(0, 0);
   };

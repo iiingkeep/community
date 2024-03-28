@@ -6,55 +6,48 @@ import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 import './Comment.css'
 
+const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount}) =>{             // 댓글 작성, 등록 컴포넌트
 
-// 댓글 작성, 등록 컴포넌트
-const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount}) =>{
   const { id } = useParams();
   const [comment, setComment] = useState('');
 
   const navigate = useNavigate();
 
-  // 댓글 내용(comment) 업데이트
-  const onCommentHandle = (e) => {
+  const onCommentHandle = (e) => {                                                                                              // 댓글 내용(comment) 업데이트
     setComment(e.target.value);
   }
 
-  // 댓글 등록 버튼 클릭 시 호출되는 핸들러 함수. 
-  const onSubmit = async(e) => {
+  const onSubmit = async(e) => {                                                                                                // 댓글 등록 버튼 클릭 시 호출되는 핸들러 함수. 
     e.preventDefault();
     if (loggedIn) {
-      // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 데이터 전송을 위한 POST요청
     try{
       if (!comment.trim()) {
         alert('내용을 입력해주세요.');
         document.querySelector('.commu-comment__content').focus();
         return;
       }
-      const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {
-          userid: userid,
-          postid: id,
+      const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {                             // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 
+          userid: userid,                                                                                                       // 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 
+          postid: id,                                                                                                           // 데이터 전송을 위한 POST요청
           content: comment,
         });
         console.log(response.status);
         console.log(response.data);
-        // 댓글 등록 성공 시 알림 + 댓글창 비우기
-        // refreshFunction으로 새로 등록한 댓글 즉시 렌더링
         if (response&&response.status===201) {
-          alert('댓글이 등록되었습니다.');
-          refreshFunction(response.data.result);
+          alert('댓글이 등록되었습니다.');                                                                                      // 댓글 등록 성공 시 알림 + 댓글창 비우기
+          refreshFunction(response.data.result);                                                                                // refreshFunction으로 새로 등록한 댓글 즉시 렌더링
           setComment('');
-        } // 댓글 등록 실패 시 알림
+        }
         else {
           console.error('예상치 못한 응답:', response);
           alert('댓글 등록에 실패했습니다. 다시 한 번 시도해주세요.')
-        } // 에러 발생 시 알림
+        }
       }catch(err) {
         console.error('에러 발생:', err);
         alert('글 작성에 실패했습니다. 다시 한 번 시도해주세요.')
       }
     } else {
-      // 로그인 상태가 아닐 경우 로그인 페이지로 이동
-      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {
+      if (window.confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")) {                                  // 로그인 상태가 아닐 경우 로그인 페이지로 이동
         navigate('/Login');
       }
     }

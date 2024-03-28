@@ -7,46 +7,33 @@ import { Icon } from '@iconify/react';
 
 
 const ProfileForm = ({ userId }) => {
-    // 회원 정보 상태관리
-    const [profileData, setProfileData] = useState([]);
-    // 이미지 URL 상태관리
-    const [imageUrl, setImageUrl] = useState("");
-    // 이미지팝업창 클릭이벤트 상태관리
-    const [showPopup, setShowPopup] = useState(false);
+    const [profileData, setProfileData] = useState([]);                                                     // 회원 정보 상태관리
+    const [imageUrl, setImageUrl] = useState("");                                                           // 이미지 URL 상태관리
+    const [showPopup, setShowPopup] = useState(false);                                                      // 이미지팝업창 클릭이벤트 상태관리
 
-
-
-    // 이미지 업데이트 핸들러
-    // const handleProfileImg = (url) => {
-    //     setImageUrl(url);
-    // };
-    // 이미지팝업창 클릭이벤트
     const handleImgPopup = () => {
         setShowPopup(true);
     };
 
-    useEffect(() => {
-        // 페이지 로드 시 저장된 이미지url 가져와서 상태에 설정
+    useEffect(() => {                                                                                       // 페이지 로드 시 저장된 이미지url 가져와서 상태에 설정
         const savedImageUrl = localStorage.getItem('storageImg');
         if (savedImageUrl) {
             setImageUrl(savedImageUrl);
         }
 
-        // fetchProfile 함수를 useEffect 내부에서 정의하고 호출
-        const fetchProfile = async () => {
+        const fetchProfile = async () => {                                                                  // fetchProfile 함수를 useEffect 내부에서 정의하고 호출
             try {
                 const response = await axios.get(`http://localhost:8000/my/profile/${userId}`);
-                const userData = response.data[0]; // n번째 데이터
+                const userData = response.data[0];                                                          // n번째 데이터
                 setProfileData(userData);
-                // console.log(userData)
             } catch (error) {
                 console.error('Error: fetching profile data:', error);
             }
         };
 
-        // fetchProfile 함수 호출
-        fetchProfile();
-    }, [userId]); // userId가 변경될 때마다 호출
+
+        fetchProfile();                                                                                      // fetchProfile 함수 호출
+    }, [userId]);                                                                                            // userId가 변경될 때마다 호출
 
     return (
         <div className="my-profile-form" >

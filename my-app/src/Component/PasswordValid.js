@@ -4,10 +4,8 @@ import "../Styles/MyPage.css";
 
 const PasswordValid = ({ onPasswordValid }) => {
     const [password, setPassword] = useState('');
-
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => {                                                               // 부모 컴포넌트에게 기존 비밀번호 유효성 검사를 요청합니다.
         e.preventDefault();
-        // 부모 컴포넌트에게 기존 비밀번호 유효성 검사를 요청합니다.
         onPasswordValid(password);
     };
 

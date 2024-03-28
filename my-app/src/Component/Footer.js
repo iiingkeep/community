@@ -102,7 +102,6 @@ function Footer() {
                 </div>
             </div>
             <div className="FooterLayer3">
-                {/* <span>FooterIsNarrowed</span> */}
             </div>
         </footer>
     );
