@@ -100,8 +100,8 @@
 #### 커뮤니티 게시글 상세 : 게시글 작성자 본인만 수정/삭제 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 로그인 한 유저는<br>좋아요 등록 및<br> 등록 해제 가능 | <img src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
-| 로그인 한 유저는<br> 댓글 및 답글 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
+| 로그인 한 유저는 좋아요 등록 및 등록 해제 가능 | <img src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
+| 로그인 한 유저는 댓글 및 답글 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
 | <nobr>작성자 본인 댓글 수정</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
 | <nobr>작성자 본인 댓글 삭제</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
 | <nobr>작성자 본인 게시글 삭제</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
