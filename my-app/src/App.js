@@ -15,29 +15,22 @@ import NetZero from "./Pages/NetZero";
 import MyPage from './Pages/MyPage';
 import { ImageProvider } from './Component/ImageContext';
 
-
-// 수정 사항 적용 확인용
-
-
 function App() {
   const navigate = useNavigate();
 
-  // 로그인 상태에 따라 화면에 표시되는 버튼을 달리하는 '조건부렌더링' 구현
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [loggedIn, setLoggedIn] = useState(false);                                      // 로그인 상태에 따라 화면에 표시되는 버튼을 달리하는 '조건부렌더링' 구현
   const [userid, setUserid] = useState('');
   const [username, setUserName] = useState('');
 
-
-  // 페이지가 로드될 때 로그인 상태를 확인하고 상태를 업데이트
-  useEffect(() => {
+  useEffect(() => {                                                                     // 페이지가 로드될 때 로그인 상태를 확인하고 상태를 업데이트
     const storedLoggedIn = sessionStorage.getItem("loggedIn");
     if (storedLoggedIn) {
       setLoggedIn(true);
     }
   }, [setLoggedIn]);
 
-  // 세션 스토리지에서 유저 정보 가져오기
-  useEffect(() => {
+  useEffect(() => {                                                                     // 세션 스토리지에서 유저 정보 가져오기
     const storedUserData = sessionStorage.getItem('userData');
     if (storedUserData) {
         const userData = JSON.parse(storedUserData);
@@ -46,8 +39,7 @@ function App() {
     }
   }, []);
 
-  // 로그아웃 시 세션 스토리지에서 로그인 상태, 유저 정보 제거
-  const handleLogout = () => {
+  const handleLogout = () => {                                                          // 로그아웃 시 세션 스토리지에서 로그인 상태, 유저 정보 제거
     sessionStorage.removeItem("usertype"); 
     sessionStorage.removeItem("userData"); 
     sessionStorage.removeItem("loggedIn");
@@ -56,10 +48,7 @@ function App() {
     window.scrollTo(0, 0);
   };
 
-
-
-  return (
-    // ImageContext 추가
+  return (                                                                              // ImageContext 추가
     <ImageProvider>
     <div className="App">
       <Header loggedIn={loggedIn} handleLogout={handleLogout}/>
