@@ -50,7 +50,7 @@
 #### 회원가입 : 정규 표현식과 중복 확인을 통한 유효성 검사 설정. 비밀번호의 경우 bcrypt와 hash를 사용해 암호화하여 저장
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 유효성 검사 후 회원가입 | <img height="400px" src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
+| 유효성 검사 후 회원가입 | <img src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
    
 ---
 ---
@@ -93,8 +93,8 @@
 #### 커뮤니티 글 작성 / 수정 : 로그인한 유저만 글쓰기 가능하며 Quill 에디터 사용으로 다양한 기능 이용 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| <div width="300px">글 작성<div> | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
-| <div width="300px">글 수정<div> | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
+| 글 작성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
+| 글 수정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
 
 ---
 ---
@@ -102,11 +102,11 @@
 #### 커뮤니티 게시글 상세 : 게시글 작성자 본인만 수정/삭제 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 로그인 한 유저는<br>좋아요 등록 및 등록 해제 가능 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
-| 로그인 한 유저는<br> 댓글 및 답글 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
-| 작성자 본인 댓글 수정 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
-| 작성자 본인 댓글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
-| 작성자 본인 게시글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
+| 로그인 한 유저는<br>좋아요 등록 및 등록 해제 가능 | <img src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
+| 로그인 한 유저는<br> 댓글 및 답글 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
+| 작성자 본인 댓글 수정 | <img src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
+| 작성자 본인 댓글 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
+| 작성자 본인 게시글 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
 
 ---
 ---
@@ -114,8 +114,8 @@
 #### 마이페이지 프로필 : 유저 프로필 표시 및 사진 설정
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 프로필사진 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
-| 프로필사진 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+| 프로필사진 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
+| 프로필사진 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
 
 ---
 ---
