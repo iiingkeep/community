@@ -82,7 +82,7 @@
 | :---: | :---: |
 | 카테고라이징 | <img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" /> |
 | 제목 / 본문 / 제목+본문 검색 | <img src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" /> |
-| <nobr>게시글 클릭하여 접속 시</nobr><br> 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
+| <nobr>게시글 클릭하여 접속 시</nobr> 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 | 페이지네이션 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 
 ---
