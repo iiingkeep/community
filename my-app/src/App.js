@@ -5,7 +5,7 @@ import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Main from './Pages/Main';
 import Login from './Pages/Login';
-import RegisterPersonal from "./Component/RegisterPersonal";
+import RegisterPersonal from "./Pages/RegisterPersonal";
 import Community from './Pages/Community';
 import CommunityEdit from './Component/CommunityEdit';
 import CommunityWrite from './Component/CommunityWrite';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { handlePostcode } from "./Postcodehandle";
+import { handlePostcode } from "../Component/Postcodehandle";
 import axios from "axios";
 import "../Styles/RegisterPersonal.css";
 
