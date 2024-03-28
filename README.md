@@ -37,22 +37,30 @@
    
 ***
    
-### 🎠 주요 기능
-<p style="background-color:yellow">로그인</p>
-  * 등록된 정보와 일치여부 확인을 통한 유효성 검사
-  * 로그인 시 MySQLStore를 통한 세션 테이블 생성하여 관리
-  * 로그인 시 세션에 유저 데이터 저장하 만료시간을 지정하여 1시간 후 또는 로그아웃 시 데이터 삭제
-<p align="center"><img width="45%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /></p>
+### 🎠 주요 기능   
+   
+#### 로그인 : 로그인 시 세션에 유저 데이터를 저장, 만료시간을 설정하여 1시간 후 또는 로그아웃 시 데이터 삭제 
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 등록된 정보와<br> 일치여부 확인을 통한<br> 유효성 검사 후 로그인 | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
 
-* 회원가입
-  * 정규표현식과 중복 확인을 통한 유효성 검사
-  * bcrypt와 hash를 사용한 비밀번호 암호화
-  * 비밀번호와 비밀번호 확인 항목은 타이핑 시 동적 유효성 검사 진행
-* 메인페이지
-  * 첫 번째 섹션의 로그인 기능
-  * 두 번째 섹션의 각 메뉴별 소개 및 이동 기능
-  * 세 번째 섹션의 최신 환경 뉴스 기재, 그에 기반한 워드 클라우드 표시 및 다운로드 기능, 커뮤니티 인기글 기재
+---
+---
+   
+#### 회원가입 : 정규 표현식과 중복 확인을 통한 유효성 검사 설정. 비밀번호의 경우 bcrypt와 hash를 사용해 암호화하여 저장
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 유효성 검사 후 회원가입 | <img height="400px" src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
+   
+---
+---
+   
+#### 메인페이지 : 세 개의 섹션으로 나누어 사이트 소개 및 로그인 기능 설정
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 첫 번째 섹션의<br> 로그인 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/339771b2-04b4-4cad-ac47-29a387d1189b" /> |
+| 두 번째 섹션의<br> 각 메뉴별 소개 및<br> 이동 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/a05259c3-a75c-4be8-b545-129facd73248" /> |
+| 세 번째 섹션의<br> 최신 환경 뉴스 기재, <br>그에 기반한<br> 워드 클라우드 표시 및<br> 다운로드 기능, <br>커뮤니티 인기글 기재 | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
  
 ---
 ---
@@ -71,74 +79,67 @@
 
 
  
-* 커뮤니티 글 목록
-  * 유저가 작성한 글을 카테고라이징하여 목록으로 표시
-  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" />
-  </p>   
-   
-   
-  * 제목 / 본문 / 제목+본문 검색   
+#### 커뮤니티 글 목록 : 유저가 작성한 글을 카테고라이징하여 목록으로 표시
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 카테고라이징 | <img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" /> |
+| 제목 / 본문 / 제목+본문 검색 | <img src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" /> |
+| 게시글 클릭하여 접속 시<br> 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
+| 페이지네이션 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 
-  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" />
-  </p>  
+---
+---
    
-  * 게시글 클릭하여 접속 시 조회수 1 증가
-  * 페이지네이션  
-   
-  <p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" />
-  </p>
-   
-* 커뮤니티 글 쓰기 / 수정
-  * 로그인 한 유저만 글쓰기
-  * Quill 에디터 사용으로 다양한 기능 이용 가능
-  * 사진 등록, 크기 조절 가능
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" />
-</p>   
-   
-* 커뮤니티 게시글 상세
-  * 게시글 작성자 본인만 수정/ 삭제
-  * 로그인 한 유저는 좋아요 등록 및 등록 해제 가능
-  * 로그인 한 유저는 댓글 및 답글 등록
-  * 댓글 작성자 본인만 댓글 수정 / 삭제  
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" />
-</p>   
-   
-* 마이페이지 프로필
-  * 프로필 사진 등록 및 삭제
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" />
-</p>
+#### 커뮤니티 글 작성 / 수정 : 로그인한 유저만 글쓰기 가능하며 Quill 에디터 사용으로 다양한 기능 이용 가능
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 글 작성 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
+| 글 수정 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
 
-* 마이페이지 나의 정보 수정
-  * 회원 정보 수정 시 비밀번호 확인 후 페이지 이동
-  * 회원 정보 수정 시 정규표현식과 중복검사를 통한 유효성 검사
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/6eab012d-1da5-411b-9ed6-3361225165ae" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/d339fabc-b153-4183-88b9-10a664929820" />
-</p>   
-
-* 마이페이지 나의 활동
-  * 내가 쓴 글 / 내가 쓴 댓글 표시 및 클릭 시 해당 페이지로 이동
-
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" />
-</p>   
-* 마이페이지 좋아요
-  * 좋아요 한 뉴스 / 좋아요 한 게시글 표시 및 클릭 시 해당 페이지로 이동   
+---
+---
    
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" />
-</p>
-<p align="center"><img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" />
-</p>
+#### 커뮤니티 게시글 상세 : 게시글 작성자 본인만 수정/삭제 가능
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 로그인 한 유저는<br>좋아요 등록 및 등록 해제 가능 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
+| 로그인 한 유저는<br> 댓글 및 답글 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
+| 작성자 본인 댓글 수정 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
+| 작성자 본인 댓글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
+| 작성자 본인 게시글 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
+
+---
+---
+   
+#### 마이페이지 프로필 : 유저 프로필 표시 및 사진 설정
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 프로필사진 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
+| 프로필사진 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+
+---
+---
+   
+#### 마이페이지 나의 정보 수정 : 본인만 수정할 수 있도록 인증 과정 설정
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 회원정보 수정 시<br> 비밀번호 확인 후 페이지 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/6eab012d-1da5-411b-9ed6-3361225165ae" /> |
+| 회원정보 수정 시<br> 정규표현식과 중복확인을 통한<br> 유효성 검사 | <img src="https://github.com/iiingkeep/community/assets/143868975/d339fabc-b153-4183-88b9-10a664929820" /> |
+
+---
+---
+   
+#### 마이페이지 나의 활동 : 내가 쓴 글과 댓글 목록 출력 및 이동 가능
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 내가 쓴 글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" /> |
+| 내가 쓴 댓글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" /> |
+
+---
+---
+   
+#### 마이페이지 좋아요 : 내가 좋아요 한 뉴스와 게시글 목록 출력 및 이동 가능
+| 기능 | 구현 영상 |
+| :---: | :---: |
+| 좋아요 한 뉴스 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
+| 좋아요 한 게시글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
