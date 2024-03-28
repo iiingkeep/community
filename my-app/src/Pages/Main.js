@@ -81,16 +81,12 @@ const Main = ({loggedIn}) => {
   const topFiveNews = news.slice(0, 5);
 
   // 워드클라우드----------------------
-  // 워드클라우드 이미지 다운로드
-  const imageUrl = "http://localhost:3000/wc_image/result.png";
+  const imageUrl = "http://localhost:3000/wc_image/result.png";                                   // 워드클라우드 이미지 다운로드
   const handleDownload = async () => {
     try {
-      // 이미지 가져오기
-      const response = await fetch(imageUrl);
+      const response = await fetch(imageUrl);                                                     // 이미지 가져오기
       const blob = await response.blob();
-
-      // 파일 저장 위치 선택 및 파일 형식 지정
-      const fileHandle = await window.showSaveFilePicker({
+      const fileHandle = await window.showSaveFilePicker({                                        // 파일 저장 위치 선택 및 파일 형식 지정
         suggestedName: "image.jpg",
         types: [
           { accept: { "image/jpeg": [".jpg"] } },
@@ -98,8 +94,7 @@ const Main = ({loggedIn}) => {
         ],
       });
 
-      // 사용자가 선택한 파일 핸들을 사용하여 파일을 저장합니다.
-      const writableStream = await fileHandle.createWritable();
+      const writableStream = await fileHandle.createWritable();                                   // 사용자가 선택한 파일 핸들을 사용하여 파일을 저장합니다.
       await writableStream.write(blob);
       await writableStream.close();
     } catch (error) {

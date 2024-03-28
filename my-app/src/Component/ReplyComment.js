@@ -3,31 +3,37 @@ import SingleComment from "./SingleComment";
 import "../Styles/ReplyComment.css"
 
 
-// 댓글에 달린 답글을 출력하는 컴포넌트
-const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteComment, commentLists, parentCommentId, postId}) => {
-  // 답글 갯수, 보기(펼침/접힘) 상태 관리
-  const [childCommentNumber, setChildCommentNumber] = useState();
+
+const ReplyComment = ({                                                                     // 댓글에 달린 답글을 출력하는 컴포넌트
+  loggedIn, 
+  userid, 
+  refreshFunction, 
+  updateComment, 
+  deleteComment, 
+  commentLists, 
+  parentCommentId, 
+  postId}) => {
+  const [childCommentNumber, setChildCommentNumber] = useState();                           // 답글 갯수, 보기(펼침/접힘) 상태 관리
   const [openReplyComments, setOpenReplyComments] = useState();
 
 
-  // 각 댓글에 달린 답글의 갯수를 계산, 업데이트
-  // 전체 댓글 리스트에서 comment.responseTo값과 parentCommentId가 같은 답글은 그 답글의 갯수를 1씩 증가시켜 각각의 댓글에 몇개의 답글이 있는지 계산
-  useEffect(() => {
-    let commentNumber = 0;
-    commentLists.map((comment) => {
-      if(comment.responseTo === parentCommentId) {
+
+
+  useEffect(() => {                                                                         // 각 댓글에 달린 답글의 갯수를 계산, 업데이트
+    let commentNumber = 0;                                                                  // 전체 댓글 리스트에서 comment.responseTo값과 parentCommentId가 
+    commentLists.map((comment) => {                                                         // 같은 답글은 그 답글의 갯수를 1씩 증가시켜 
+      if(comment.responseTo === parentCommentId) {                                          // 각각의 댓글에 몇개의 답글이 있는지 계산
         commentNumber ++
       }
     })
     setChildCommentNumber(commentNumber)
   }, [commentLists, parentCommentId])
 
-  // 답글 렌더링 함수
-  let renderReplyComment = (parentCommentId) => 
-    commentLists.map((comment, index) => (
+  let renderReplyComment = (parentCommentId) =>                                             // 답글 렌더링 함수
+    commentLists.map((comment, index) => (                                                  //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 
       <React.Fragment key={index}>
-      { //전체 댓글 배열을 순회하며 답글이 있는 댓글의 경우 그 답글에 다시 답글을 달고 표시할 수 있도록 SingleComment와 ReplyComment 컴포넌트 렌더링
-        comment.responseTo === parentCommentId &&
+      {                                                                                     // 그 답글에 다시 답글을 달고 표시할 수 있도록
+        comment.responseTo === parentCommentId &&                                           // SingleComment와 ReplyComment 컴포넌트 렌더링
         <div style={{marginLeft: '40px'}}>
         <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId} />
         <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.commentid} postId={postId}/>
@@ -36,8 +42,7 @@ const ReplyComment = ({loggedIn, userid, refreshFunction, updateComment, deleteC
       </React.Fragment>
     ))
 
-    // 답글 보기를 클릭했을 때 접히고 펼쳐지는 상태를 업데이트 하는 함수
-    const openCloseChange = () => {
+    const openCloseChange = () => {                                                         // 답글 보기를 클릭했을 때 접히고 펼쳐지는 상태를 업데이트 하는 함수
       setOpenReplyComments(!openReplyComments)
     }
 

@@ -5,17 +5,17 @@ import axios from "axios";
 import "../Styles/RegisterPersonal.css";
 
 function RegisterPersonal() {
-  const [email, setEmail] = useState(""); // 아이디
-  const [username, setUsername] = useState(""); // 이름
-  const [password, setPassword] = useState(""); // 비밀번호
-  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
-  const [phonenumber, setPhonenumber] = useState(""); // 휴대폰 번호
-  const [openPostcode, setOpenPostcode] = useState(false); // 주소
-  const [address, setAddress] = useState(""); // 주소
-  const [detailedaddress, setdetailedaddress] = useState(""); // 상세 주소
-  const [emailDuplication, setEmailDuplication] = useState(false); // 아이디 유효성
-  const [usernameDuplication, setUsernameDuplication] = useState(false); // 닉네임 유효성
-  const [phonenumberDuplication, setPhonenumberDuplication] = useState(false); // 휴대폰 번호 유효성
+  const [email, setEmail] = useState("");                                                           // 아이디
+  const [username, setUsername] = useState("");                                                     // 이름
+  const [password, setPassword] = useState("");                                                     // 비밀번호
+  const [confirmPassword, setConfirmPassword] = useState("");                                       // 비밀번호 확인
+  const [phonenumber, setPhonenumber] = useState("");                                               // 휴대폰 번호
+  const [openPostcode, setOpenPostcode] = useState(false);                                          // 주소
+  const [address, setAddress] = useState("");                                                       // 주소
+  const [detailedaddress, setdetailedaddress] = useState("");                                       // 상세 주소
+  const [emailDuplication, setEmailDuplication] = useState(false);                                  // 아이디 유효성
+  const [usernameDuplication, setUsernameDuplication] = useState(false);                            // 닉네임 유효성
+  const [phonenumberDuplication, setPhonenumberDuplication] = useState(false);                      // 휴대폰 번호 유효성
 
   const handle = handlePostcode(openPostcode, setOpenPostcode, setAddress);
 
@@ -23,40 +23,36 @@ function RegisterPersonal() {
     // setPasswordMatch(true) 또는 setPasswordMatch(false) 등으로 사용
   };
 
-  const spacebar = /\s/g; // 공백 정규표현식
-  const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g; // 특수문자 정규표현식
-  const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/; // ID 정규표현식
+  const spacebar = /\s/g;                                                                           // 공백 정규표현식
+  const special = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;                               // 특수문자 정규표현식
+  const IDcheck = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,20}$/;                                   // ID 정규표현식
   const NICKcheck = /^[가-힣a-zA-Z0-9]{4,10}$/;
   const PWcheck =
-    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/; // PW 정규표현식
-  const tel = /^010\d{8}$/; // 휴대폰 번호 정규표현식
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!])[a-zA-Z\d@#$%^&+=!]{8,16}$/;                           // PW 정규표현식
+  const tel = /^010\d{8}$/;                                                                         // 휴대폰 번호 정규표현식
 
-  // 이전 email, username, phonenumber 상태를 저장할 변수
-  const prevEmail = useRef(email);
+  const prevEmail = useRef(email);                                                                  // 이전 email, username, phonenumber 상태를 저장할 변수
   const prevUsername = useRef(username);
   const prevPhonenumber = useRef(phonenumber);
 
-  useEffect(() => {
-    // email 상태가 변경될 때만 실행
+  useEffect(() => {                                                                                 // email 상태가 변경될 때만 실행
     if (prevEmail.current !== email) {
-      setEmailDuplication(false); // setEmailDuplication을 false로 설정
-      prevEmail.current = email; // 이전 email 상태를 갱신
+      setEmailDuplication(false);                                                                   // setEmailDuplication을 false로 설정
+      prevEmail.current = email;                                                                    // 이전 email 상태를 갱신
     }
-  }, [email]); // email 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+  }, [email]);                                                                                      // email 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
 
-  useEffect(() => {
-    // username 상태가 변경될 때만 실행
+  useEffect(() => {                                                                                 // username 상태가 변경될 때만 실행
     if (prevUsername.current !== username) {
-      setUsernameDuplication(false); // setUsernameDuplication을 false로 설정
-      prevUsername.current = username; // 이전 username 상태를 갱신
+      setUsernameDuplication(false);                                                                // setUsernameDuplication을 false로 설정
+      prevUsername.current = username;                                                              // 이전 username 상태를 갱신
     }
-  }, [username]); // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
+  }, [username]);                                                                                   // username 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
 
-  useEffect(() => {
-    // phonenumber 상태가 변경될 때만 실행
+  useEffect(() => {                                                                                 // phonenumber 상태가 변경될 때만 실행
     if (prevPhonenumber.current !== phonenumber) {
-      setPhonenumberDuplication(false); // setPhonenumberDuplication을 false로 설정
-      prevPhonenumber.current = phonenumber; // 이전 phonenumber 상태를 갱신
+      setPhonenumberDuplication(false);                                                             // setPhonenumberDuplication을 false로 설정
+      prevPhonenumber.current = phonenumber;                                                        // 이전 phonenumber 상태를 갱신
     }
   }, [phonenumber]); // phonenumber 상태가 변경될 때만 실행되도록 useEffect의 의존성 배열에 추가
 

@@ -23,13 +23,10 @@ const MyPage = () => {
         const userData = JSON.parse(storedUserData);
         const response = await axios.get(`http://localhost:8000/my/${formType}/${userData.userid}`);
 
-        // 반환된 데이터가 배열 안에 객체이므로 첫 번째 요소를 선택
-        if (response.data.length > 0) {
-          // 응답 데이터 형식은 배열 안에 객체의 형태
-          // response.data는 배열이며, 실제 데이터는 배열의 첫 번째 요소인 객체에 들어 있다 
-          setFormData(response.data[0]); // 첫 번째 요소에 해당하는 객체를 상태로 설정
-        } else {
-          console.log("User data not found");
+        if (response.data.length > 0) {                                                                           // 반환된 데이터가 배열 안에 객체이므로 첫 번째 요소를 선택
+          setFormData(response.data[0]);                                                                          // 응답 데이터 형식은 배열 안에 객체의 형태
+        } else {                                                                                                  // response.data는 배열이며, 실제 데이터는 배열의 첫 번째 요소인 객체에 들어 있다 
+          console.log("User data not found");                                                                     // 첫 번째 요소에 해당하는 객체를 상태로 설정
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -38,8 +35,7 @@ const MyPage = () => {
     fetchData(activeForm);
   }, [activeForm]);
 
-  // 폼 선택 핸들러
-  const handleFormChange = (formType) => {
+  const handleFormChange = (formType) => {                                                                        // 폼 선택 핸들러
     setActiveForm(formType);
     setSelectedButton(formType);
   };
@@ -74,18 +70,3 @@ const MyPage = () => {
 };
 
 export default MyPage;
-
-// const MyPage = () => {
-//   return (
-//     <div className='MyPage'>
-//       마이페이지
-//       <div>
-//         <button>포인트</button>
-//         <button>개인정보 수정</button>
-//         <button>나의 활동내역</button>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default MyPage;
