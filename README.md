@@ -42,7 +42,7 @@
 #### 로그인 : 로그인 시 세션에 유저 데이터를 저장, 만료시간을 설정하여 1시간 후 또는 로그아웃 시 데이터 삭제 
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 등록된 정보와 일치여부 확인을 통한 유효성 검사 후 로그인 | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
+| 등록된 정보와<br> 일치여부 확인을 통한<br> 유효성 검사 후 로그인 | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
 
 ---
 ---
@@ -50,7 +50,7 @@
 #### 회원가입 : 정규 표현식과 중복 확인을 통한 유효성 검사 설정. 비밀번호의 경우 bcrypt와 hash를 사용해 암호화하여 저장
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 유효성 검사 후 회원가입 | <img src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
+| 유효성 검사 후 회원가입 | <img height="400px" src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
    
 ---
 ---
@@ -60,7 +60,7 @@
 | :---: | :---: |
 | 첫 번째 섹션의<br> 로그인 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/339771b2-04b4-4cad-ac47-29a387d1189b" /> |
 | 두 번째 섹션의<br> 각 메뉴별 소개 및<br> 이동 기능 | <img src="https://github.com/iiingkeep/community/assets/143868975/a05259c3-a75c-4be8-b545-129facd73248" /> |
-| 세 번째 섹션의<br> 최신 환경 뉴스 기재, <br>그에 기반한 워드 클라우드 표시 및 다운로드 기능, <br>커뮤니티 인기글 기재 | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
+| 세 번째 섹션의<br> 최신 환경 뉴스 기재, <br>그에 기반한<br> 워드 클라우드 표시 및<br> 다운로드 기능, <br>커뮤니티 인기글 기재 | <img src="https://github.com/iiingkeep/community/assets/143868975/9a0548db-9be5-4e53-b553-77ac4f53e9b2" /> |
  
 ---
 ---
@@ -93,8 +93,8 @@
 #### 커뮤니티 글 작성 / 수정 : 로그인한 유저만 글쓰기 가능하며 Quill 에디터 사용으로 다양한 기능 이용 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 글 작성 | <img src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
-| 글 수정 | <img src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
+| 글 작성 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/cff90797-0926-46b6-8c2f-875617e11921" /> |
+| 글 수정 | <img width="700px" src="https://github.com/iiingkeep/community/assets/143868975/69329bf7-c0b5-4a74-b8ef-2faae23168d9" /> |
 
 ---
 ---
@@ -114,8 +114,8 @@
 #### 마이페이지 프로필 : 유저 프로필 표시 및 사진 설정
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 프로필사진 등록 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
-| 프로필사진 삭제 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+| 프로필사진 등록 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
+| 프로필사진 삭제 | <img width="80%" src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
 
 ---
 ---
