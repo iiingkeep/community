@@ -73,18 +73,36 @@
 
 ![환경이슈](https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge)
 
-<img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="100px"/>
+<img src="https://img.shields.io/badge/환경이슈-FFF5B1?style=for-the-badge" width="100px"/>   
+
+![환경이슈](https://img.shields.io/badge/환경이슈-FFE6E6?style=for-the-badge)
+![환경이슈](https://img.shields.io/badge/환경이슈-E6E6FA?style=for-the-badge)
+![환경이슈](https://img.shields.io/badge/환경이슈-C0FFFF?style=for-the-badge)
+![환경이슈](https://img.shields.io/badge/환경이슈-FFFFF0?style=for-the-badge)
+![환경이슈](https://img.shields.io/badge/환경이슈-F5F5F5?style=for-the-badge)
+![환경이슈](https://img.shields.io/badge/환경이슈-DCFFE4?style=for-the-badge)
 
 <img src="https://img.shields.io/badge/환                   경                   이                   슈-FFF5B1?style=for-the-badge" width="100%" height="60px"/>   
    
 | 검색 |
 | :---: |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-FFE6E6?style=for-the-badge) |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-E6E6FA?style=for-the-badge) |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-C0FFFF?style=for-the-badge) |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-FFFFF0?style=for-the-badge) |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-F5F5F5?style=for-the-badge) |
-| ![환경이슈](https://img.shields.io/badge/환경이슈-DCFFE4?style=for-the-badge) |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d) |
+   
+| 최신순 / 오래된 순 / 조회수 높은 순 정렬 |
+| :---: |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e) |
+   
+| 기사 클릭 시 해당 기사의 url로 이동하며 조회수 1 증가 |
+| :---: |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332) |
+   
+| 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시 |
+| :---: |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf52d480-99f5-48e5-9bda-ffbea68ad4a0) |
+   
+| 페이지네이션 |
+| :---: |
+| ![검색기능](https://github.com/iiingkeep/community/assets/143868975/cf87ba7d-ebf3-448f-9387-95bc65ce1dc7) |
 
 
 
@@ -97,22 +115,7 @@
   * 기사 좋아요 토글 시 로그인 안 된 유저는 로그인 페이지로 이동, 로그인 된 유저는 좋아요 표시
   * 페이지네이션
    
-<p align="center">
- <img width="40%"
-  src="https://github.com/iiingkeep/community/assets/143868975/def43f9f-f5e2-4524-b9af-dc13ebb1d05d" />
- <img width="40%"
-  src="https://github.com/iiingkeep/community/assets/143868975/9be8bf98-4f02-4d80-9b09-6be8b47dfa5e" />
-</p>
 
-
-<p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/143868975/e8abca1d-7a79-431b-934b-b663ea80d332" /></p>
-<p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/151604087/b4688d6d-e611-4ffc-9800-6684dff2a4e1" /></p>
-<p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/143868975/cf52d480-99f5-48e5-9bda-ffbea68ad4a0" /></p>
-<p align="center"><img width="80%" align="center" 
-  src="https://github.com/iiingkeep/community/assets/143868975/cf87ba7d-ebf3-448f-9387-95bc65ce1dc7" /></p>
  
 * 커뮤니티 글 목록
   * 유저가 작성한 글을 카테고라이징하여 목록으로 표시
