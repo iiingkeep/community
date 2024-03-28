@@ -13,14 +13,11 @@
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
-  align-items: center; /* 수직 가운데 정렬 */
-  /* background: url('../../public/background_img/back.jpg') no-repeat; */
-  /* background-size: auto 150%;  */
-  /* 이미지 비율은 그대로 유지하면서 너비는 자동으로 조정되도록 설정 */
+  align-items: center;
 }
 
 .login-right {
-  width: 350px; /* 배경 이미지의 너비 */
+  width: 350px;
   height: 400px;
   background-color: white;
   display: flex;
@@ -37,9 +34,9 @@
 
 /* 상단 회원가입 문구 */
 .login-form h2 {
-  text-align: center; /* 가운데 정렬 */
-  margin-bottom: 40px; /* 아래 여백 추가 */
-  font-size: 24px; /* 텍스트 크기 조정 */
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
 }
 
 .login-box input {

@@ -1,9 +1,4 @@
 .Footer {
-    /* position: relative;
-    bottom: 0;
-    width: 100%;
-    height:100%;
-     */
      height: 172px;
      position: relative;
      transform:translateY(0%);
@@ -51,7 +46,6 @@
     text-align: center;
     list-style: none;
     display: flex;
-    /* flex-direction: column; */
 }
 
 .FooterLink > li {
@@ -71,7 +65,6 @@
 .LayerDivWrap {
     width: 15%;
     margin-right:10%;
-    /* justify-content: space-between; */
 }
 
 .FooterLinkDivWrap {
@@ -138,31 +131,24 @@ padding-right: 3%;
     border-radius: 5rem;    
     letter-spacing: -0.05rem;
     transition: all 0.2s;
-    /* margin-left: 15%; */
 }
 
 .list > ul {
     width: 172.28px;
     margin-left: 12%;
-    /* margin: 0 auto; */
     position: absolute;
     top: 5%;
-    /* justify-content: ; */
 }
 
 .labelList .list {
     margin-left:15%;
     visibility: hidden;
     overflow: hidden;
-    /* top: -300%; */
     width: 172.28px;
-    /* height: 0 auto; */
     opacity: 1;
     position: absolute;
     left: auto;
     bottom: 100%;
-    /* min-width: 100%; */
-    /* margin-bottom: 30%; */
     padding: 4rem 0;
     border-radius: 2rem;
     border: 1px solid #b3b3b3;
@@ -202,7 +188,5 @@ padding-right: 3%;
     overflow: visible;
     width: 172.28px;
     height: 140px;
-    /* opacity: 0.855; */
     bottom: calc(100% + 1rem);
-    /* padding: 2rem; */
 }
