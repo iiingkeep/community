@@ -42,7 +42,7 @@
 #### 로그인 : 로그인 시 세션에 유저 데이터를 저장, 만료시간을 설정하여 1시간 후 또는 로그아웃 시 데이터 삭제 
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 등록된 정보와<br> 일치여부 확인을 통한<br> 유효성 검사 후 로그인 | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
+| 등록된 정보와<br> 일치여부 확인을 통한<br> <nobr>유효성 검사 후 로그인</nobr> | <img width="45%" src="https://github.com/iiingkeep/community/assets/151604087/f8289786-20ad-4c89-962e-138e071ec791" /> |
 
 ---
 ---
@@ -102,8 +102,8 @@
 | :---: | :---: |
 | 로그인 한 유저는<br>좋아요 등록 및<br> 등록 해제 가능 | <img src="https://github.com/iiingkeep/community/assets/143868975/543dc1cf-dd43-4f3b-82ed-4feb246fd7fb" /> |
 | 로그인 한 유저는<br> 댓글 및 답글 등록 | <img src="https://github.com/iiingkeep/community/assets/143868975/9be25d05-1531-4bb5-b2dc-67490a680908" /> |
-| 작성자 본인 댓글 수정 | <img src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
-| 작성자 본인 댓글 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
+| <nobr>작성자 본인 댓글 수정</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/12947b13-e6b4-457b-8b92-904fced1d74a" /> |
+| <nobr>작성자 본인 댓글 삭제</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/47caf440-023b-4b8e-b137-dc512f167f49" /> |
 | <nobr>작성자 본인 게시글 삭제</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/e991b91a-04b5-4fdc-93dd-5e16de43ffb1" /> |
 
 ---
@@ -113,7 +113,7 @@
 | 기능 | 구현 영상 |
 | :---: | :---: |
 | <nobr>프로필사진 등록</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/2ad671e1-d86c-410d-b791-ff56cc68aee9" /> |
-| 프로필사진 삭제 | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
+| <nobr>프로필사진 삭제</nobr> | <img src="https://github.com/iiingkeep/community/assets/143868975/e60cacc9-cd97-45b5-80f9-b60c60310f2d" /> |
 
 ---
 ---
@@ -130,8 +130,8 @@
 #### 마이페이지 나의 활동 : 내가 쓴 글과 댓글 목록 출력 및 이동 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 내가 쓴 글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" /> |
-| <nobr>내가 쓴 댓글 표시 및</nobr> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" /> |
+| 내가 쓴 글 표시 및<br> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/a1ddf691-7c81-434b-ae75-21feeea80810" /> |
+| <nobr>내가 쓴 댓글 표시 및</nobr> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/9c08340d-88f4-4d51-bff9-33f2e7fe734b" /> |
 
 ---
 ---
@@ -139,5 +139,5 @@
 #### 마이페이지 좋아요 : 내가 좋아요 한 뉴스와 게시글 목록 출력 및 이동 가능
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| <nobr>좋아요 한 뉴스 표시 및</nobr> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
-| 좋아요 한 게시글 표시 및<br> 클릭 시 해당 페이지로 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
+| 좋아요 한 뉴스 표시 및<br> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/c072c01b-4bd4-4f55-9f7a-5206baa75ba1" /> |
+| <nobr>좋아요 한 게시글 표시 및</nobr> 클릭 시 해당 페이지로<br> 이동 | <img src="https://github.com/iiingkeep/community/assets/143868975/475ca059-54da-4df2-b03a-4688255f9a5f" /> |
