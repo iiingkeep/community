@@ -52,7 +52,7 @@
 .my-page__wrapper { 
   display: flex; 
   margin-top: 80px;
-  margin-bottom: 190px; /* 푸터위치 수정용 */
+  margin-bottom: 190px;
 }
 
 .my-page__btn >ul{
@@ -79,11 +79,6 @@
 
 .my-profile-form__wrapper {
   align-items: center; 
-  /* 세로 중앙 정렬 */
-  /* justify-content: center; */
-  /* 가로 중앙 정렬 */
-  /* flex-direction: column;  */
-  /* 아이템들을 세로 방향으로 정렬 */
 }
 
 .my-profile-form__img { 
@@ -167,9 +162,8 @@
 font-size: 19px;
 width: 330px;
 height: 85px;
-outline: none; /* 선택 상태에서의 기본 테두리 제거 */
-border: none; /* 선택 상태에서의 테두리 제거 */
-/* box-sizing: border-box; */
+outline: none;
+border: none;
 color: rgb(0, 0, 0);
 }
 
@@ -186,11 +180,8 @@ color: rgb(0, 0, 0);
 
 .my-edit-form_content label {
   text-align: left;
-  /* 라벨 텍스트를 좌측으로 정렬 */
   display: block;
-  /* 라벨을 블록 레벨 요소로 변경하여 한 줄에 하나씩 표시 */
   margin-bottom: 5px;
-  /* 5px; 라벨 간격 조정 */
 }
 
 .my-edit-wrapper__btn {
@@ -213,9 +204,8 @@ color: rgb(0, 0, 0);
 
 .my-edit__addspace {
   width: 150px;
-  /* height: 85px; */
   display: flex;
-  justify-content: center; /* 수평 가운데 정렬 */
+  justify-content: center;
 }
 
 .my-edit__sub__btn {
@@ -246,7 +236,7 @@ color: rgb(0, 0, 0);
 }
 
 .my-edit-form__text {
-  margin-right: 15px; /* 텍스트와 입력 필드 사이의 간격 */
+  margin-right: 15px;
   width: 100px;
   font-size: 20px;
 }
@@ -257,23 +247,26 @@ color: rgb(0, 0, 0);
   align-items: center; width: 100%; margin-bottom: 70px;
 }
 .my-content__title{display: flex-start; width: 80%;}
+
 .my-content__title >h2{padding: 10px; font-weight: 1000;}
+
 .my-content__list p { font-size: 20px; margin-bottom: 15px;}
-/* {display: flex; justify-content: start; width: 80%;} */
-/* 호환이슈수정* : (justify-content: start; => justify-content: flex-start;) */
 
 .my-form-table-wrapper {padding-top: 20px;}
+
 .my-acti-content { width: 100%; }
 
 .my-forms-post,
 .my-acti-comm {
   width: 100%;
 }
+
 .my-like-post__list{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .my-like__title {
   font-size: 20px;
   font-weight: bold;
@@ -284,6 +277,7 @@ color: rgb(0, 0, 0);
 .my-forms-table {
   width: 800px
 }
+
 .my-forms__table {
   margin-bottom: 50px;
 }
@@ -294,7 +288,6 @@ color: rgb(0, 0, 0);
   flex-direction: column;
   border-top: solid 2px rgb(210, 210, 210);
   border-bottom: solid 2px rgb(210, 210, 210);
-
 }
 
 .my-forms-table th {
@@ -311,12 +304,14 @@ tr th:first-child { width: 200px; }
   text-align: center;
   font-size: 17px;
 }
+
 tr>td:first-of-type>.my-table__td-box {
   overflow: hidden;
   display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
 tr>td:nth-of-type(2)>.my-table__td-box {
   overflow: hidden;
   display: -webkit-box;
@@ -331,9 +326,11 @@ tr>td:nth-of-type(2)>.my-table__td-box {
 .my-forms-table__title {
   text-align: center;
 }
+
 tbody a {
   color: black;
 }
+
 tbody a:hover {
   font-weight: bolder;
 }
