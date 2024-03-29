@@ -18,8 +18,8 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_DATABASE = os.environ.get('DB_DATABASE')
 
 # 네이버 검색 API 설정
-naver_client_id = NCI # API 클라이언트 ID
-naver_client_secret = NCS # API 클라이언트 SECRET
+naver_client_id = NCI # 네이버 API 클라이언트 ID
+naver_client_secret = NCS # 네이버 API 클라이언트 SECRET
 news_url = 'https://openapi.naver.com/v1/search/news.json'
 query = '탄소중립' # 검색어 지정
 
