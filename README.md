@@ -50,7 +50,7 @@
 #### 회원가입 : 정규 표현식과 중복 확인을 통한 유효성 검사 설정. 비밀번호의 경우 bcrypt와 hash를 사용해 암호화하여 저장
 | 기능 | 구현 영상 |
 | :---: | :---: |
-| 유효성 검사 후 회원가입 | <img src="https://github.com/iiingkeep/community/assets/143868975/79315d58-7e82-4267-97c3-01e016ff79ff" /> |
+| 유효성 검사 후 회원가입 | <img src="https://github.com/iiingkeep/community/assets/143868975/dcc7f951-fe0c-45b1-b28c-29d844d572ac" /> |
    
 ---
 ---
@@ -82,7 +82,6 @@
 | :---: | :---: |
 | 카테고라이징 | <img src="https://github.com/iiingkeep/community/assets/143868975/919391ae-9621-4d30-8fff-7c593d4a235d" /> |
 | 제목 / 본문 / 제목+본문 검색 | <img src="https://github.com/iiingkeep/community/assets/143868975/0f616d61-3b35-436b-b7ec-51cf9d8a86ba" /> |
-| <nobr>게시글 클릭하여 접속 시</nobr> 조회수 1 증가 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 | 페이지네이션 | <img src="https://github.com/iiingkeep/community/assets/143868975/ba0a4778-a8fd-44b1-969c-77b81a3f01fb" /> |
 
 ---
