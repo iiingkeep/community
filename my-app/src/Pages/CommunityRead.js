@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 import { useParams, useNavigate } from 'react-router-dom';
-import Comment from './Comment';
+import Comment from '../Component/Comment';
 import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 import '../Styles/CommunityRead.css'

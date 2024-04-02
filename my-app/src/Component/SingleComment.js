@@ -71,9 +71,8 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
     }
   }
 
-    const onUpdateComment = async (e) => {                                                                          // 댓글 수정 후 등록버튼 클릭 시 호출되는 핸들러 함수
-      e.preventDefault();                                                                                           // 사용자에게 수정 여부 확인 후 수정 진행
-      const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");
+    const onUpdateComment = async () => {                                                                          // 댓글 수정 후 등록버튼 클릭 시 호출되는 핸들러 함수
+      const editComfirmed = window.confirm("댓글 수정을 완료하시겠습니까?");                                          // 사용자에게 수정 여부 확인 후 수정 진행
       if (editComfirmed) {
       try {
         if (!commentValue.trim()) {                                                                                 // 댓글에 내용이 없을 시 입력 요청
@@ -86,10 +85,11 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
           content: commentValue,
         });
         if (response && response.status === 200) {
-          console.log('댓글이 수정되었습니다.');
           alert('댓글이 수정되었습니다.');
           updateComment(response.data.result);
-          setIsEditing(false);                                                                                      // 수정 상태 종료
+          console.log(response.data.result)
+          setIsEditing(false);
+          setCommentValue('');                                                                                      // 수정 상태 종료
         } else {
           console.error('예상치 못한 응답:', response);
           alert('댓글 수정에 실패했습니다. 다시 한 번 시도해주세요.');

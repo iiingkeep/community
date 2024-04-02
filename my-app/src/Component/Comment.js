@@ -31,7 +31,6 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
           postid: id,                                                                                                           // 데이터 전송을 위한 POST요청
           content: comment,
         });
-        console.log(response.status);
         console.log(response.data);
         if (response&&response.status===201) {
           alert('댓글이 등록되었습니다.');                                                                                      // 댓글 등록 성공 시 알림 + 댓글창 비우기
