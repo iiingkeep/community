@@ -4,7 +4,7 @@ import axios from "axios";
 import '../Styles/ImagePopup.css';
 import Draggable from "./Draggable";
 
-const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
+const ImagePopup = ({ userId, onClose, handleProfileImg, baseURL }) => {
 
   const [imageUrl, setImageUrl] = useState("");                                                   // 이미지 URL 상태
 
@@ -15,20 +15,20 @@ const ImagePopup = ({ userId, onClose, handleProfileImg }) => {
     formData.append('img', file);
 
     try {
-      const result = await axios.post(`http://localhost:8000/imgupdate/${userId}`, formData,      // const result = await axios.post('http://localhost:8000/my/profile/img', formData,
+      const result = await axios.post(`${baseURL}/imgupdate/${userId}`, formData,      // const result = await axios.post('${baseURL}/my/profile/img', formData,
       { headers: { 'Content-Type': 'multipart/form-data' }}
       );
       console.log('success: 서버응답', result.data);
 
-      const imageUrl = `http://localhost:8000/public/userimg/${result.data}`;                     // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
+      const imageUrl = `${baseURL}/public/userimg/${result.data}`;                     // 이미지가 존재하는 파일명으로 경로 수정 - *수정코드
       setImageUrl(imageUrl);
       // handleProfileImg(imageUrl); // ----> 저장 전까지 Profile에 표시하지 않도록 주석처리
       // 업로드 성공 시 서버에서 받은 이미지 URL을 상태에 설정 - *오류코드
-      // const imageUrl = `http://localhost:8000/my/profile/img/${result.data}`;
+      // const imageUrl = `${baseURL}/my/profile/img/${result.data}`;
       // 이미지 URL을 부모 컴포넌트로 전달
-      // handleProfileImg(`http://localhost:8000/my/profile/img/${result.data}`);
+      // handleProfileImg(`${baseURL}/my/profile/img/${result.data}`);
       // 이미지url 로컬스토리지 저장
-      // localStorage.setItem('saveImgUrl', `http://localhost:8000/my/profile/img/${result.data}`);
+      // localStorage.setItem('saveImgUrl', `${baseURL}/my/profile/img/${result.data}`);
       // localStorage.setItem('saveImgUrl', imgUrl);
 
     } catch (error) {

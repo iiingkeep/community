@@ -5,7 +5,7 @@ import { handlePostcode } from "./Postcodehandle";
 import PasswordValid from "./PasswordValid";
 import "../Styles/MyPage.css";
 
-const EditForm = ({ userId, onFormChange }) => {
+const EditForm = ({ userId, onFormChange, baseURL }) => {
   const [profileData, setProfileData] = useState({});
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -74,7 +74,7 @@ const EditForm = ({ userId, onFormChange }) => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(                                                                 // axios를 사용하여 서버에서 해당 userId에 해당하는 사용자 프로필 데이터를 가져옵니다.
-          `http://localhost:8000/my/edit/${userId}`
+          `${baseURL}/my/edit/${userId}`
         );
         const userData = response.data[0];                                                                // 가져온 데이터를 profileData 상태에 설정
         setProfileData(userData);
@@ -94,7 +94,7 @@ const EditForm = ({ userId, onFormChange }) => {
   const handlePasswordValid = async (password) => {                                                       // 비밀번호 유효성 검사
     try {
       const response = await axios.post(                                                                  // 비밀번호 검사 요청을 서버에 보냅니다.
-        `http://localhost:8000/pw-valid/${userId}`,
+        `${baseURL}/pw-valid/${userId}`,
         {
           userId: userId,
           password: password,
@@ -125,7 +125,7 @@ const EditForm = ({ userId, onFormChange }) => {
     }
 
     axios
-      .post("http://localhost:8000/checkUsernameDuplication", { username })
+      .post(`${baseURL}/checkUsernameDuplication`, { username })
       .then((response) => {
         console.log("서버 응답:", response.data);
         setUsernameDuplication(response.data.success);
@@ -156,7 +156,7 @@ const EditForm = ({ userId, onFormChange }) => {
     }
 
     axios
-      .post("http://localhost:8000/checkPhonenumberDuplication", {
+      .post(`${baseURL}/checkPhonenumberDuplication`, {
         phonenumber,
       })
       .then((response) => {
@@ -215,7 +215,7 @@ const EditForm = ({ userId, onFormChange }) => {
         detailedaddress: detailedaddress,
       };
       await axios.put(
-        `http://localhost:8000/my/edit/update/${userId}`,
+        `${baseURL}/my/edit/update/${userId}`,
         updatedData
       );
       alert("성공적으로 수정되었습니다.");

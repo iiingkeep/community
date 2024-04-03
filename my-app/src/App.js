@@ -16,6 +16,7 @@ import MyPage from './Pages/MyPage';
 import { ImageProvider } from './Component/ImageContext';
 
 function App() {
+  const baseURL = 'http://api.bbangkut.com'
   const navigate = useNavigate();
 
 
@@ -54,24 +55,24 @@ function App() {
       <Header loggedIn={loggedIn} handleLogout={handleLogout}/>
 
       <Routes>
-        <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/Login" element={<Login />}></Route>
-        <Route path="/RegisterPersonal" element={<RegisterPersonal />}></Route>
-        <Route path="/MyPage" element={<MyPage />} />
+        <Route path="/" element={<Main loggedIn={loggedIn} baseURL={baseURL}/>} />
+        <Route path="/Login" element={<Login baseURL={baseURL} />}></Route>
+        <Route path="/RegisterPersonal" element={<RegisterPersonal baseURL={baseURL} />}></Route>
+        <Route path="/MyPage" element={<MyPage baseURL={baseURL}/>} />
         <Route path="/NetZero" element={<NetZero />} />
-        <Route path="/News" element={<News />} />
-        <Route path="/Community" element={<Community loggedIn={loggedIn} />} />
+        <Route path="/News" element={<News baseURL={baseURL}/>} />
+        <Route path="/Community" element={<Community loggedIn={loggedIn} baseURL={baseURL}/>} />
         <Route
           path="/Community/Write"
-          element={<CommunityWrite userid={userid} />}
+          element={<CommunityWrite userid={userid} baseURL={baseURL} />}
         />
         <Route
           path="/Community/Read/:id"
-          element={<CommunityRead loggedIn={loggedIn} userid={userid} />}
+          element={<CommunityRead loggedIn={loggedIn} userid={userid} baseURL={baseURL} />}
         />
         <Route
           path="/Community/Edit/:id"
-          element={<CommunityEdit userid={userid} />}
+          element={<CommunityEdit userid={userid} baseURL={baseURL} />}
         />
         <Route path="/uploads/" element={<CommunityWrite />} />
       </Routes>

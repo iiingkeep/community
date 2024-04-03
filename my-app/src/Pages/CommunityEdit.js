@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import ImageResize from "quill-image-resize-module-react";
 
 Quill.register("modules/imageResize", ImageResize);
-const CommunityEdit = ({userid}) => {                                                        // 등록된 게시글 수정 컴포넌트
+const CommunityEdit = ({userid, baseURL}) => {                                                        // 등록된 게시글 수정 컴포넌트
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const CommunityEdit = ({userid}) => {                                           
   useEffect(() => {                                                                          // 서버의 다음 엔드포인트로 상세 게시글의 제목과 본문 데이터를 불러오기 위한 GET요청
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/Community/Edit/${id}`);
+        const response = await axios.get(`${baseURL}/Community/Edit/${id}`);
         setTitle(response.data.title);
         setContent(response.data.content);
         setSelectedCategory(response.data.categoryid);
@@ -67,7 +67,7 @@ const CommunityEdit = ({userid}) => {                                           
 
 
     try {
-      const response = await axios.post('http://localhost:8000/img', formData);         // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
+      const response = await axios.post(`${baseURL}/img`, formData);         // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
       console.log('성공 시, 백엔드가 보내주는 데이터', response.data.url);              
 
 
@@ -103,7 +103,7 @@ console.log('콘텐츠:', content);
     if (editComfirmed) {
 
     try {
-      const response = await axios.put(`http://localhost:8000/Community/Edit/${id}`, {
+      const response = await axios.put(`${baseURL}/Community/Edit/${id}`, {
         userid,
         categoryid: selectedCategory,
         title,

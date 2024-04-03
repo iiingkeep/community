@@ -6,7 +6,7 @@ import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 import '../Styles/Comment.css'
 
-const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount}) =>{             // 댓글 작성, 등록 컴포넌트
+const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment, deleteComment, commentCount, baseURL}) =>{             // 댓글 작성, 등록 컴포넌트
 
   const { id } = useParams();
   const [comment, setComment] = useState('');
@@ -26,7 +26,7 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
         document.querySelector('.commu-comment__content').focus();
         return;
       }
-      const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {                             // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 
+      const response = await axios.post(`${baseURL}/Community/Read/${id}/SaveComment`, {                             // 로그인 한 상태일 경우 서버의 다음 엔드포인트로 
           userid: userid,                                                                                                       // 댓글 정보(게시글id, 작성한 댓글의 내용, 부모댓글id) 
           postid: id,                                                                                                           // 데이터 전송을 위한 POST요청
           content: comment,
@@ -67,8 +67,8 @@ const Comment = ({loggedIn, userid, commentLists, refreshFunction, updateComment
         // 원본 댓글 목록 출력 시 댓글에 답글을 달 수 있는 SingleComment와 댓글에 달린 답글을 볼 수 있도록 하는 ReplyComment 컴포넌트 함께 출력 
         (!comment.responseTo &&
         <React.Fragment key={index}>
-        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment}  comment={comment}/>
-        <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
+        <SingleComment className='commu-single-comment-box' baseURL={baseURL} loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment}  comment={comment}/>
+        <ReplyComment className='commu-reply-comment-box' baseURL={baseURL} loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} parentCommentId={comment.commentid}  commentLists={commentLists} postId={id}/>
         </React.Fragment>
         )
       ))}

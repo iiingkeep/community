@@ -5,7 +5,7 @@ import { getPostThumbnail } from "../Util/utils";
 import {Icon} from '@iconify/react';
 import "../Styles/Main.css";
 
-const Main = ({loggedIn}) => {
+const Main = ({loggedIn, baseURL}) => {
   const navigate = useNavigate();
   // -------------------------------------------- 로그인 --------------------------------------------
   const [email, setemail] = useState("");
@@ -14,7 +14,7 @@ const Main = ({loggedIn}) => {
 
   const handleLogin = () => {                                                                     // 로그인 버튼 클릭 시 /Login 엔드포인트에서 데이터를 가져오는 함수
     axios
-      .post("http://localhost:8000/Login", {
+      .post(`${baseURL}/Login`, {
         email: email,
         password: password,                                                                       //회원 정보 email, password의 정보 가져오기
       }) 
@@ -43,7 +43,7 @@ const Main = ({loggedIn}) => {
 
   useEffect(() => {                                                                               // 뉴스 정보 가져오기
     axios
-      .get("http://localhost:8000/news")                                                          // /news 엔드포인트에서 데이터를 가져오는 함수
+      .get(`${baseURL}/news`)                                                          // /news 엔드포인트에서 데이터를 가져오는 함수
       .then((response) => {
         const sortedNews = response.data
           .map((item) => {
@@ -69,7 +69,7 @@ const Main = ({loggedIn}) => {
     setNews(clickedNews);
 
     axios                                                                                         // 서버로 조회수 데이터 전송
-      .post("http://localhost:8000/news/views", {
+      .post(`${baseURL}/news/views`, {
         newsid: item.newsid,                                                                      // newsid 이름으로 기사 newsid 정보를 넘겨줌
         views: item.views + 1,                                                                    // views라는 이름으로 기사 조회수 정보를 넘겨줌
       })
@@ -81,7 +81,7 @@ const Main = ({loggedIn}) => {
   const topFiveNews = news.slice(0, 5);
 
   // 워드클라우드----------------------
-  const imageUrl = "http://localhost:3000/wc_image/result.png";                                   // 워드클라우드 이미지 다운로드
+  const imageUrl = "http://bbangkut.com/wc_image/result.png";                                   // 워드클라우드 이미지 다운로드
   const handleDownload = async () => {
     try {
       const response = await fetch(imageUrl);                                                     // 이미지 가져오기
@@ -108,7 +108,7 @@ const Main = ({loggedIn}) => {
   const [topFivePosts, setTopFivePosts] = useState([]);
 
   useEffect(() => {                                                                                    // 당일 올라온 게시물 중 좋아요를 많이 받은 상위 5개 게시물 가져오기
-    axios.get("http://localhost:8000/Main")
+    axios.get(`${baseURL}/Main`)
       .then((response) => {
         setTopFivePosts(response.data.posts);
       })

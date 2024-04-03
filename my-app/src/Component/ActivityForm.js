@@ -5,7 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import "../Styles/MyPage.css";
 
-const ActivityForm = ({ userId }) => {
+const ActivityForm = ({ userId, baseURL }) => {
   const [actiData, setActiData] = useState([]);
   const [commData, setCommData] = useState([]);
 
@@ -13,7 +13,7 @@ const ActivityForm = ({ userId }) => {
     const fetchPostData = async () => {
       try {
         const posResponse = await axios.get(
-          `http://localhost:8000/acti-post/${userId}`
+          `${baseURL}/acti-post/${userId}`
         );
         const posData = posResponse.data;
         setActiData(posData);
@@ -25,7 +25,7 @@ const ActivityForm = ({ userId }) => {
     const fetchCommentData = async () => {                                          // 활동 댓글 요청
       try {
         const comResponse = await axios.get(
-          `http://localhost:8000/acti-comment/${userId}`
+          `${baseURL}/acti-comment/${userId}`
         );
         const comData = comResponse.data;
         setCommData(comData);

@@ -4,7 +4,7 @@ import { handlePostcode } from "../Component/Postcodehandle";
 import axios from "axios";
 import "../Styles/RegisterPersonal.css";
 
-function RegisterPersonal() {
+function RegisterPersonal({baseURL}) {
   const [email, setEmail] = useState("");                                                           // 아이디
   const [username, setUsername] = useState("");                                                     // 이름
   const [password, setPassword] = useState("");                                                     // 비밀번호
@@ -76,7 +76,7 @@ function RegisterPersonal() {
 
     // 클라이언트가 서버에 아이디 중복 확인을 요청
     axios
-      .post("http://localhost:8000/checkEmailDuplication", { email })
+      .post(`${baseURL}/checkEmailDuplication`, { email })
       .then((response) => {
         console.log("서버 응답:", response.data);
         setEmailDuplication(response.data.success);
@@ -107,7 +107,7 @@ function RegisterPersonal() {
     }
 
     axios
-      .post("http://localhost:8000/checkUsernameDuplication", { username })
+      .post(`${baseURL}/checkUsernameDuplication`, { username })
       .then((response) => {
         console.log("서버 응답:", response.data);
         setUsernameDuplication(response.data.success);
@@ -138,7 +138,7 @@ function RegisterPersonal() {
     }
 
     axios
-      .post("http://localhost:8000/checkPhonenumberDuplication", {
+      .post(`${baseURL}/checkPhonenumberDuplication`, {
         phonenumber,
       })
       .then((response) => {
@@ -196,7 +196,7 @@ function RegisterPersonal() {
     } else {
       // 클라이언트에서 서버로 회원가입 요청
       axios
-        .post("http://localhost:8000/register", {
+        .post(`${baseURL}/register`, {
           username,
           password,
           email,

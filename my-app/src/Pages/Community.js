@@ -8,7 +8,7 @@ import { formattedDateAndTime } from "../Util/utils";
 import { getPostThumbnail } from "../Util/utils";
 import '../Styles/Community.css';
 
-const Community = ({loggedIn}) => {                                                                     // 게시물 목록을 페이지별로 출력하는 컴포넌트
+const Community = ({loggedIn, baseURL}) => {                                                                     // 게시물 목록을 페이지별로 출력하는 컴포넌트
   const [posts, setPosts] = useState([]);                                                               // 게시글 목록, 전체 게시글 갯수, 현재 페이지, 검색어, 검색유형 상태 관리
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +50,7 @@ const Community = ({loggedIn}) => {                                             
 
   const fetchPosts = async () => {
     try {                                                                                               // 서버의 다음 엔드포인트에 게시글 목록과 게시글의 총 갯수 GET요청
-      const response = await axios.get(`http://localhost:8000/Community?categoryId=${selectedCategory}&page=${currentPage}&searchQuery=${searchQuery}&searchType=${searchType}`);
+      const response = await axios.get(`${baseURL}/Community?categoryId=${selectedCategory}&page=${currentPage}&searchQuery=${searchQuery}&searchType=${searchType}`);
       setPosts(response.data.posts);
       setTotalItems(response.data.totalItems);
     } catch (error) {

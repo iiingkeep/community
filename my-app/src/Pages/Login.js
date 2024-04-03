@@ -4,7 +4,7 @@ import axios from "axios";
 import "../Styles/Login.css";
 
 
-function Login() {                                                                            //로그인 페이지 상태 변화 함수
+const Login = ({baseURL}) => {                                                                            //로그인 페이지 상태 변화 함수
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setloginStatus] = useState("");
@@ -22,7 +22,7 @@ function Login() {                                                              
     } else {
 
       axios
-        .post("http://localhost:8000/login", {                                                // 로그인 요청 구현
+        .post(`${baseURL}/login`, {                                                // 로그인 요청 구현
           email: email,
           password: password,
         })                                                                                    //회원 정보 email, password 정보 가져옴

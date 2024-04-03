@@ -10,7 +10,8 @@ const ReplyComment = ({                                                         
   deleteComment, 
   commentLists, 
   parentCommentId, 
-  postId}) => {
+  postId,
+  baseURL}) => {
   const [childCommentNumber, setChildCommentNumber] = useState();                           // 답글 갯수, 보기(펼침/접힘) 상태 관리
   const [openReplyComments, setOpenReplyComments] = useState();
 
@@ -31,8 +32,8 @@ const ReplyComment = ({                                                         
       {                                                                                     // 그 답글에 다시 답글을 달고 표시할 수 있도록
         comment.responseTo === parentCommentId &&                                           // SingleComment와 ReplyComment 컴포넌트 렌더링
         <div style={{marginLeft: '40px'}}>
-        <SingleComment className='commu-single-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId} />
-        <ReplyComment className='commu-reply-comment-box' loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.commentid} postId={postId}/>
+        <SingleComment className='commu-single-comment-box' baseURL={baseURL} loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} comment={comment} postId={postId} />
+        <ReplyComment className='commu-reply-comment-box' baseURL={baseURL} loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} updateComment={updateComment} deleteComment={deleteComment} commentLists={commentLists} parentCommentId={comment.commentid} postId={postId}/>
         </div>
       }
       </React.Fragment>

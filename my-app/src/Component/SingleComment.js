@@ -4,7 +4,7 @@ import axios from 'axios';
 import { formattedDateAndTime } from "../Util/utils";
 import '../Styles/SingleComment.css'
 
-const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateComment, deleteComment}) => {             // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
+const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateComment, deleteComment, baseURL}) => {             // 작성된 원본 단일 댓글 표시, 각 댓글에 답글을 작성하는 컴포넌트
   const { id } = useParams();
   const [openReply, setOpenReply] = useState(false);
   const [commentValue, setCommentValue] = useState('');
@@ -41,7 +41,7 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
           document.querySelector('.commu-comment__content').focus();
           return;
         }
-        const response = await axios.post(`http://localhost:8000/Community/Read/${id}/SaveComment`, {               // 서버의 다음 엔드포인트로 답글 정보 
+        const response = await axios.post(`${baseURL}/Community/Read/${id}/SaveComment`, {               // 서버의 다음 엔드포인트로 답글 정보 
             userid: userid,                                                                                         // (게시글id, 작성한 답글의 내용, 부모댓글id)
             postId: id,                                                                                             // 데이터 전송을 위한 POST요청
             content: commentValue,
@@ -80,7 +80,7 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
           document.querySelector('.commu-single-comment__content--editing').focus();
           return;
         }
-        const response = await axios.put(`http://localhost:8000/Community/Read/${id}/UpdateComment`, {
+        const response = await axios.put(`${baseURL}/Community/Read/${id}/UpdateComment`, {
           commentid: comment.commentid,
           content: commentValue,
         });
@@ -107,7 +107,7 @@ const SingleComment = ({loggedIn, userid, comment, refreshFunction, updateCommen
       const userConfirmed = window.confirm('정말로 댓글을 삭제하시겠습니까?');                                      // 사용자에게 삭제 여부 확인 후 삭제 진행
       if (userConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:8000/Community/Read/${id}/DeleteComment/${comment.commentid}`);
+        const response = await axios.delete(`${baseURL}/Community/Read/${id}/DeleteComment/${comment.commentid}`);
         if (response && response.status === 200) {
           console.log('댓글이 삭제되었습니다.');
           alert('댓글이 삭제되었습니다.');

@@ -7,7 +7,7 @@ import axios from 'axios';
 import '../Styles/CommunityWrite.css'
 Quill.register("modules/imageResize", ImageResize);
 
-const CommunityWrite = ({userid}) => {                                                    // 게시글 작성 컴포넌트
+const CommunityWrite = ({userid, baseURL}) => {                                                    // 게시글 작성 컴포넌트
   const location = useLocation();
   const navigate = useNavigate();                                                         
   const [title, setTitle] = useState('');                                                 // 게시글 제목과 내용 상태 관리
@@ -48,7 +48,7 @@ const CommunityWrite = ({userid}) => {                                          
     formData.append('img', file); 
 
     try {                                                                                 // 서버의 다음 엔드포인트에 이미지 데이터를 보내기 위한 POST 요청
-      const result = await axios.post('http://localhost:8000/img', formData);
+      const result = await axios.post(`${baseURL}/img`, formData);
       console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);                  // 서버로부터 받은 이미지url 데이터를 IMG_URL에 할당
       const IMG_URL = result.data.url;                                                    // 이 url을 img 태그의 src에 넣어 에디터의 커서에 삽입 시 에디터 내 이미지 출력
       const editor = quillRef.current.getEditor();                                        // 에디터에 이미지 태그 넣기
@@ -77,7 +77,7 @@ const CommunityWrite = ({userid}) => {                                          
           return;
         }
       } else {
-      const response = await axios.post('http://localhost:8000/Community/Write', {        // 제목과 내용 작성을 완료했을 경우 서버의 다음 엔드포인트로 새 게시글 정보(제목, 내용) POST 요청
+      const response = await axios.post(`${baseURL}/Community/Write`, {        // 제목과 내용 작성을 완료했을 경우 서버의 다음 엔드포인트로 새 게시글 정보(제목, 내용) POST 요청
         userid,
         categoryid: selectedCategory,
         title,

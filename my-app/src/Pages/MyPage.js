@@ -7,7 +7,7 @@ import IsLikeForm from "../Component/IsLikeForm";
 import axios from "axios";
 import "../Styles/MyPage.css";
 
-const MyPage = () => {
+const MyPage = ({baseURL}) => {
   const [activeForm, setActiveForm] = useState('profile');
   const [formData, setFormData] = useState({});
   const [selectedButton, setSelectedButton] = useState('profile');
@@ -21,7 +21,7 @@ const MyPage = () => {
       try {
         const storedUserData = sessionStorage.getItem("userData");
         const userData = JSON.parse(storedUserData);
-        const response = await axios.get(`http://localhost:8000/my/${formType}/${userData.userid}`);
+        const response = await axios.get(`${baseURL}/my/${formType}/${userData.userid}`);
 
         if (response.data.length > 0) {                                                                           // 반환된 데이터가 배열 안에 객체이므로 첫 번째 요소를 선택
           setFormData(response.data[0]);                                                                          // 응답 데이터 형식은 배열 안에 객체의 형태
@@ -56,11 +56,11 @@ const MyPage = () => {
         </div>
       {/* Form 조건부 렌더링 */}
         <div className="my-page__right">
-        {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'profile' && <ProfileForm baseURL={baseURL} formData={formData} userId={userData.userid} />}
         {/* {activeForm === 'profile' && <ProfileForm formData={formData} userId={userData.userid} />} */}
-        {activeForm === 'edit' && <EditForm formData={formData} userId={userData.userid} onFormChange={handleFormChange} />}
-        {activeForm === 'activity' && <ActivityForm formData={formData} userId={userData.userid} />}
-        {activeForm === 'islike' && <IsLikeForm formData={formData} userId={userData.userid} />}
+        {activeForm === 'edit' && <EditForm baseURL={baseURL} formData={formData} userId={userData.userid} onFormChange={handleFormChange} />}
+        {activeForm === 'activity' && <ActivityForm baseURL={baseURL} formData={formData} userId={userData.userid} />}
+        {activeForm === 'islike' && <IsLikeForm baseURL={baseURL} formData={formData} userId={userData.userid} />}
         </div>
       </div>
       <div>

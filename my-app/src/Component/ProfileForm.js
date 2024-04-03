@@ -6,7 +6,7 @@ import "../Styles/MyPage.css";
 import { Icon } from '@iconify/react';
 
 
-const ProfileForm = ({ userId }) => {
+const ProfileForm = ({ userId, baseURL }) => {
     const [profileData, setProfileData] = useState([]);                                                     // 회원 정보 상태관리
     const [imageUrl, setImageUrl] = useState("");                                                           // 이미지 URL 상태관리
     const [showPopup, setShowPopup] = useState(false);                                                      // 이미지팝업창 클릭이벤트 상태관리
@@ -23,7 +23,7 @@ const ProfileForm = ({ userId }) => {
 
         const fetchProfile = async () => {                                                                  // fetchProfile 함수를 useEffect 내부에서 정의하고 호출
             try {
-                const response = await axios.get(`http://localhost:8000/my/profile/${userId}`);
+                const response = await axios.get(`${baseURL}/my/profile/${userId}`);
                 const userData = response.data[0];                                                          // n번째 데이터
                 setProfileData(userData);
             } catch (error) {

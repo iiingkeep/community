@@ -7,7 +7,7 @@ import {Icon} from '@iconify/react';
 import { formattedDateAndTime } from "../Util/utils";
 import '../Styles/CommunityRead.css'
 
-const CommunityRead = ({loggedIn, userid}) => {                                                // 게시글 상세와 댓글을 출력하는 컴포넌트
+const CommunityRead = ({loggedIn, userid, baseURL}) => {                                                // 게시글 상세와 댓글을 출력하는 컴포넌트
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -21,8 +21,8 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   useEffect(() => {
     const fetchPostAndIncrementViews = async () => {
       try {
-        await axios.put(`http://localhost:8000/Community/Read/${id}/IncrementViews`);           // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}`);         // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
+        await axios.put(`${baseURL}/Community/Read/${id}/IncrementViews`);           // 서버의 다음 엔드포인트로 게시글 조회수 증가를 위한 PUT 요청
+        const response = await axios.get(`${baseURL}/Community/Read/${id}`);         // 서버의 다음 엔드포인트로 상세 게시글 데이터를 불러오기 위한 GET요청
         console.log(response.data);
         setPost(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   useEffect(() => {
     const fetchComments = async () => {                                                         // 서버의 다음 엔드포인트로 댓글 데이터를 불러오기 위한 GET요청
       try {
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetComments`);    
+        const response = await axios.get(`${baseURL}/Community/Read/${id}/GetComments`);    
         setComments(response.data);
         setCommentCount(response.data.length);
       } catch (error) {
@@ -46,7 +46,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
     fetchComments();
     const checkLiked = async () => {                                                             // 서버의 다음 엔드포인트로 유저의 게시글 좋아요 여부를 확인하기 위한 GET요청
       try {
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/CheckLiked?userid=${userid}`);    
+        const response = await axios.get(`${baseURL}/Community/Read/${id}/CheckLiked?userid=${userid}`);    
         console.log(userid)
         setIsLiked(response.data.isLiked);
       } catch (error) {
@@ -59,7 +59,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   useEffect(() => {
     const fetchLikeCount = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/Community/Read/${id}/GetLikeCount`);
+        const response = await axios.get(`${baseURL}/Community/Read/${id}/GetLikeCount`);
         setLikeCount(response.data.likeCount);
       } catch (error) {
         console.error('좋아요 수를 불러오는 중 에러 발생:', error);
@@ -101,7 +101,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   const userConfirmed = window.confirm('정말로 게시글을 삭제하시겠습니까?');                     // 삭제 확인 창 출력
   if (userConfirmed) {                                                                           // 사용자가 확인을 선택한 경우에만 삭제 진행
     try {
-      await axios.delete(`http://localhost:8000/Community/Read/${id}`);
+      await axios.delete(`${baseURL}/Community/Read/${id}`);
       navigate('/Community');                                                                    // 삭제가 성공하면 게시물 목록 페이지로 리다이렉트
     } catch (err) {
       console.error('게시물 삭제 중 에러 발생:', err);
@@ -112,7 +112,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
   const toggleLike = async () => {                                                               // 로그인 상태일 경우 좋아요 반영
   if (loggedIn) {
     try {
-      const response = await axios.put(`http://localhost:8000/Community/Read/${id}/ToggleLike`, {
+      const response = await axios.put(`${baseURL}/Community/Read/${id}/ToggleLike`, {
         userid: userid,
       });
       setIsLiked(!isLiked);
@@ -173,7 +173,7 @@ const CommunityRead = ({loggedIn, userid}) => {                                 
       
       {/* 댓글 표시를 위한 Comment 컴포넌트 렌더링 */}
       <div className='commu-comment-box'>
-        <Comment loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
+        <Comment baseURL={baseURL} loggedIn={loggedIn} userid={userid} refreshFunction={refreshFunction} commentLists={comments} post={post} commentCount={commentCount} updateComment={updateComment} deleteComment={deleteComment}/>
       </div>
       {/* 게시글 목록으로 이동할 수 있는 버튼 */}
       <div className='commu-post-detail__button--go-list-box'>

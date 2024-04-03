@@ -92,10 +92,10 @@ function Footer() {
                         </button>
                         <div className={`list ${isListVisible ? 'active' : ''}`}>
                             <ul>
-                                <a onClick={() => window.open("https://me.go.kr/home/web/main.do", "_blank")} title="새창">환경부</a>
-                                <a onClick={() => window.open("https://www.keci.or.kr/web/main.do", "_blank")} title="새창">한국환경보전원</a>
-                                <a onClick={() => window.open("https://www.gihoo.or.kr/zerolife", "_blank")} title="새창">탄소중립 실천포털</a>
-                                <a onClick={() => window.open("https://www.gihoo.or.kr/greencampus/", "_blank")} title="새창">그린캠퍼스</a>
+                                <a onClick={() => window.open("http://me.go.kr/home/web/main.do", "_blank")} title="새창">환경부</a>
+                                <a onClick={() => window.open("http://www.keci.or.kr/web/main.do", "_blank")} title="새창">한국환경보전원</a>
+                                <a onClick={() => window.open("http://www.gihoo.or.kr/zerolife", "_blank")} title="새창">탄소중립 실천포털</a>
+                                <a onClick={() => window.open("http://www.gihoo.or.kr/greencampus/", "_blank")} title="새창">그린캠퍼스</a>
                             </ul>
                         </div>
                     </div>

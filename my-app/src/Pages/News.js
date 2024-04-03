@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import "../Styles/News.css";
 import { formattedDateAndTime } from "../Util/utils";
 
-const News = () => {
+const News = ({baseURL}) => {
   const [news, setNews] = useState([]);                                                       // news : DB에 있는 뉴스 데이터
   const [page, setPage] = useState(1);                                                        // page : 현재 페이지
   const [currenPosts, setCurrenPosts] = useState([]);                                         // currenPosts : 현재 페이지에 보이는 기사들
@@ -28,7 +28,7 @@ const News = () => {
 
   useEffect(() => {                                                                           // 뉴스 정보 가져오기
     axios
-      .get("http://localhost:8000/news")
+      .get(`${baseURL}/news`)
       .then((response) => {
         const sortedNews = response.data
           .map((item) => {
@@ -79,7 +79,7 @@ const News = () => {
     setNews(clickedNews);
 
     axios
-      .post("http://localhost:8000/news/views", {                                             // 서버로 조회수 데이터 전송
+      .post(`${baseURL}/news/views`, {                                             // 서버로 조회수 데이터 전송
         newsid: item.newsid,                                                                  // newsid 이름으로 기사 newsid 정보를 넘겨줌
         views: item.views + 1,                                                                // views라는 이름으로 기사 조회수 정보를 넘겨줌
       })
@@ -128,7 +128,7 @@ const News = () => {
       return;
     }
 
-    axios.get("http://localhost:8000/news/likes").then((response) => {
+    axios.get(`${baseURL}/news/likes`).then((response) => {
       const likedArticles = {};
       const loggedInUserId = JSON.parse(                                                      // 현재 로그인된 사용자의 userid
         sessionStorage.getItem("userData")
@@ -167,7 +167,7 @@ const News = () => {
       setLikedArticles(updatedLikedArticles);
 
       axios
-        .post("http://localhost:8000/news/likes", {                                           // 서버로 좋아요 상태 업데이트 요청
+        .post(`${baseURL}/news/likes`, {                                           // 서버로 좋아요 상태 업데이트 요청
           userid: userid,
           newsid: newsid,
           news_isLiked: !likedArticles[newsid] ? 1 : 0,
