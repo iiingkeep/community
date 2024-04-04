@@ -16,7 +16,7 @@ import MyPage from './Pages/MyPage';
 import { ImageProvider } from './Component/ImageContext';
 
 function App() {
-  const baseURL = 'http://api.bbangkut.com'
+  const baseURL = 'http://localhost:8000'
   const navigate = useNavigate();
 
 

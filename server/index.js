@@ -21,7 +21,7 @@ const MySQLStore = MySQLSession(session);
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -490,8 +490,6 @@ app.post("/img", upload.single("img"), (req, res) => {
   res.json({ url: IMG_URL });
 });
 
-
-
 // 페이지네이션 기능을 이용하여 게시글 목록이 보여질 수 있도록 db에서 정보 조회, 클라이언트에 전달
 app.get('/Community', async (req, res) => {
   try {
@@ -569,8 +567,6 @@ app.get('/Community', async (req, res) => {
   }
 });
 
-
-
 // 게시글 등록시 게시글 정보를 DB에 저장
 app.post("/Community/Write", async (req, res) => {
   // 요청 객체에서 title과 content 추출
@@ -590,8 +586,6 @@ app.post("/Community/Write", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-
 
 // 게시글 상세 페이지 접속 시 db에서 해당 게시물과 작성자 조회, 클라이언트에 정보 반환 
 app.get('/Community/Read/:id', async (req, res) => {
@@ -623,8 +617,6 @@ app.get('/Community/Read/:id', async (req, res) => {
   }
 });
 
-
-
 // 게시물 상세페이지 접속 시 해당 게시물의 조회수 증가를 db에 업데이트
 app.put('/Community/Read/:id/IncrementViews', async (req, res) => {
   const postId = req.params.id;
@@ -642,7 +634,6 @@ app.put('/Community/Read/:id/IncrementViews', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 // 게시글에 대한 좋아요 여부를 db에 업데이트
 app.put('/Community/Read/:id/ToggleLike', async (req, res) => {
@@ -688,9 +679,6 @@ app.put('/Community/Read/:id/ToggleLike', async (req, res) => {
   }
 });
 
-
-
-
 // 해당 게시글을 현재 로그인된 사용자가 좋아요 했는지 확인하여 클라이언트에 정보 반환
 app.get('/Community/Read/:id/CheckLiked', async (req, res) => {
   const postId = req.params.id;
@@ -711,7 +699,6 @@ app.get('/Community/Read/:id/CheckLiked', async (req, res) => {
   }
 });
 
-
 // db에서 게시글의 좋아요 갯수를 반환
 app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
   const postId = req.params.id;
@@ -728,8 +715,6 @@ app.get('/Community/Read/:id/GetLikeCount', async (req, res) => {
     res.status(500).json({ error: '내부 서버 오류' });
   }
 });
-
-
 
 // 유저가 이전에 작성한 게시글의 정보 가져옴
 app.get('/Community/Edit/:id', async (req, res) => {
@@ -751,8 +736,6 @@ app.get('/Community/Edit/:id', async (req, res) => {
   }
 });
 
-
-
 // 수정한 글의 데이터를 db에 업데이트
 app.put('/Community/Edit/:id', async (req, res) => {
   const postId = req.params.id;
@@ -769,8 +752,6 @@ app.put('/Community/Edit/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-
 
 // 게시글의 정보를 db에서 삭제
 app.delete('/Community/Read/:id', async (req, res) => {
@@ -835,8 +816,6 @@ app.get('/Community/Read/:id/GetComments', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 app.post('/Community/Read/:id/SaveComment', async (req, res) => {
   // 요청 객체에서 content 추출
@@ -938,7 +917,6 @@ app.delete('/Community/Read/:id/DeleteComment/:commentId', async (req, res) => {
   }
 });
 
-
 //-------------------------------------마이페이지------------------------------------------
 
 // 사용자 ID에 따라 프로필 데이터를 반환하는 엔드포인트
@@ -1013,7 +991,6 @@ app.get('/acti-post/:userid', (req, res) => {
   });
 });
 
-
 //-------------------------------------나의활동(덧글)------------------------------------------
 
 app.get('/acti-comment/:userid', (req, res) => {
@@ -1041,7 +1018,6 @@ app.get('/acti-comment/:userid', (req, res) => {
       console.log(userData);
   });
 });
-
 
 //-------------------------------------좋아요 폼------------------------------------------
 
@@ -1173,7 +1149,6 @@ app.post('/pw-valid/:userid', async (req, res) => {
   }
 });
 
-
 //-------------------------------------프로필 이미지 저장(storage)------------------------------------------
 
 const storage = multer.diskStorage({
@@ -1203,9 +1178,6 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
   // 이미지 URL 생성 (예: /uploads/파일명)
   console.log('파일객체log',req.file)
   const imageUrl = filePath;
-  // const imageUrl = `http://api.bbangkut.com/public/userimg/${filePath}`;
-  // const imageUrl = `http://bbangkut.com/${filePath}`;
-  // const imageUrl = "http://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg";
 
   const sql = 'INSERT INTO imgup (imgurl) VALUES (?)';
   connection.query(sql, [imageUrl], (err, results, fields) => {
@@ -1219,7 +1191,6 @@ app.post('/imgupdate/:userid', imgup.single('img'), (req, res) => {
 
 //-------------------------------------프로필 이미지 get요청------------------------------------------
 
-// app.use("/public", express.static(path.join(__dirname, "public"))); ---경로설정
 app.get('/imgsave/:userid', (req, res) => {
   const userId = req.params.userid;
   const filePath = path.join(__dirname, `public/userimg/profile_${userId}.png`);
@@ -1236,70 +1207,6 @@ app.get('/imgsave/:userid', (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--------------------------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--------------------------------------------------------------------------//
 //---------------------------------메인----------------------------//
 
 // 당일 올라온 게시물 중 좋아요를 많이 받은 상위 5개 게시물 정보 반환
@@ -1324,97 +1231,6 @@ app.get('/Main', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//--------------------------------------------------------------------------//
-
-
 
 // Express 애플리케이션을 특정 포트(PORT)에서 실행
 app.listen(PORT, () => {
