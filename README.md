@@ -29,10 +29,10 @@
 ***
 ### 🛠️ 기술 스택
 <p align="center">
-<img width="90%" src="https://github.com/iiingkeep/community/assets/143868975/1340bbaf-d67f-4177-8bc4-157042594f80" />
+<img width="90%" src="https://github.com/iiingkeep/community/assets/151603893/1fba5371-b1ac-4d74-99be-281670f2c499" />
 </p>
 <p align="center">
-<img width="90%" src="https://github.com/iiingkeep/community/assets/143868975/0eaee95a-3b06-432d-b19f-599c7eb31fea"/>
+<img width="90%" src="https://github.com/iiingkeep/community/assets/151603893/c702dae4-7f5b-47bb-b31e-816099ca6c93"/>
 </p>
    
 ***
