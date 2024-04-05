@@ -233,9 +233,6 @@ const News = ({baseURL}) => {
               </div>
               {/* 제목 */}
               <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={() => handleClick(item)}
               >
                 {item.title}

@@ -162,6 +162,7 @@
 /* 제목 hover */
 .news-list-box li a:hover {
   font-weight: bolder;
+  cursor: pointer;
 }
 
 /* 방문 후 제목 */
